@@ -3,8 +3,11 @@
 // ~/Dropbox/Public/RichardFuhr/BusyBezier/BusyBezier.js
 // We will actually go ahead and implement the other functionality from
 // ~/Dropbox/Public/RichardFuhr/BusyBezier/BusyBezier.js
-// Also, we will reformulate some of my Objective-C BusyBSpline code as TypeScript: 
+// Also, we will reformulate some of my Objective-C BusyBSpline code as TypeScript:
 // /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
+
+// We may use JSDoc as described here.
+// https://en.wikipedia.org/wiki/JSDoc
 
 // Begin declaring some of the globals
 var globalPointOnCurveForParm : Circle;
@@ -23,6 +26,13 @@ class Point
   // property names.
   // As a convention, if the class has a constructor, it will appear as
   // the first function after the declaration of the class.
+  /**
+  * Creates an instance of a Point
+  * @constructor
+  * @this Point
+  * @param x {number} the x coordinate of the Point
+  * @param y {number} the y coordinate of the Point
+  */
   constructor(x : number,
               y : number)
   {
@@ -441,12 +451,12 @@ class CubicBezierCurve
      drawData.updateContext(context);
      var P : Array<Point> = this.CtrlPts;
      context.moveTo(P[0].x, P[0].y);
-     
+
      for (var i = 1; i < P.length; i++)
      {
         context.lineTo(P[i].x, P[i].y);
      }
- 
+
      context.stroke();
   }
 
@@ -1238,7 +1248,7 @@ function CubicSplineTest()
   document.writeln(CubicSplineData);
   document.writeln("<p>")
  }
- 
+
 
 function doTests()
 {
