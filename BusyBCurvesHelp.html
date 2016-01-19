@@ -1,0 +1,79 @@
+<!-- Copyright (C) 2014 Richard David Fuhr - All rights reserved. -->
+<!-- richard.fuhr@gmail.com -->
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<html>
+<head>
+    <title>Help With Exploring Bezier Curves</title>
+</head>
+<body>
+<p>
+This program enables you to explore some properties of cubic 
+<a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve"><i>Bezier curves</i></a>.
+</p>
+<p>
+The yellow circle on the red cubic Bezier curve is <b>always</b> at the
+<i>center of mass</i> of the blue <i>control points</i>.
+</p> 
+<p>  
+The number next to this yellow circle (the <i>parameter</i>) varies between 0 and 1.
+</p>
+<p>
+As this number varies, the yellow circle moves along the red curve,
+and the blue control points increase or decrease in area.
+</p>
+<p>
+The areas of the four blue circles <b>always</b> add up to 1.  (NOTE: In this demo, the areas of
+the circles are rounded to two decimal places, so there can be cases where the sum of 
+these <i>rounded</i> areas does not equal 1.)
+</p>
+<p>
+The number near each blue circle is the <i>area</i> of that circle.
+</p> 
+<p>
+These areas are equal to the <i>values of the functions</i> whose green graphs
+are drawn next to the blue circles.
+</p>
+<p>
+These functions are called 
+<a href="http://en.wikipedia.org/wiki/Bernstein_polynomials"><i>Bernstein basis polynomials</i></a>.
+</p>
+<p>
+The black polyline connecting the blue control points is the <i>control polygon</i> for the Bezier
+curve.  (NOTE: The Bezier curve is <i>always tangent</i> to its control polygon at the endpoints,
+no matter how you move the control points.)
+</p>
+<p>
+Press the <b>Start Animation</b> button to start the animation.
+</p>
+<p>
+Press the <b>Stop Animation</b> button to stop the animation.
+</p>   
+<p>
+Press the <b>Explore With Mouse</b> button to do your own exploration.
+<ol>
+<li>
+You can click on any blue circle and drag it around
+to change the shape of the curve.  The <i>parametric</i> position of the
+yellow circle will <b>not</b> change.
+</li>
+<li>
+You can click on the yellow circle and drag it along the curve
+and watch the areas of the blue circles change accordingly.
+The <i>locations</i> of the centers of the blue circles will <b>not</b> change.
+</li>   
+</ol>   
+</p>
+<p>
+---
+</p>
+<p>
+Please send your questions or comments to the software developer at 
+<a href="mailto:richard.fuhr@gmail.com">richard.fuhr@gmail.com</a>.
+</p>
+<p>
+You can also view the explanatory YouTube video at
+<a href="https://www.youtube.com/watch?v=3YPSIu5Q2w8">https://www.youtube.com/watch?v=3YPSIu5Q2w8</a>
+</p>
+</body>   
