@@ -26,15 +26,14 @@ class Point
   // property names.
   // As a convention, if the class has a constructor, it will appear as
   // the first function after the declaration of the class.
- 
-  
-  /**
-   * Creates an instance of a Point
-   * @constructor
-   * @this Point
-   * @param x {number} the x coordinate of the Point
-   * @param y {number} the y coordinate of the Point
-   */
+
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for Point
+  // Creates an instance of a Point
+  //
+  // input: x - the x coordinate of the Point to be constructed
+  // input: y - the y coordinate of the Point to be constructed
+  //////////////////////////////////////////////////////////////////////////////
   constructor(x : number,
               y : number)
   {
@@ -45,16 +44,37 @@ class Point
   // As a convention, if the class has a toString() method, it will appear
   // right after the constructor, if there is a constructor.  Otherwise, it
   // will appear as the first method.
+
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of Point
+  // Returns the string representation of this Point
+  //
+  // returns: the string representation of this Point
+  //////////////////////////////////////////////////////////////////////////////
   toString() :  string
   {
   	return "("+this.x+", "+this.y+")";
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // norm - method of Point
+  // Returns the norm of this Point
+  //
+  // return: the norm of this Point
+  // note: we currently are not creating a separate Vector class
+  //////////////////////////////////////////////////////////////////////////////
   norm() : number
   {
     return Math.sqrt((this.x*this.x)+(this.y*this.y));
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // plus - method of Point
+  // Returns the sum of this Point with another Point
+  //
+  // input: that - a Point to be added to this Point
+  // returns: this + that
+  //////////////////////////////////////////////////////////////////////////////
   plus(that : Point) : Point
   {
      var x = this.x + that.x;
@@ -62,6 +82,13 @@ class Point
      return new Point(x,y);
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // minus - method of Point
+  // Returns the difference of this Point and another Point
+  //
+  // input: that - a Point to be subtracted from this Point
+  // returns: this - that
+  //////////////////////////////////////////////////////////////////////////////
   minus(that : Point) : Point
   {
      var x = this.x - that.x;
@@ -69,6 +96,13 @@ class Point
      return new Point(x,y);
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // scalarMult - method of Point
+  // Returns a scalar multiple of this Point
+  //
+  // input: s - the scalar factor to be applied to this Point
+  // returns: s*this
+  //////////////////////////////////////////////////////////////////////////////
   scalarMult(s : number) : Point
   {
      var x = s*this.x;
@@ -76,6 +110,13 @@ class Point
      return new Point(x,y);
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // dotProd - method of Point
+  // Returns the dot product of this Point with another Point
+  //
+  // input: that - a Point to be dotted with this Point
+  // returns: this*that
+  //////////////////////////////////////////////////////////////////////////////
   dotProd(that) : number
   {
      return this.x*that.x + this.y*that.y;
