@@ -156,6 +156,15 @@ class Point
      context.stroke();
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // isInsideCircle - method of Point
+  // Determines whether this Point is inside the given Circle
+  //
+  // input: C - the Circle used for the containment test.
+  // returns: true if this Point is inside C, false otherwise.
+  // Note: the code could be made much more compact; in fact, a one-liner.
+  //       return(C.containsPoint(this))
+  //////////////////////////////////////////////////////////////////////////////
   isInsideCircle(C : Circle) : boolean
   {
      var insideCircle : boolean;
@@ -174,6 +183,16 @@ class Point
 } // End class Point
 
 // Begin Point utilities.
+////////////////////////////////////////////////////////////////////////////////
+// linearCombination - utility function for Point (not a method of Point)
+// Computes a linear combination of two points
+//
+// input: a - scalar
+// input: P - Point
+// input: b - scalar
+// input: Q - Point
+// returns: a*P + b*Q
+////////////////////////////////////////////////////////////////////////////////
 function linearCombination(a : number,
                            P : Point,
                            b : number,
@@ -192,6 +211,13 @@ class Circle
   center : Point;
   radius : number;
 
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for Circle
+  // Creates an instance of a Circle
+  //
+  // input: center - the center of the Circle to be constructed
+  // input: radius - the radius of the Circle to be constructed
+  //////////////////////////////////////////////////////////////////////////////
   constructor(center : Point,
               radius : number)
   {
@@ -199,12 +225,27 @@ class Circle
     this.radius = radius;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of Circle
+  // Returns the string representation of this Circle
+  //
+  // returns: the string representation of this Circle
+  //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
   	return "center " + this.center.toString() + "radius = " + this.radius;
   }
 
-
+  //////////////////////////////////////////////////////////////////////////////
+  // containsPoint - method of Circle
+  // Determines whether this Circle contains the given Point
+  //
+  // input: P - the Point used for the containment test.
+  // returns: true if P is inside this Circle, false otherwise.
+  // Note: the code could be made much more compact; in fact, a one-liner.
+  //       return (P.distanceTo(this.center) < this.radius)
+  //
+  //////////////////////////////////////////////////////////////////////////////
   containsPoint(P : Point) : boolean
   {
     if (P.distanceTo(this.center) < this.radius)
@@ -217,6 +258,14 @@ class Circle
     }
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // draw - method of Circle
+  // Draws this circle with specified appearance
+  //
+  // input: drawData - an object containing information specifying appearance
+  // input: context - the context associated with the canvas
+  //
+  //////////////////////////////////////////////////////////////////////////////
   draw(drawData : CircleDrawData,
        context : CanvasRenderingContext2D)
   {
