@@ -122,6 +122,13 @@ class Point
      return this.x*that.x + this.y*that.y;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // distanceTo - method of Point
+  // Returns the distance from this Point to another Point
+  //
+  // input: that - a Point to which the distance is to be calculated
+  // returns: the distance between this Point and that Point
+  //////////////////////////////////////////////////////////////////////////////
   distanceTo(that : Point) : number
   {
      var thisMinusThat : Point = this.minus(that);
@@ -129,6 +136,14 @@ class Point
      return distanceToThat;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawCircleHere - method of Point
+  // Draws a circle centered at this Point with specified radius and appearance
+  //
+  // input: radius - the radius of the circle to be drawingCanvas
+  // input: drawData - an object containing information specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
   drawCircleHere(radius : number,
                  drawData : CircleDrawData,
                  context : CanvasRenderingContext2D)
