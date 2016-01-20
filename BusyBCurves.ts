@@ -26,13 +26,15 @@ class Point
   // property names.
   // As a convention, if the class has a constructor, it will appear as
   // the first function after the declaration of the class.
+ 
+  
   /**
    * Creates an instance of a Point
    * @constructor
    * @this Point
    * @param x {number} the x coordinate of the Point
    * @param y {number} the y coordinate of the Point
-  */
+   */
   constructor(x : number,
               y : number)
   {
