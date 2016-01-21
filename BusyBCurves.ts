@@ -282,6 +282,13 @@ class CircleDrawData
   strokeColor : string;
   curveWidth : number;
 
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for CircleDrawData
+  // Creates an instance of CircleDrawData
+  //
+  // input: fillColor - the color with which to fill the Circle
+  // input: strokeColor - the color with which to stroke the Circle
+  //////////////////////////////////////////////////////////////////////////////
   constructor(fillColor : string,
               strokeColor : string,
               curveWidth : number)
@@ -291,6 +298,12 @@ class CircleDrawData
     this.curveWidth = curveWidth;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of CircleDrawData
+  // Returns the string representation of this CircleDrawData
+  //
+  // returns: the string representation of this CircleDrawData
+  //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
      var stringRep : string = "fillColor = " + this.fillColor;
@@ -303,6 +316,12 @@ class CircleDrawData
      return stringRep;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // updateContext - method of CircleDrawData
+  // Updates the context for the canvas using the data in CircleDrawData
+  //
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
   updateContext(context :CanvasRenderingContext2D)
   {
      context.fillStyle = this.fillColor;
