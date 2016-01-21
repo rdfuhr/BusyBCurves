@@ -288,6 +288,7 @@ class CircleDrawData
   //
   // input: fillColor - the color with which to fill the Circle
   // input: strokeColor - the color with which to stroke the Circle
+  // input: curveWidth - the width of the Circle to be drawn
   //////////////////////////////////////////////////////////////////////////////
   constructor(fillColor : string,
               strokeColor : string,
@@ -336,6 +337,13 @@ class CurveDrawData
   strokeColor : string;
   curveWidth : number;
 
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for CurveDrawData
+  // Creates an instance of CurveDrawData
+  //
+  // input: strokeColor - the color with which to stroke the Curve
+  // input: curveWidth - the width of the Curve to be drawn
+  //////////////////////////////////////////////////////////////////////////////
   constructor(strokeColor : string,
               curveWidth : number)
   {
@@ -343,6 +351,12 @@ class CurveDrawData
     this.curveWidth = curveWidth;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of CurveDrawData
+  // Returns the string representation of this CurveDrawData
+  //
+  // returns: the string representation of this CurveDrawData
+  //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
      var stringRep : string = "strokeColor = " + this.strokeColor;
@@ -353,6 +367,12 @@ class CurveDrawData
      return stringRep;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // updateContext - method of CurveDrawData
+  // Updates the context for the canvas using the data in CurveDrawData
+  //
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
   updateContext(context :CanvasRenderingContext2D)
   {
      context.strokeStyle = this.strokeColor;
