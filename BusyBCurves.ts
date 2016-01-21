@@ -385,6 +385,14 @@ class CurveDrawData
 
 
 // Begin utilities that are used by the CubicBezierCurve class
+////////////////////////////////////////////////////////////////////////////////
+// doOneDeCasteljauStep - function
+// Do one step of the DeCasteljau algorithm
+//
+// input: P - an array of Points
+// input: t - a parameter value
+// returns: An array of points resulting from one step of DeCasteljau algorithm
+////////////////////////////////////////////////////////////////////////////////
 function doOneDeCasteljauStep(P : Array<Point>,
                               t : number) : Array<Point>
 {
@@ -399,6 +407,14 @@ function doOneDeCasteljauStep(P : Array<Point>,
 	return Q;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// doAllDeCasteljauSteps - function
+// Do all the steps of the DeCasteljau algorithm
+//
+// input: P - an array of Points
+// input: t - a parameter value
+// returns: The point resulting from all steps of DeCasteljau algorithm
+////////////////////////////////////////////////////////////////////////////////
 function doAllDeCasteljauSteps(P : Array<Point>,
                                t : number) : Point
 {
@@ -418,6 +434,13 @@ function doAllDeCasteljauSteps(P : Array<Point>,
    }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// hodographPoints - function
+// Given control points of Bezier curve return control points of its hodograph
+//
+// input: P - an array of Points that are Bezier control points of curve C
+// returns: An array of Points that are control points of hodograph C'  
+////////////////////////////////////////////////////////////////////////////////
 function hodographPoints(P : Array<Point>) : Array<Point>
 {
    // Assume we are given a list of points P that are the control
