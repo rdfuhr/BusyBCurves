@@ -738,7 +738,7 @@ class CubicBezierCurve
   // Draws control points of this CubicBezierCurve with specified appearance
   //
   // input: radius - the radius of the circles representing the control points
-  // input: drawData - an object containing information specifying appearance  
+  // input: drawData - an object containing information specifying appearance
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawControlPoints(radius : number,
@@ -753,6 +753,16 @@ class CubicBezierCurve
      }
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawControlPointsWeightedForParm - method of CubicBezierCurve
+  // Draws control points with areas proportional to basis function values
+  //
+  // input: t - the parameter for the basis functions
+  // input: sumOfAreas - the sum of the areas of all the circles
+  // input: drawData - an object containing information specifying appearance
+  // input: context - the context associated with the canvas
+  // output: controlPointCircles - circles centered at control points
+  //////////////////////////////////////////////////////////////////////////////  
   drawControlPointsWeightedForParm(t : number,
                                    sumOfAreas : number,
                                    drawData : CircleDrawData,
