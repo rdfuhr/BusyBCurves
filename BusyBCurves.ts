@@ -275,6 +275,9 @@ class Circle
   }
 } // End class Circle
 
+// Note: We could possibly implement a superclass called DrawData and then
+// implement CircleDrawData and CurveDrawData as subclasses of DrawData.
+
 
 class CircleDrawData
 { // Begin class CircleDrawData
