@@ -521,6 +521,15 @@ function bernsteinDeriv(i : number,
    return deriv;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// annotateGraphOfCubicBernstein - function
+// Decorate the graph of a cubic Bernstein function with current function value
+//
+// input: i - the index of the cubic Bernstein function
+// input: t - the parameter at which the cubic Bernstein is being evalated
+// input: graphOfCubicBernstein: s-->(s, B(i,n)(s))
+// input: context - the context associated with the canvas
+////////////////////////////////////////////////////////////////////////////////
 function annotateGraphOfCubicBernstein(i : number,
                                        t : number,
                                        graphOfCubicBernstein : CubicBezierCurve,
@@ -544,6 +553,15 @@ function annotateGraphOfCubicBernstein(i : number,
    drawTextForNumber(y, P, fontSpec, context); // For now
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// buildGraphOfCubicBernstein - function
+// Construct the graph of a cubic Bernstein polynomial as a 2D curve
+//
+// input: indx - the index of the cubic Bernstein polynomial
+// input: upperLeft -  point at upper left corner of bounding box of graph
+// input: width - width of bounding box of graph
+// input: height - height of bounding box of graph
+////////////////////////////////////////////////////////////////////////////////
 function buildGraphOfCubicBernstein(indx : number,
                                     upperLeft : Point,
                                     width : number,
