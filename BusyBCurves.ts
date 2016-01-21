@@ -439,7 +439,7 @@ function doAllDeCasteljauSteps(P : Array<Point>,
 // Given control points of Bezier curve return control points of its hodograph
 //
 // input: P - an array of Points that are Bezier control points of curve C
-// returns: An array of Points that are control points of hodograph C'  
+// returns: An array of Points that are control points of hodograph C'
 ////////////////////////////////////////////////////////////////////////////////
 function hodographPoints(P : Array<Point>) : Array<Point>
 {
@@ -461,6 +461,15 @@ function hodographPoints(P : Array<Point>) : Array<Point>
 //   End utilities that are used by the CubicBezierCurve class
 
 // Begin Bernstein utilities
+////////////////////////////////////////////////////////////////////////////////
+// binom - function
+// Compute a specified binomial coefficient
+//
+// input: n - an integer
+// input: k - an integer
+// returns: Binom(n, k)
+// note: this implementation does not check whether n and k are reasonable.
+////////////////////////////////////////////////////////////////////////////////
 function binom(n : number,
                k : number) : number
 {
@@ -470,6 +479,15 @@ function binom(n : number,
     return coeff;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// bernsteinValue - function
+// Computes value of specified Bernstein polynomial at given parameter
+//
+// input: i - an integer representing the index of the Bernstein polynomial
+// input: n - an integer representing the degree of the Bernstein polynomial
+// input: t - the parameter at which to evaluate the Bernstein polynomial
+// returns: B(i,n,t)
+////////////////////////////////////////////////////////////////////////////////
 function bernsteinValue(i : number,
                         n : number,
                         t : number) : number
@@ -486,6 +504,15 @@ function bernsteinValue(i : number,
    return value;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// bernsteinDeriv - function
+// Computes derivative of specified Bernstein polynomial at given parameter
+//
+// input: i - an integer representing the index of the Bernstein polynomial
+// input: n - an integer representing the degree of the Bernstein polynomial
+// input: t - the parameter at which to evaluate the derivative
+// returns: B'(i,n,t)
+////////////////////////////////////////////////////////////////////////////////
 function bernsteinDeriv(i : number,
                         n : number,
                         t : number) : number
