@@ -595,6 +595,15 @@ class CubicBezierCurve
 { // Begin class CubicBezierCurve
   CtrlPts : Array<Point>;
 
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for CubicBezierCurve
+  // Creates an instance of a CubicBezierCurve
+  //
+  // input: P0 - the 0th control point
+  // input: P1 - the 1st control point
+  // input: P2 - the 2nd control point
+  // input: P3 - the 3rd control point
+  //////////////////////////////////////////////////////////////////////////////
   constructor(P0 : Point,
               P1 : Point,
               P2 : Point,
@@ -603,6 +612,12 @@ class CubicBezierCurve
     this.CtrlPts = new Array(P0, P1, P2, P3);
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of CubicBezierCurve
+  // Returns the string representation of this CubicBezierCurve
+  //
+  // returns: the string representation of this CubicBezierCurve
+  //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
      var curveData = "Data for Bezier Curve\n";
@@ -617,6 +632,13 @@ class CubicBezierCurve
      return curveData;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // positionAtParm - method of CubicBezierCurve
+  // Returns the point on this CubicBezierCurve at the input parameter
+  //
+  // input: t - parameter at which to get position on this CubicBezierCurve
+  // returns: position on this CubicBezierCurve at parameter t
+  //////////////////////////////////////////////////////////////////////////////
   positionAtParm(t : number) : Point
   {
      var P : Array<Point> = this.CtrlPts;
@@ -624,6 +646,13 @@ class CubicBezierCurve
      return pos;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // derivativeAtParm - method of CubicBezierCurve
+  // Returns the derivative of this CubicBezierCurve at the input parameter
+  //
+  // input: t - parameter at which to get derivative of this CubicBezierCurve
+  // returns: derivative of this CubicBezierCurve at parameter t
+  //////////////////////////////////////////////////////////////////////////////
   derivativeAtParm(t : number) : Point
   {
      var Q : Array<Point> = hodographPoints(this.CtrlPts);
@@ -631,6 +660,13 @@ class CubicBezierCurve
      return der;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // scale - method of CubicBezierCurve
+  // Scales this CubicBezierCurve using specified scale factors
+  //
+  // input: xScale - the scale factor in the x direction
+  // input: yScale - the scale factor in the y direction
+  //////////////////////////////////////////////////////////////////////////////
   scale(xScale : number,
         yScale : number)
   {
@@ -641,6 +677,12 @@ class CubicBezierCurve
      }
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // translate - method of CubicBezierCurve
+  // Traslates this CubicBezierCurve using specified displacement
+  //
+  // input: P - specified displacement
+  //////////////////////////////////////////////////////////////////////////////
   translate(P : Point)
   {
      for (var i = 0; i < this.CtrlPts.length; i++)
