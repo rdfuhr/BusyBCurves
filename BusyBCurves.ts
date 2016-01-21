@@ -692,6 +692,13 @@ class CubicBezierCurve
      }
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawCurve - method of CubicBezierCurve
+  // Draws this CubicBezierCurve with specified appearance
+  //
+  // input: drawData - an object containing information specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
   drawCurve(drawData : CurveDrawData,
             context : CanvasRenderingContext2D)
   {
@@ -703,6 +710,13 @@ class CubicBezierCurve
      context.stroke();
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawControlPolygon - method of CubicBezierCurve
+  // Draws control polygon of this CubicBezierCurve with specified appearance
+  //
+  // input: drawData - an object containing information specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
   drawControlPolygon(drawData : CurveDrawData,
                      context : CanvasRenderingContext2D)
   {
@@ -719,6 +733,14 @@ class CubicBezierCurve
      context.stroke();
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawControlPoints - method of CubicBezierCurve
+  // Draws control points of this CubicBezierCurve with specified appearance
+  //
+  // input: radius - the radius of the circles representing the control points
+  // input: drawData - an object containing information specifying appearance  
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
   drawControlPoints(radius : number,
                     drawData : CircleDrawData,
                     context : CanvasRenderingContext2D)
