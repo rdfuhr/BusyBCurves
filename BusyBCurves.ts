@@ -761,7 +761,7 @@ class CubicBezierCurve
   // input: sumOfAreas - the sum of the areas of all the circles
   // input: drawData - an object containing information specifying appearance
   // input: context - the context associated with the canvas
-  // output: controlPointCircles - circles centered at control points
+  // output: controlPointCircles - circles marking weighted control points
   //////////////////////////////////////////////////////////////////////////////
   drawControlPointsWeightedForParm(t : number,
                                    sumOfAreas : number,
@@ -809,6 +809,8 @@ class CubicBezierCurve
   //
   // input: t - parameter that determines point on the curve
   // input: strokeColor - color used for drawing the line
+  // input: lineWidth - the width of the line to be drawn
+  // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawVerticalLineFromCurveForParm(t : number,
                                    strokeColor : string,
@@ -839,6 +841,15 @@ class CubicBezierCurve
      context.stroke();
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawBasisFunctionsWithParm - method of CubicBezierCurve
+  // Draw graphs of cubic Bernstein polynomials with a point on each graph
+  //
+  // input: t - the parameter where we should draw corresponding points
+  // input: graphStrokeColor - the color with which to draw the graphs
+  // input: sumOfControlPointAreas -  sum of the areas of control point circles
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
   drawBasisFunctionsWithParm(t,
                              graphStrokeColor,
                              graphWidth,
@@ -900,6 +911,19 @@ class CubicBezierCurve
 
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawAllBezierArtifacts - method of CubicBezierCurve
+  // Draw all information associated with this CubicBezierCurve
+  //
+  // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
+  // input: drawDataForControlPolygon - style for drawing control polygon
+  // input: sumOfControlPointAreas - sum of areas of control points
+  // input: drawDataForControlPoints - style for drawing control points
+  // input: pointOnCurveRadius - radius of circle representing point on curve
+  // input: drawDataForPointOnCurve - style for drawing point on curve
+  // input: context - the context associated with the canvas
+  // output: controlPointCircles - circles marking weighted control points
+  //////////////////////////////////////////////////////////////////////////////
   drawAllBezierArtifacts(drawDataForBezierCurve : CurveDrawData,
                          drawDataForControlPolygon : CurveDrawData,
                          sumOfControlPointAreas : number,
@@ -945,6 +969,37 @@ class CubicBezierCurve
                                      context);
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // editPointOnCurve - method of CubicBezierCurve
+  // Called when user has clicked the point on this curve and is moving it.
+  //
+  // input: evt - the mouse event
+  // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
+  // input: drawDataForControlPolygon - style for drawing control polygon
+  // input: sumOfControlPointAreas - sum of areas of control points
+  // input: drawDataForControlPoints - style for drawing control points
+  // input: pointOnCurveRadius - radius of circle representing point on curve
+  // input: drawDataForPointOnCurve - style for drawing point on curve
+  // input: context - the context associated with the canvas
+  // input: canvas - the canvas on which we are drawing
+  // output: controlPointCircles - circles marking weighted control points
+  //
+  // NOTE: to get the updated position of the point on the curve, we are
+  // using information about the derivative of the curve, and we are using
+  // the linear approximation theorem.  In effect, we are projecting the
+  // updated mouse position onto the tangent line to the curve at the previous
+  // point, and we use this projected point to get a dt value.  We update the
+  // the current parameter, which is called tGlobal, and we use this to redraw
+  // this Bezier curve and its associated artifacts.
+  //
+  // TODO: I think we can get by without passing the canvas as a parameter
+  // because we should be able to get it from evt.
+  //
+  // TODO: We should document in detail how we get the updated position of the
+  // point on the curve by using TeX and save the TeX as well as the generated
+  // PDF file in this folder and put it under git control.
+  //
+  //////////////////////////////////////////////////////////////////////////////
   editPointOnCurve(evt : MouseEvent,
                    drawDataForBezierCurve : CurveDrawData,
                    drawDataForControlPolygon : CurveDrawData,
