@@ -6,6 +6,11 @@
 // Also, we will reformulate some of my Objective-C BusyBSpline code as TypeScript:
 // /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
 
+// As of Friday, January 22, 2016 we are also going to place the derived
+// file BusyBCurves.js under git control and under GitHub management.
+// Adding these comments is done as a test to see how this will appear in
+// SourceTree.
+
 // We may use JSDoc as described here.
 // https://en.wikipedia.org/wiki/JSDoc
 
