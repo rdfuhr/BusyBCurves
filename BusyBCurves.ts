@@ -762,7 +762,7 @@ class CubicBezierCurve
   // input: drawData - an object containing information specifying appearance
   // input: context - the context associated with the canvas
   // output: controlPointCircles - circles centered at control points
-  //////////////////////////////////////////////////////////////////////////////  
+  //////////////////////////////////////////////////////////////////////////////
   drawControlPointsWeightedForParm(t : number,
                                    sumOfAreas : number,
                                    drawData : CircleDrawData,
@@ -785,6 +785,15 @@ class CubicBezierCurve
 
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawPointOnCurveForParm - method of CubicBezierCurve
+  // Draws point on curve at specified parameter with specified appearance
+  //
+  // input: t - parameter at which corresponding point is to be drawn
+  // input: radius - the radius of the circle representing the point
+  // input: drawData - an object containing information specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
   drawPointOnCurveForParm(t : number,
                           radius : number,
                           drawData : CircleDrawData,
@@ -794,6 +803,13 @@ class CubicBezierCurve
      P.drawCircleHere(radius, drawData, context);
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawVerticalLineFromCurveForParm - method of CubicBezierCurve
+  // Draw a vertical line from a point on a curve to its local X-axis
+  //
+  // input: t - parameter that determines point on the curve
+  // input: strokeColor - color used for drawing the line
+  //////////////////////////////////////////////////////////////////////////////
   drawVerticalLineFromCurveForParm(t : number,
                                    strokeColor : string,
                                    lineWidth : number,
