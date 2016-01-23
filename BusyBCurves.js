@@ -778,6 +778,26 @@ var CubicBezierCurve = (function () {
         context.clearRect(0, 0, canvas.width, canvas.height);
         this.drawAllBezierArtifacts(drawDataForBezierCurve, drawDataForControlPolygon, sumOfControlPointAreas, drawDataForControlPoints, pointOnCurveRadius, drawDataForPointOnCurve, context, controlPointCircles);
     };
+    //////////////////////////////////////////////////////////////////////////////
+    // editControlPoint - method of CubicBezierCurve
+    // Called when user has clicked a control point on this curve and is moving it
+    //
+    // input: evt - the mouse event
+    // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
+    // input: drawDataForControlPolygon - style for drawing control polygon
+    // input: sumOfControlPointAreas - sum of areas of control points
+    // input: drawDataForControlPoints - style for drawing control points
+    // input: pointOnCurveRadius - radius of circle representing point on curve
+    // input: drawDataForPointOnCurve - style for drawing point on curve
+    // input: context - the context associated with the canvas
+    // input: canvas - the canvas on which we are drawing
+    // output: controlPointCircles - circles marking weighted control points
+    //
+    //
+    // TODO: I think we can get by without passing the canvas as a parameter
+    // because we should be able to get it from evt.
+    //
+    //////////////////////////////////////////////////////////////////////////////
     CubicBezierCurve.prototype.editControlPoint = function (evt, drawDataForBezierCurve, drawDataForControlPolygon, sumOfControlPointAreas, drawDataForControlPoints, pointOnCurveRadius, drawDataForPointOnCurve, context, canvas, controlPointCircles) {
         var mousePos = getMousePos(canvas, evt);
         this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
