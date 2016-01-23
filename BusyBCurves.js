@@ -916,6 +916,14 @@ function StopAnimatedCanvasTests() {
 var globalIndexOfModifiedControlPoint = -1;
 // -1 means none is being modified.
 var globalModifyingPointOnCurve = false;
+////////////////////////////////////////////////////////////////////////////////
+// getMousePos - function
+// Get current position of mouse in terms of canvas coordinates
+//
+// input: canvas - the canvas on which we are drawing
+// input: evt - the mouse event
+// returns: current position of mouse in terms of canvas coordinates
+////////////////////////////////////////////////////////////////////////////////
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();
     var x = evt.clientX - rect.left;
