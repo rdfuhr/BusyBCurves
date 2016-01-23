@@ -807,6 +807,15 @@ var CubicBezierCurve = (function () {
     return CubicBezierCurve;
 }()); // End class CubicBezierCurve
 // Begin Canvas utilities
+////////////////////////////////////////////////////////////////////////////////
+// drawTextForNumber - function
+// Draw the text representing a given number at a specified location
+//
+// input: t - The number for which the text is to be drawn
+// input: textLocation - the location where the text is to be drawn
+// input: fontSpec - the font to be used
+// input: context - the context associated with the canvas
+////////////////////////////////////////////////////////////////////////////////
 function drawTextForNumber(t, textLocation, fontSpec, context) {
     context.font = fontSpec;
     context.strokeText(t.toFixed(2), textLocation.x, textLocation.y);
@@ -818,6 +827,12 @@ var tGlobal = 0.0; // global
 var tDeltaGlobal = 0.001;
 var globalCircleAreaFactor = 2.0;
 var globalCircleRadiusFactor = Math.sqrt(globalCircleAreaFactor);
+////////////////////////////////////////////////////////////////////////////////
+// tGlobalUpdate - function
+// Change the tGlobal parameter to prepare for the next step in the animation
+//
+// TODO - Consider ways to reformulate this without the use of global variables
+////////////////////////////////////////////////////////////////////////////////
 function tGlobalUpdate() {
     tGlobal = tGlobal + tDeltaGlobal;
     if (tGlobal > 1.0) {
