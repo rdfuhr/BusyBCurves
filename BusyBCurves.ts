@@ -34,6 +34,9 @@
 // I don't want to see BusyBCurves.js appear in my list of files in
 // SourceTree.  Perhaps I should ask Steve Baker.
 
+// I am adding this line to test whether BusyBCurves.js will once again appear
+// in SourceTree.
+
 // Begin declaring some of the globals
 var globalPointOnCurveForParm : Circle;
 //   End declaring some of the globals
