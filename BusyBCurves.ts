@@ -1139,6 +1139,11 @@ function tGlobalUpdate() // updates the global t
    }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// animation - function
+// Create a CubicBezierCurve and set the drawing style for animation.
+// TODO - Why are we re-creating the curve with every call to this function?
+////////////////////////////////////////////////////////////////////////////////
 function animation()
 {
    var drawingCanvas : HTMLCanvasElement =
@@ -1193,7 +1198,10 @@ function animation()
 
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
+// StartAnimatedCanvasTests - function
+// Enable and disable the buttons and set the animation interval
+////////////////////////////////////////////////////////////////////////////////
 function StartAnimatedCanvasTests()
 {
    var startAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StartAnimation");
@@ -1202,10 +1210,6 @@ function StartAnimatedCanvasTests()
    startAnimationButton.disabled = true;
    stopAnimationButton.disabled = false;
    exploreWithMouseButton.disabled = true;
-   // The following were commented out and replaced with what is above
-   // document.getElementById("StartAnimation").disabled = true;
-   // document.getElementById("StopAnimation").disabled = false;
-   // document.getElementById("ExploreWithMouse").disabled = true;
 
    globalLoop = setInterval(animation, 10);
 }
@@ -1213,6 +1217,10 @@ function StartAnimatedCanvasTests()
 
 
 // Begin code related to StopAnimatedCanvasTests()
+////////////////////////////////////////////////////////////////////////////////
+// StopAnimatedCanvasTests - function
+// Clear the animation interval and reenable and disable the buttons
+////////////////////////////////////////////////////////////////////////////////
 function StopAnimatedCanvasTests()
 {
    var startAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StartAnimation");
@@ -1221,10 +1229,6 @@ function StopAnimatedCanvasTests()
    startAnimationButton.disabled = false;
    stopAnimationButton.disabled = true;
    exploreWithMouseButton.disabled = false;
-   // The following were commented out and replaced with what is above
-   //  document.getElementById("StartAnimation").disabled = false;
-   //  document.getElementById("StopAnimation").disabled = true;
-   //  document.getElementById("ExploreWithMouse").disabled = false;
 
    clearInterval(globalLoop);
 }
