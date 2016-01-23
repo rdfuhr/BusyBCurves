@@ -148,7 +148,7 @@ var Point = (function () {
         return insideCircle;
     };
     return Point;
-}()); // End class Point
+})(); // End class Point
 // Begin Point utilities.
 ////////////////////////////////////////////////////////////////////////////////
 // linearCombination - utility function for Point (not a method of Point)
@@ -221,7 +221,7 @@ var Circle = (function () {
         center.drawCircleHere(radius, drawData, context);
     };
     return Circle;
-}()); // End class Circle
+})(); // End class Circle
 // Note: We could possibly implement a superclass called DrawData and then
 // implement CircleDrawData and CurveDrawData as subclasses of DrawData.
 var CircleDrawData = (function () {
@@ -266,7 +266,7 @@ var CircleDrawData = (function () {
         context.lineWidth = this.curveWidth;
     };
     return CircleDrawData;
-}()); // End class CircleDrawData
+})(); // End class CircleDrawData
 var CurveDrawData = (function () {
     //////////////////////////////////////////////////////////////////////////////
     // constructor for CurveDrawData
@@ -304,7 +304,7 @@ var CurveDrawData = (function () {
         context.lineWidth = this.curveWidth;
     };
     return CurveDrawData;
-}()); // End class CurveDrawData
+})(); // End class CurveDrawData
 // Begin utilities that are used by the CubicBezierCurve class
 ////////////////////////////////////////////////////////////////////////////////
 // doOneDeCasteljauStep - function
@@ -805,7 +805,7 @@ var CubicBezierCurve = (function () {
         this.drawAllBezierArtifacts(drawDataForBezierCurve, drawDataForControlPolygon, sumOfControlPointAreas, drawDataForControlPoints, pointOnCurveRadius, drawDataForPointOnCurve, context, controlPointCircles);
     };
     return CubicBezierCurve;
-}()); // End class CubicBezierCurve
+})(); // End class CubicBezierCurve
 // Begin Canvas utilities
 ////////////////////////////////////////////////////////////////////////////////
 // drawTextForNumber - function
@@ -1092,7 +1092,7 @@ var CubicSpline = (function () {
         return thisIsValid;
     };
     return CubicSpline;
-}());
+})();
 // End class CubicSpline
 //   End code to support BusyBSpline
 // Do this when the web page is loaded

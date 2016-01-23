@@ -1237,7 +1237,7 @@ function StopAnimatedCanvasTests()
 // Begin code related to ExploreWithMouse()
 var globalIndexOfModifiedControlPoint : number = -1;
 // -1 means none is being modified.
-var globalModifyingPointOnCurve = false;
+var globalModifyingPointOnCurve : boolean = false;
 
 ////////////////////////////////////////////////////////////////////////////////
 // getMousePos - function
