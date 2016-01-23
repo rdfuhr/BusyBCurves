@@ -26,6 +26,10 @@
 // globalIndexOfModifiedControlPoint
 // globalModifyingPointOnCurve
 
+// I just invoked git rm BusyBCurves.js at about 2:40 PM on 1/23/2016
+// Adding these lines is a test to ensure that I no longer will be checking
+// in versions of BusyBCurves.js
+
 // Begin declaring some of the globals
 var globalPointOnCurveForParm : Circle;
 //   End declaring some of the globals
@@ -1286,7 +1290,7 @@ function getMousePos(canvas : HTMLCanvasElement,
 // thePointOnCurveRadius
 // theCanvas
 // Therefore, if they are really not being used, remove them here and remove
-// them in the call to addEventListener that references onMouseDown. 
+// them in the call to addEventListener that references onMouseDown.
 ////////////////////////////////////////////////////////////////////////////////
 function onMouseDown(evt : MouseEvent,
                      theBezierCurve : CubicBezierCurve,
