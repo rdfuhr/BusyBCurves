@@ -30,6 +30,10 @@
 // Adding these lines is a test to ensure that I no longer will be checking
 // in versions of BusyBCurves.js
 
+// The whole business of using a .gitignore file is driving me crazy.
+// I don't want to see BusyBCurves.js appear in my list of files in
+// SourceTree.  Perhaps I should ask Steve Baker.
+
 // Begin declaring some of the globals
 var globalPointOnCurveForParm : Circle;
 //   End declaring some of the globals
