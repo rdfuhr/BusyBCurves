@@ -1272,6 +1272,21 @@ function getMousePos(canvas : HTMLCanvasElement,
 ////////////////////////////////////////////////////////////////////////////////
 // onMouseDown - callback function
 // This is called in reponse to a mousedown event detected by the canvas
+
+// input: evt - the mouse event at the time of mousedown
+// inout: theBezierCurve - the CubicBezierCurve being manipulated
+// input: theSumOfControlPointAreas - sum of areas of control points
+// input: thePointOnCurveRadius - radius of circle marking point on curve
+// input: theCanvas - canvas on which we are drawing
+// input: controlPointCircles - circles marking the control points
+
+// TODO: The following input parameters do not seem to be used by this function
+// theBezierCurve
+// theSumOfControlPointAreas
+// thePointOnCurveRadius
+// theCanvas
+// Therefore, if they are really not being used, remove them here and remove
+// them in the call to addEventListener that references onMouseDown. 
 ////////////////////////////////////////////////////////////////////////////////
 function onMouseDown(evt : MouseEvent,
                      theBezierCurve : CubicBezierCurve,

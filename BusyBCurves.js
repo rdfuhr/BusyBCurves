@@ -159,7 +159,7 @@ var Point = (function () {
         return insideCircle;
     };
     return Point;
-})(); // End class Point
+}()); // End class Point
 // Begin Point utilities.
 ////////////////////////////////////////////////////////////////////////////////
 // linearCombination - utility function for Point (not a method of Point)
@@ -232,7 +232,7 @@ var Circle = (function () {
         center.drawCircleHere(radius, drawData, context);
     };
     return Circle;
-})(); // End class Circle
+}()); // End class Circle
 // Note: We could possibly implement a superclass called DrawData and then
 // implement CircleDrawData and CurveDrawData as subclasses of DrawData.
 var CircleDrawData = (function () {
@@ -277,7 +277,7 @@ var CircleDrawData = (function () {
         context.lineWidth = this.curveWidth;
     };
     return CircleDrawData;
-})(); // End class CircleDrawData
+}()); // End class CircleDrawData
 var CurveDrawData = (function () {
     //////////////////////////////////////////////////////////////////////////////
     // constructor for CurveDrawData
@@ -315,7 +315,7 @@ var CurveDrawData = (function () {
         context.lineWidth = this.curveWidth;
     };
     return CurveDrawData;
-})(); // End class CurveDrawData
+}()); // End class CurveDrawData
 // Begin utilities that are used by the CubicBezierCurve class
 ////////////////////////////////////////////////////////////////////////////////
 // doOneDeCasteljauStep - function
@@ -816,7 +816,7 @@ var CubicBezierCurve = (function () {
         this.drawAllBezierArtifacts(drawDataForBezierCurve, drawDataForControlPolygon, sumOfControlPointAreas, drawDataForControlPoints, pointOnCurveRadius, drawDataForPointOnCurve, context, controlPointCircles);
     };
     return CubicBezierCurve;
-})(); // End class CubicBezierCurve
+}()); // End class CubicBezierCurve
 // Begin Canvas utilities
 ////////////////////////////////////////////////////////////////////////////////
 // drawTextForNumber - function
@@ -945,6 +945,19 @@ function getMousePos(canvas, evt) {
 ////////////////////////////////////////////////////////////////////////////////
 // onMouseDown - callback function
 // This is called in reponse to a mousedown event detected by the canvas
+// input: evt - the mouse event at the time of mousedown
+// inout: theBezierCurve - the CubicBezierCurve being manipulated
+// input: theSumOfControlPointAreas - sum of areas of control points
+// input: thePointOnCurveRadius - radius of circle marking point on curve
+// input: theCanvas - canvas on which we are drawing
+// input: controlPointCircles - circles marking the control points
+// TODO: The following input parameters do not seem to be used by this function
+// theBezierCurve
+// theSumOfControlPointAreas
+// thePointOnCurveRadius
+// theCanvas
+// Therefore, if they are really not being used, remove them here and remove
+// them in the call to addEventListener that references onMouseDown. 
 ////////////////////////////////////////////////////////////////////////////////
 function onMouseDown(evt, theBezierCurve, theSumOfControlPointAreas, thePointOnCurveRadius, theCanvas, controlPointCircles) {
     var mousePos = getMousePos(theCanvas, evt);
@@ -1115,7 +1128,7 @@ var CubicSpline = (function () {
         return thisIsValid;
     };
     return CubicSpline;
-})();
+}());
 // End class CubicSpline
 //   End code to support BusyBSpline
 // Do this when the web page is loaded
