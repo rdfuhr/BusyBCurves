@@ -159,7 +159,7 @@ var Point = (function () {
         return insideCircle;
     };
     return Point;
-}()); // End class Point
+})(); // End class Point
 // Begin Point utilities.
 ////////////////////////////////////////////////////////////////////////////////
 // linearCombination - utility function for Point (not a method of Point)
@@ -232,7 +232,7 @@ var Circle = (function () {
         center.drawCircleHere(radius, drawData, context);
     };
     return Circle;
-}()); // End class Circle
+})(); // End class Circle
 // Note: We could possibly implement a superclass called DrawData and then
 // implement CircleDrawData and CurveDrawData as subclasses of DrawData.
 var CircleDrawData = (function () {
@@ -277,7 +277,7 @@ var CircleDrawData = (function () {
         context.lineWidth = this.curveWidth;
     };
     return CircleDrawData;
-}()); // End class CircleDrawData
+})(); // End class CircleDrawData
 var CurveDrawData = (function () {
     //////////////////////////////////////////////////////////////////////////////
     // constructor for CurveDrawData
@@ -315,7 +315,7 @@ var CurveDrawData = (function () {
         context.lineWidth = this.curveWidth;
     };
     return CurveDrawData;
-}()); // End class CurveDrawData
+})(); // End class CurveDrawData
 // Begin utilities that are used by the CubicBezierCurve class
 ////////////////////////////////////////////////////////////////////////////////
 // doOneDeCasteljauStep - function
@@ -816,7 +816,7 @@ var CubicBezierCurve = (function () {
         this.drawAllBezierArtifacts(drawDataForBezierCurve, drawDataForControlPolygon, sumOfControlPointAreas, drawDataForControlPoints, pointOnCurveRadius, drawDataForPointOnCurve, context, controlPointCircles);
     };
     return CubicBezierCurve;
-}()); // End class CubicBezierCurve
+})(); // End class CubicBezierCurve
 // Begin Canvas utilities
 ////////////////////////////////////////////////////////////////////////////////
 // drawTextForNumber - function
@@ -942,6 +942,10 @@ function getMousePos(canvas, evt) {
     var mousePos = new Point(x, y);
     return mousePos;
 }
+////////////////////////////////////////////////////////////////////////////////
+// onMouseDown - callback function
+// This is called in reponse to a mousedown event detected by the canvas
+////////////////////////////////////////////////////////////////////////////////
 function onMouseDown(evt, theBezierCurve, theSumOfControlPointAreas, thePointOnCurveRadius, theCanvas, controlPointCircles) {
     var mousePos = getMousePos(theCanvas, evt);
     globalIndexOfModifiedControlPoint = -1;
@@ -958,6 +962,10 @@ function onMouseDown(evt, theBezierCurve, theSumOfControlPointAreas, thePointOnC
             }
         }
 }
+////////////////////////////////////////////////////////////////////////////////
+// onMouseMove - callback function
+// This is called in reponse to a mousemove event detected by the canvas
+///////////////////////////////////////////////////////////////////////////////
 function onMouseMove(evt, C, drawDataForBezierCurve, drawDataForControlPolygon, sumOfControlPointAreas, drawDataForControlPoints, pointOnCurveRadius, drawDataForPointOnCurve, drawingContext, drawingCanvas, controlPointCircles) {
     if (globalModifyingPointOnCurve == true) {
         C.editPointOnCurve(evt, drawDataForBezierCurve, drawDataForControlPolygon, sumOfControlPointAreas, drawDataForControlPoints, pointOnCurveRadius, drawDataForPointOnCurve, drawingContext, drawingCanvas, controlPointCircles);
@@ -968,6 +976,10 @@ function onMouseMove(evt, C, drawDataForBezierCurve, drawDataForControlPolygon, 
     else {
     }
 }
+////////////////////////////////////////////////////////////////////////////////
+// onMouseUp - callback function
+// This is called in reponse to a mouseup event detected by the canvas
+///////////////////////////////////////////////////////////////////////////////
 function onMouseUp(evt, C, drawDataForBezierCurve, drawDataForControlPolygon, sumOfControlPointAreas, drawDataForControlPoints, pointOnCurveRadius, drawDataForPointOnCurve, drawingContext, drawingCanvas, controlPointCircles) {
     if (globalModifyingPointOnCurve == true) {
         globalModifyingPointOnCurve = false;
@@ -1103,7 +1115,7 @@ var CubicSpline = (function () {
         return thisIsValid;
     };
     return CubicSpline;
-}());
+})();
 // End class CubicSpline
 //   End code to support BusyBSpline
 // Do this when the web page is loaded

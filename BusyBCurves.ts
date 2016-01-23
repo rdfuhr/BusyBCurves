@@ -1269,6 +1269,10 @@ function getMousePos(canvas : HTMLCanvasElement,
 	return mousePos;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// onMouseDown - callback function
+// This is called in reponse to a mousedown event detected by the canvas
+////////////////////////////////////////////////////////////////////////////////
 function onMouseDown(evt : MouseEvent,
                      theBezierCurve : CubicBezierCurve,
                      theSumOfControlPointAreas : number,
@@ -1296,6 +1300,10 @@ function onMouseDown(evt : MouseEvent,
    }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// onMouseMove - callback function
+// This is called in reponse to a mousemove event detected by the canvas
+///////////////////////////////////////////////////////////////////////////////
 function onMouseMove(evt : MouseEvent,
                      C : CubicBezierCurve,
                      drawDataForBezierCurve : CurveDrawData,
@@ -1344,6 +1352,10 @@ function onMouseMove(evt : MouseEvent,
 	}
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// onMouseUp - callback function
+// This is called in reponse to a mouseup event detected by the canvas
+///////////////////////////////////////////////////////////////////////////////
 function onMouseUp(evt : MouseEvent,
                    C : CubicBezierCurve,
                    drawDataForBezierCurve : CurveDrawData,
