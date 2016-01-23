@@ -12,6 +12,16 @@
 // We may use JSDoc as described here.
 // https://en.wikipedia.org/wiki/JSDoc
 // This is a test to see what this system thinks gets changed in the js file.
+// For the record, here is a list of the variables that I am currently
+// using as globals.
+// globalPointOnCurveForParm
+// globalLoop
+// tGlobal
+// tDeltaGlobal
+// globalCircleAreaFactor
+// globalCircleRadiusFactor
+// globalIndexOfModifiedControlPoint
+// globalModifyingPointOnCurve
 // Begin declaring some of the globals
 var globalPointOnCurveForParm;
 //   End declaring some of the globals
