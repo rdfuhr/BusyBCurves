@@ -37,6 +37,12 @@
 // I am adding this line to test whether BusyBCurves.js will once again appear
 // in SourceTree.
 
+// I am trying to get SourceTree and git to stop tracking BusyBCurves.js
+// This is just a test to see whether it will.
+
+// What seemed to work was to right click on the file, select Stop Tracking,
+// and then commit that change.
+
 // Begin declaring some of the globals
 var globalPointOnCurveForParm : Circle;
 //   End declaring some of the globals
