@@ -1322,6 +1322,17 @@ function onMouseDown(evt : MouseEvent,
 ////////////////////////////////////////////////////////////////////////////////
 // onMouseMove - callback function
 // This is called in response to a mousemove event detected by the canvas
+// input: evt - the mouse event
+// input: C - the CubicBezierCurve
+// input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
+// input: drawDataForControlPolygon - style for drawing control polygon
+// input: sumOfControlPointAreas - sum of areas of control points
+// input: drawDataForControlPoints - style for drawing control points
+// input: pointOnCurveRadius - radius of circle representing point on curve
+// input: drawDataForPointOnCurve - style for drawing point on curve
+// input: drawingContext - the context associated with the canvas
+// input: drawingCanvas - the canvas on which we are drawing
+// output: controlPointCircles - circles marking weighted control points
 ///////////////////////////////////////////////////////////////////////////////
 function onMouseMove(evt : MouseEvent,
                      C : CubicBezierCurve,
