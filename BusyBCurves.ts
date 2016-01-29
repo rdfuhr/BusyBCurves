@@ -1402,6 +1402,14 @@ function onMouseUp()
    }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// touchHandler - callback function
+// This is called response to touchstart, touchmove, and touchend.
+//
+// input: event - a touch event
+// See http://stackoverflow.com/questions/5186441
+//           /javascript-drag-and-drop-for-touch-devices/6362527#6362527
+////////////////////////////////////////////////////////////////////////////////
 function touchHandler(event) {
     var touch = event.changedTouches[0];
 
