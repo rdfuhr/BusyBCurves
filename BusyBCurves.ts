@@ -1428,9 +1428,16 @@ function touchHandler(event) {
 
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
+// ExploreWithMouse - function
+// Constructs the curve and declares callbacks for exploring with the mouse.
+//
+// TODO - There is a refactoring opportunity for constructing the curve.
+// TODO - Look for other refactoring opportunities
+// Note: This function is called when user clicks Explore With Mouse button
+////////////////////////////////////////////////////////////////////////////////
 function ExploreWithMouse()
-{
+{  // Begin function ExploreWithMouse
    var drawingCanvas : HTMLCanvasElement =
      <HTMLCanvasElement>document.getElementById('drawingCanvas');
    var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
@@ -1518,7 +1525,7 @@ function ExploreWithMouse()
     drawingCanvas.addEventListener("touchend", touchHandler, true);
 //   End adding code based on
 // http://stackoverflow.com/questions/5186441/javascript-drag-and-drop-for-touch-devices/6362527#6362527
-}
+}  // End function ExploreWithMouse
 
 //   End code related to ExploreWithMouse()
 
