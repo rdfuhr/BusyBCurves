@@ -1387,32 +1387,10 @@ function onMouseMove(evt : MouseEvent,
 // onMouseUp - callback function
 // This is called in reponse to a mouseup event detected by the canvas
 //
-// input: evt - the mouse event
-// input: C - the CubicBezierCurve
-// input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
-// input: drawDataForControlPolygon - style for drawing control polygon
-// input: sumOfControlPointAreas - sum of areas of control points
-// input: drawDataForControlPoints - style for drawing control points
-// input: pointOnCurveRadius - radius of circle representing point on curve
-// input: drawDataForPointOnCurve - style for drawing point on curve
-// input: drawingContext - the context associated with the canvas
-// input: drawingCanvas - the canvas on which we are drawing
-// output: controlPointCircles - circles marking weighted control points
-
-// TODO - none of the above parameters are needed.  remove them all and
-//        change the other reference to this function.
+// TODO - this function now references some globals; change them to
+//        parameters in a future implementation.
 ///////////////////////////////////////////////////////////////////////////////
-function onMouseUp(evt : MouseEvent,
-                   C : CubicBezierCurve,
-                   drawDataForBezierCurve : CurveDrawData,
-                   drawDataForControlPolygon : CurveDrawData,
-                   sumOfControlPointAreas : number,
-                   drawDataForControlPoints : CircleDrawData,
-                   pointOnCurveRadius : number,
-                   drawDataForPointOnCurve : CircleDrawData,
-                   drawingContext : CanvasRenderingContext2D,
-                   drawingCanvas : HTMLCanvasElement,
-                   controlPointCircles : Array<Circle>)
+function onMouseUp()
 {
    if(globalModifyingPointOnCurve==true)
    {
@@ -1522,17 +1500,7 @@ function ExploreWithMouse()
 
       drawingCanvas.addEventListener('mouseup', function(evt)
          {
-            onMouseUp(evt,
-                      C,
-                      drawDataForBezierCurve,
-                      drawDataForControlPolygon,
-                      sumOfControlPointAreas,
-                      drawDataForControlPoints,
-                      pointOnCurveRadius,
-                      drawDataForPointOnCurve,
-                      drawingContext,
-                      drawingCanvas,
-                      controlPointCircles);
+            onMouseUp();
          }, false);
 
 // Begin adding code based on
