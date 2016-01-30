@@ -1409,6 +1409,19 @@ function onMouseUp()
 // input: event - a touch event
 // See http://stackoverflow.com/questions/5186441
 //           /javascript-drag-and-drop-for-touch-devices/6362527#6362527
+// Note: This function needs to be rewritten, because the method
+// initMouseEvent has been deprecated according to
+// https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/initMouseEvent
+//
+// The above-referenced web page says the following about initMouseEvent.
+// This feature has been removed from the Web standards.
+// Though some browsers may still support it, it is in the proecess of being
+// dropped. Do not use it in old or new projects. Pages or Web apps using it
+// may break at any time. 
+// The above-referenced web page goes on to say the following.
+// Instead use specific event constructors, like MouseEvent().
+// The page on creating and triggering events gives more information
+// about the way to use these.
 ////////////////////////////////////////////////////////////////////////////////
 function touchHandler(event) {
     var touch = event.changedTouches[0];
