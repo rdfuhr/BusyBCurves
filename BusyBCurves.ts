@@ -1417,11 +1417,13 @@ function onMouseUp()
 // This feature has been removed from the Web standards.
 // Though some browsers may still support it, it is in the proecess of being
 // dropped. Do not use it in old or new projects. Pages or Web apps using it
-// may break at any time. 
+// may break at any time.
 // The above-referenced web page goes on to say the following.
 // Instead use specific event constructors, like MouseEvent().
 // The page on creating and triggering events gives more information
 // about the way to use these.
+// Do a Google search for "touch events" "mouse events"
+// Study: http://www.html5rocks.com/en/mobile/touchandmouse/
 ////////////////////////////////////////////////////////////////////////////////
 function touchHandler(event) {
     var touch = event.changedTouches[0];
