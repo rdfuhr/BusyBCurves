@@ -30,3 +30,10 @@ For now, I think we should just put in comments using my own style and not worry
 So that is what I am doing.
 
 I am going to change this file to a plain text file.
+
+For testing on the iPhone and iPad, put copies of the following files in
+/Users/richardfuhr/Dropbox/Public/Temp
+BusyBCurves.html
+BusyBCurves.js		
+BusyBCurvesHelp.html	
+README.txt
