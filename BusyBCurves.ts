@@ -1680,6 +1680,13 @@ class CubicSpline
 
 // Do this when the web page is loaded
 // window.onload = StartAnimatedCanvasTests;
+
+// TODO: Do we just want this free-floating function here?
+// Would it be better design to somehow put this in the HTML or have it
+// be a function that automatically gets called?
+// This call is the last line of the executable code; the remaining code
+// consists of tests.
+
 window.onload = ExploreWithMouse;
 
 
