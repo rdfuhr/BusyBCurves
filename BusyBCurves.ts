@@ -1561,9 +1561,29 @@ class CubicSpline
 
   // The following is a special-purpose constructor in which we build a 3-span cubic spline curve
   // that has 6 control points and 10 knots.  It remains to determine whether
-  // we should check the object for validity.  Perhaps there should be an
+  // we should check the object for validity.  Perhaps we should use the
   // isValid() method.
 
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for a 3-span cubic spline curve
+  // Creates an instance of a CubicSpline
+  //
+  // input: P0 - the 0th control point
+  // input: P1 - the 1st control point
+  // input: P2 - the 2nd control point
+  // input: P3 - the 3rd control point
+  // input: P4 - the 3rd control point
+  // input: P5 - the 3rd control point
+  // input: t0 - the 0th distinct knot
+  // input: t1 - the 1st distinct knot
+  // input: t2 - the 2nd distinct knot
+  // input: t3 - the 3rd distinct knot
+  //
+  // Note: This is a very special-purpose constructor.
+  // We should eventually replace this with a general constructor.
+  // We should also either check for validity in the constructor or
+  // use the isValid() method.
+  //////////////////////////////////////////////////////////////////////////////
   constructor(P0 : Point,
               P1 : Point,
               P2 : Point,
@@ -1601,6 +1621,12 @@ class CubicSpline
 
 // Multiple constructor implementations are apparently not allowed.
 
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of CubicSpline
+  // Returns the string representation of this CubicSpline
+  //
+  // returns: the string representation of this CubicSpline
+  //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
      var curveData : string = "Data for Spline Curve\n";
@@ -1625,6 +1651,14 @@ class CubicSpline
      return curveData;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // isValid - method of CubicSpline
+  // Determines the validity of this CubicSpline
+  //
+  // returns: true if this CubicSpline is valid; returns false otherwise
+  // TODO: We could perform more validity checks, such as whether the knots
+  // are proper; i.e., non-decreasing and with reasonable multiplicities.
+  /////////////////////////////////////////////////////////////////////////////
   isValid() : boolean
   {
     var thisIsValid : boolean = true; // innocent until proven guilty
