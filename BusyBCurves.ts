@@ -469,6 +469,45 @@ function doAllDeCasteljauSteps(P : Array<Point>,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// drawAllDeCasteljauSteps - function
+// Draw all the steps of the DeCasteljau algorithm
+//
+// input: P - an array of Points
+// input: t - a parameter value
+// input: drawData - an object containing information specifying appearance
+// input: context - the context associated with the canvas
+////////////////////////////////////////////////////////////////////////////////
+function drawAllDeCasteljauSteps(P : Array<Point>,
+                                 t : number,
+                                 drawData : CurveDrawData,
+                                 context : CanvasRenderingContext2D)
+{
+   // Draw all steps of the DeCasteljau algorithm
+   var n : number = P.length
+   for (var i = 0; i < n-1; i++)
+   {  // begin i-loop
+      P = doOneDeCasteljauStep(P, t); // so we are overwriting P
+      var m : number = P.length;
+      if (m > 1)
+      {  // begin case of m > 1
+         context.beginPath();
+         drawData.updateContext(context);
+         if (m==2)
+         { // begin hack
+           context.strokeStyle = "teal";
+           context.lineWidth = 1;
+         } // end hack
+         context.moveTo(P[0].x, P[0].y);
+         for (var j = 1; j < m; j++)
+         {
+            context.lineTo(P[j].x, P[j].y);
+         }
+         context.stroke();
+      }  //   end case of m > 1
+   }  //  end i-loop
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // hodographPoints - function
 // Given control points of Bezier curve return control points of its hodograph
 //
@@ -1001,6 +1040,12 @@ class CubicBezierCurve
                                      graphWidth,
                                      sumOfControlPointAreas,
                                      context);
+
+      var drawDataForDeCasteljauSteps : CurveDrawData = new CurveDrawData("brown", 2);
+      drawAllDeCasteljauSteps(this.CtrlPts,
+                              tGlobal,
+                              drawDataForDeCasteljauSteps,
+                              context);
   }
 
   //////////////////////////////////////////////////////////////////////////////
