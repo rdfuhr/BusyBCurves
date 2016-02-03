@@ -469,20 +469,21 @@ function doAllDeCasteljauSteps(P : Array<Point>,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// drawAllDeCasteljauSteps - function
-// Draw all the steps of the DeCasteljau algorithm
+// drawAlldeCasteljauLines - function
+// Draw all the lines of the DeCasteljau algorithm
 //
 // input: P - an array of Points
 // input: t - a parameter value
 // input: drawData - an object containing information specifying appearance
 // input: context - the context associated with the canvas
 ////////////////////////////////////////////////////////////////////////////////
-function drawAllDeCasteljauSteps(P : Array<Point>,
+function drawAlldeCasteljauLines(P : Array<Point>,
                                  t : number,
                                  drawData : CurveDrawData,
                                  context : CanvasRenderingContext2D)
 {
    // Draw all steps of the DeCasteljau algorithm
+
    var n : number = P.length
    for (var i = 0; i < n-1; i++)
    {  // begin i-loop
@@ -503,6 +504,42 @@ function drawAllDeCasteljauSteps(P : Array<Point>,
             context.lineTo(P[j].x, P[j].y);
          }
          context.stroke();
+      }  //   end case of m > 1
+   }  //  end i-loop
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// drawAlldeCasteljauPoints - function
+// Draw all the points of the DeCasteljau algorithm
+//
+// input: P - an array of Points
+// input: t - a parameter value
+// input: drawData - an object containing information specifying appearance
+// input: context - the context associated with the canvas
+////////////////////////////////////////////////////////////////////////////////
+function drawAlldeCasteljauPoints(P : Array<Point>,
+                                  t : number,
+                                  drawData : CurveDrawData,
+                                  context : CanvasRenderingContext2D)
+{
+   // Draw all steps of the DeCasteljau algorithm
+   var pointOnGraphFillColor = "orange"
+   var pointOnGraphStrokeColor = "orange"
+   var pointOnGraphStrokeWidth = 5.0;
+   var drawDataForPointOnLine = new CircleDrawData(pointOnGraphFillColor,
+                                                    pointOnGraphStrokeColor,
+                                                    pointOnGraphStrokeWidth);
+   var n : number = P.length
+   for (var i = 0; i < n-1; i++)
+   {  // begin i-loop
+      P = doOneDeCasteljauStep(P, t); // so we are overwriting P
+      var m : number = P.length;
+      if (m > 0) // can clean this up
+      {  // begin case of m > 1
+         for (var j = 0; j < m; j++)
+         {
+            P[j].drawCircleHere(3.0, drawDataForPointOnLine, context)
+         }
       }  //   end case of m > 1
    }  //  end i-loop
 }
@@ -1042,10 +1079,15 @@ class CubicBezierCurve
                                      context);
 
       var drawDataForDeCasteljauSteps : CurveDrawData = new CurveDrawData("brown", 2);
-      drawAllDeCasteljauSteps(this.CtrlPts,
+      drawAlldeCasteljauLines(this.CtrlPts,
                               tGlobal,
                               drawDataForDeCasteljauSteps,
                               context);
+
+      drawAlldeCasteljauPoints(this.CtrlPts,
+                               tGlobal,
+                               drawDataForDeCasteljauSteps, // not used!!!
+                               context);
   }
 
   //////////////////////////////////////////////////////////////////////////////
