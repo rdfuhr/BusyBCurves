@@ -494,10 +494,10 @@ function drawAlldeCasteljauLines(P : Array<Point>,
          context.beginPath();
          drawData.updateContext(context);
          if (m==2)
-         { // begin hack
+         { // begin hack (may not need this)
            context.strokeStyle = "teal";
            context.lineWidth = 1;
-         } // end hack
+         } // end hack (may not need this)
          context.moveTo(P[0].x, P[0].y);
          for (var j = 1; j < m; j++)
          {
