@@ -469,7 +469,7 @@ function doAllDeCasteljauSteps(P : Array<Point>,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// drawAlldeCasteljauLines - function
+// drawAllDeCasteljauLines - function
 // Draw all the lines of the DeCasteljau algorithm
 //
 // input: P - an array of Points
@@ -477,7 +477,7 @@ function doAllDeCasteljauSteps(P : Array<Point>,
 // input: drawData - an object containing information specifying appearance
 // input: context - the context associated with the canvas
 ////////////////////////////////////////////////////////////////////////////////
-function drawAlldeCasteljauLines(P : Array<Point>,
+function drawAllDeCasteljauLines(P : Array<Point>,
                                  t : number,
                                  drawData : CurveDrawData,
                                  context : CanvasRenderingContext2D)
@@ -493,11 +493,6 @@ function drawAlldeCasteljauLines(P : Array<Point>,
       {  // begin case of m > 1
          context.beginPath();
          drawData.updateContext(context);
-         if (m==2)
-         { // begin hack (may not need this)
-           context.strokeStyle = "teal";
-           context.lineWidth = 1;
-         } // end hack (may not need this)
          context.moveTo(P[0].x, P[0].y);
          for (var j = 1; j < m; j++)
          {
@@ -509,7 +504,7 @@ function drawAlldeCasteljauLines(P : Array<Point>,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// drawAlldeCasteljauPoints - function
+// drawAllDeCasteljauPoints - function
 // Draw all the points of the DeCasteljau algorithm
 //
 // input: P - an array of Points
@@ -517,7 +512,7 @@ function drawAlldeCasteljauLines(P : Array<Point>,
 // input: drawData - an object containing information specifying appearance
 // input: context - the context associated with the canvas
 ////////////////////////////////////////////////////////////////////////////////
-function drawAlldeCasteljauPoints(P : Array<Point>,
+function drawAllDeCasteljauPoints(P : Array<Point>,
                                   t : number,
                                   drawData : CurveDrawData,
                                   context : CanvasRenderingContext2D)
@@ -1079,12 +1074,12 @@ class CubicBezierCurve
                                      context);
 
       var drawDataForDeCasteljauSteps : CurveDrawData = new CurveDrawData("brown", 2);
-      drawAlldeCasteljauLines(this.CtrlPts,
+      drawAllDeCasteljauLines(this.CtrlPts,
                               tGlobal,
                               drawDataForDeCasteljauSteps,
                               context);
 
-      drawAlldeCasteljauPoints(this.CtrlPts,
+      drawAllDeCasteljauPoints(this.CtrlPts,
                                tGlobal,
                                drawDataForDeCasteljauSteps, // not used!!!
                                context);
