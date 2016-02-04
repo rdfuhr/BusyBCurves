@@ -1063,22 +1063,22 @@ class CubicBezierCurve
                                      sumOfControlPointAreas,
                                      context);
 
-      var drawDataForDeCasteljauSteps : CurveDrawData = new CurveDrawData("brown", 2);
+      var drawDataForDeCasteljauLines : CurveDrawData = new CurveDrawData("brown", 2);
       drawAllDeCasteljauLines(this.CtrlPts,
                               tGlobal,
-                              drawDataForDeCasteljauSteps,
+                              drawDataForDeCasteljauLines,
                               context);
 
       var fillColor : string = "orange"
       var strokeColor : string = "orange"
       var strokeWidth : number = 5.0;
-      var drawData = new CircleDrawData(fillColor,
-                                        strokeColor,
-                                        strokeWidth);
+      var drawDataForDeCasteljauPoints = new CircleDrawData(fillColor,
+                                                            strokeColor,
+                                                            strokeWidth);
 
       drawAllDeCasteljauPoints(this.CtrlPts,
                                tGlobal,
-                               drawData,
+                               drawDataForDeCasteljauPoints,
                                context);
   }
 
