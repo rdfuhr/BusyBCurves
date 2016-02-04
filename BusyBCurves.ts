@@ -514,28 +514,18 @@ function drawAllDeCasteljauLines(P : Array<Point>,
 ////////////////////////////////////////////////////////////////////////////////
 function drawAllDeCasteljauPoints(P : Array<Point>,
                                   t : number,
-                                  drawData : CurveDrawData,
+                                  drawData : CircleDrawData,
                                   context : CanvasRenderingContext2D)
 {
-   // Draw all steps of the DeCasteljau algorithm
-   var pointOnGraphFillColor = "orange"
-   var pointOnGraphStrokeColor = "orange"
-   var pointOnGraphStrokeWidth = 5.0;
-   var drawDataForPointOnLine = new CircleDrawData(pointOnGraphFillColor,
-                                                    pointOnGraphStrokeColor,
-                                                    pointOnGraphStrokeWidth);
    var n : number = P.length
    for (var i = 0; i < n-1; i++)
    {  // begin i-loop
       P = doOneDeCasteljauStep(P, t); // so we are overwriting P
       var m : number = P.length;
-      if (m > 0) // can clean this up
-      {  // begin case of m > 1
-         for (var j = 0; j < m; j++)
-         {
-            P[j].drawCircleHere(3.0, drawDataForPointOnLine, context)
-         }
-      }  //   end case of m > 1
+      for (var j = 0; j < m; j++)
+      {   // begin j-loop
+          P[j].drawCircleHere(3.0, drawData, context)
+      }   //   end j-loop
    }  //  end i-loop
 }
 
@@ -1079,9 +1069,16 @@ class CubicBezierCurve
                               drawDataForDeCasteljauSteps,
                               context);
 
+      var fillColor : string = "orange"
+      var strokeColor : string = "orange"
+      var strokeWidth : number = 5.0;
+      var drawData = new CircleDrawData(fillColor,
+                                        strokeColor,
+                                        strokeWidth);
+
       drawAllDeCasteljauPoints(this.CtrlPts,
                                tGlobal,
-                               drawDataForDeCasteljauSteps, // not used!!!
+                               drawData,
                                context);
   }
 
