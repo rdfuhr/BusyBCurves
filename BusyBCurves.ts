@@ -1273,18 +1273,33 @@ function initializeCubicBezierCurve() : CubicBezierCurve
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// clearCanvas - function
+// Clear the drawing canvas
+//
+////////////////////////////////////////////////////////////////////////////////
+function clearCanvas()
+{
+  var drawingCanvas : HTMLCanvasElement =
+    <HTMLCanvasElement>document.getElementById('drawingCanvas');
+  var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
+  var width : number = drawingCanvas.width;
+  var height : number = drawingCanvas.height;
+  drawingContext.clearRect(0, 0, width, height);
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // animation - function
 // Create a CubicBezierCurve and set the drawing style for animation.
 // TODO - Why are we re-creating the curve with every call to this function?
+// We may still want to do this, but I am not sure.
 ////////////////////////////////////////////////////////////////////////////////
 function animation()
 {
    var drawingCanvas : HTMLCanvasElement =
      <HTMLCanvasElement>document.getElementById('drawingCanvas');
    var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
-   var width : number = drawingCanvas.width;
-   var height : number = drawingCanvas.height;
-   drawingContext.clearRect(0, 0, width, height);
+
+   clearCanvas();
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
 
@@ -1554,9 +1569,8 @@ function ExploreWithMouse()
    var drawingCanvas : HTMLCanvasElement =
      <HTMLCanvasElement>document.getElementById('drawingCanvas');
    var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
-   var width : number = drawingCanvas.width;
-   var height : number = drawingCanvas.height;
-   drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+
+   clearCanvas();
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
 
