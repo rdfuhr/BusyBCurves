@@ -1257,10 +1257,10 @@ function initializeCubicBezierCurve() : CubicBezierCurve
 {
   var drawingCanvas : HTMLCanvasElement =
     <HTMLCanvasElement>document.getElementById('drawingCanvas');
-  var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
+
   var width : number = drawingCanvas.width;
   var height : number = drawingCanvas.height;
-  drawingContext.clearRect(0, 0, width, height);
+
   var lowerMargin : number = 0.18;
   var upperMargin : number = 1.0 - lowerMargin;
   var xDelta : number = (upperMargin - lowerMargin)/3.0;
@@ -1285,14 +1285,8 @@ function animation()
    var width : number = drawingCanvas.width;
    var height : number = drawingCanvas.height;
    drawingContext.clearRect(0, 0, width, height);
-   var lowerMargin : number = 0.18;
-   var upperMargin : number = 1.0 - lowerMargin;
-   var xDelta : number = (upperMargin - lowerMargin)/3.0;
-   var P0 : Point = new Point(lowerMargin*width, lowerMargin*height)
-   var P1 : Point = new Point(P0.x + xDelta*width, upperMargin*height);
-   var P2 : Point = new Point(P1.x + xDelta*width, P0.y);
-   var P3 : Point = new Point(upperMargin*width, P1.y);
-   var C : CubicBezierCurve = new CubicBezierCurve(P0, P1, P2, P3);
+
+   var C : CubicBezierCurve = initializeCubicBezierCurve();
 
    var curveStrokeColor : string = "red";
    var curveWidth : number = 10;
@@ -1563,14 +1557,8 @@ function ExploreWithMouse()
    var width : number = drawingCanvas.width;
    var height : number = drawingCanvas.height;
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
-   var lowerMargin : number = 0.18;
-   var upperMargin : number = 1.0 - lowerMargin;
-   var xDelta : number = (upperMargin - lowerMargin)/3.0;
-   var P0 : Point = new Point(lowerMargin*width, lowerMargin*height)
-   var P1 : Point = new Point(P0.x + xDelta*width, upperMargin*height);
-   var P2 : Point = new Point(P1.x + xDelta*width, P0.y);
-   var P3 : Point = new Point(upperMargin*width, P1.y);
-   var C : CubicBezierCurve = new CubicBezierCurve(P0, P1, P2, P3);
+
+   var C : CubicBezierCurve = initializeCubicBezierCurve();
 
    var curveStrokeColor : string = "red";
    var curveWidth : number = 10;
