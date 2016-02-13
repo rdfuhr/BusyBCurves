@@ -1012,19 +1012,19 @@ class CubicBezierCurve
   //
   // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
   // input: drawDataForControlPolygon - style for drawing control polygon
-  // input: sumOfControlPointAreas - sum of areas of control points
   // input: drawDataForControlPoints - style for drawing control points
-  // input: pointOnCurveRadius - radius of circle representing point on curve
   // input: drawDataForPointOnCurve - style for drawing point on curve
+  // input: sumOfControlPointAreas - sum of areas of control points
+  // input: pointOnCurveRadius - radius of circle representing point on curve
   // input: context - the context associated with the canvas
   // output: controlPointCircles - circles marking weighted control points
   //////////////////////////////////////////////////////////////////////////////
   drawAllBezierArtifacts(drawDataForBezierCurve : CurveDrawData,
                          drawDataForControlPolygon : CurveDrawData,
-                         sumOfControlPointAreas : number,
                          drawDataForControlPoints : CircleDrawData,
-                         pointOnCurveRadius : number,
                          drawDataForPointOnCurve : CircleDrawData,
+                         sumOfControlPointAreas : number,
+                         pointOnCurveRadius : number,
                          context : CanvasRenderingContext2D,
                          controlPointCircles : Array<Circle>)
   {
@@ -1140,10 +1140,10 @@ class CubicBezierCurve
      context.clearRect(0, 0, canvas.width, canvas.height);
      this.drawAllBezierArtifacts(drawDataForBezierCurve,
                                  drawDataForControlPolygon,
-                                 sumOfControlPointAreas,
                                  drawDataForControlPoints,
-                                 pointOnCurveRadius,
                                  drawDataForPointOnCurve,
+                                 sumOfControlPointAreas,
+                                 pointOnCurveRadius,
                                  context,
                                  controlPointCircles);
   }
@@ -1185,10 +1185,10 @@ class CubicBezierCurve
 
      this.drawAllBezierArtifacts(drawDataForBezierCurve,
                                  drawDataForControlPolygon,
-                                 sumOfControlPointAreas,
                                  drawDataForControlPoints,
-                                 pointOnCurveRadius,
                                  drawDataForPointOnCurve,
+                                 sumOfControlPointAreas,
+                                 pointOnCurveRadius,
                                  context,
                                  controlPointCircles);
   }
@@ -1331,10 +1331,10 @@ function animation()
 
    C.drawAllBezierArtifacts(drawDataForBezierCurve,
                             drawDataForControlPolygon,
-                            sumOfControlPointAreas,
                             drawDataForControlPoints,
-                            pointOnCurveRadius,
                             drawDataForPointOnCurve,
+                            sumOfControlPointAreas,
+                            pointOnCurveRadius,
                             drawingContext,
                             controlPointCircles);
 
@@ -1604,10 +1604,10 @@ function ExploreWithMouse()
 
    C.drawAllBezierArtifacts(drawDataForBezierCurve,
                             drawDataForControlPolygon,
-                            sumOfControlPointAreas,
                             drawDataForControlPoints,
-                            pointOnCurveRadius,
                             drawDataForPointOnCurve,
+                            sumOfControlPointAreas,
+                            pointOnCurveRadius,
                             drawingContext,
                             controlPointCircles);
 
