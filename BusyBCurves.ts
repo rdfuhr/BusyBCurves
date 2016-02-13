@@ -25,6 +25,7 @@
 // globalCircleRadiusFactor
 // globalIndexOfModifiedControlPoint
 // globalModifyingPointOnCurve
+// globalCubicBezierCurve
 
 // I just invoked git rm BusyBCurves.js at about 2:40 PM on 1/23/2016
 // Adding these lines is a test to ensure that I no longer will be checking
@@ -45,6 +46,7 @@
 
 // Begin declaring some of the globals
 var globalPointOnCurveForParm : Circle;
+var globalCubicBezierCurve : CubicBezierCurve;
 //   End declaring some of the globals
 
 // The Point class
@@ -1245,6 +1247,29 @@ function tGlobalUpdate() // updates the global t
       tGlobal = 0.0;
       tDeltaGlobal = -1.0*tDeltaGlobal;
    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// initializeGlobalCubicBezierCurve - function
+// Construct the globalCubicBezierCurve
+//
+////////////////////////////////////////////////////////////////////////////////
+function initializeGlobalCubicBezierCurve()
+{
+  var drawingCanvas : HTMLCanvasElement =
+    <HTMLCanvasElement>document.getElementById('drawingCanvas');
+  var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
+  var width : number = drawingCanvas.width;
+  var height : number = drawingCanvas.height;
+  drawingContext.clearRect(0, 0, width, height);
+  var lowerMargin : number = 0.18;
+  var upperMargin : number = 1.0 - lowerMargin;
+  var xDelta : number = (upperMargin - lowerMargin)/3.0;
+  var P0 : Point = new Point(lowerMargin*width, lowerMargin*height)
+  var P1 : Point = new Point(P0.x + xDelta*width, upperMargin*height);
+  var P2 : Point = new Point(P1.x + xDelta*width, P0.y);
+  var P3 : Point = new Point(upperMargin*width, P1.y);
+  globalCubicBezierCurve = new CubicBezierCurve(P0, P1, P2, P3);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
