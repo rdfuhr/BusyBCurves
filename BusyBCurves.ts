@@ -1179,7 +1179,7 @@ class CubicBezierCurve
                    canvas : HTMLCanvasElement,
                    controlPointCircles)
   {
-     var mousePos = getMousePos(canvas, evt);
+     var mousePos : Point = getMousePos(canvas, evt);
      this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
      context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -1412,7 +1412,7 @@ function onMouseDown(evt : MouseEvent,
                      theCanvas : HTMLCanvasElement,
                      controlPointCircles : Array<Circle>)
 {
-   var mousePos = getMousePos(theCanvas, evt);
+   var mousePos : Point = getMousePos(theCanvas, evt);
 
    globalIndexOfModifiedControlPoint = -1;
 
@@ -1793,10 +1793,57 @@ class CubicSpline
 // This call is the last line of the executable code; the remaining code
 // consists of tests.
 
-window.onload = ExploreWithMouse;
+// TODO: We would like to make the size of the canvas adapt to the size
+// of the browser.
+// Look at the following:
+// http://cssdeck.com/labs/emcxdwuz
+// http://stackoverflow.com/questions/1664785/resize-html5-canvas-to-fit-window
+// http://htmlcheats.com/html/resize-the-html5-canvas-dyamically/
 
+////////////////////////////////////////////////////////////////////////////////
+// resize ( from http://cssdeck.com/labs/emcxdwuz )
+// This resizes the drawingCanvas to match the window.
+// But note that the original code that used drawingCanvas.style
+// did not work properly.
+// TODO:
+// This still isn't perfect, because I am not taking window.innerWidth
+// into consideration.  I solved a similar problem in BoGART years ago, so
+// I can do it again.  In other words, if I resize the window from the bottom
+// or top edge (changing innerHeight) then the drawingCanvas adjusts.
+// But it does not adjust if I resize the window from the left or right edge.
+// This should be fixed.
+////////////////////////////////////////////////////////////////////////////////
+function resize()
+{
+  var drawingCanvas : HTMLCanvasElement =
+    <HTMLCanvasElement>document.getElementById('drawingCanvas');
+  var height : number = window.innerHeight;
+  var ratio : number = drawingCanvas.width/drawingCanvas.height;
+  var width = height*ratio;
 
+  var scaleFac : number = 0.8;
 
+  // Note, the following did not work in conjunction with mouse actions.
+  // drawingCanvas.style.width = scaleFac*width + 'px';
+  // drawingCanvas.style.height = scaleFac*height + 'px';
+
+  // This works
+  // drawingCanvas.width = scaleFac*width;
+  // drawingCanvas.height = scaleFac*height;
+
+  // This could work too but wouldn't preserve the aspect ratio.
+  drawingCanvas.width = scaleFac*window.innerWidth;
+  drawingCanvas.height = scaleFac*window.innerHeight;
+
+  ExploreWithMouse();
+}
+
+// I replaced window.onload = ExploreWithMouse with the following.
+window.onload = resize;
+window.onresize = resize;
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 // Miscellaneous tests of the above.
 
