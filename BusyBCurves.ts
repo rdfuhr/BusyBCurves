@@ -1659,6 +1659,48 @@ function HelpInTheFormOfAWebPage()
 
 // Begin code to support BusyBSpline
 
+// Begin class PolyBezier
+// See ~/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
+class PolyBezier
+{
+  Component : Array<CubicBezierCurve>;
+  Breakpoint : Array<number>;
+
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for a PolyBezier curve
+  // Creates an instance of a PolyBezier curve.
+  //
+  // input C : an array of CubicBezierCurve
+  // input t : an array of breakpoints
+  //////////////////////////////////////////////////////////////////////////////
+  constructor(C : Array<CubicBezierCurve>,
+              t : Array<number>)
+  {
+    // We need to do some validity checking; otherwise we will construct
+    // a PolyBezier object with no components.
+    this.Component = new Array<CubicBezierCurve>();
+    this.Breakpoint = new Array<number>();
+    var validInput : boolean = true; // innocent until proven guilty
+    // Begin checking for validInput
+    if ((C.length < 1) || (t.length < 2))
+    {
+      validInput = false;
+    }
+    else if (C.length + 1 != t.length)
+    {
+      validInput = false;
+    }
+    else
+    { // begin checking that t is monotone increasing
+    } //   end checking that t is monotone increasing
+    if (validInput)
+    {  // begin constructing this PolyBezier curve
+    }  //   end constructing this PolyBezier curve
+  }
+
+}
+//   End class PolyBezier
+
 // Begin class CubicSpline
 class CubicSpline
 {
