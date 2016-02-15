@@ -1,11 +1,11 @@
-<!-- Copyright (C) 2014 Richard David Fuhr - All rights reserved. -->
+<!-- Copyright (C) 2016 Richard David Fuhr - All rights reserved. -->
 <!-- richard.fuhr@gmail.com -->
 <!DOCTYPE html>
 <meta charset="UTF-8">
 
 <html>
 <head>
-    <title>Exploring Bezier and Spline Curves</title>
+    <title>Exploring Bezier Curves</title>
     <script src="BusyBCurves.js">
     </script>
 <!-- Style based on Core HTML5 Canvas Example     -->
@@ -24,23 +24,12 @@
 </head>
 
 <body>
-<!--
-    <h1>
-    /Users/richardfuhr/Documents/Sandbox/pythonLearn/BezierCurves/standalone</a>
-    </h1>
- -->
 
- <!--
-Consider using a modified version of
- file:///Users/richardfuhr/Documents/Sandbox/html5CanvasLearn/html5-curves/
- for initial work with Canvas
- Also consider using ideas from /Users/richardfuhr/Documents/Sandbox/html5CanvasLearn/Core HTML5 Canvas/code-master
- In particular, example 2.29 looks promising
- -->
 
 <div>
 <!-- Golden Ratio is approximately 1.618      -->
 <!-- I am using the Golden Ratio as width/height for the rectangle -->
+<!-- This could be overridden by code in the TypeScript/JavaScript file -->
 <canvas id='drawingCanvas' width='1084' height='670'>
       Canvas not supported
 </canvas>
@@ -49,36 +38,6 @@ Consider using a modified version of
 
 <div>
 
-<!--
-    <input type="button"
-           value="Say Hello"
-           id = "SayHello"
-           onclick="SayHello()" />
-
-    <input type="button"
-           value="Do Point Tests"
-           id = "DoPointTests"
-           onclick="DoPointTests()" />
-
-    <input type="button"
-           value="Do Bernstein Tests"
-           id = "DoBernsteinTests"
-           onclick="DoBernsteinTests()" />
- -->
-
-<!--
-    <input type="button"
-           value="Do Graph Tests"
-           id = "DoGraphTests"
-           onclick="DoGraphTests()" />
- -->
-
-<!--
-    <input type="button"
-           value="Do Static Canvas Tests"
-           id = "DoStaticCanvasTests"
-           onclick="DoStaticCanvasTests()" />
- -->
 
     <input type="button"
            value="Start Animation"
