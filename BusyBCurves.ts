@@ -1863,7 +1863,8 @@ function resize()
   var ratio : number = drawingCanvas.width/drawingCanvas.height;
   var width = height*ratio;
 
-  var scaleFac : number = 0.8;
+  var widthScaleFac : number = 0.9;
+  var heightScaleFac : number = 0.8;
 
   // Note, the following did not work in conjunction with mouse actions.
   // drawingCanvas.style.width = scaleFac*width + 'px';
@@ -1873,9 +1874,9 @@ function resize()
   // drawingCanvas.width = scaleFac*width;
   // drawingCanvas.height = scaleFac*height;
 
-  // This could work too but wouldn't preserve the aspect ratio.
-  drawingCanvas.width = scaleFac*window.innerWidth;
-  drawingCanvas.height = scaleFac*window.innerHeight;
+  // This works but doesn't preserve the aspect ratio.
+  drawingCanvas.width = widthScaleFac*window.innerWidth;
+  drawingCanvas.height = heightScaleFac*window.innerHeight;
 
   ExploreWithMouse();
 }
