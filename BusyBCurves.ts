@@ -34,6 +34,7 @@
 // and then commit that change.
 
 // Begin declaring some of the globals
+var globalPointEqualityTol : number = 0.000001; // can we make this a constant?
 var globalPointOnCurveForParm : Circle;
 //   End declaring some of the globals
 
@@ -1662,6 +1663,13 @@ class PolyBezier
   //
   // input C : an array of CubicBezierCurve
   // input t : an array of breakpoints
+  //
+  // The input is checked for validity.
+  // 1. Number of cubic Bezier curves must be at least 1.
+  // 2. Number of breakpoints must be at least 2.
+  // 3. Number of breakpoints must equal number of cubic Bezier curves + 1
+  // 4. Breakpoints must be strictly increasing
+  // 5. Last point of i-th curve must equal first point of (i+1)st curve.
   //////////////////////////////////////////////////////////////////////////////
   constructor(C : Array<CubicBezierCurve>,
               t : Array<number>)
@@ -1682,9 +1690,39 @@ class PolyBezier
     }
     else
     { // begin checking that t is monotone increasing
+      for (var i = 0; i < t.length - 1; i++)
+      {  // begin i-loop
+         if (t[i] >= t[i+1])
+         {  // begin case where t not monotone increasing
+            validInput = false;
+            break; // no reason to continue
+         }  //   end case where t not monotone increasing
+      }  //   end i-loop
     } //   end checking that t is monotone increasing
     if (validInput)
+    { // Begin checking that last pt of i-th curve = 1st pt of (i+1)-st curve
+      for (var m = 0; m < C.length - 1; m++)
+      {   // begin m-loop
+          var endPt : Point = C[i].CtrlPts[3];
+          var startPt : Point = C[i+1].CtrlPts[0];
+          if (endPt.distanceTo(startPt) > globalPointEqualityTol)
+          {  // begin case where successive curves aren't connected
+             validInput = false;
+             break; // no reason to continue
+          }  //   end case where successive curves aren't connected
+      }   //   end m-loop
+
+    } //   End checking that last pt of i-th curve = 1st pt of (i+1)-st curve
+    if (validInput)
     {  // begin constructing this PolyBezier curve
+       for (var j = 0; j < C.length; j++)
+       {   // begin j-loop
+           this.Component.push(C[i]);
+       }   //   end j-loop
+       for (var k = 0; k < C.length; k++)
+       {   // begin j-loop
+           this.Breakpoint.push(t[i]);
+       }   //   end j-loop
     }  //   end constructing this PolyBezier curve
   }
 
