@@ -1734,7 +1734,7 @@ class PolyBezier
   //////////////////////////////////////////////////////////////////////////////
   toString() :  string
   {
-    var curveData : string = "Data for Spline Curve\n";
+    var curveData : string = "Data for PolyBezier Curve\n";
 
     var nComponents : number = this.Component.length;
     for (var i = 0; i < nComponents; i++)
