@@ -1,7 +1,4 @@
-// The purpose of this file is to implement the Point class
-// giving it roughly the same functionality as we have in the file
-// ~/Dropbox/Public/RichardFuhr/BusyBezier/BusyBezier.js
-// We will actually go ahead and implement the other functionality from
+// We will implement the functionality from
 // ~/Dropbox/Public/RichardFuhr/BusyBezier/BusyBezier.js
 // Also, we will reformulate some of my Objective-C BusyBSpline code as TypeScript:
 // /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
@@ -14,7 +11,7 @@
 // We may use JSDoc as described here.
 // https://en.wikipedia.org/wiki/JSDoc
 
-// This is a test to see what this system thinks gets changed in the js file.
+
 // For the record, here is a list of the variables that I am currently
 // using as globals.
 // globalPointOnCurveForParm
@@ -29,13 +26,6 @@
 // I just invoked git rm BusyBCurves.js at about 2:40 PM on 1/23/2016
 // Adding these lines is a test to ensure that I no longer will be checking
 // in versions of BusyBCurves.js
-
-// The whole business of using a .gitignore file is driving me crazy.
-// I don't want to see BusyBCurves.js appear in my list of files in
-// SourceTree.  Perhaps I should ask Steve Baker.
-
-// I am adding this line to test whether BusyBCurves.js will once again appear
-// in SourceTree.
 
 // I am trying to get SourceTree and git to stop tracking BusyBCurves.js
 // This is just a test to see whether it will.
