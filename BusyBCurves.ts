@@ -1653,7 +1653,7 @@ function HelpInTheFormOfAWebPage()
 // Begin class PolyBezier
 // See ~/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
 class PolyBezier
-{
+{ // Begin class PolyBezier
   Component : Array<CubicBezierCurve>;
   Breakpoint : Array<number>;
 
@@ -1673,7 +1673,7 @@ class PolyBezier
   //////////////////////////////////////////////////////////////////////////////
   constructor(C : Array<CubicBezierCurve>,
               t : Array<number>)
-  {
+  { // begin constructor of PolyBezier
     // We need to do some validity checking; otherwise we will construct
     // a PolyBezier object with no components.
     this.Component = new Array<CubicBezierCurve>();
@@ -1724,10 +1724,44 @@ class PolyBezier
            this.Breakpoint.push(t[i]);
        }   //   end j-loop
     }  //   end constructing this PolyBezier curve
+  } // End constructor of PolyBezier
+
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of PolyBezier
+  // Returns the string representation of this PolyBezier
+  //
+  // returns: the string representation of this PolyBezier
+  //////////////////////////////////////////////////////////////////////////////
+  toString() :  string
+  {
+    var curveData : string = "Data for Spline Curve\n";
+
+    var nComponents : number = this.Component.length;
+    for (var i = 0; i < nComponents; i++)
+    {
+       curveData += "<p>"
+       curveData += "Component[" + i + "] = ";
+       curveData += this.Component[i].toString();
+       curveData += "</p>";
+    }
+
+    var nBreakpoints : number = this.Breakpoint.length;
+    for (var j = 0; j < nBreakpoints; j++)
+    {
+       curveData += "<p>"
+       curveData += "Breakpoint[" + j + "] = ";
+       curveData += this.Breakpoint[j].toString();
+       curveData += "</p>";
+    }
+    return curveData;
   }
 
-}
-//   End class PolyBezier
+} // End class PolyBezier
+
+
+
+
+
 
 // Begin class CubicSpline
 class CubicSpline
