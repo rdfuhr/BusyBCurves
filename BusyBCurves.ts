@@ -2027,11 +2027,19 @@ function CubicSplineTest()
   document.writeln("<p>")
  }
 
+ function PolyBezierTest()
+ {
+   document.writeln("<p>In PolyBezierTest(</p>)")
+   // Create some CubicBezierCurve objects
+   // Dump those objects
+   // Create a PolyBezier object from the CubicBezierCurve objects
+   // Dump that object
+ }
+
 
 function doTests()
 {
    var date : Date = new Date();
    document.writeln(date.toString());
-   doPointTests();
-//   CubicSplineTest();
+   PolyBezierTest();
 }
