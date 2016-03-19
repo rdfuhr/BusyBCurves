@@ -2029,7 +2029,7 @@ function CubicSplineTest()
 
  function PolyBezierTest()
  {
-   document.writeln("<p>In PolyBezierTest(</p>)")
+   document.writeln("<p>In PolyBezierTest()</p>")
    // Create some CubicBezierCurve objects
    // Dump those objects
    // Create a PolyBezier object from the CubicBezierCurve objects
