@@ -1676,7 +1676,7 @@ class PolyBezier
   { // begin constructor of PolyBezier
     // We need to do some validity checking; otherwise we will construct
     // a PolyBezier object with no components.
-    this.Component = new Array<CubicBezierCurve>();
+    this.Component  = new Array<CubicBezierCurve>();
     this.Breakpoint = new Array<number>();
     var validInput : boolean = true; // innocent until proven guilty
     // Begin checking for validInput
@@ -1699,12 +1699,13 @@ class PolyBezier
          }  //   end case where t not monotone increasing
       }  //   end i-loop
     } //   end checking that t is monotone increasing
+
     if (validInput)
-    { // Begin checking that last pt of i-th curve = 1st pt of (i+1)-st curve
+    { // Begin checking that last pt of m-th curve = 1st pt of (m+1)-st curve
       for (var m = 0; m < C.length - 1; m++)
       {   // begin m-loop
-          var endPt : Point = C[i].CtrlPts[3];
-          var startPt : Point = C[i+1].CtrlPts[0];
+          var endPt : Point = C[m].CtrlPts[3];
+          var startPt : Point = C[m+1].CtrlPts[0];
           if (endPt.distanceTo(startPt) > globalPointEqualityTol)
           {  // begin case where successive curves aren't connected
              validInput = false;
@@ -1712,17 +1713,18 @@ class PolyBezier
           }  //   end case where successive curves aren't connected
       }   //   end m-loop
 
-    } //   End checking that last pt of i-th curve = 1st pt of (i+1)-st curve
+    } //   End checking that last pt of m-th curve = 1st pt of (m+1)-st curve
+
     if (validInput)
     {  // begin constructing this PolyBezier curve
        for (var j = 0; j < C.length; j++)
        {   // begin j-loop
-           this.Component.push(C[i]);
+           this.Component.push(C[j]);
        }   //   end j-loop
-       for (var k = 0; k < C.length; k++)
-       {   // begin j-loop
-           this.Breakpoint.push(t[i]);
-       }   //   end j-loop
+       for (var k = 0; k < t.length; k++)
+       {   // begin k-loop
+           this.Breakpoint.push(t[k]);
+       }   //   end k-loop
     }  //   end constructing this PolyBezier curve
   } // End constructor of PolyBezier
 
@@ -2027,13 +2029,67 @@ function CubicSplineTest()
   document.writeln("<p>")
  }
 
+
+
  function PolyBezierTest()
  {
-   document.writeln("<p>In PolyBezierTest()</p>")
+   document.writeln("<p>Entering PolyBezierTest()</p>");
+   // Declare some indices
+   var i,j,k,m,n : number;
+   // Create some points
+   var Pts : Array<Point> = new Array();
+   var nCubicBezierCurves : number = 3;
+   var degree : number = 3;
+   var nPoints : number = 0;
+
+   if (nCubicBezierCurves > 0)
+   {
+     nPoints = degree*nCubicBezierCurves + 1;
+   }
+
+   // nPoints determined to be 10
+   for (i = 0; i < nPoints; i++)
+   {
+     var currPt : Point = new Point(i, 10*i);
+     Pts.push(currPt);
+   }
+
    // Create some CubicBezierCurve objects
+
+   var Crvs : Array<CubicBezierCurve> = new Array();
+   for (j = 0; j < nCubicBezierCurves; j++)
+   {
+     k = 3*j;
+     var A : Point = Pts[k];
+     var B : Point = Pts[k+1];
+     var C : Point = Pts[k+2];
+     var D : Point = Pts[k+3];
+     var currCrv = new CubicBezierCurve(A, B, C, D);
+     Crvs.push(currCrv);
+   }
    // Dump those objects
-   // Create a PolyBezier object from the CubicBezierCurve objects
-   // Dump that object
+
+   for (m = 0; m < nCubicBezierCurves; m++)
+   {
+     var BezierCurveData : string = Crvs[m].toString();
+     document.writeln(BezierCurveData);
+   }
+   //  // Create a PolyBezier object from the CubicBezierCurve objects
+   // First construct the array of breakpoints.
+   var Breakpoints : Array<number> = new Array();
+   var nBreakpoints : number = nCubicBezierCurves + 1;
+   for (n = 0; n < nBreakpoints; n++)
+   {
+     Breakpoints.push(n*n);
+   }
+
+   var thePolyBezierObject : PolyBezier = new PolyBezier(Crvs, Breakpoints)
+   //  // Dump that object
+
+   var thePolyBezierObjectData = thePolyBezierObject.toString();
+   document.writeln(thePolyBezierObjectData);
+
+   document.writeln("<p>Leaving PolyBezierTest()</p>");
  }
 
 
