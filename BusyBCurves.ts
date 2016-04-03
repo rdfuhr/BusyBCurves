@@ -1252,9 +1252,9 @@ function initializeCubicBezierCurve() : CubicBezierCurve
   var width : number = drawingCanvas.width;
   var height : number = drawingCanvas.height;
 
-  var lowerMargin : number = 0.18;
-  var upperMargin : number = 1.0 - lowerMargin;
-  var xDelta : number = (upperMargin - lowerMargin)/3.0;
+  const lowerMargin : number = 0.18;
+  const upperMargin : number = 1.0 - lowerMargin;
+  const xDelta : number = (upperMargin - lowerMargin)/3.0;
   var P0 : Point = new Point(lowerMargin*width, lowerMargin*height)
   var P1 : Point = new Point(P0.x + xDelta*width, upperMargin*height);
   var P2 : Point = new Point(P1.x + xDelta*width, P0.y);
