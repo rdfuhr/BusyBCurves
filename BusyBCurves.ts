@@ -621,7 +621,7 @@ function annotateGraphOfCubicBernstein(i : number,
                                        graphOfCubicBernstein : CubicBezierCurve,
                                        context : CanvasRenderingContext2D)
 {
-   var fontSpec : string = 'lighter 45px Sans-Serif';
+   const fontSpec : string = 'lighter 45px Sans-Serif';
    var P : Point = graphOfCubicBernstein.positionAtParm(t);
    // Don't assume degree is 3; compute it.
    var degree : number = graphOfCubicBernstein.CtrlPts.length - 1;
