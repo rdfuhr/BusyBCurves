@@ -653,8 +653,8 @@ function buildGraphOfCubicBernstein(indx : number,
                                     width : number,
                                     height : number) : CubicBezierCurve
 {
-    var oneThird : number = 1.0/3.0;
-    var twoThirds : number = 2.0/3.0;
+    const oneThird : number = 1.0/3.0;
+    const twoThirds : number = 2.0/3.0;
 
     var Q0 : Point = new Point(0.0, 1.0)
     var Q1 : Point = new Point(oneThird, 1.0);
