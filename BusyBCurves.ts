@@ -1039,15 +1039,15 @@ class CubicBezierCurve
 
       var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - pointOnCurveRadius);
 
-      var fontSpec : string = 'lighter 45px Sans-Serif';
+      const fontSpec : string = 'lighter 45px Sans-Serif';
       drawTextForNumber(tGlobal,
                         textLocation,
                         fontSpec,
                         context);
 
   // temporarily hard-code some of the input parameters
-     var graphStrokeColor : string = "green";
-     var graphWidth : number = 2;
+     const graphStrokeColor : string = "green";
+     const graphWidth : number = 2;
      this.drawBasisFunctionsWithParm(tGlobal,
                                      graphStrokeColor,
                                      graphWidth,
@@ -1060,9 +1060,9 @@ class CubicBezierCurve
                               drawDataForDeCasteljauLines,
                               context);
 
-      var fillColor : string = "orange"
-      var strokeColor : string = "orange"
-      var strokeWidth : number = 5.0;
+      const fillColor : string = "orange"
+      const strokeColor : string = "orange"
+      const strokeWidth : number = 5.0;
       var drawDataForDeCasteljauPoints = new CircleDrawData(fillColor,
                                                             strokeColor,
                                                             strokeWidth);
