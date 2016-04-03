@@ -34,7 +34,7 @@
 // and then commit that change.
 
 // Begin declaring some of the globals
-const globalPointEqualityTol : number = 0.000001; 
+const globalPointEqualityTol : number = 0.000001;
 var globalPointOnCurveForParm : Circle;
 //   End declaring some of the globals
 
@@ -1212,9 +1212,9 @@ function drawTextForNumber(t : number,
 // Begin code related to StartAnimatedCanvasTests()
 var globalLoop : number; //used by StartAnimatedCanvasTests and StopAnimatedCanvasTests
 var tGlobal : number = 0.0; // global
-var tDeltaGlobal : number = 0.001;
-var globalCircleAreaFactor : number = 2.0;
-var globalCircleRadiusFactor : number = Math.sqrt(globalCircleAreaFactor);
+var tDeltaGlobal : number = 0.001; // cannot be made a const
+const globalCircleAreaFactor : number = 2.0;
+const globalCircleRadiusFactor : number = Math.sqrt(globalCircleAreaFactor);
 
 ////////////////////////////////////////////////////////////////////////////////
 // tGlobalUpdate - function
