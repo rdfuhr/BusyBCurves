@@ -1565,26 +1565,26 @@ function ExploreWithMouse()
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
 
-   var curveStrokeColor : string = "red";
-   var curveWidth : number = 10;
+   const curveStrokeColor : string = "red";
+   const curveWidth : number = 10;
    var drawDataForBezierCurve : CurveDrawData = new CurveDrawData(curveStrokeColor, curveWidth);
-   var lineWidth : number = 5;
-   var polygonStrokeColor : string = "black";
+   const lineWidth : number = 5;
+   const polygonStrokeColor : string = "black";
    var drawDataForControlPolygon : CurveDrawData = new CurveDrawData(polygonStrokeColor, lineWidth);
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
-   var sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
-   var controlPointFillColor : string = "blue";
-   var controlPointStrokeColor : string = "green";
-   var controlPointStrokeWidth : number = 5.0;
+   const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
+   const controlPointFillColor : string = "blue";
+   const controlPointStrokeColor : string = "green";
+   const controlPointStrokeWidth : number = 5.0;
    var drawDataForControlPoints : CircleDrawData =
      new CircleDrawData(controlPointFillColor,
                         controlPointStrokeColor,
                         controlPointStrokeWidth);
 
-   var pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
-   var pointOnCurveFillColor : string = "yellow";
-   var pointOnCurveStrokeColor : string = "black";
-   var pointOnCurveStrokeWidth : number = 5.0;
+   const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
+   const pointOnCurveFillColor : string = "yellow";
+   const pointOnCurveStrokeColor : string = "black";
+   const pointOnCurveStrokeWidth : number = 5.0;
    var drawDataForPointOnCurve : CircleDrawData =
      new CircleDrawData(pointOnCurveFillColor,
                         pointOnCurveStrokeColor,
