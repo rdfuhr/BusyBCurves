@@ -34,7 +34,7 @@
 // and then commit that change.
 
 // Begin declaring some of the globals
-var globalPointEqualityTol : number = 0.000001; // can we make this a constant?
+const globalPointEqualityTol : number = 0.000001; 
 var globalPointOnCurveForParm : Circle;
 //   End declaring some of the globals
 
