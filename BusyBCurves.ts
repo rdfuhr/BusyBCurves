@@ -1278,6 +1278,72 @@ function clearCanvas()
   drawingContext.clearRect(0, 0, width, height);
 }
 
+// Begin implementing functions that construct and return draw data.
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForBezierCurve - function
+// Return the default draw data for the Bezier curve.
+//
+////////////////////////////////////////////////////////////////////////////////
+function defaultDrawDataForBezierCurve() : CurveDrawData
+{
+  const curveStrokeColor : string = "red";
+  const curveWidth : number = 10;
+  var drawDataForBezierCurve : CurveDrawData =
+     new CurveDrawData(curveStrokeColor, curveWidth);
+  return drawDataForBezierCurve;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForControlPolygon - function
+// Return the default draw data for the control polygon.
+//
+////////////////////////////////////////////////////////////////////////////////
+function defaultDrawDataForControlPolygon() : CurveDrawData
+{
+  const lineWidth : number = 5;
+  const polygonStrokeColor : string = "black";
+  var drawDataForControlPolygon : CurveDrawData =
+     new CurveDrawData(polygonStrokeColor, lineWidth);
+  return drawDataForControlPolygon;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForControlPoints - function
+// Return the default draw data for the control points.
+//
+////////////////////////////////////////////////////////////////////////////////
+function defaultDrawDataForControlPoints() : CircleDrawData
+{
+  const controlPointFillColor : string = "blue";
+  const controlPointStrokeColor : string = "green";
+  const controlPointStrokeWidth : number = 5.0;
+  var drawDataForControlPoints : CircleDrawData =
+    new CircleDrawData(controlPointFillColor,
+                       controlPointStrokeColor,
+                       controlPointStrokeWidth);
+  return drawDataForControlPoints;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForPointOnCurve - function
+// Return the default draw data for the point on the curve.
+//
+////////////////////////////////////////////////////////////////////////////////
+function defaultDrawDataForPointOnCurve() : CircleDrawData
+{
+  const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
+  const pointOnCurveFillColor : string = "yellow";
+  const pointOnCurveStrokeColor : string = "black";
+  const pointOnCurveStrokeWidth : number = 5.0;
+  var drawDataForPointOnCurve : CircleDrawData =
+    new CircleDrawData(pointOnCurveFillColor,
+                       pointOnCurveStrokeColor,
+                       pointOnCurveStrokeWidth);
+  return drawDataForPointOnCurve;                      
+}
+
+//   End implementing functions that construct and return draw data.
+
 ////////////////////////////////////////////////////////////////////////////////
 // animation - function
 // Create a CubicBezierCurve and set the drawing style for animation.
