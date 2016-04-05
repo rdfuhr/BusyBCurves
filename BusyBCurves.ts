@@ -1339,7 +1339,7 @@ function defaultDrawDataForPointOnCurve() : CircleDrawData
     new CircleDrawData(pointOnCurveFillColor,
                        pointOnCurveStrokeColor,
                        pointOnCurveStrokeWidth);
-  return drawDataForPointOnCurve;                      
+  return drawDataForPointOnCurve;
 }
 
 //   End implementing functions that construct and return draw data.
@@ -1360,9 +1360,8 @@ function animation()
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
 
-   const curveStrokeColor : string = "red";
-   const curveWidth : number = 10;
-   var drawDataForBezierCurve : CurveDrawData = new CurveDrawData(curveStrokeColor, curveWidth);
+   var drawDataForBezierCurve : CurveDrawData = defaultDrawDataForBezierCurve();
+
    const lineWidth : number = 5;
    const polygonStrokeColor : string = "black";
    var drawDataForControlPolygon : CurveDrawData = new CurveDrawData(polygonStrokeColor, lineWidth);
@@ -1631,9 +1630,8 @@ function ExploreWithMouse()
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
 
-   const curveStrokeColor : string = "red";
-   const curveWidth : number = 10;
-   var drawDataForBezierCurve : CurveDrawData = new CurveDrawData(curveStrokeColor, curveWidth);
+   var drawDataForBezierCurve : CurveDrawData = defaultDrawDataForBezierCurve();
+
    const lineWidth : number = 5;
    const polygonStrokeColor : string = "black";
    var drawDataForControlPolygon : CurveDrawData = new CurveDrawData(polygonStrokeColor, lineWidth);
