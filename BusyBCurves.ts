@@ -1363,15 +1363,11 @@ function animation()
    var drawDataForBezierCurve : CurveDrawData = defaultDrawDataForBezierCurve();
 
    var drawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
+
    tGlobalUpdate(); // the global value of t is adjusted
    const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
-   const controlPointFillColor : string = "blue";
-   const controlPointStrokeColor : string = "green";
-   const controlPointStrokeWidth : number = 5.0;
-   var drawDataForControlPoints : CircleDrawData =
-     new CircleDrawData(controlPointFillColor,
-                        controlPointStrokeColor,
-                        controlPointStrokeWidth);
+
+   var drawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
 
    const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
    const pointOnCurveFillColor : string = "yellow";
@@ -1633,13 +1629,8 @@ function ExploreWithMouse()
    var drawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
    const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
-   const controlPointFillColor : string = "blue";
-   const controlPointStrokeColor : string = "green";
-   const controlPointStrokeWidth : number = 5.0;
-   var drawDataForControlPoints : CircleDrawData =
-     new CircleDrawData(controlPointFillColor,
-                        controlPointStrokeColor,
-                        controlPointStrokeWidth);
+
+   var drawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
 
    const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
    const pointOnCurveFillColor : string = "yellow";
