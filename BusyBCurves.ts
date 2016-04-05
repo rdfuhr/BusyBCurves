@@ -1370,13 +1370,9 @@ function animation()
    var drawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
 
    const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
-   const pointOnCurveFillColor : string = "yellow";
-   const pointOnCurveStrokeColor : string = "black";
-   const pointOnCurveStrokeWidth : number = 5.0;
-   var drawDataForPointOnCurve : CircleDrawData =
-     new CircleDrawData(pointOnCurveFillColor,
-                        pointOnCurveStrokeColor,
-                        pointOnCurveStrokeWidth);
+
+   var drawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
+
    var controlPointCircles : Array<Circle> = new Array();
 
    C.drawAllBezierArtifacts(drawDataForBezierCurve,
@@ -1633,13 +1629,8 @@ function ExploreWithMouse()
    var drawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
 
    const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
-   const pointOnCurveFillColor : string = "yellow";
-   const pointOnCurveStrokeColor : string = "black";
-   const pointOnCurveStrokeWidth : number = 5.0;
-   var drawDataForPointOnCurve : CircleDrawData =
-     new CircleDrawData(pointOnCurveFillColor,
-                        pointOnCurveStrokeColor,
-                        pointOnCurveStrokeWidth);
+
+   var drawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
 
    var controlPointCircles : Array<Circle> = new Array();
 
