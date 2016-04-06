@@ -1295,6 +1295,8 @@ function initializeCubicBezierCurve() : CubicBezierCurve
 // clearCanvas - function
 // Clear the drawing canvas
 //
+// Note: For possible efficiency, we will not call the functions
+// getDrawingCanvas or getDrawingContext.  Not sure whether that matters though.
 ////////////////////////////////////////////////////////////////////////////////
 function clearCanvas()
 {
@@ -1384,7 +1386,7 @@ function animation()
      <HTMLCanvasElement>document.getElementById('drawingCanvas');
    var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
 
-   clearCanvas();
+   clearCanvas(); // NOTE: We may want to replace this with the inline code
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
 
@@ -1645,7 +1647,7 @@ function ExploreWithMouse()
      <HTMLCanvasElement>document.getElementById('drawingCanvas');
    var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
 
-   clearCanvas();
+   clearCanvas(); // Note: We may want to replace this with the inline code
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
 
