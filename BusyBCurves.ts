@@ -1199,6 +1199,34 @@ class CubicBezierCurve
 // input: fontSpec - the font to be used
 // input: context - the context associated with the canvas
 ////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+// getDrawingCanvas
+// Get the drawing canvas
+//
+// returns: the drawing canvas
+////////////////////////////////////////////////////////////////////////////////
+function getDrawingCanvas() : HTMLCanvasElement
+{
+   var document : Document;
+   var drawingCanvas : HTMLCanvasElement =
+     <HTMLCanvasElement>document.getElementById('drawingCanvas');
+   return drawingCanvas;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// getDrawingContext
+// Get the drawing context
+//
+// returns: the drawing context
+////////////////////////////////////////////////////////////////////////////////
+function getDrawingContext() : CanvasRenderingContext2D
+{
+  var drawingCanvas : HTMLCanvasElement = getDrawingCanvas();
+  var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
+  return drawingContext;
+}
+
 function drawTextForNumber(t : number,
                            textLocation : Point,
                            fontSpec : string,
