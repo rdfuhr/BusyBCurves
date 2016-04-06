@@ -1364,14 +1364,15 @@ function animation()
 
    var drawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
 
-   tGlobalUpdate(); // the global value of t is adjusted
-   const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
-
    var drawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
 
-   const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
-
    var drawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
+
+   tGlobalUpdate(); // the global value of t is adjusted
+
+   const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
+
+   const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
 
    var controlPointCircles : Array<Circle> = new Array();
 
@@ -1623,17 +1624,18 @@ function ExploreWithMouse()
    var drawDataForBezierCurve : CurveDrawData = defaultDrawDataForBezierCurve();
 
    var drawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
-   tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
-   const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
 
    var drawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
 
-   const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
-
    var drawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
 
-   var controlPointCircles : Array<Circle> = new Array();
+   tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
 
+   const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
+
+   const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
+
+   var controlPointCircles : Array<Circle> = new Array();
 
    C.drawAllBezierArtifacts(drawDataForBezierCurve,
                             drawDataForControlPolygon,
