@@ -474,6 +474,7 @@ function drawAllDeCasteljauLines(P : Array<Point>,
                                  context : CanvasRenderingContext2D)
 {
    // Draw all steps of the DeCasteljau algorithm
+   drawData.updateContext(context);
 
    var n : number = P.length
    for (var i = 0; i < n-1; i++)
@@ -483,7 +484,6 @@ function drawAllDeCasteljauLines(P : Array<Point>,
       if (m > 1)
       {  // begin case of m > 1
          context.beginPath();
-         drawData.updateContext(context);
          context.moveTo(P[0].x, P[0].y);
          for (var j = 1; j < m; j++)
          {
