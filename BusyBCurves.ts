@@ -173,8 +173,8 @@ class Point
                  drawData : CircleDrawData,
                  context : CanvasRenderingContext2D)
   {
-     context.beginPath();
      drawData.updateContext(context);
+     context.beginPath();
      var anticlockwise : boolean = true; // It doesn't really matter for a full circle
      context.arc(this.x, this.y, radius, 0, Math.PI*2, anticlockwise);
      context.fill();
@@ -473,7 +473,6 @@ function drawAllDeCasteljauLines(P : Array<Point>,
                                  drawData : CurveDrawData,
                                  context : CanvasRenderingContext2D)
 {
-   // Draw all steps of the DeCasteljau algorithm
    drawData.updateContext(context);
 
    var n : number = P.length
@@ -788,8 +787,8 @@ class CubicBezierCurve
   drawCurve(drawData : CurveDrawData,
             context : CanvasRenderingContext2D)
   {
-     context.beginPath();
      drawData.updateContext(context);
+     context.beginPath();
      var P : Array<Point> = this.CtrlPts;
      context.moveTo(P[0].x, P[0].y);
      context.bezierCurveTo(P[1].x, P[1].y, P[2].x, P[2].y, P[3].x, P[3].y);
@@ -806,8 +805,8 @@ class CubicBezierCurve
   drawControlPolygon(drawData : CurveDrawData,
                      context : CanvasRenderingContext2D)
   {
+     drawData.updateContext(context);    
      context.beginPath();
-     drawData.updateContext(context);
      var P : Array<Point> = this.CtrlPts;
      context.moveTo(P[0].x, P[0].y);
 
