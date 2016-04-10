@@ -1237,8 +1237,8 @@ function drawTextForNumber(t : number,
 }
 // End Canvas utilities
 
-// Begin code related to StartAnimatedCanvasTests()
-var globalLoop : number; //used by StartAnimatedCanvasTests and StopAnimatedCanvasTests
+// Begin code related to StartAnimation()
+var globalLoop : number; //used by StartAnimation and StopAnimation
 var tGlobal : number = 0.0; // global
 var tDeltaGlobal : number = 0.001; // cannot be made a const
 const globalCircleAreaFactor : number = 2.0;
@@ -1421,10 +1421,10 @@ function animation()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// StartAnimatedCanvasTests - function
+// StartAnimation - function
 // Enable and disable the buttons and set the animation interval
 ////////////////////////////////////////////////////////////////////////////////
-function StartAnimatedCanvasTests()
+function StartAnimation()
 {
    var startAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StartAnimation");
    var stopAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StopAnimation");
@@ -1435,15 +1435,15 @@ function StartAnimatedCanvasTests()
 
    globalLoop = setInterval(animation, 10);
 }
-//   End code related to StartAnimatedCanvasTests()
+//   End code related to StartAnimation()
 
 
-// Begin code related to StopAnimatedCanvasTests()
+// Begin code related to StopAnimation()
 ////////////////////////////////////////////////////////////////////////////////
-// StopAnimatedCanvasTests - function
+// StopAnimation - function
 // Clear the animation interval and reenable and disable the buttons
 ////////////////////////////////////////////////////////////////////////////////
-function StopAnimatedCanvasTests()
+function StopAnimation()
 {
    var startAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StartAnimation");
    var stopAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StopAnimation");
@@ -1454,7 +1454,7 @@ function StopAnimatedCanvasTests()
 
    clearInterval(globalLoop);
 }
-//   End code related to StopAnimatedCanvasTests()
+//   End code related to StopAnimation()
 
 // Begin code related to ExploreWithMouse()
 var globalIndexOfModifiedControlPoint : number = -1;
@@ -1969,7 +1969,7 @@ class CubicSpline
 //   End code to support BusyBSpline
 
 // Do this when the web page is loaded
-// window.onload = StartAnimatedCanvasTests;
+// window.onload = StartAnimation;
 
 // TODO: Do we just want this free-floating function here?
 // Would it be better design to somehow put this in the HTML or have it
