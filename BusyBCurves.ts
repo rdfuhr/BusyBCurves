@@ -529,20 +529,20 @@ function drawAllDeCasteljauPoints(P : Array<Point>,
 ////////////////////////////////////////////////////////////////////////////////
 function hodographPoints(P : Array<Point>) : Array<Point>
 {
-   // Assume we are given a list of points P that are the control
-   // points of a Bezier curve C.  We will construct and return a
-   // list of points Q for the hodograph of that curve.
-   // That is, we will return a list of points Q that are the
-   // control points for the Bezier curve C'
-   var Q : Array<Point> = new Array();
-   var d : number = P.length - 1; // so d can be interpreted as the degree of C
-   for(var i = 0; i < d; i++)
-   {
-      var LinComb = linearCombination(d, P[i+1], -1.0*d, P[i]);
-	  Q.push(LinComb);
-   }
+  // Assume we are given a list of points P that are the control
+  // points of a Bezier curve C.  We will construct and return a
+  // list of points Q for the hodograph of that curve.
+  // That is, we will return a list of points Q that are the
+  // control points for the Bezier curve C'
+  var Q : Array<Point> = new Array();
+  var d : number = P.length - 1; // so d can be interpreted as the degree of C
+  for(var i = 0; i < d; i++)
+  {
+     var LinComb = linearCombination(d, P[i+1], -1.0*d, P[i]);
+     Q.push(LinComb);
+  }
 
-   return Q;
+  return Q;
 }
 //   End utilities that are used by the CubicBezierCurve class
 
