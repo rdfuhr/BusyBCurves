@@ -520,13 +520,13 @@ function drawAllDeCasteljauPoints(P : Array<Point>,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// hodographPoints - function
+// bezierHodographPoints - function
 // Given control points of Bezier curve return control points of its hodograph
 //
 // input: P - an array of Points that are Bezier control points of curve C
 // returns: An array of Points that are control points of hodograph C'
 ////////////////////////////////////////////////////////////////////////////////
-function hodographPoints(P : Array<Point>) : Array<Point>
+function bezierHodographPoints(P : Array<Point>) : Array<Point>
 {
   // Assume we are given a list of points P that are the control
   // points of a Bezier curve C.  We will construct and return a
@@ -740,7 +740,7 @@ class CubicBezierCurve
   //////////////////////////////////////////////////////////////////////////////
   derivativeAtParm(t : number) : Point
   {
-     var Q : Array<Point> = hodographPoints(this.CtrlPts);
+     var Q : Array<Point> = bezierHodographPoints(this.CtrlPts);
      var der : Point = doAllDeCasteljauSteps(Q, t);
      return der;
   }
