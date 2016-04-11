@@ -165,7 +165,7 @@ class Point
   // drawCircleHere - method of Point
   // Draws a circle centered at this Point with specified radius and appearance
   //
-  // input: radius - the radius of the circle to be drawingCanvas
+  // input: radius - the radius of the circle to be drawn
   // input: drawData - an object containing information specifying appearance
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
@@ -805,7 +805,7 @@ class CubicBezierCurve
   drawControlPolygon(drawData : CurveDrawData,
                      context : CanvasRenderingContext2D)
   {
-     drawData.updateContext(context);    
+     drawData.updateContext(context);
      context.beginPath();
      var P : Array<Point> = this.CtrlPts;
      context.moveTo(P[0].x, P[0].y);
