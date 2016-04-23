@@ -14,6 +14,7 @@
 
 // For the record, here is a list of the variables that I am currently
 // using as globals.
+// globalPointEqualityTol
 // globalPointOnCurveForParm
 // globalLoop
 // tGlobal
