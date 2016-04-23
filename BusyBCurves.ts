@@ -1730,6 +1730,8 @@ function HelpInTheFormOfAWebPage()
 
 // Begin class PolyBezier
 // See ~/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
+// /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
+
 class PolyBezier
 { // Begin class PolyBezier
   Component : Array<CubicBezierCurve>;
