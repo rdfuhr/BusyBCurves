@@ -1,0 +1,14 @@
+{
+  "sessions": [
+    {
+      "id": "4f0bce0f-1c0b-4aa4-8603-00755e3ed8d2",
+      "openTabs": [
+        {
+          "relativeUrl": "file://./BusyBCurves.js"
+        }
+      ],
+      "lastUsed": 1462904967784
+    }
+  ],
+  "relativePathToTsconfig": "./tsconfig.json"
+}
