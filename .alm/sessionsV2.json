@@ -16,8 +16,9 @@
         "subItems": [],
         "activeItemIndex": 0
       },
-      "lastUsed": 1475083605490,
-      "selectedTabId": "52e31b4b-6578-4007-8c6b-f1185134dc2f"
+      "lastUsed": 1475089505434,
+      "selectedTabId": "52e31b4b-6578-4007-8c6b-f1185134dc2f",
+      "fileTreeExpanded": true
     }
   ],
   "relativePathToTsconfig": "./tsconfig.json"

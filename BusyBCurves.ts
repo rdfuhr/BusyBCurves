@@ -33,6 +33,8 @@
 
 // What seemed to work was to right click on the file, select Stop Tracking,
 // and then commit that change.
+// 
+// I am adding this line using alm, just as a test.
 
 // Begin declaring some of the globals
 const globalPointEqualityTol : number = 0.000001;
