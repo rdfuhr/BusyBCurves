@@ -11,12 +11,17 @@
             "id": "52e31b4b-6578-4007-8c6b-f1185134dc2f",
             "relativeUrl": "file://./BusyBCurves.ts",
             "additionalData": null
+          },
+          {
+            "id": "a3c4556f-d703-4898-b858-71d30e8707b2",
+            "relativeUrl": "file://./BusyBCurvesHelp.html",
+            "additionalData": null
           }
         ],
         "subItems": [],
         "activeItemIndex": 0
       },
-      "lastUsed": 1475089505434,
+      "lastUsed": 1475101530785,
       "selectedTabId": "52e31b4b-6578-4007-8c6b-f1185134dc2f",
       "fileTreeExpanded": true
     }
