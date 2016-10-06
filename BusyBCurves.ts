@@ -37,6 +37,10 @@
 // I am adding this line using alm, just as a test.
 // I am adding these lines using alm on Oct 5, 2016 to test whether
 // the alm configuration files will be ignored.
+// I am doing another test with alm to see whether
+// the alm configuration files will be ignored.
+// This time I modified .gitignore so that it just has a line
+// with .alm in it.
 
 // Begin declaring some of the globals
 const globalPointEqualityTol : number = 0.000001;
