@@ -44,6 +44,7 @@
 // That didn't work either, so now I have changed .alm to .alm/ in .gitignore
 // I did git rm --cached .alm/sessionsV1.json 
 // I did git rm --cached .alm/sessionsV2.json 
+// One more test to make sure the .alm files are ignored by git.
 
 // Begin declaring some of the globals
 const globalPointEqualityTol : number = 0.000001;
