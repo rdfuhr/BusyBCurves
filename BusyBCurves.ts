@@ -35,6 +35,8 @@
 // and then commit that change.
 // 
 // I am adding this line using alm, just as a test.
+// I am adding these lines using alm on Oct 5, 2016 to test whether
+// the alm configuration files will be ignored.
 
 // Begin declaring some of the globals
 const globalPointEqualityTol : number = 0.000001;
