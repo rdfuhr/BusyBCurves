@@ -1,2 +1,4 @@
 # JavaScript files
 *.js
+# alm configuration files
+.alm/*.json
