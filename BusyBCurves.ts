@@ -41,6 +41,7 @@
 // the alm configuration files will be ignored.
 // This time I modified .gitignore so that it just has a line
 // with .alm in it.
+// That didn't work either, so now I have changed .alm to .alm/ in .gitignore
 
 // Begin declaring some of the globals
 const globalPointEqualityTol : number = 0.000001;
