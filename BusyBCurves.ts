@@ -155,7 +155,7 @@ class Point
   // input: that - a Point to be dotted with this Point
   // returns: this*that
   //////////////////////////////////////////////////////////////////////////////
-  dotProd(that) : number
+  dotProd(that : Point) : number
   {
      return this.x*that.x + this.y*that.y;
   }
