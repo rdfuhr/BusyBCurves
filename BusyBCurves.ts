@@ -33,7 +33,7 @@
 
 // What seemed to work was to right click on the file, select Stop Tracking,
 // and then commit that change.
-// 
+//
 // I am adding this line using alm, just as a test.
 // I am adding these lines using alm on Oct 5, 2016 to test whether
 // the alm configuration files will be ignored.
@@ -42,8 +42,8 @@
 // This time I modified .gitignore so that it just has a line
 // with .alm in it.
 // That didn't work either, so now I have changed .alm to .alm/ in .gitignore
-// I did git rm --cached .alm/sessionsV1.json 
-// I did git rm --cached .alm/sessionsV2.json 
+// I did git rm --cached .alm/sessionsV1.json
+// I did git rm --cached .alm/sessionsV2.json
 // One more test to make sure the .alm files are ignored by git.
 
 // Begin declaring some of the globals
@@ -659,7 +659,8 @@ function annotateGraphOfCubicBernstein(i : number,
 // input: upperLeft -  point at upper left corner of bounding box of graph
 // input: width - width of bounding box of graph
 // input: height - height of bounding box of graph
-// 
+//
+// returns: graph of the cubic Bernstein function as a CubicBezierCurve
 ////////////////////////////////////////////////////////////////////////////////
 function buildGraphOfCubicBernstein(indx : number,
                                     upperLeft : Point,
