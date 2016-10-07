@@ -660,7 +660,6 @@ function annotateGraphOfCubicBernstein(i : number,
 // input: width - width of bounding box of graph
 // input: height - height of bounding box of graph
 // 
-// returns: graph of the cubic Bernsitein function as a CubicBezierCurve
 ////////////////////////////////////////////////////////////////////////////////
 function buildGraphOfCubicBernstein(indx : number,
                                     upperLeft : Point,
