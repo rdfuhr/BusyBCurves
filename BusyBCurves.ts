@@ -947,6 +947,7 @@ class CubicBezierCurve
   //
   // input: t - the parameter where we should draw corresponding points
   // input: graphStrokeColor - the color with which to draw the graphs
+  // input: graphWidth - the width of the graph to be drawn
   // input: sumOfControlPointAreas -  sum of the areas of control point circles
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
