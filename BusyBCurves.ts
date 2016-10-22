@@ -45,6 +45,10 @@
 // I did git rm --cached .alm/sessionsV1.json
 // I did git rm --cached .alm/sessionsV2.json
 // One more test to make sure the .alm files are ignored by git.
+//
+// Now that Dropbox no longer supports web hosting, I will no longer put my
+// updates there for public access.  Instead I am going to be using
+// neocities.  Look at https://neocities.org
 
 // Begin declaring some of the globals
 const globalPointEqualityTol : number = 0.000001;
