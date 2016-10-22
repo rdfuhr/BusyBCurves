@@ -49,6 +49,8 @@
 // Now that Dropbox no longer supports web hosting, I will no longer put my
 // updates there for public access.  Instead I am going to be using
 // neocities.  Look at https://neocities.org
+// In particular, look at http://richardfuhr.neocities.org
+// And also look at http://richardfuhr.neocities.org/BusyBCurves.html
 
 // Begin declaring some of the globals
 const globalPointEqualityTol : number = 0.000001;
