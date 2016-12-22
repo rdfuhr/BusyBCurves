@@ -1,7 +1,7 @@
 // We will implement the functionality from
 // ~/Dropbox/Public/RichardFuhr/BusyBezier/BusyBezier.js
 // Also, we will reformulate some of my Objective-C BusyBSpline code as TypeScript:
-// /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
+// /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources
 
 // As of Friday, January 22, 2016 we are also going to place the derived
 // file BusyBCurves.js under git control and under GitHub management.
