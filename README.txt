@@ -37,3 +37,9 @@ BusyBCurves.html
 BusyBCurves.js		
 BusyBCurvesHelp.html	
 README.txt
+
+I just did the following (on my iMac on Feb 10, 2017) to make a soft link in Dropbox of my actual working BusyBCurves folder.  This should provide me with an updated backup.  We shall see how it goes.  I am writing these comments on my Dell XPS 13
+
+ln -s  ~/Documents/Sandbox/typeScriptLearn/BusyBCurves ~/Dropbox/BusyBCurves
+
+I am back on the iMac and can confirm that the text I entered into this file, README.txt, is here on the iMac.
