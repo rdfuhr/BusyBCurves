@@ -1280,7 +1280,7 @@ function drawTextForNumber(t : number,
 // End Canvas utilities
 
 // Begin code related to StartAnimation()
-var globalLoop : number; //used by StartAnimation and StopAnimation
+
 var tGlobal : number = 0.0; // global
 var tDeltaGlobal : number = 0.001; // cannot be made a const
 const globalCircleAreaFactor : number = 2.0;
@@ -1463,17 +1463,42 @@ function animation()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// StartAnimation - function
-// Enable and disable the buttons and set the animation interval
+// DisableEnableButtons - function
+// Disable and enable specified buttons
+//
+// input: startAnimationButtonDisabled - disable if true, enable if false
+// input: stopAnimationButtonDisabled - disable if true, enable if false
+// input: exploreWithMouseButtonDisabled - disable if true, enable if false
 ////////////////////////////////////////////////////////////////////////////////
-function StartAnimation()
+function DisableEnableButtons(startAnimationButtonDisabled : boolean,
+                              stopAnimationButtonDisabled : boolean,
+                              exploreWithMouseButtonDisabled : boolean)
 {
    var startAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StartAnimation");
    var stopAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StopAnimation");
    var exploreWithMouseButton : HTMLInputElement = <HTMLInputElement>document.getElementById("ExploreWithMouse");
-   startAnimationButton.disabled = true;
-   stopAnimationButton.disabled = false;
-   exploreWithMouseButton.disabled = true;
+   startAnimationButton.disabled = startAnimationButtonDisabled;
+   stopAnimationButton.disabled = stopAnimationButtonDisabled;
+   exploreWithMouseButton.disabled = exploreWithMouseButtonDisabled;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Note:  It would be nice if we could replace globalLoop with a non-global, but that
+// may not be possible  From experimentation, it seems that globalLoop is an integer
+// that gets incremented by 1 each time that setInterval is called, with the first
+// value seen (after calling setInterval the first time) being 1.
+var globalLoop : number; //used by StartAnimation and StopAnimation
+
+////////////////////////////////////////////////////////////////////////////////
+// StartAnimation - function
+// Enable and disable the appropriate buttons and set the animation interval
+////////////////////////////////////////////////////////////////////////////////
+function StartAnimation()
+{
+   var startAnimationButtonDisabled : boolean = true;
+   var stopAnimationButtonDisabled : boolean = false;
+   var exploreWithMouseButtonDisabled : boolean = true;
+   DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, exploreWithMouseButtonDisabled);
 
    globalLoop = setInterval(animation, 10); 
 }
@@ -1483,16 +1508,14 @@ function StartAnimation()
 // Begin code related to StopAnimation()
 ////////////////////////////////////////////////////////////////////////////////
 // StopAnimation - function
-// Clear the animation interval and reenable and disable the buttons
+// Clear the animation interval and reenable and disable the appropriate buttons
 ////////////////////////////////////////////////////////////////////////////////
 function StopAnimation()
 {
-   var startAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StartAnimation");
-   var stopAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StopAnimation");
-   var exploreWithMouseButton : HTMLInputElement = <HTMLInputElement>document.getElementById("ExploreWithMouse");
-   startAnimationButton.disabled = false;
-   stopAnimationButton.disabled = true;
-   exploreWithMouseButton.disabled = false;
+   var startAnimationButtonDisabled : boolean = false;
+   var stopAnimationButtonDisabled : boolean = true;
+   var exploreWithMouseButtonDisabled : boolean = false;
+   DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, exploreWithMouseButtonDisabled);
 
    clearInterval(globalLoop);
 }
