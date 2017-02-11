@@ -14,7 +14,6 @@
 
 // For the record, here is a list of the variables that I am currently
 // using as globals.
-// globalPointEqualityTol
 // globalPointOnCurveForParm
 // globalLoop
 // tGlobal
@@ -53,7 +52,6 @@
 // And also look at http://richardfuhr.neocities.org/BusyBCurves.html
 
 // Begin declaring some of the globals
-const globalPointEqualityTol : number = 0.000001;
 var globalPointOnCurveForParm : Circle;
 //   End declaring some of the globals
 
@@ -178,6 +176,29 @@ class Point
      var thisMinusThat : Point = this.minus(that);
      var distanceToThat : number = thisMinusThat.norm();
      return distanceToThat;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // isEqualWithinToleranceTo - method of Point
+  // Determines whether two points are equal within tolerance
+  //
+  // input: that - a Point that is to be compared to this Point
+  // returns: true if this point is equal within tolerance to that point
+  //////////////////////////////////////////////////////////////////////////////
+  isEqualWithinToleranceTo(that : Point) : boolean
+  {
+     const pointEqualityTol : number = 0.000001;
+     var distanceToThat : number = this.distanceTo(that);
+     var equalWithinTolerance : boolean;
+     if (distanceToThat < pointEqualityTol)
+     {
+       equalWithinTolerance = true;
+     }
+     else
+     {
+       equalWithinTolerance = false;
+     }
+     return equalWithinTolerance;
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -1807,7 +1828,9 @@ class PolyBezier
       {   // begin m-loop
           var endPt : Point = C[m].CtrlPts[3];
           var startPt : Point = C[m+1].CtrlPts[0];
-          if (endPt.distanceTo(startPt) > globalPointEqualityTol)
+          var curvesAreConnected : boolean;
+          curvesAreConnected = endPt.isEqualWithinToleranceTo(startPt);
+          if (curvesAreConnected==false)
           {  // begin case where successive curves aren't connected
              validInput = false;
              break; // no reason to continue
