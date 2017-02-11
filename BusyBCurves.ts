@@ -1475,7 +1475,7 @@ function StartAnimation()
    stopAnimationButton.disabled = false;
    exploreWithMouseButton.disabled = true;
 
-   globalLoop = setInterval(animation, 10);
+   globalLoop = setInterval(animation, 10); 
 }
 //   End code related to StartAnimation()
 
