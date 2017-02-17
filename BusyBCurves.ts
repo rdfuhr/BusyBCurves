@@ -762,8 +762,7 @@ function newBuildGraphOfCubicBernstein(iCubicBernstein: number,
    {
       var x : number = iPoint/3.0;
       var y = 1.0 - KroneckerDelta(iCubicBernstein, iPoint);
-      var Qi : Point = new Point(x,y);
-      Q.push(Qi);
+      Q[iPoint] = new Point(x,y);
    }
 
    var graphOfCubicBernstein : CubicBezierCurve =
