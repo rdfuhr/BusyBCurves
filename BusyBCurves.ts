@@ -739,6 +739,40 @@ function buildGraphOfCubicBernstein(indx : number,
     graphOfCubicBernstein.translate(upperLeft);
     return graphOfCubicBernstein;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// newBuildGraphOfCubicBernstein - function
+// Construct the graph of a cubic Bernstein polynomial as a 2D curve
+//
+// input: iCubicBernstein - the index of the cubic Bernstein polynomial
+// input: upperLeft -  point at upper left corner of bounding box of graph
+// input: width - width of bounding box of graph
+// input: height - height of bounding box of graph
+//
+// returns: graph of the cubic Bernstein function as a CubicBezierCurve
+////////////////////////////////////////////////////////////////////////////////
+function newBuildGraphOfCubicBernstein(iCubicBernstein: number,
+                                       upperLeft : Point,
+                                       width : number,
+                                       height : number) : CubicBezierCurve
+{
+   var Q : Array<Point>; 
+   var iPoint : number; 
+   for (iPoint = 0; iPoint < 4; iPoint++)
+   {
+      var x : number = iPoint/3.0;
+      var y = 1.0 - KroneckerDelta(iCubicBernstein, iPoint);
+      var Qi : Point = new Point(x,y);
+      Q.push(Qi);
+   }
+
+   var graphOfCubicBernstein : CubicBezierCurve =
+      new CubicBezierCurve(Q[0], Q[1], Q[2], Q[3]);
+
+    graphOfCubicBernstein.scale(width, height);
+    graphOfCubicBernstein.translate(upperLeft);
+    return graphOfCubicBernstein;
+}
 // End Bernstein utilities
 
 
