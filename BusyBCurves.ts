@@ -679,6 +679,30 @@ function annotateGraphOfCubicBernstein(i : number,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// KroneckerDelta - function
+// Invoke the Kronecker Delta function on two integers
+//
+// input: i - an integer
+// input: j - an integer
+//
+// returns: 1 if i equals j 
+//          0 if i does not equal j
+// note: we do not check whether i and j are integers
+// note: we may use this function in buildGraphOfCubicBernstein
+////////////////////////////////////////////////////////////////////////////////
+function KroneckerDelta(i : number, j : number) : number
+{
+   if (i==j)
+   {
+      return 1;
+   }
+   else
+   {
+      return 0;
+   }
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // buildGraphOfCubicBernstein - function
 // Construct the graph of a cubic Bernstein polynomial as a 2D curve
 //
