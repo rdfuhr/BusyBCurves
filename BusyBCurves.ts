@@ -756,7 +756,7 @@ function newBuildGraphOfCubicBernstein(iCubicBernstein: number,
                                        width : number,
                                        height : number) : CubicBezierCurve
 {
-   var Q : Array<Point>; 
+   var Q : Array<Point> = new Array(); 
    var iPoint : number; 
    for (iPoint = 0; iPoint < 4; iPoint++)
    {
@@ -1060,7 +1060,7 @@ class CubicBezierCurve
         {
            upperLeft = (this.CtrlPts[indx]).plus(delta2);
         }
-        var graphOfCubicBernstein = buildGraphOfCubicBernstein(indx,
+        var graphOfCubicBernstein = newBuildGraphOfCubicBernstein(indx,
                                                                upperLeft,
                                                                2.0*maxRadius,
                                                                2.0*maxRadius);
