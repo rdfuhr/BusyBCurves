@@ -688,7 +688,7 @@ function annotateGraphOfCubicBernstein(i : number,
 // returns: 1 if i equals j 
 //          0 if i does not equal j
 // note: we do not check whether i and j are integers
-// note: we may use this function in buildGraphOfCubicBernstein
+// note: we use this function in buildGraphOfCubicBernstein
 ////////////////////////////////////////////////////////////////////////////////
 function KroneckerDelta(i : number, j : number) : number
 {
@@ -702,46 +702,9 @@ function KroneckerDelta(i : number, j : number) : number
    }
 }
 
+
 ////////////////////////////////////////////////////////////////////////////////
 // buildGraphOfCubicBernstein - function
-// Construct the graph of a cubic Bernstein polynomial as a 2D curve
-//
-// input: indx - the index of the cubic Bernstein polynomial
-// input: upperLeft -  point at upper left corner of bounding box of graph
-// input: width - width of bounding box of graph
-// input: height - height of bounding box of graph
-//
-// returns: graph of the cubic Bernstein function as a CubicBezierCurve
-////////////////////////////////////////////////////////////////////////////////
-function buildGraphOfCubicBernstein(indx : number,
-                                    upperLeft : Point,
-                                    width : number,
-                                    height : number) : CubicBezierCurve
-{
-    const oneThird : number = 1.0/3.0;
-    const twoThirds : number = 2.0/3.0;
-
-    var Q0 : Point = new Point(0.0, 1.0)
-    var Q1 : Point = new Point(oneThird, 1.0);
-    var Q2 : Point = new Point(twoThirds, 1.0);
-    var Q3 : Point = new Point(1.0, 1.0);
-
-    // clumsy but we will do this for now
-    if (indx==0) Q0.y = 0.0;
-    else if (indx==1) Q1.y = 0.0;
-    else if (indx==2) Q2.y = 0.0;
-    else if (indx==3) Q3.y = 0.0;
-
-    var graphOfCubicBernstein : CubicBezierCurve =
-      new CubicBezierCurve(Q0, Q1, Q2, Q3);
-
-    graphOfCubicBernstein.scale(width, height);
-    graphOfCubicBernstein.translate(upperLeft);
-    return graphOfCubicBernstein;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// newBuildGraphOfCubicBernstein - function
 // Construct the graph of a cubic Bernstein polynomial as a 2D curve
 //
 // input: iCubicBernstein - the index of the cubic Bernstein polynomial
@@ -751,16 +714,18 @@ function buildGraphOfCubicBernstein(indx : number,
 //
 // returns: graph of the cubic Bernstein function as a CubicBezierCurve
 ////////////////////////////////////////////////////////////////////////////////
-function newBuildGraphOfCubicBernstein(iCubicBernstein: number,
-                                       upperLeft : Point,
-                                       width : number,
-                                       height : number) : CubicBezierCurve
+function buildGraphOfCubicBernstein(iCubicBernstein : number,
+                                          upperLeft : Point,
+                                              width : number,
+                                             height : number) : CubicBezierCurve
 {
+   const degree : number = 3;
+   const order : number = degree + 1;
    var Q : Array<Point> = new Array(); 
    var iPoint : number; 
-   for (iPoint = 0; iPoint < 4; iPoint++)
+   for (iPoint = 0; iPoint < order; iPoint++)
    {
-      var x : number = iPoint/3.0;
+      var x : number = iPoint/degree;
       var y = 1.0 - KroneckerDelta(iCubicBernstein, iPoint);
       Q[iPoint] = new Point(x,y);
    }
@@ -1060,7 +1025,7 @@ class CubicBezierCurve
         {
            upperLeft = (this.CtrlPts[indx]).plus(delta2);
         }
-        var graphOfCubicBernstein = newBuildGraphOfCubicBernstein(indx,
+        var graphOfCubicBernstein = buildGraphOfCubicBernstein(indx,
                                                                upperLeft,
                                                                2.0*maxRadius,
                                                                2.0*maxRadius);
