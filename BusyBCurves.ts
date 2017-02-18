@@ -1446,7 +1446,14 @@ function defaultDrawDataForPointOnCurve() : CircleDrawData
 // TODO - Why are we re-creating the curve with every call to this function?
 // We may still want to do this, but I am not sure.
 ////////////////////////////////////////////////////////////////////////////////
-function animation()
+function animation(C : CubicBezierCurve,
+                   drawDataForBezierCurve : CurveDrawData,
+                   drawDataForControlPolygon : CurveDrawData,
+                   drawDataForControlPoints : CircleDrawData,
+                   drawDataForPointOnCurve : CircleDrawData,
+                   sumOfControlPointAreas : number,
+                   pointOnCurveRadius : number,
+                   controlPointCircles : Array<Circle>)
 {
    var drawingCanvas : HTMLCanvasElement =
      <HTMLCanvasElement>document.getElementById('drawingCanvas');
@@ -1455,23 +1462,7 @@ function animation()
    // Inline code corresponding to clearCanvas
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
-   var C : CubicBezierCurve = initializeCubicBezierCurve();
-
-   var drawDataForBezierCurve : CurveDrawData = defaultDrawDataForBezierCurve();
-
-   var drawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
-
-   var drawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
-
-   var drawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
-
    tGlobalUpdate(); // the global value of t is adjusted
-
-   const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
-
-   const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
-
-   var controlPointCircles : Array<Circle> = new Array();
 
    C.drawAllBezierArtifacts(drawDataForBezierCurve,
                             drawDataForControlPolygon,
@@ -1522,7 +1513,26 @@ function StartAnimation()
    var exploreWithMouseButtonDisabled : boolean = true;
    DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, exploreWithMouseButtonDisabled);
 
-   globalLoop = setInterval(animation, 10); 
+   var C : CubicBezierCurve = initializeCubicBezierCurve();
+   var drawDataForBezierCurve : CurveDrawData = defaultDrawDataForBezierCurve();
+   var drawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
+   var drawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
+   var drawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
+
+   const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
+   const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
+   var controlPointCircles : Array<Circle> = new Array();
+
+   globalLoop = setInterval(animation, 
+                            10, 
+                            C,
+                            drawDataForBezierCurve,
+                            drawDataForControlPolygon,
+                            drawDataForControlPoints,
+                            drawDataForPointOnCurve,
+                            sumOfControlPointAreas,
+                            pointOnCurveRadius,
+                            controlPointCircles); 
 }
 //   End code related to StartAnimation()
 
