@@ -1456,7 +1456,7 @@ function defaultDrawDataForPointOnCurve() : CircleDrawData
 // input: drawDataForPointOnCurve - style for drawing point on curve
 // input: sumOfControlPointAreas - sum of areas of circles marking control points
 // input: pointOnCurveRadius - radius of circle representing point on curve
-// controlPointCircles - - circles marking the control points
+// output: controlPointCircles - circles marking weighted control points
 //
 ////////////////////////////////////////////////////////////////////////////////
 function animation(drawingCanvas : HTMLCanvasElement,
@@ -1599,7 +1599,7 @@ function getMousePos(canvas : HTMLCanvasElement,
 
 // input: evt - the mouse event at the time of mousedown
 // input: theCanvas - canvas on which we are drawing
-// input: controlPointCircles - circles marking the control points
+// input: controlPointCircles - circles marking weighted control points
 
 ////////////////////////////////////////////////////////////////////////////////
 function onMouseDown(evt : MouseEvent,
