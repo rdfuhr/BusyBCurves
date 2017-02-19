@@ -997,7 +997,7 @@ class CubicBezierCurve
   // input: t - the parameter where we should draw corresponding points
   // input: graphStrokeColor - the color with which to draw the graphs
   // input: graphWidth - the width of the graph to be drawn
-  // input: sumOfControlPointAreas -  sum of the areas of control point circles
+  // input: sumOfControlPointAreas -  sum of areas of circles marking control points
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawBasisFunctionsWithParm(t,
@@ -1069,7 +1069,7 @@ class CubicBezierCurve
   // input: drawDataForControlPolygon - style for drawing control polygon
   // input: drawDataForControlPoints - style for drawing control points
   // input: drawDataForPointOnCurve - style for drawing point on curve
-  // input: sumOfControlPointAreas - sum of areas of control points
+  // input: sumOfControlPointAreas - sum of areas of circles marking control points
   // input: pointOnCurveRadius - radius of circle representing point on curve
   // input: context - the context associated with the canvas
   // output: controlPointCircles - circles marking weighted control points
@@ -1144,7 +1144,7 @@ class CubicBezierCurve
   // input: evt - the mouse event
   // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
   // input: drawDataForControlPolygon - style for drawing control polygon
-  // input: sumOfControlPointAreas - sum of areas of control points
+  // input: sumOfControlPointAreas - sum of areas of circles marking control points
   // input: drawDataForControlPoints - style for drawing control points
   // input: pointOnCurveRadius - radius of circle representing point on curve
   // input: drawDataForPointOnCurve - style for drawing point on curve
@@ -1210,7 +1210,7 @@ class CubicBezierCurve
   // input: evt - the mouse event
   // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
   // input: drawDataForControlPolygon - style for drawing control polygon
-  // input: sumOfControlPointAreas - sum of areas of control points
+  // input: sumOfControlPointAreas - sum of areas of circles marking control points
   // input: drawDataForControlPoints - style for drawing control points
   // input: pointOnCurveRadius - radius of circle representing point on curve
   // input: drawDataForPointOnCurve - style for drawing point on curve
@@ -1442,9 +1442,22 @@ function defaultDrawDataForPointOnCurve() : CircleDrawData
 
 ////////////////////////////////////////////////////////////////////////////////
 // animation - function
-// Create a CubicBezierCurve and set the drawing style for animation.
-// TODO - Why are we re-creating the curve with every call to this function?
-// We may still want to do this, but I am not sure.
+// Manage the animation in which a point moves back and forth along a Bezier
+// curve, and in which the size of the control points and the indicators on the graphs
+// of the basis functions vary accordingly.  One call to this function generates
+// one frame of the animation.
+//
+// input: drawingCanvas - the canvas on which we are drawing
+// input: drawingContext - the context associated with the canvas
+// input: C - the main CubicBezierCurve
+// input: drawDataForBezierCurve - style for drawing the main CubicBezierCurve C
+// input: drawDataForControlPolygon - style for drawing control polygon
+// input: drawDataForControlPoints - style for drawing control points
+// input: drawDataForPointOnCurve - style for drawing point on curve
+// input: sumOfControlPointAreas - sum of areas of circles marking control points
+// input: pointOnCurveRadius - radius of circle representing point on curve
+// controlPointCircles - - circles marking the control points
+//
 ////////////////////////////////////////////////////////////////////////////////
 function animation(drawingCanvas : HTMLCanvasElement,
                    drawingContext : CanvasRenderingContext2D,
@@ -1457,9 +1470,6 @@ function animation(drawingCanvas : HTMLCanvasElement,
                    pointOnCurveRadius : number,
                    controlPointCircles : Array<Circle>)
 {
-
-
-   // Inline code corresponding to clearCanvas
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
    tGlobalUpdate(); // the global value of t is adjusted
@@ -1504,7 +1514,9 @@ var globalLoop : number; //used by StartAnimation and StopAnimation
 
 ////////////////////////////////////////////////////////////////////////////////
 // StartAnimation - function
-// Enable and disable the appropriate buttons and set the animation interval
+// Enable and disable the appropriate buttons and set the animation interval.
+// Initialize the data to be passed to the function that generates each frame
+// of the animation.
 ////////////////////////////////////////////////////////////////////////////////
 function StartAnimation()
 {
@@ -1622,7 +1634,7 @@ function onMouseDown(evt : MouseEvent,
 // input: C - the CubicBezierCurve
 // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
 // input: drawDataForControlPolygon - style for drawing control polygon
-// input: sumOfControlPointAreas - sum of areas of control points
+// input: sumOfControlPointAreas - sum of areas of circles marking control points
 // input: drawDataForControlPoints - style for drawing control points
 // input: pointOnCurveRadius - radius of circle representing point on curve
 // input: drawDataForPointOnCurve - style for drawing point on curve
