@@ -1446,7 +1446,9 @@ function defaultDrawDataForPointOnCurve() : CircleDrawData
 // TODO - Why are we re-creating the curve with every call to this function?
 // We may still want to do this, but I am not sure.
 ////////////////////////////////////////////////////////////////////////////////
-function animation(C : CubicBezierCurve,
+function animation(drawingCanvas : HTMLCanvasElement,
+                   drawingContext : CanvasRenderingContext2D,
+                   C : CubicBezierCurve,
                    drawDataForBezierCurve : CurveDrawData,
                    drawDataForControlPolygon : CurveDrawData,
                    drawDataForControlPoints : CircleDrawData,
@@ -1455,9 +1457,7 @@ function animation(C : CubicBezierCurve,
                    pointOnCurveRadius : number,
                    controlPointCircles : Array<Circle>)
 {
-   var drawingCanvas : HTMLCanvasElement =
-     <HTMLCanvasElement>document.getElementById('drawingCanvas');
-   var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
+
 
    // Inline code corresponding to clearCanvas
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
@@ -1513,6 +1513,9 @@ function StartAnimation()
    var exploreWithMouseButtonDisabled : boolean = true;
    DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, exploreWithMouseButtonDisabled);
 
+   var drawingCanvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('drawingCanvas');
+   var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
+
    var C : CubicBezierCurve = initializeCubicBezierCurve();
    var drawDataForBezierCurve : CurveDrawData = defaultDrawDataForBezierCurve();
    var drawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
@@ -1524,7 +1527,9 @@ function StartAnimation()
    var controlPointCircles : Array<Circle> = new Array();
 
    globalLoop = setInterval(animation, 
-                            10, 
+                            10,
+                            drawingCanvas,
+                            drawingContext, 
                             C,
                             drawDataForBezierCurve,
                             drawDataForControlPolygon,
