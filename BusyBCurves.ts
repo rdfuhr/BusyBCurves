@@ -376,9 +376,9 @@ class CircleDrawData
   toString() : string
   {
      var stringRep : string = "fillColor = " + this.fillColor;
-     stringRep = stringRep + "\n";
+     stringRep = stringRep + "<p>";
      stringRep = stringRep + "strokeColor = " + this.strokeColor;
-     stringRep = stringRep + "\n";
+     stringRep = stringRep + "<p>";
      var curveWidthString : string;
      curveWidthString = this.curveWidth.toString();
      stringRep = stringRep + "curveWidth = " + curveWidthString;
@@ -428,9 +428,10 @@ class CurveDrawData
   toString() : string
   {
      var stringRep : string = "strokeColor = " + this.strokeColor;
-     stringRep = stringRep + "\n";
+     stringRep = stringRep + "<p>";
      var curveWidthString : string;
      curveWidthString = this.curveWidth.toString();
+     stringRep = stringRep + "<p>";
      stringRep = stringRep + "curveWidth = " + curveWidthString;
      return stringRep;
   }
@@ -490,34 +491,56 @@ class BezierArtifactsDrawData
   //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
-    var stringRep : string = "Data for this BezierArtifactsDrawData\n";
+    var stringRep : string = "Begin data for this BezierArtifactsDrawData\n";
 
-    stringRep = stringRep + "\nData for this.forBezierCurve"; 
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forBezierCurve"; 
+    stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forBezierCurve.toString();
 
-    stringRep = stringRep + "\nData for this.forControlPolygon"; 
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forControlPolygon"; 
+    stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forControlPolygon.toString();
 
-    stringRep = stringRep + "\nData for this.forControlPoints"; 
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forControlPoints";
+    stringRep = stringRep + "<p>";    
     stringRep = stringRep + this.forControlPoints.toString();
 
-    stringRep = stringRep + "\nData for this.forPointOnCurve"; 
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forPointOnCurve";
+    stringRep = stringRep + "<p>";     
     stringRep = stringRep + this.forPointOnCurve.toString();
 
-    stringRep = stringRep + "\nData for this.forDecasteljauLines"; 
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forDecasteljauLines";
+    stringRep = stringRep + "<p>";     
     stringRep = stringRep + this.forDecasteljauLines.toString();
 
-    stringRep = stringRep + "\nData for this.forDecasteljauPoints"; 
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forDecasteljauPoints";
+    stringRep = stringRep + "<p>";     
     stringRep = stringRep + this.forDecasteljauPoints.toString();
 
-    stringRep = stringRep + "\nData for this.forGraphOfCubicBernstein"; 
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forGraphOfCubicBernstein";
+    stringRep = stringRep + "<p>";     
     stringRep = stringRep + this.forGraphOfCubicBernstein.toString();
 
-    stringRep = stringRep + "\nData for this.forPointOnGraph"; 
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forPointOnGraph";
+    stringRep = stringRep + "<p>";     
     stringRep = stringRep + this.forPointOnGraph.toString();
 
-    stringRep = stringRep + "\nData for this.forVerticalLineFromCurveForParm"; 
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forVerticalLineFromCurveForParm";
+    stringRep = stringRep + "<p>";     
     stringRep = stringRep + this.forVerticalLineFromCurveForParm.toString();
+
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "End data for this BezierArtifactsDrawData";
+    stringRep = stringRep + "<p>";    
 
     return stringRep;
   }
@@ -2438,10 +2461,20 @@ function CubicSplineTest()
    document.writeln("<p>Leaving PolyBezierTest()</p>");
  }
 
+ function drawDataTest()
+ {
+   document.writeln("<p>Entering drawDataTest()</p>");
+   var allDrawData : BezierArtifactsDrawData = new BezierArtifactsDrawData();
+   var stringRepOfAllDrawData : string = allDrawData.toString();
+   document.writeln(stringRepOfAllDrawData);
+   document.writeln("<p> Leaving drawDataTest()</p>");
+ }
+
 
 function doTests()
 {
    var date : Date = new Date();
    document.writeln(date.toString());
-   PolyBezierTest();
+   // PolyBezierTest();
+   drawDataTest();
 }
