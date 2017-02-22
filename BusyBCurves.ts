@@ -448,6 +448,82 @@ class CurveDrawData
   }
 } // End class CurveDrawData
 
+class BezierArtifactsDrawData
+{ // Begin class BezierArtifactsDrawData 
+  forBezierCurve : CurveDrawData;
+  forControlPolygon : CurveDrawData;
+  forControlPoints : CircleDrawData;
+  forPointOnCurve : CircleDrawData;
+  forDecasteljauLines : CurveDrawData;
+  forDecasteljauPoints : CircleDrawData;
+  forGraphOfCubicBernstein : CurveDrawData;
+  forPointOnGraph : CircleDrawData;
+  forVerticalLineFromCurveForParm : CurveDrawData;
+  // forTextNearPointOnCurve : TextDrawData;
+  // forTextNearPointOnGraph : TextDrawData;
+
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for BezierArtifactsDrawData
+  // Creates an instance of BezierArtifactsDrawData
+  //
+  // Set each data member to the default value
+  // 
+  ////////////////////////////////////////////////////////////////////////////// 
+  constructor()
+  {
+    this.forBezierCurve = defaultDrawDataForBezierCurve();
+    this.forControlPolygon = defaultDrawDataForControlPolygon();
+    this.forControlPoints = defaultDrawDataForControlPoints();
+    this.forPointOnCurve = defaultDrawDataForPointOnCurve();
+    this.forDecasteljauLines = defaultDrawDataForDecasteljauLines();
+    this.forDecasteljauPoints = defaultDrawDataForDecasteljauPoints();
+    this.forGraphOfCubicBernstein = defaultDrawDataForGraphOfCubicBernstein();
+    this.forPointOnGraph = defaultDrawDataForPointOnGraph();
+    this.forVerticalLineFromCurveForParm = defaultDrawDataForVerticalLineFromCurveForParm();
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of BezierArtifactsDrawData
+  // Returns the string representation of this BezierArtifactsDrawData
+  //
+  // returns: the string representation of this BezierArtifactsDrawData
+  //////////////////////////////////////////////////////////////////////////////
+  toString() : string
+  {
+    var stringRep : string = "Data for this BezierArtifactsDrawData\n";
+
+    stringRep = stringRep + "\nData for this.forBezierCurve"; 
+    stringRep = stringRep + this.forBezierCurve.toString();
+
+    stringRep = stringRep + "\nData for this.forControlPolygon"; 
+    stringRep = stringRep + this.forControlPolygon.toString();
+
+    stringRep = stringRep + "\nData for this.forControlPoints"; 
+    stringRep = stringRep + this.forControlPoints.toString();
+
+    stringRep = stringRep + "\nData for this.forPointOnCurve"; 
+    stringRep = stringRep + this.forPointOnCurve.toString();
+
+    stringRep = stringRep + "\nData for this.forDecasteljauLines"; 
+    stringRep = stringRep + this.forDecasteljauLines.toString();
+
+    stringRep = stringRep + "\nData for this.forDecasteljauPoints"; 
+    stringRep = stringRep + this.forDecasteljauPoints.toString();
+
+    stringRep = stringRep + "\nData for this.forGraphOfCubicBernstein"; 
+    stringRep = stringRep + this.forGraphOfCubicBernstein.toString();
+
+    stringRep = stringRep + "\nData for this.forPointOnGraph"; 
+    stringRep = stringRep + this.forPointOnGraph.toString();
+
+    stringRep = stringRep + "\nData for this.forVerticalLineFromCurveForParm"; 
+    stringRep = stringRep + this.forVerticalLineFromCurveForParm.toString();
+
+    return stringRep;
+  }
+
+} //   End class BezierArtifactsDrawData
+
 
 // Begin utilities that are used by the CubicBezierCurve class
 ////////////////////////////////////////////////////////////////////////////////
@@ -1437,6 +1513,80 @@ function defaultDrawDataForPointOnCurve() : CircleDrawData
                        pointOnCurveStrokeWidth);
   return drawDataForPointOnCurve;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForDecasteljauLines - function
+// Return the default draw data for the Decasteljau Lines.
+//
+////////////////////////////////////////////////////////////////////////////////
+function defaultDrawDataForDecasteljauLines() : CurveDrawData
+{
+  const strokeColor : string = "brown";
+  const curveWidth : number = 2;
+  var drawDataForDeCasteljauLines : CurveDrawData = new CurveDrawData(strokeColor, curveWidth);
+  return drawDataForDeCasteljauLines;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForDecasteljauPoints - function
+// Return the default draw data for the Decasteljau Points.
+//
+////////////////////////////////////////////////////////////////////////////////
+function defaultDrawDataForDecasteljauPoints() : CircleDrawData
+{
+  const fillColor : string = "orange"
+  const strokeColor : string = "orange"
+  const strokeWidth : number = 5.0;
+  var drawDataForDeCasteljauPoints = new CircleDrawData(fillColor,
+                                                            strokeColor,
+                                                            strokeWidth);
+  return drawDataForDeCasteljauPoints;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForGraphOfCubicBernstein - function
+// Return the default draw data for the graphs of the cubic Bernstein polynomials.
+//
+////////////////////////////////////////////////////////////////////////////////
+function defaultDrawDataForGraphOfCubicBernstein() : CurveDrawData
+{
+  const graphStrokeColor : string = "green";
+  const graphWidth : number = 2;
+  var drawDataForGraphOfCubicBernstein : CurveDrawData = new CurveDrawData(graphStrokeColor,
+                                                                           graphWidth);
+  return drawDataForGraphOfCubicBernstein;                                                               
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForPointOnGraph - function
+// Return the default draw data for the point on each graph of the cubic Bernstein polynomials.
+//
+////////////////////////////////////////////////////////////////////////////////
+function defaultDrawDataForPointOnGraph() : CircleDrawData
+{
+  const pointOnGraphFillColor = "black"
+  const pointOnGraphStrokeColor = "black"
+  const pointOnGraphStrokeWidth = 5.0;
+  var drawDataForPointOnGraph = new CircleDrawData(pointOnGraphFillColor,
+                                                   pointOnGraphStrokeColor,
+                                                   pointOnGraphStrokeWidth);
+  return drawDataForPointOnGraph;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForVerticalLineFromCurveForParm - function
+// Return the default draw data for the vertical line from the curve for a given parm.
+//
+////////////////////////////////////////////////////////////////////////////////
+function defaultDrawDataForVerticalLineFromCurveForParm() : CurveDrawData
+{
+  const lineStrokeColor : string = "black";
+  const lineWidth : number = 2;
+  var drawDataForVerticalLineFromCurveForParm : CurveDrawData = new CurveDrawData(lineStrokeColor,
+                                                                           lineWidth);
+  return drawDataForVerticalLineFromCurveForParm;                                                                         
+}
+
 
 //   End implementing functions that construct and return draw data.
 
