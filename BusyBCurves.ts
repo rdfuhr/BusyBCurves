@@ -1164,6 +1164,7 @@ class CubicBezierCurve
   // drawAllBezierArtifacts - method of CubicBezierCurve
   // Draw all information associated with this CubicBezierCurve
   //
+  // input: drawDataForAllBezierArtifacts - styles for drawing everything
   // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
   // input: drawDataForControlPolygon - style for drawing control polygon
   // input: drawDataForControlPoints - style for drawing control points
@@ -1173,7 +1174,8 @@ class CubicBezierCurve
   // input: context - the context associated with the canvas
   // output: controlPointCircles - circles marking weighted control points
   //////////////////////////////////////////////////////////////////////////////
-  drawAllBezierArtifacts(drawDataForBezierCurve : CurveDrawData,
+  drawAllBezierArtifacts(drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
+                         drawDataForBezierCurve : CurveDrawData,
                          drawDataForControlPolygon : CurveDrawData,
                          drawDataForControlPoints : CircleDrawData,
                          drawDataForPointOnCurve : CircleDrawData,
@@ -1241,6 +1243,7 @@ class CubicBezierCurve
   // Called when user has clicked the point on this curve and is moving it.
   //
   // input: evt - the mouse event
+  // input: drawDataForAllBezierArtifacts - styles for drawing everything
   // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
   // input: drawDataForControlPolygon - style for drawing control polygon
   // input: sumOfControlPointAreas - sum of areas of circles marking control points
@@ -1268,6 +1271,7 @@ class CubicBezierCurve
   //
   //////////////////////////////////////////////////////////////////////////////
   editPointOnCurve(evt : MouseEvent,
+                   drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
                    drawDataForBezierCurve : CurveDrawData,
                    drawDataForControlPolygon : CurveDrawData,
                    sumOfControlPointAreas : number,
@@ -1292,7 +1296,8 @@ class CubicBezierCurve
      if (tGlobal > 1.0) tGlobal = 1.0;
 
      context.clearRect(0, 0, canvas.width, canvas.height);
-     this.drawAllBezierArtifacts(drawDataForBezierCurve,
+     this.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
+                                 drawDataForBezierCurve,
                                  drawDataForControlPolygon,
                                  drawDataForControlPoints,
                                  drawDataForPointOnCurve,
@@ -1307,6 +1312,7 @@ class CubicBezierCurve
   // Called when user has clicked a control point on this curve and is moving it
   //
   // input: evt - the mouse event
+  // input: drawDataForAllBezierArtifacts - styles for drawing everything
   // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
   // input: drawDataForControlPolygon - style for drawing control polygon
   // input: sumOfControlPointAreas - sum of areas of circles marking control points
@@ -1323,6 +1329,7 @@ class CubicBezierCurve
   //
   //////////////////////////////////////////////////////////////////////////////
   editControlPoint(evt : MouseEvent,
+                   drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
                    drawDataForBezierCurve : CurveDrawData,
                    drawDataForControlPolygon : CurveDrawData,
                    sumOfControlPointAreas : number,
@@ -1337,7 +1344,8 @@ class CubicBezierCurve
      this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
      context.clearRect(0, 0, canvas.width, canvas.height);
 
-     this.drawAllBezierArtifacts(drawDataForBezierCurve,
+     this.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
+                                 drawDataForBezierCurve,
                                  drawDataForControlPolygon,
                                  drawDataForControlPoints,
                                  drawDataForPointOnCurve,
@@ -1623,6 +1631,7 @@ function defaultDrawDataForVerticalLineFromCurveForParm() : CurveDrawData
 // input: drawingCanvas - the canvas on which we are drawing
 // input: drawingContext - the context associated with the canvas
 // input: C - the main CubicBezierCurve
+// input: drawDataForAllBezierArtifacts - styles for drawing everything
 // input: drawDataForBezierCurve - style for drawing the main CubicBezierCurve C
 // input: drawDataForControlPolygon - style for drawing control polygon
 // input: drawDataForControlPoints - style for drawing control points
@@ -1635,6 +1644,7 @@ function defaultDrawDataForVerticalLineFromCurveForParm() : CurveDrawData
 function animation(drawingCanvas : HTMLCanvasElement,
                    drawingContext : CanvasRenderingContext2D,
                    C : CubicBezierCurve,
+                   drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
                    drawDataForBezierCurve : CurveDrawData,
                    drawDataForControlPolygon : CurveDrawData,
                    drawDataForControlPoints : CircleDrawData,
@@ -1647,7 +1657,8 @@ function animation(drawingCanvas : HTMLCanvasElement,
 
    tGlobalUpdate(); // the global value of t is adjusted
 
-   C.drawAllBezierArtifacts(drawDataForBezierCurve,
+   C.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
+                            drawDataForBezierCurve,
                             drawDataForControlPolygon,
                             drawDataForControlPoints,
                             drawDataForPointOnCurve,
@@ -1706,6 +1717,7 @@ function StartAnimation()
    var drawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
    var drawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
    var drawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
+   var drawDataForAllBezierArtifacts : BezierArtifactsDrawData = new BezierArtifactsDrawData();
 
    const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
    const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
@@ -1716,6 +1728,7 @@ function StartAnimation()
                             drawingCanvas,
                             drawingContext, 
                             C,
+                            drawDataForAllBezierArtifacts,
                             drawDataForBezierCurve,
                             drawDataForControlPolygon,
                             drawDataForControlPoints,
@@ -1805,6 +1818,7 @@ function onMouseDown(evt : MouseEvent,
 //
 // input: evt - the mouse event
 // input: C - the CubicBezierCurve
+// input: drawDataForAllBezierArtifacts - styles for drawing everything
 // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
 // input: drawDataForControlPolygon - style for drawing control polygon
 // input: sumOfControlPointAreas - sum of areas of circles marking control points
@@ -1817,6 +1831,7 @@ function onMouseDown(evt : MouseEvent,
 ///////////////////////////////////////////////////////////////////////////////
 function onMouseMove(evt : MouseEvent,
                      C : CubicBezierCurve,
+                     drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
                      drawDataForBezierCurve : CurveDrawData,
                      drawDataForControlPolygon : CurveDrawData,
                      sumOfControlPointAreas : number,
@@ -1831,6 +1846,7 @@ function onMouseMove(evt : MouseEvent,
 	if (globalModifyingPointOnCurve==true)
 	{
 	   C.editPointOnCurve(evt,
+              drawDataForAllBezierArtifacts,
 						  drawDataForBezierCurve,
 						  drawDataForControlPolygon,
 						  sumOfControlPointAreas,
@@ -1847,6 +1863,7 @@ function onMouseMove(evt : MouseEvent,
 	{
 
 	   C.editControlPoint(evt,
+                        drawDataForAllBezierArtifacts,
                         drawDataForBezierCurve,
 						            drawDataForControlPolygon,
 						            sumOfControlPointAreas,
@@ -1950,6 +1967,8 @@ function ExploreWithMouse()
 
    var drawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
 
+   var drawDataForAllBezierArtifacts : BezierArtifactsDrawData = new BezierArtifactsDrawData();
+
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
 
    const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
@@ -1958,7 +1977,8 @@ function ExploreWithMouse()
 
    var controlPointCircles : Array<Circle> = new Array();
 
-   C.drawAllBezierArtifacts(drawDataForBezierCurve,
+   C.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
+                            drawDataForBezierCurve,
                             drawDataForControlPolygon,
                             drawDataForControlPoints,
                             drawDataForPointOnCurve,
@@ -1979,6 +1999,7 @@ function ExploreWithMouse()
          {
             onMouseMove(evt,
                         C,
+                        drawDataForAllBezierArtifacts,
                         drawDataForBezierCurve,
                         drawDataForControlPolygon,
                         sumOfControlPointAreas,
