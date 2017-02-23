@@ -1094,15 +1094,11 @@ class CubicBezierCurve
   // Draw graphs of cubic Bernstein polynomials with a point on each graph
   //
   // input: t - the parameter where we should draw corresponding points
-  // input: graphStrokeColor - the color with which to draw the graphs
-  // input: graphWidth - the width of the graph to be drawn
   // input: sumOfControlPointAreas -  sum of areas of circles marking control points
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawBasisFunctionsWithParm(t : number,
                              drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
-                             graphStrokeColor : string,
-                             graphWidth : number,
                              sumOfControlPointAreas : number,
                              context: CanvasRenderingContext2D)
   {
@@ -1130,9 +1126,7 @@ class CubicBezierCurve
                                                                2.0*maxRadius,
                                                                2.0*maxRadius);
 
-        var drawDataForGraphOfCubicBernstein = new CurveDrawData(graphStrokeColor,
-                                                                 graphWidth);
-        graphOfCubicBernstein.drawCurve(drawDataForGraphOfCubicBernstein, context);
+                graphOfCubicBernstein.drawCurve(drawDataForAllBezierArtifacts.forGraphOfCubicBernstein, context);
 
         var pointOnGraphRadius = 3.0;
         var pointOnGraphFillColor = "black"
@@ -1147,6 +1141,7 @@ class CubicBezierCurve
                                                       drawDataForPointOnGraph,
                                                       context);
 
+        const graphWidth : number = 2;
         graphOfCubicBernstein.drawVerticalLineFromCurveForParm(t,
                                                                "black",
                                                                graphWidth,
@@ -1203,15 +1198,10 @@ class CubicBezierCurve
                         fontSpec,
                         context);
 
-  // temporarily hard-code some of the input parameters
-     const graphStrokeColor : string = "green";
-     const graphWidth : number = 2;
-     this.drawBasisFunctionsWithParm(tGlobal,
-                                     drawDataForAllBezierArtifacts,
-                                     graphStrokeColor,
-                                     graphWidth,
-                                     sumOfControlPointAreas,
-                                     context);
+       this.drawBasisFunctionsWithParm(tGlobal,
+                                       drawDataForAllBezierArtifacts,
+                                       sumOfControlPointAreas,
+                                       context);
 
       drawAllDeCasteljauLines(this.CtrlPts,
                               tGlobal,
