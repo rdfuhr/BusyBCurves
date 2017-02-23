@@ -1099,11 +1099,12 @@ class CubicBezierCurve
   // input: sumOfControlPointAreas -  sum of areas of circles marking control points
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
-  drawBasisFunctionsWithParm(t,
-                             graphStrokeColor,
-                             graphWidth,
-                             sumOfControlPointAreas,
-                             context)
+  drawBasisFunctionsWithParm(t : number,
+                             drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
+                             graphStrokeColor : string,
+                             graphWidth : number,
+                             sumOfControlPointAreas : number,
+                             context: CanvasRenderingContext2D)
   {
      // We will use maxRadius to help position the graphs.
      // Of course we are recalculating maxRadius each time, which is not efficient
@@ -1206,6 +1207,7 @@ class CubicBezierCurve
      const graphStrokeColor : string = "green";
      const graphWidth : number = 2;
      this.drawBasisFunctionsWithParm(tGlobal,
+                                     drawDataForAllBezierArtifacts,
                                      graphStrokeColor,
                                      graphWidth,
                                      sumOfControlPointAreas,
