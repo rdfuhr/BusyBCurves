@@ -1196,7 +1196,7 @@ class CubicBezierCurve
 
      this.drawPointOnCurveForParm(tGlobal,
                                   pointOnCurveRadius,
-                                  drawDataForPointOnCurve,
+                                  drawDataForAllBezierArtifacts.forPointOnCurve,
                                   context);
 
       var pointOnCurve : Point = this.positionAtParm(tGlobal);
