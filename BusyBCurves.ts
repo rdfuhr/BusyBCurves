@@ -1225,16 +1225,16 @@ class CubicBezierCurve
                               drawDataForAllBezierArtifacts.forDecasteljauLines,
                               context);
 
-      const fillColor : string = "orange"
-      const strokeColor : string = "orange"
-      const strokeWidth : number = 5.0;
-      var drawDataForDeCasteljauPoints = new CircleDrawData(fillColor,
-                                                            strokeColor,
-                                                            strokeWidth);
+      // const fillColor : string = "orange"
+      // const strokeColor : string = "orange"
+      // const strokeWidth : number = 5.0;
+      // var drawDataForDeCasteljauPoints = new CircleDrawData(fillColor,
+      //                                                       strokeColor,
+      //                                                       strokeWidth);
 
       drawAllDeCasteljauPoints(this.CtrlPts,
                                tGlobal,
-                               drawDataForDeCasteljauPoints,
+                               drawDataForAllBezierArtifacts.forDecasteljauPoints,
                                context);
   }
 
