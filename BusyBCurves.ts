@@ -1236,12 +1236,8 @@ class CubicBezierCurve
   //
   // input: evt - the mouse event
   // input: drawDataForAllBezierArtifacts - styles for drawing everything
-  // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
-  // input: drawDataForControlPolygon - style for drawing control polygon
   // input: sumOfControlPointAreas - sum of areas of circles marking control points
-  // input: drawDataForControlPoints - style for drawing control points
   // input: pointOnCurveRadius - radius of circle representing point on curve
-  // input: drawDataForPointOnCurve - style for drawing point on curve
   // input: context - the context associated with the canvas
   // input: canvas - the canvas on which we are drawing
   // output: controlPointCircles - circles marking weighted control points
@@ -1264,12 +1260,8 @@ class CubicBezierCurve
   //////////////////////////////////////////////////////////////////////////////
   editPointOnCurve(evt : MouseEvent,
                    drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
-                   drawDataForBezierCurve : CurveDrawData,
-                   drawDataForControlPolygon : CurveDrawData,
                    sumOfControlPointAreas : number,
-                   drawDataForControlPoints :CircleDrawData,
                    pointOnCurveRadius : number,
-                   drawDataForPointOnCurve : CircleDrawData,
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement,
                    controlPointCircles : Array<Circle>)
@@ -1301,12 +1293,8 @@ class CubicBezierCurve
   //
   // input: evt - the mouse event
   // input: drawDataForAllBezierArtifacts - styles for drawing everything
-  // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
-  // input: drawDataForControlPolygon - style for drawing control polygon
   // input: sumOfControlPointAreas - sum of areas of circles marking control points
-  // input: drawDataForControlPoints - style for drawing control points
   // input: pointOnCurveRadius - radius of circle representing point on curve
-  // input: drawDataForPointOnCurve - style for drawing point on curve
   // input: context - the context associated with the canvas
   // input: canvas - the canvas on which we are drawing
   // output: controlPointCircles - circles marking weighted control points
@@ -1318,12 +1306,8 @@ class CubicBezierCurve
   //////////////////////////////////////////////////////////////////////////////
   editControlPoint(evt : MouseEvent,
                    drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
-                   drawDataForBezierCurve : CurveDrawData,
-                   drawDataForControlPolygon : CurveDrawData,
                    sumOfControlPointAreas : number,
-                   drawDataForControlPoints : CircleDrawData,
                    pointOnCurveRadius : number,
-                   drawDataForPointOnCurve : CircleDrawData,
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement,
                    controlPointCircles)
@@ -1799,12 +1783,8 @@ function onMouseDown(evt : MouseEvent,
 // input: evt - the mouse event
 // input: C - the CubicBezierCurve
 // input: drawDataForAllBezierArtifacts - styles for drawing everything
-// input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
-// input: drawDataForControlPolygon - style for drawing control polygon
 // input: sumOfControlPointAreas - sum of areas of circles marking control points
-// input: drawDataForControlPoints - style for drawing control points
 // input: pointOnCurveRadius - radius of circle representing point on curve
-// input: drawDataForPointOnCurve - style for drawing point on curve
 // input: drawingContext - the context associated with the canvas
 // input: drawingCanvas - the canvas on which we are drawing
 // output: controlPointCircles - circles marking weighted control points
@@ -1812,13 +1792,9 @@ function onMouseDown(evt : MouseEvent,
 function onMouseMove(evt : MouseEvent,
                      C : CubicBezierCurve,
                      drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
-                     drawDataForBezierCurve : CurveDrawData,
-                     drawDataForControlPolygon : CurveDrawData,
                      sumOfControlPointAreas : number,
-                     drawDataForControlPoints : CircleDrawData,
-					           pointOnCurveRadius : number,
-                     drawDataForPointOnCurve : CircleDrawData,
-					           drawingContext : CanvasRenderingContext2D,
+ 					           pointOnCurveRadius : number,
+ 					           drawingContext : CanvasRenderingContext2D,
 					           drawingCanvas : HTMLCanvasElement,
 					           controlPointCircles : Array<Circle>)
 {
@@ -1827,12 +1803,8 @@ function onMouseMove(evt : MouseEvent,
 	{
 	   C.editPointOnCurve(evt,
               drawDataForAllBezierArtifacts,
-						  drawDataForBezierCurve,
-						  drawDataForControlPolygon,
 						  sumOfControlPointAreas,
-						  drawDataForControlPoints,
 						  pointOnCurveRadius,
-						  drawDataForPointOnCurve,
 						  drawingContext,
 						  drawingCanvas,
 						  controlPointCircles);
@@ -1844,12 +1816,8 @@ function onMouseMove(evt : MouseEvent,
 
 	   C.editControlPoint(evt,
                         drawDataForAllBezierArtifacts,
-                        drawDataForBezierCurve,
-						            drawDataForControlPolygon,
-						            sumOfControlPointAreas,
-						            drawDataForControlPoints,
+     						        sumOfControlPointAreas,
 						            pointOnCurveRadius,
-						            drawDataForPointOnCurve,
 						            drawingContext,
 						            drawingCanvas,
 						            controlPointCircles);
@@ -1976,12 +1944,8 @@ function ExploreWithMouse()
             onMouseMove(evt,
                         C,
                         drawDataForAllBezierArtifacts,
-                        drawDataForBezierCurve,
-                        drawDataForControlPolygon,
                         sumOfControlPointAreas,
-                        drawDataForControlPoints,
                         pointOnCurveRadius,
-                        drawDataForPointOnCurve,
                         drawingContext,
                         drawingCanvas,
                         controlPointCircles);
