@@ -1669,10 +1669,7 @@ function StartAnimation()
    var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
-  //  var drawDataForBezierCurve : CurveDrawData = defaultDrawDataForBezierCurve();
-  //  var drawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
-  //  var drawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
-  //  var drawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
+  
    var drawDataForAllBezierArtifacts : BezierArtifactsDrawData = new BezierArtifactsDrawData();
 
    const sumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
@@ -1894,14 +1891,6 @@ function ExploreWithMouse()
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
-
-  //  var drawDataForBezierCurve : CurveDrawData = defaultDrawDataForBezierCurve();
-
-  //  var drawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
-
-  //  var drawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
-
-  //  var drawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
 
    var drawDataForAllBezierArtifacts : BezierArtifactsDrawData = new BezierArtifactsDrawData();
 
