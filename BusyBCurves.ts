@@ -1184,7 +1184,7 @@ class CubicBezierCurve
                          context : CanvasRenderingContext2D,
                          controlPointCircles : Array<Circle>)
   {
-     this.drawCurve(drawDataForBezierCurve, context);
+     this.drawCurve(drawDataForAllBezierArtifacts.forBezierCurve, context);
      this.drawControlPolygon(drawDataForControlPolygon, context);
 
      this.drawControlPointsWeightedForParm(tGlobal,
