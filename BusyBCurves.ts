@@ -1165,20 +1165,12 @@ class CubicBezierCurve
   // Draw all information associated with this CubicBezierCurve
   //
   // input: drawDataForAllBezierArtifacts - styles for drawing everything
-  // input: drawDataForBezierCurve - style for drawing this CubicBezierCurve
-  // input: drawDataForControlPolygon - style for drawing control polygon
-  // input: drawDataForControlPoints - style for drawing control points
-  // input: drawDataForPointOnCurve - style for drawing point on curve
   // input: sumOfControlPointAreas - sum of areas of circles marking control points
   // input: pointOnCurveRadius - radius of circle representing point on curve
   // input: context - the context associated with the canvas
   // output: controlPointCircles - circles marking weighted control points
   //////////////////////////////////////////////////////////////////////////////
   drawAllBezierArtifacts(drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
-                         drawDataForBezierCurve : CurveDrawData,
-                         drawDataForControlPolygon : CurveDrawData,
-                         drawDataForControlPoints : CircleDrawData,
-                         drawDataForPointOnCurve : CircleDrawData,
                          sumOfControlPointAreas : number,
                          pointOnCurveRadius : number,
                          context : CanvasRenderingContext2D,
@@ -1297,10 +1289,6 @@ class CubicBezierCurve
 
      context.clearRect(0, 0, canvas.width, canvas.height);
      this.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
-                                 drawDataForBezierCurve,
-                                 drawDataForControlPolygon,
-                                 drawDataForControlPoints,
-                                 drawDataForPointOnCurve,
                                  sumOfControlPointAreas,
                                  pointOnCurveRadius,
                                  context,
@@ -1345,10 +1333,6 @@ class CubicBezierCurve
      context.clearRect(0, 0, canvas.width, canvas.height);
 
      this.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
-                                 drawDataForBezierCurve,
-                                 drawDataForControlPolygon,
-                                 drawDataForControlPoints,
-                                 drawDataForPointOnCurve,
                                  sumOfControlPointAreas,
                                  pointOnCurveRadius,
                                  context,
@@ -1658,10 +1642,6 @@ function animation(drawingCanvas : HTMLCanvasElement,
    tGlobalUpdate(); // the global value of t is adjusted
 
    C.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
-                            drawDataForBezierCurve,
-                            drawDataForControlPolygon,
-                            drawDataForControlPoints,
-                            drawDataForPointOnCurve,
                             sumOfControlPointAreas,
                             pointOnCurveRadius,
                             drawingContext,
@@ -1978,10 +1958,6 @@ function ExploreWithMouse()
    var controlPointCircles : Array<Circle> = new Array();
 
    C.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
-                            drawDataForBezierCurve,
-                            drawDataForControlPolygon,
-                            drawDataForControlPoints,
-                            drawDataForPointOnCurve,
                             sumOfControlPointAreas,
                             pointOnCurveRadius,
                             drawingContext,
