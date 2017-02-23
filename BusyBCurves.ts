@@ -1129,16 +1129,10 @@ class CubicBezierCurve
         graphOfCubicBernstein.drawCurve(drawDataForAllBezierArtifacts.forGraphOfCubicBernstein, context);
 
         var pointOnGraphRadius = 3.0;
-        var pointOnGraphFillColor = "black"
-        var pointOnGraphStrokeColor = "black"
-        var pointOnGraphStrokeWidth = 5.0;
-        var drawDataForPointOnGraph = new CircleDrawData(pointOnGraphFillColor,
-                                                         pointOnGraphStrokeColor,
-                                                         pointOnGraphStrokeWidth);
 
         graphOfCubicBernstein.drawPointOnCurveForParm(t,
                                                       pointOnGraphRadius,
-                                                      drawDataForPointOnGraph,
+                                                      drawDataForAllBezierArtifacts.forPointOnGraph, 
                                                       context);
 
         const graphWidth : number = 2;
