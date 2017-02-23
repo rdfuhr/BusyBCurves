@@ -1600,10 +1600,6 @@ function defaultDrawDataForVerticalLineFromCurveForParm() : CurveDrawData
 // input: drawingContext - the context associated with the canvas
 // input: C - the main CubicBezierCurve
 // input: drawDataForAllBezierArtifacts - styles for drawing everything
-// input: drawDataForBezierCurve - style for drawing the main CubicBezierCurve C
-// input: drawDataForControlPolygon - style for drawing control polygon
-// input: drawDataForControlPoints - style for drawing control points
-// input: drawDataForPointOnCurve - style for drawing point on curve
 // input: sumOfControlPointAreas - sum of areas of circles marking control points
 // input: pointOnCurveRadius - radius of circle representing point on curve
 // output: controlPointCircles - circles marking weighted control points
@@ -1613,10 +1609,6 @@ function animation(drawingCanvas : HTMLCanvasElement,
                    drawingContext : CanvasRenderingContext2D,
                    C : CubicBezierCurve,
                    drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
-                   drawDataForBezierCurve : CurveDrawData,
-                   drawDataForControlPolygon : CurveDrawData,
-                   drawDataForControlPoints : CircleDrawData,
-                   drawDataForPointOnCurve : CircleDrawData,
                    sumOfControlPointAreas : number,
                    pointOnCurveRadius : number,
                    controlPointCircles : Array<Circle>)
@@ -1693,10 +1685,6 @@ function StartAnimation()
                             drawingContext, 
                             C,
                             drawDataForAllBezierArtifacts,
-                            drawDataForBezierCurve,
-                            drawDataForControlPolygon,
-                            drawDataForControlPoints,
-                            drawDataForPointOnCurve,
                             sumOfControlPointAreas,
                             pointOnCurveRadius,
                             controlPointCircles); 
