@@ -1211,19 +1211,12 @@ class CubicBezierCurve
                                      sumOfControlPointAreas,
                                      context);
 
-      // var drawDataForDeCasteljauLines : CurveDrawData = new CurveDrawData("brown", 2);
       drawAllDeCasteljauLines(this.CtrlPts,
                               tGlobal,
                               drawDataForAllBezierArtifacts.forDecasteljauLines,
                               context);
 
-      // const fillColor : string = "orange"
-      // const strokeColor : string = "orange"
-      // const strokeWidth : number = 5.0;
-      // var drawDataForDeCasteljauPoints = new CircleDrawData(fillColor,
-      //                                                       strokeColor,
-      //                                                       strokeWidth);
-
+      
       drawAllDeCasteljauPoints(this.CtrlPts,
                                tGlobal,
                                drawDataForAllBezierArtifacts.forDecasteljauPoints,
