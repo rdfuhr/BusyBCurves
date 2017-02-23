@@ -1126,7 +1126,7 @@ class CubicBezierCurve
                                                                2.0*maxRadius,
                                                                2.0*maxRadius);
 
-                graphOfCubicBernstein.drawCurve(drawDataForAllBezierArtifacts.forGraphOfCubicBernstein, context);
+        graphOfCubicBernstein.drawCurve(drawDataForAllBezierArtifacts.forGraphOfCubicBernstein, context);
 
         var pointOnGraphRadius = 3.0;
         var pointOnGraphFillColor = "black"
