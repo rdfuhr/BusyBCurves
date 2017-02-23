@@ -1189,7 +1189,7 @@ class CubicBezierCurve
 
      this.drawControlPointsWeightedForParm(tGlobal,
                                            sumOfControlPointAreas,
-                                           drawDataForControlPoints,
+                                           drawDataForAllBezierArtifacts.forControlPoints,
                                            context,
                                            controlPointCircles);
 
