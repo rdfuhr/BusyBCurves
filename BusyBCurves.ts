@@ -812,11 +812,13 @@ function bernsteinDeriv(i : number,
 // input: i - the index of the cubic Bernstein function
 // input: t - the parameter at which the cubic Bernstein is being evalated
 // input: graphOfCubicBernstein: s-->(s, B(i,n)(s))
+// input: drawData - an object containing data specifying appearance
 // input: context - the context associated with the canvas
 ////////////////////////////////////////////////////////////////////////////////
 function annotateGraphOfCubicBernstein(i : number,
                                        t : number,
                                        graphOfCubicBernstein : CubicBezierCurve,
+                                       drawData : TextDrawData,
                                        context : CanvasRenderingContext2D)
 {
    const fontSpec : string = 'lighter 45px Sans-Serif';
@@ -833,7 +835,7 @@ function annotateGraphOfCubicBernstein(i : number,
       var textWidth : number = context.measureText(t.toFixed(2)).width;
       P.x = P.x - textWidth;
    }
-   drawTextForNumber(y, P, fontSpec, context); // For now
+   drawTextForNumber(y, P, drawData, context); 
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1200,6 +1202,7 @@ class CubicBezierCurve
         annotateGraphOfCubicBernstein(indx,
                                       t,
                                       graphOfCubicBernstein,
+                                      drawDataForAllBezierArtifacts.forTextNearPointOnGraph,
                                       context);
 
      }
@@ -1242,10 +1245,9 @@ class CubicBezierCurve
 
       var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - pointOnCurveRadius);
 
-      const fontSpec : string = 'lighter 45px Sans-Serif';
       drawTextForNumber(tGlobal,
                         textLocation,
-                        fontSpec,
+                        drawDataForAllBezierArtifacts.forTextNearPointOnCurve,
                         context);
 
        this.drawBasisFunctionsWithParm(tGlobal,
@@ -1399,16 +1401,15 @@ function getDrawingContext() : CanvasRenderingContext2D
 //
 // input: t - The number for which the text is to be drawn
 // input: textLocation - the location where the text is to be drawn
-// input: fontSpec - the font to be used
+// input: drawData - an object containing data specifying appearance
 // input: context - the context associated with the canvas
 ////////////////////////////////////////////////////////////////////////////////
 function drawTextForNumber(t : number,
                            textLocation : Point,
-                           fontSpec : string,
+                           drawData : TextDrawData,
                            context : CanvasRenderingContext2D)
 {
-   context.font = fontSpec;
-   context.fillStyle = "black";
+   drawData.updateContext(context);
    context.fillText(t.toFixed(2), textLocation.x, textLocation.y);
 }
 // End Canvas utilities
