@@ -1003,7 +1003,7 @@ class CubicBezierCurve
   // drawCurve - method of CubicBezierCurve
   // Draws this CubicBezierCurve with specified appearance
   //
-  // input: drawData - an object containing information specifying appearance
+  // input: drawData - an object containing data specifying appearance
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawCurve(drawData : CurveDrawData,
@@ -1021,7 +1021,7 @@ class CubicBezierCurve
   // drawControlPolygon - method of CubicBezierCurve
   // Draws control polygon of this CubicBezierCurve with specified appearance
   //
-  // input: drawData - an object containing information specifying appearance
+  // input: drawData - an object containing data specifying appearance
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawControlPolygon(drawData : CurveDrawData,
@@ -1045,7 +1045,7 @@ class CubicBezierCurve
   // Draws control points of this CubicBezierCurve with specified appearance
   //
   // input: radius - the radius of the circles representing the control points
-  // input: drawData - an object containing information specifying appearance
+  // input: drawData - an object containing data specifying appearance
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawControlPoints(radius : number,
@@ -1066,7 +1066,7 @@ class CubicBezierCurve
   //
   // input: t - the parameter for the basis functions
   // input: sumOfAreas - the sum of the areas of all the circles
-  // input: drawData - an object containing information specifying appearance
+  // input: drawData - an object containing data specifying appearance
   // input: context - the context associated with the canvas
   // output: controlPointCircles - circles marking weighted control points
   //////////////////////////////////////////////////////////////////////////////
@@ -1098,7 +1098,7 @@ class CubicBezierCurve
   //
   // input: t - parameter at which corresponding point is to be drawn
   // input: radius - the radius of the circle representing the point
-  // input: drawData - an object containing information specifying appearance
+  // input: drawData - an object containing data specifying appearance
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawPointOnCurveForParm(t : number,
@@ -1115,8 +1115,7 @@ class CubicBezierCurve
   // Draw a vertical line from a point on a curve to its local X-axis
   //
   // input: t - parameter that determines point on the curve
-  // input: strokeColor - color used for drawing the line
-  // input: lineWidth - the width of the line to be drawn
+  // input: drawData - an object containing data specifying appearance
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawVerticalLineFromCurveForParm(t : number,
@@ -1151,6 +1150,7 @@ class CubicBezierCurve
   // Draw graphs of cubic Bernstein polynomials with a point on each graph
   //
   // input: t - the parameter where we should draw corresponding points
+  // input: drawDataForAllBezierArtifacts - - styles for drawing everything
   // input: sumOfControlPointAreas -  sum of areas of circles marking control points
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
