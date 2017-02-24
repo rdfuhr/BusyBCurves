@@ -1305,15 +1305,7 @@ class CubicBezierCurve
 
 
 // Begin Canvas utilities
-////////////////////////////////////////////////////////////////////////////////
-// drawTextForNumber - function
-// Draw the text representing a given number at a specified location
-//
-// input: t - The number for which the text is to be drawn
-// input: textLocation - the location where the text is to be drawn
-// input: fontSpec - the font to be used
-// input: context - the context associated with the canvas
-////////////////////////////////////////////////////////////////////////////////
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // getDrawingCanvas
@@ -1342,6 +1334,15 @@ function getDrawingContext() : CanvasRenderingContext2D
   return drawingContext;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// drawTextForNumber - function
+// Draw the text representing a given number at a specified location
+//
+// input: t - The number for which the text is to be drawn
+// input: textLocation - the location where the text is to be drawn
+// input: fontSpec - the font to be used
+// input: context - the context associated with the canvas
+////////////////////////////////////////////////////////////////////////////////
 function drawTextForNumber(t : number,
                            textLocation : Point,
                            fontSpec : string,
