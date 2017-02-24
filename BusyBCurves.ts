@@ -1061,8 +1061,7 @@ class CubicBezierCurve
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawVerticalLineFromCurveForParm(t : number,
-                                   strokeColor : string,
-                                   lineWidth : number,
+                                   drawData : CurveDrawData,
                                    context :CanvasRenderingContext2D)
   {
      var P = this.positionAtParm(t);
@@ -1081,9 +1080,8 @@ class CubicBezierCurve
      }
      var  Q : Point = new Point(P.x, yMax);
 
+     drawData.updateContext(context);
      context.beginPath();
-     context.strokeStyle = strokeColor;
-     context.lineWidth = lineWidth;
      context.moveTo(P.x, P.y);
      context.lineTo(Q.x, Q.y);
      context.stroke();
@@ -1137,8 +1135,7 @@ class CubicBezierCurve
 
         const graphWidth : number = 2;
         graphOfCubicBernstein.drawVerticalLineFromCurveForParm(t,
-                                                               "black",
-                                                               graphWidth,
+                                                               drawDataForAllBezierArtifacts.forVerticalLineFromCurveForParm,
                                                                context);
 
         annotateGraphOfCubicBernstein(indx,
