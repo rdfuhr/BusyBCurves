@@ -770,7 +770,6 @@ function annotateGraphOfCubicBernstein(i : number,
    // to the left so that it is on the other side of the graph
    if (i==3)
    {
-      context.font = fontSpec;
       var textWidth : number = context.measureText(t.toFixed(2)).width;
       P.x = P.x - textWidth;
    }
