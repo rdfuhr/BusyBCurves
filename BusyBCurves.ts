@@ -508,8 +508,8 @@ class BezierArtifactsDrawData
   forGraphOfCubicBernstein : CurveDrawData;
   forPointOnGraph : CircleDrawData;
   forVerticalLineFromCurveForParm : CurveDrawData;
-  // forTextNearPointOnCurve : TextDrawData;
-  // forTextNearPointOnGraph : TextDrawData;
+  forTextNearPointOnCurve : TextDrawData;
+  forTextNearPointOnGraph : TextDrawData;
 
   //////////////////////////////////////////////////////////////////////////////
   // constructor for BezierArtifactsDrawData
@@ -529,6 +529,8 @@ class BezierArtifactsDrawData
     this.forGraphOfCubicBernstein = defaultDrawDataForGraphOfCubicBernstein();
     this.forPointOnGraph = defaultDrawDataForPointOnGraph();
     this.forVerticalLineFromCurveForParm = defaultDrawDataForVerticalLineFromCurveForParm();
+    this.forTextNearPointOnCurve = defaultDrawDataForTextNearPointOnCurve();
+    this.forTextNearPointOnGraph = defaultDrawDataForTextNearPointOnGraph();
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -585,6 +587,16 @@ class BezierArtifactsDrawData
     stringRep = stringRep + "Data for this.forVerticalLineFromCurveForParm";
     stringRep = stringRep + "<p>";     
     stringRep = stringRep + this.forVerticalLineFromCurveForParm.toString();
+
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forTextNearPointOnCurve";
+    stringRep = stringRep + "<p>";     
+    stringRep = stringRep + this.forTextNearPointOnCurve.toString();
+
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forTextNearPointOnGraph";
+    stringRep = stringRep + "<p>";     
+    stringRep = stringRep + this.forTextNearPointOnGraph.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "End data for this BezierArtifactsDrawData";
@@ -1609,6 +1621,22 @@ function defaultDrawDataForVerticalLineFromCurveForParm() : CurveDrawData
   var drawDataForVerticalLineFromCurveForParm : CurveDrawData = new CurveDrawData(lineStrokeColor,
                                                                            lineWidth);
   return drawDataForVerticalLineFromCurveForParm;                                                                         
+}
+
+function defaultDrawDataForTextNearPointOnCurve() : TextDrawData
+{
+  const fontSpec : string = 'lighter 45px Sans-Serif';
+  const fillColor = "black";
+  var drawDataForTextNearPointOnCurve : TextDrawData = new TextDrawData(fontSpec, fillColor);
+  return drawDataForTextNearPointOnCurve;
+}
+
+function defaultDrawDataForTextNearPointOnGraph() : TextDrawData
+{
+  const fontSpec : string = 'lighter 45px Sans-Serif';
+  const fillColor = "black";
+  var drawDataForTextNearPointOnGraph : TextDrawData = new TextDrawData(fontSpec, fillColor);
+  return drawDataForTextNearPointOnGraph;  
 }
 
 
