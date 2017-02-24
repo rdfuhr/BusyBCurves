@@ -401,7 +401,7 @@ class CircleDrawData
 
 
 class CurveDrawData
-{ // Begin class curveDrawData
+{ // Begin class CurveDrawData
   strokeColor : string;
   curveWidth : number;
 
@@ -448,6 +448,54 @@ class CurveDrawData
      context.lineWidth = this.curveWidth;
   }
 } // End class CurveDrawData
+
+class TextDrawData
+{ // Begin class TextDrawData
+  fontSpec : string;
+  fillColor : string;
+
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for TextDrawData
+  // Creates an instance of TextDrawData
+  //
+  // input: fontSpec - the font with which to draw the text
+  // input: fillColor - the color with which to fill the text
+  //////////////////////////////////////////////////////////////////////////////
+  constructor(fontSpec : string,
+              fillColor : string)
+  {
+    this.fontSpec = fontSpec;
+    this.fillColor = fillColor;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of TextDrawData
+  // Returns the string representation of this TextDrawData
+  //
+  // returns: the string representation of this TextDrawData
+  //////////////////////////////////////////////////////////////////////////////
+  toString() : string
+  {
+     var stringRep : string = "fontSpec = " + this.fontSpec;
+     stringRep = stringRep + "<p>";
+     stringRep = stringRep + "fillColor = " + this.fillColor;
+     stringRep = stringRep + "<p>";
+     return stringRep;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // updateContext - method of TextDrawData
+  // Updates the context for the canvas using the data in TextDrawData
+  //
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  updateContext(context : CanvasRenderingContext2D)
+  {
+    context.font = this.fontSpec;
+    context.fillStyle = this.fillColor;
+  }
+
+} //   End class TextDrawData
 
 class BezierArtifactsDrawData
 { // Begin class BezierArtifactsDrawData 
