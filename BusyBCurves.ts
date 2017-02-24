@@ -1348,7 +1348,8 @@ function drawTextForNumber(t : number,
                            context : CanvasRenderingContext2D)
 {
    context.font = fontSpec;
-   context.strokeText(t.toFixed(2), textLocation.x, textLocation.y);
+   context.fillStyle = "black";
+   context.fillText(t.toFixed(2), textLocation.x, textLocation.y);
 }
 // End Canvas utilities
 
