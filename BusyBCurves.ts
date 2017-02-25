@@ -1093,7 +1093,7 @@ class CubicBezierCurve
 
      for (var i = 0; i < order; i++)
      {
-        var actualArea : number = sumOfAreas*bernsteinValue(i, degree, t);
+        var actualArea : number = globalConstSumOfControlPointAreas*bernsteinValue(i, degree, t);
         // NOTE: actualArea = Math.PI*(actualRadius)^2
         // so actualRadius = sqrt(actualArea/Math.PI)
         var actualRadius : number = Math.sqrt(actualArea/Math.PI);
