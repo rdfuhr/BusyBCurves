@@ -1194,7 +1194,6 @@ class CubicBezierCurve
                                                       drawDataForAllBezierArtifacts.forPointOnGraph, 
                                                       context);
 
-        const graphWidth : number = 2;
         graphOfCubicBernstein.drawVerticalLineFromCurveForParm(t,
                                                                drawDataForAllBezierArtifacts.forVerticalLineFromCurveForParm,
                                                                context);
