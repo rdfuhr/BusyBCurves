@@ -53,6 +53,10 @@
 
 // Begin declaring some of the globals
 var globalPointOnCurveForParm : Circle;
+var tGlobal : number = 0.0; // global
+var tDeltaGlobal : number = 0.001; // cannot be made a const
+const globalCircleAreaFactor : number = 2.0;
+const globalCircleRadiusFactor : number = Math.sqrt(globalCircleAreaFactor);
 //   End declaring some of the globals
 
 // The Point class
@@ -1415,10 +1419,7 @@ function drawTextForNumber(t : number,
 
 // Begin code related to StartAnimation()
 
-var tGlobal : number = 0.0; // global
-var tDeltaGlobal : number = 0.001; // cannot be made a const
-const globalCircleAreaFactor : number = 2.0;
-const globalCircleRadiusFactor : number = Math.sqrt(globalCircleAreaFactor);
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // tGlobalUpdate - function
