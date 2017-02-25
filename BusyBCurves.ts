@@ -57,6 +57,11 @@ var tGlobal : number = 0.0; // global
 var tDeltaGlobal : number = 0.001; // cannot be made a const
 const globalCircleAreaFactor : number = 2.0;
 const globalCircleRadiusFactor : number = Math.sqrt(globalCircleAreaFactor);
+const globalConstSumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
+const globalConstMaxRadius : number = Math.sqrt(globalConstSumOfControlPointAreas/Math.PI);
+const globalConstMaxDiameter : number = 2.0*globalConstMaxRadius;
+
+
 //   End declaring some of the globals
 
 // The Point class
