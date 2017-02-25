@@ -1076,13 +1076,13 @@ class CubicBezierCurve
   // Draws control points with areas proportional to basis function values
   //
   // input: t - the parameter for the basis functions
-  // input: sumOfAreas - the sum of the areas of all the circles
   // input: drawData - an object containing data specifying appearance
   // input: context - the context associated with the canvas
   // output: controlPointCircles - circles marking weighted control points
+  //
+  // note: the sum of all the control point areas is now a global const
   //////////////////////////////////////////////////////////////////////////////
   drawControlPointsWeightedForParm(t : number,
-                                   sumOfAreas : number,
                                    drawData : CircleDrawData,
                                    context : CanvasRenderingContext2D,
                                    controlPointCircles : Array<Circle>)
@@ -1237,7 +1237,6 @@ class CubicBezierCurve
      this.drawControlPolygon(drawDataForAllBezierArtifacts.forControlPolygon, context);
 
      this.drawControlPointsWeightedForParm(tGlobal,
-                                           sumOfControlPointAreas,
                                            drawDataForAllBezierArtifacts.forControlPoints,
                                            context,
                                            controlPointCircles);
