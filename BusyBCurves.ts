@@ -1624,6 +1624,11 @@ function defaultDrawDataForVerticalLineFromCurveForParm() : CurveDrawData
   return drawDataForVerticalLineFromCurveForParm;                                                                         
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForTextNearPointOnCurve - function
+// Return the default draw data for the text near the point on the main Bezier curve.
+//
+////////////////////////////////////////////////////////////////////////////////
 function defaultDrawDataForTextNearPointOnCurve() : TextDrawData
 {
   const fontSpec : string = 'lighter 45px Sans-Serif';
@@ -1632,6 +1637,11 @@ function defaultDrawDataForTextNearPointOnCurve() : TextDrawData
   return drawDataForTextNearPointOnCurve;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForTextNearPointOnGraph - function
+// Return the default draw data for the text near the points on graphs of the Bernstein basis functions.
+//
+////////////////////////////////////////////////////////////////////////////////
 function defaultDrawDataForTextNearPointOnGraph() : TextDrawData
 {
   const fontSpec : string = 'lighter 45px Sans-Serif';
