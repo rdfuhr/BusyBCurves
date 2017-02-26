@@ -52,15 +52,16 @@
 // And also look at http://richardfuhr.neocities.org/BusyBCurves.html
 
 // Begin declaring some of the globals
-var globalPointOnCurveForParm : Circle;
-var tGlobal : number = 0.0; // global
+
+var globalPointOnCurveForParm : Circle; // cannot be made a const
+var tGlobal : number = 0.0; // cannot be made a const
 var tDeltaGlobal : number = 0.001; // cannot be made a const
 const globalCircleAreaFactor : number = 2.0;
 const globalCircleRadiusFactor : number = Math.sqrt(globalCircleAreaFactor);
 const globalConstSumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
 const globalConstMaxRadius : number = Math.sqrt(globalConstSumOfControlPointAreas/Math.PI);
 const globalConstMaxDiameter : number = 2.0*globalConstMaxRadius;
-
+const globalConstPointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
 
 //   End declaring some of the globals
 
