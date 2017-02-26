@@ -1218,12 +1218,10 @@ class CubicBezierCurve
   // Draw all information associated with this CubicBezierCurve
   //
   // input: drawDataForAllBezierArtifacts - styles for drawing everything
-  // input: pointOnCurveRadius - radius of circle representing point on curve
   // input: context - the context associated with the canvas
   // output: controlPointCircles - circles marking weighted control points
   //////////////////////////////////////////////////////////////////////////////
   drawAllBezierArtifacts(drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
-                         pointOnCurveRadius : number,
                          context : CanvasRenderingContext2D,
                          controlPointCircles : Array<Circle>)
   {
@@ -1237,14 +1235,14 @@ class CubicBezierCurve
 
 
      this.drawPointOnCurveForParm(tGlobal,
-                                  pointOnCurveRadius,
+                                  globalConstPointOnCurveRadius,
                                   drawDataForAllBezierArtifacts.forPointOnCurve,
                                   context);
 
       var pointOnCurve : Point = this.positionAtParm(tGlobal);
-      globalPointOnCurveForParm  = new Circle(pointOnCurve, pointOnCurveRadius);
+      globalPointOnCurveForParm  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
-      var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - pointOnCurveRadius);
+      var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - globalConstPointOnCurveRadius);
 
       drawTextForNumber(tGlobal,
                         textLocation,
@@ -1273,7 +1271,6 @@ class CubicBezierCurve
   //
   // input: evt - the mouse event
   // input: drawDataForAllBezierArtifacts - styles for drawing everything
-  // input: pointOnCurveRadius - radius of circle representing point on curve
   // input: context - the context associated with the canvas
   // input: canvas - the canvas on which we are drawing
   // output: controlPointCircles - circles marking weighted control points
@@ -1296,7 +1293,6 @@ class CubicBezierCurve
   //////////////////////////////////////////////////////////////////////////////
   editPointOnCurve(evt : MouseEvent,
                    drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
-                   pointOnCurveRadius : number,
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement,
                    controlPointCircles : Array<Circle>)
@@ -1316,7 +1312,6 @@ class CubicBezierCurve
 
      context.clearRect(0, 0, canvas.width, canvas.height);
      this.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
-                                 pointOnCurveRadius,
                                  context,
                                  controlPointCircles);
   }
@@ -1327,7 +1322,6 @@ class CubicBezierCurve
   //
   // input: evt - the mouse event
   // input: drawDataForAllBezierArtifacts - styles for drawing everything
-  // input: pointOnCurveRadius - radius of circle representing point on curve
   // input: context - the context associated with the canvas
   // input: canvas - the canvas on which we are drawing
   // output: controlPointCircles - circles marking weighted control points
@@ -1339,7 +1333,6 @@ class CubicBezierCurve
   //////////////////////////////////////////////////////////////////////////////
   editControlPoint(evt : MouseEvent,
                    drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
-                   pointOnCurveRadius : number,
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement,
                    controlPointCircles)
@@ -1349,7 +1342,6 @@ class CubicBezierCurve
      context.clearRect(0, 0, canvas.width, canvas.height);
 
      this.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
-                                 pointOnCurveRadius,
                                  context,
                                  controlPointCircles);
   }
@@ -1531,7 +1523,6 @@ function defaultDrawDataForControlPoints() : CircleDrawData
 ////////////////////////////////////////////////////////////////////////////////
 function defaultDrawDataForPointOnCurve() : CircleDrawData
 {
-  const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
   const pointOnCurveFillColor : string = "yellow";
   const pointOnCurveStrokeColor : string = "black";
   const pointOnCurveStrokeWidth : number = 5.0;
@@ -1655,7 +1646,6 @@ function defaultDrawDataForTextNearPointOnGraph() : TextDrawData
 // input: drawingContext - the context associated with the canvas
 // input: C - the main CubicBezierCurve
 // input: drawDataForAllBezierArtifacts - styles for drawing everything
-// input: pointOnCurveRadius - radius of circle representing point on curve
 // output: controlPointCircles - circles marking weighted control points
 //
 ////////////////////////////////////////////////////////////////////////////////
@@ -1663,7 +1653,6 @@ function animation(drawingCanvas : HTMLCanvasElement,
                    drawingContext : CanvasRenderingContext2D,
                    C : CubicBezierCurve,
                    drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
-                   pointOnCurveRadius : number,
                    controlPointCircles : Array<Circle>)
 {
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
@@ -1671,7 +1660,6 @@ function animation(drawingCanvas : HTMLCanvasElement,
    tGlobalUpdate(); // the global value of t is adjusted
 
    C.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
-                            pointOnCurveRadius,
                             drawingContext,
                             controlPointCircles);
 
@@ -1724,7 +1712,6 @@ function StartAnimation()
   
    var drawDataForAllBezierArtifacts : BezierArtifactsDrawData = new BezierArtifactsDrawData();
 
-   const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
    var controlPointCircles : Array<Circle> = new Array();
 
    globalLoop = setInterval(animation, 
@@ -1733,7 +1720,6 @@ function StartAnimation()
                             drawingContext, 
                             C,
                             drawDataForAllBezierArtifacts,
-                            pointOnCurveRadius,
                             controlPointCircles); 
 }
 //   End code related to StartAnimation()
@@ -1818,7 +1804,6 @@ function onMouseDown(evt : MouseEvent,
 // input: evt - the mouse event
 // input: C - the CubicBezierCurve
 // input: drawDataForAllBezierArtifacts - styles for drawing everything
-// input: pointOnCurveRadius - radius of circle representing point on curve
 // input: drawingContext - the context associated with the canvas
 // input: drawingCanvas - the canvas on which we are drawing
 // output: controlPointCircles - circles marking weighted control points
@@ -1826,8 +1811,7 @@ function onMouseDown(evt : MouseEvent,
 function onMouseMove(evt : MouseEvent,
                      C : CubicBezierCurve,
                      drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
-  					         pointOnCurveRadius : number,
- 					           drawingContext : CanvasRenderingContext2D,
+  					         drawingContext : CanvasRenderingContext2D,
 					           drawingCanvas : HTMLCanvasElement,
 					           controlPointCircles : Array<Circle>)
 {
@@ -1836,7 +1820,6 @@ function onMouseMove(evt : MouseEvent,
 	{
 	   C.editPointOnCurve(evt,
               drawDataForAllBezierArtifacts,
-						  pointOnCurveRadius,
 						  drawingContext,
 						  drawingCanvas,
 						  controlPointCircles);
@@ -1848,7 +1831,6 @@ function onMouseMove(evt : MouseEvent,
 
 	   C.editControlPoint(evt,
                         drawDataForAllBezierArtifacts,
-  						          pointOnCurveRadius,
 						            drawingContext,
 						            drawingCanvas,
 						            controlPointCircles);
@@ -1942,12 +1924,9 @@ function ExploreWithMouse()
 
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
 
-   const pointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
-
    var controlPointCircles : Array<Circle> = new Array();
 
    C.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
-                            pointOnCurveRadius,
                             drawingContext,
                             controlPointCircles);
 
@@ -1964,7 +1943,6 @@ function ExploreWithMouse()
             onMouseMove(evt,
                         C,
                         drawDataForAllBezierArtifacts,
-                        pointOnCurveRadius,
                         drawingContext,
                         drawingCanvas,
                         controlPointCircles);
