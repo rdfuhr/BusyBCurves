@@ -1941,6 +1941,42 @@ function HelpInTheFormOfAWebPage()
 
 // Begin code to support BusyBSpline
 
+// Begin utilities that can be used by PolyBezier and CubicSpline objects
+
+////////////////////////////////////////////////////////////////////////////////
+// BinarySearchSortedArray - function
+// Given a number t and an array a of non-decreasing numbers, find the largest
+// index i such that a[i] <= t < a[i+1].
+//
+// input: i - a number
+// input: a - a sorted array (we do NOT check inside this function whether a is sorted)
+//
+// returns the largest index i such that a[i] <= t < a[i+1] 
+// with the following exceptions...
+////////////////////////////////////////////////////////////////////////////////
+function BinarySearchSortedArray(t : number,
+                                 a : Array<number>) : number
+{
+  var bottom : number = 0;
+  var top : number = a.length - 1;
+
+  while (top > bottom + 1)
+  { // begin while (top > bottom + 1)
+    var mid = Math.floor((top+bottom)/2);
+    if (t > a[mid])
+    {
+      bottom = mid;
+    }
+    else
+    {
+      top = mid;
+    }
+  } //   end while (top > bottom + 1)
+
+  return bottom;
+}
+//   End utilities that can be used by PolyBezier and CubicSpline objects
+
 // Begin class PolyBezier
 // See ~/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
 // /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
@@ -2396,11 +2432,45 @@ function CubicSplineTest()
    document.writeln("<p> Leaving drawDataTest()</p>");
  }
 
+ function TestBinarySearchSortedArray()
+ {
+   document.writeln("<p>Entering TestBinarySearchSortedArray()</p>");
+   var indx : number;
+   var topindx : number;
+   var A : Array<number> = new Array();
+   topindx = 5;
+   for (indx = 0; indx <= topindx; indx++)
+   {
+     A[indx] = indx;
+     document.writeln("<p>");
+     document.writeln("A[" + indx + "] = ");
+     document.writeln(A[indx].toString());
+     document.writeln("</p>");    
+   }
+
+   var factor : number = 3;
+   for (indx = 0; indx <= topindx*factor; indx++)
+   {
+     var t : number = indx/factor;
+     var iFound = BinarySearchSortedArray(t, A)
+     document.writeln("<p>")
+     document.writeln("t = ");
+     document.writeln(t.toString())
+     document.writeln("<p>");
+     document.writeln(" iFound = ");
+     document.writeln(iFound.toString());
+     document.writeln("<p>")
+   }
+   
+   document.writeln("<p> Leaving TestBinarySearchSortedArray()</p>");    
+ }
+
 
 function doTests()
 {
    var date : Date = new Date();
    document.writeln(date.toString());
    // PolyBezierTest();
-   drawDataTest();
+   //drawDataTest();
+   TestBinarySearchSortedArray();
 }
