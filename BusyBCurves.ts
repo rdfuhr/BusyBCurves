@@ -1963,7 +1963,7 @@ function BinarySearchSortedArray(t : number,
   while (top > bottom + 1)
   { // begin while (top > bottom + 1)
     var mid = Math.floor((top+bottom)/2);
-    if (t > a[mid])
+    if (t >= a[mid])
     {
       bottom = mid;
     }
