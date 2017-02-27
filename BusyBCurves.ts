@@ -2448,6 +2448,8 @@ function CubicSplineTest()
      document.writeln("</p>");    
    }
 
+   document.writeln("Test computed values of t that may not exactly equal array values")
+   document.writeln("<p>")
    var factor : number = 3;
    for (indx = 0; indx <= topindx*factor; indx++)
    {
@@ -2456,6 +2458,21 @@ function CubicSplineTest()
      document.writeln("<p>")
      document.writeln("t = ");
      document.writeln(t.toString())
+     document.writeln("<p>");
+     document.writeln(" iFound = ");
+     document.writeln(iFound.toString());
+     document.writeln("<p>")
+   }
+
+   document.writeln("Test assigned values of u that exactly equal array values")
+   document.writeln("<p>")
+   for (indx = 0; indx <= topindx; indx++)
+   {
+     var u : number = A[indx];
+     var iFound = BinarySearchSortedArray(u, A)
+     document.writeln("<p>")
+     document.writeln("u = ");
+     document.writeln(u.toString())
      document.writeln("<p>");
      document.writeln(" iFound = ");
      document.writeln(iFound.toString());
