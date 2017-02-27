@@ -14,7 +14,8 @@
 
 // For the record, here is a list of the variables that I am currently
 // using as globals.
-// globalPointOnCurveForParm
+// globalPointOnCurveForParmTarget
+// globalControlPointTargets
 // globalLoop
 // tGlobal
 // tDeltaGlobal
@@ -53,8 +54,8 @@
 
 // Begin declaring some of the globals
 
-var globalPointOnCurveForParm : Circle; // cannot be made a const
-var globalControlPointCircles : Array<Circle> = new Array();
+var globalPointOnCurveForParmTarget : Circle; // cannot be made a const
+var globalControlPointTargets : Array<Circle> = new Array();
 var tGlobal : number = 0.0; // cannot be made a const
 var tDeltaGlobal : number = 0.001; // cannot be made a const
 const globalCircleAreaFactor : number = 2.0;
@@ -1098,7 +1099,7 @@ class CubicBezierCurve
         // so actualRadius = sqrt(actualArea/Math.PI)
         var actualRadius : number = Math.sqrt(actualArea/Math.PI);
         controlPoints[i].drawCircleHere(actualRadius, drawData, context);
-        globalControlPointCircles[i] = new Circle(controlPoints[i], actualRadius);
+        globalControlPointTargets[i] = new Circle(controlPoints[i], actualRadius);
      }
 
   }
@@ -1235,7 +1236,7 @@ class CubicBezierCurve
                                   context);
 
       var pointOnCurve : Point = this.positionAtParm(tGlobal);
-      globalPointOnCurveForParm  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
+      globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
       var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - globalConstPointOnCurveRadius);
 
@@ -1761,14 +1762,14 @@ function onMouseDown(evt : MouseEvent,
 
    globalIndexOfModifiedControlPoint = -1;
 
-   if (mousePos.isInsideCircle(globalPointOnCurveForParm))
+   if (mousePos.isInsideCircle(globalPointOnCurveForParmTarget))
    {
       globalModifyingPointOnCurve = true;
       globalIndexOfModifiedControlPoint = -1;
    }
-   else for (var i = 0; i < globalControlPointCircles.length; i++)
+   else for (var i = 0; i < globalControlPointTargets.length; i++)
    {
-         if(mousePos.isInsideCircle(globalControlPointCircles[i]))
+         if(mousePos.isInsideCircle(globalControlPointTargets[i]))
          {
             globalIndexOfModifiedControlPoint = i;
             globalModifyingPointOnCurve = false;
