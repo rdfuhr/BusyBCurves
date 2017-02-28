@@ -2506,6 +2506,36 @@ function CubicSplineTest()
      document.writeln(iFound.toString());
      document.writeln("<p>")
    }
+
+   var B : Array<number> = new Array();
+   B.push(1);
+   B.push(2);
+   B.push(2);
+   B.push(3);
+   B.push(4);
+   B.push(4);
+   B.push(4);
+   B.push(5);
+   B.push(5);
+   B.push(6);
+   B.push(6);
+   ArrayLogger("Data for Array B", "B", B);
+
+   document.writeln("Test assigned values of v that exactly equal array values")
+   document.writeln("<p>")
+   topindx = B.length - 1;
+   for (indx = 0; indx <= topindx; indx++)
+   {
+     var v : number = B[indx];
+     var jFound = BinarySearchSortedArray(v, B)
+     document.writeln("<p>")
+     document.writeln("v = ");
+     document.writeln(v.toString())
+     document.writeln("<p>");
+     document.writeln(" jFound = ");
+     document.writeln(jFound.toString());
+     document.writeln("<p>")
+   }
    
    document.writeln("<p> Leaving TestBinarySearchSortedArray()</p>");    
  }
@@ -2529,6 +2559,6 @@ function doTests()
    document.writeln(date.toString());
    // PolyBezierTest();
    // drawDataTest();
-   // TestBinarySearchSortedArray();
-   TestArrayLogger();
+   TestBinarySearchSortedArray();
+   // TestArrayLogger();
 }
