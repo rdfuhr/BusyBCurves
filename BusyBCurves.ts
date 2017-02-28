@@ -2283,7 +2283,37 @@ window.onresize = resize;
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-// Miscellaneous tests of the above.
+// Miscellaneous tests of the above and utilities to help do tests.
+
+function StartParagraph()
+{
+  document.writeln("<p>")
+}
+
+function EndParagraph()
+{
+  document.writeln("</p>")
+}
+
+function ArrayLogger<T>(ArrayDescription : string,
+                        ItemDescription : string,
+                        A:Array<T>)
+{
+  StartParagraph();
+  document.writeln("Begin " + ArrayDescription);
+  EndParagraph();
+  let n : number = A.length;
+  for (var i : number = 0; i < n; i++)
+  {
+    StartParagraph();
+    document.writeln(ItemDescription + "[" + i + "] = ");
+    document.writeln(A[i].toString())
+    EndParagraph();
+  }
+  StartParagraph();
+  document.writeln("  End " + ArrayDescription);
+  EndParagraph();   
+}
 
 function doPointTests()
 {
@@ -2442,11 +2472,9 @@ function CubicSplineTest()
    for (indx = 0; indx <= topindx; indx++)
    {
      A[indx] = indx;
-     document.writeln("<p>");
-     document.writeln("A[" + indx + "] = ");
-     document.writeln(A[indx].toString());
-     document.writeln("</p>");    
    }
+
+   ArrayLogger("Contents of array A using ArrayLogger", "A", A);
 
    document.writeln("Test computed values of t that may not exactly equal array values")
    document.writeln("<p>")
@@ -2482,12 +2510,25 @@ function CubicSplineTest()
    document.writeln("<p> Leaving TestBinarySearchSortedArray()</p>");    
  }
 
+ function TestArrayLogger()
+ {
+   let P : Array<Point> = new Array();
+   let n = 10;
+   for (var i = 0; i < n; i++)
+   {
+     P[i] = new Point(i, i+1);
+   }
+
+   ArrayLogger("list of points displayed using ArrayLogger", "P", P);
+ }
+
 
 function doTests()
 {
    var date : Date = new Date();
    document.writeln(date.toString());
    // PolyBezierTest();
-   //drawDataTest();
-   TestBinarySearchSortedArray();
+   // drawDataTest();
+   // TestBinarySearchSortedArray();
+   TestArrayLogger();
 }
