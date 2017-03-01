@@ -1975,6 +1975,94 @@ function BinarySearchSortedArray(t : number,
 
   return bottom;
 }
+
+// Objective-C Code from 
+// /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/SplineUtilities.m
+// commented out, so this will compile.
+// The goal is to implement a TypeScript version right below it.
+
+// +(void)deBoorTriangleAt:(float)t
+// 			  SpanIndex:(int)ispan
+// 				 Degree:(int)degree
+// 			 lastColumn:(int)itop
+// 				  Knots:(float *)kt
+// 				  Coefs:(float *)pt
+// 			   Triangle:(float[MAXORDER][MAXORDER])D
+// /*---------------------------------------------------------------------$
+//  $ DESCRIPTION: Given a parameter value, span index, degree, knot       $
+//  $              sequence and B-spline coefficients, perform the         $
+//  $              Cox - de Boor evaluation algorithm and return the       $
+//  $              entire triangle of values that get computed.            $
+//  $                                                                      $
+//  $ ACCESS PATH: Internal and External                                   $
+//  $                                                                      $
+//  $ WRITTEN BY:  Richard Fuhr, June 2010                                 $
+//  $                                                                      $
+//  $ MODIFICATIONS: None                                                  $
+//  $                                                                      $
+//  $ INPUT PARAMETERS:   t - parameter at which to evaluate               $
+//  $                 ispan - span index of t in terms of kt               $
+//  $                degree - the degree of the B-splines on kt            $
+//  $                  itop - the index of the last column to compute      $
+//  $                         Normally, itop = degree - mult, where mult   $
+//  $                         is the multiplicity of t (which may be 0)    $
+//  $                    kt - the knot sequence                            $
+//  $                    pt - the B-spline coefficients                    $
+//  $                                                                      $
+//  $ OUTPUT PARAMETERS:  D - the triangle of values which arise from      $
+//  $                         the Cox - de Boor evaluation algorithm.      $
+//  $                                                                      $
+//  $ ERROR EXITS:  None                                                   $
+//  $                                                                      $
+//  $ METHOD: Perform the Cox - de Boor algorithm, but don't overwrite any $
+//  $         of the array values.                                         $
+//  $                                                                      $
+//  $---------------------------------------------------------------------*/
+// {
+// 	int j,m;
+// 	double a,abar;
+	
+// 	for (j = 0; j <= itop; j++)
+// 		D[0][j] = pt[ispan-degree+j];
+	
+// 	for (m = 1; m <= itop; m++)
+// 		for (j = m; j <= itop; j++)
+// 		{
+// 			a = (t - kt[ispan + j -degree])/(kt[ispan + j + 1 -m] - kt[ispan + j -degree]);
+// 			abar = 1.0 - a;
+// 			D[m][j] = a*D[m-1][j] + abar*D[m-1][j-1];
+// 		}	
+// }
+
+function DeBoorTriangleAt(t : number,
+                          ispan : number,
+                          degree : number,
+                          itop : number,
+                          kt : number[],
+                          pt : Point[],
+                          D : Point[][])
+ {
+   var j : number;   // a loop index
+   var m : number;   // a loop index
+   var a : number;   // one of the scalar multipliers
+   var abar : number // one of the scalar multipliers
+
+   for (j = 0; j <= itop; j++)
+   {  // Begin j-loop
+      D[0][j] = pt[ispan-degree+j];
+   }  //   End j-loop
+
+   for (m = 1; m <= itop; m++)
+   {   // Begin m-loop
+       for (j = m; j <= itop; j++)
+       {   // Begin j-loop
+           a = (t - kt[ispan + j -degree])/(kt[ispan + j + 1 -m] - kt[ispan + j -degree]);
+           abar = 1.0 - a;
+           D[m][j] = linearCombination(a, D[m-1][j], abar, D[m-1][j-1]);
+       }   //   End j-loop
+   }   //   End m-loop
+ }
+
 //   End utilities that can be used by PolyBezier and CubicSpline objects
 
 // Begin class PolyBezier
