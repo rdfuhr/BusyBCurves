@@ -1,3 +1,11 @@
+// <!-- Copyright (C) 2017 Richard David Fuhr - All rights reserved. -->
+// <!-- richard.fuhr@gmail.com -->
+
+// TODO: Started March 3, 2017
+// TODO: March 3, 2017: Implement a Line class.
+// TODO: March 3, 2017: Implement a PolyLine class.
+// TODO: March 3, 2017: Implement a Rectangle class.
+
 // We will implement the functionality from
 // ~/Dropbox/Public/RichardFuhr/BusyBezier/BusyBezier.js
 // Also, we will reformulate some of my Objective-C BusyBSpline code as TypeScript:
