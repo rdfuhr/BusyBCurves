@@ -1142,7 +1142,7 @@ class CubicBezierCurve
                                    drawData : CurveDrawData,
                                    context :CanvasRenderingContext2D)
   {
-     var P = this.positionAtParm(t);
+     var P : Point = this.positionAtParm(t);
      // Now, we will create a point Q that has the same x coordinate as P and whose
      // y coordinate is equal to the maximum of the y coordinates of the control points
      // of this CubicBezierCurve.  That is because y increases as we go downward.
@@ -1158,11 +1158,8 @@ class CubicBezierCurve
      }
      var  Q : Point = new Point(P.x, yMax);
 
-     drawData.updateContext(context);
-     context.beginPath();
-     context.moveTo(P.x, P.y);
-     context.lineTo(Q.x, Q.y);
-     context.stroke();
+     let VerticalLine : Line = new Line(P, Q, 0.0, 1.0);
+     VerticalLine.draw(drawData, context);
   }
 
   //////////////////////////////////////////////////////////////////////////////
