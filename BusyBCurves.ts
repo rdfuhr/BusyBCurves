@@ -2073,7 +2073,7 @@ function DeBoorTriangleAt(t : number,
 
 //   End utilities that can be used by PolyBezier and CubicSpline objects
 
-// Begin class PolyBezier
+
 // See ~/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
 // /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
 
