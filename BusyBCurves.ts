@@ -2317,6 +2317,79 @@ class CubicSpline
 
 //   End code to support BusyBSpline
 
+// Begin code for classes Line, PolyLine, Rectangle
+
+class Line
+{   // Begin class Line
+    StartPt : Point;
+    EndPt : Point;
+    StartParm : number;
+    EndParm : number;
+
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for Line
+  // Creates an instance of Line
+  //
+  // input: StartPt - the starting point for this Line
+  // input: EndPt - the ending point for this Line
+  // input: StartParm - the starting parameter for this Line
+  // input: EndParm - the ending paramter for this Line  
+  //
+  // Note:  It is assumed, but not checked within this constructor, that 
+  // StartParm < EndParm.  Also, normally, we should have StartPt unequal to
+  // EndPt.
+  //////////////////////////////////////////////////////////////////////////////
+  constructor(StartPt : Point,
+              EndPt : Point,
+              StartParm : number,
+              EndParm : number)
+    {
+      this.StartPt = StartPt;
+      this.EndPt = EndPt;
+      this.StartParm = StartParm;
+      this.EndParm = EndParm;
+    }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of Line
+  // Returns the string representation of this Line
+  //
+  // returns: the string representation of this Line
+  //////////////////////////////////////////////////////////////////////////////
+  toString() : string
+  {
+     var curveData : string = "Data for Line";
+
+     curveData += "<p>";
+     curveData += "StartPt = ";
+     curveData += this.StartPt.toString();
+     curveData += "<p>";
+     curveData += "  EndPt = "
+     curveData += this.EndPt.toString();
+     curveData += "<p>";
+
+     curveData += "<p>";
+     curveData += "StartParm = ";
+     curveData += this.StartParm.toString();
+     curveData += "<p>";
+     curveData += "  EndParm = "
+     curveData += this.EndParm.toString();
+     curveData += "<p>";
+    
+     return curveData;
+  }
+}   //   End class Line
+
+class PolyLine
+{   // Begin class PolyLine
+}   //   End class PolyLine
+
+class Rectangle
+{   // Begin class Rectangle
+}   //   End class Rectangle
+
+//   End code for classes Line, PolyLine, Rectangle
+
 // Do this when the web page is loaded
 // window.onload = StartAnimation;
 
@@ -2638,6 +2711,7 @@ function CubicSplineTest()
 
  function TestArrayLogger()
  {
+   document.writeln("<p>Entering TestArrayLogger()</p>");
    let P : Array<Point> = new Array();
    let n = 10;
    for (var i = 0; i < n; i++)
@@ -2646,6 +2720,19 @@ function CubicSplineTest()
    }
 
    ArrayLogger("list of points displayed using ArrayLogger", "P", P);
+   document.writeln("<p>Leaving TestArrayLogger()</p>");
+ }
+
+ function TestLine()
+ {
+    document.writeln("<p>Entering TestLine()</p>");
+    var P : Point = new Point(1.0, 2.0);
+    var Q : Point = new Point(3.0, 4.0)
+    var s : number = 5.0;
+    var t : number = 6.0;
+    var L : Line = new Line(P, Q, s, t);
+    document.writeln(L.toString());
+    document.writeln("<p>Leaving TestLine()</p>");  
  }
 
 
@@ -2655,6 +2742,7 @@ function doTests()
    document.writeln(date.toString());
    // PolyBezierTest();
    // drawDataTest();
-   TestBinarySearchSortedArray();
+   // TestBinarySearchSortedArray();
    // TestArrayLogger();
+   TestLine();
 }
