@@ -2442,6 +2442,23 @@ class Line
     return Der;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // draw - method of Line
+  // Draws this Line with specified appearance
+  //
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  draw(drawData : CurveDrawData,
+       context : CanvasRenderingContext2D)
+  {
+     drawData.updateContext(context);
+     context.beginPath();
+     context.moveTo(this.StartPt.x, this.StartPt.y);
+     context.lineTo(this.EndPt.x, this.EndPt.y);
+     context.stroke();
+  }
+
 }   //   End class Line
 
 class PolyLine
