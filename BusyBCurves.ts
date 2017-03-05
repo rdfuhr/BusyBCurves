@@ -1158,7 +1158,7 @@ class CubicBezierCurve
      }
      var  Q : Point = new Point(P.x, yMax);
 
-     let VerticalLine : Line = new Line(P, Q, 0.0, 1.0);
+     let VerticalLine : Line = new Line(P, Q);
      VerticalLine.draw(drawData, context);
   }
 
@@ -2320,31 +2320,21 @@ class Line
 {   // Begin class Line
     StartPt : Point;
     EndPt : Point;
-    StartParm : number;
-    EndParm : number;
-
+    
   //////////////////////////////////////////////////////////////////////////////
   // constructor for Line
   // Creates an instance of Line
   //
   // input: StartPt - the starting point for this Line
   // input: EndPt - the ending point for this Line
-  // input: StartParm - the starting parameter for this Line
-  // input: EndParm - the ending paramter for this Line  
   //
-  // Note:  It is assumed, but not checked within this constructor, that 
-  // StartParm < EndParm.  Also, normally, we should have StartPt unequal to
-  // EndPt.
+  // Note:  To keep things simple, the domain of each line is will be [0,1].
   //////////////////////////////////////////////////////////////////////////////
   constructor(StartPt : Point,
-              EndPt : Point,
-              StartParm : number,
-              EndParm : number)
+              EndPt : Point)
     {
       this.StartPt = StartPt;
       this.EndPt = EndPt;
-      this.StartParm = StartParm;
-      this.EndParm = EndParm;
     }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -2364,14 +2354,6 @@ class Line
      curveData += "  EndPt = "
      curveData += this.EndPt.toString();
      curveData += "<p>";
-
-     curveData += "<p>";
-     curveData += "StartParm = ";
-     curveData += this.StartParm.toString();
-     curveData += "<p>";
-     curveData += "  EndParm = "
-     curveData += this.EndParm.toString();
-     curveData += "<p>";
     
      return curveData;
   }
@@ -2381,28 +2363,16 @@ class Line
   // Returns the point on this Line at the input parameter
   //
   // input: t - parameter at which to get position on this Line
+  //
   // returns: position on this Line at parameter t
   //
-  // Note: We are not checking whether the input parameter t is between
-  // this.StartParm and this.EndParm.  For safety, and to avoid a possible
-  // divide by zero, we will check that StartParm is greater than EndParm.
-  // Otherwise, we will return StartPt.
+  // Note: This function assumes that the domain of each Line is [0,1].
+  // Also, we allow the input parameter t to be any number, not just in [0,1].
   //////////////////////////////////////////////////////////////////////////////
   positionAtParm(t : number) : Point
   {
-     var Pos : Point;
-     let denominator : number = this.EndParm - this.StartParm;
-     if (denominator > 0.0)
-     {
-       let numerator : number = t - this.StartParm;
-       let a : number = numerator/denominator;
-       let b : number = 1.0 - a;
-       Pos = linearCombination(b, this.StartPt, a, this.EndPt);
-     }
-     else
-     {
-       Pos = this.StartPt;
-     }
+     var Pos : Point = linearCombination(1.0 - t, this.StartPt, t, this.EndPt);
+     
      return Pos;
   }
 
@@ -2411,30 +2381,20 @@ class Line
   // Returns the derivative of this Line at the input parameter
   //
   // input: t - parameter at which to get derivative of this Line
-  // returns: derivative of this Line at parameter t
-  // 
-  // Note: If this.StartParm > thisEndParm we will calculate and return the
-  // derivative.  Otherwise, we will return 0.0
   //
-  // Also Note:  Since this is a line with a uniform parameterization, the
+  // returns: derivative of this Line at parameter t
+  //
+  // Note:  Since this is a line with a uniform parameterization, the
   // derivative is constant, and therefore the input parameter is not needed.
   // However, we are including it just to be consistent with the implementations
   // of derivativeAtParm for other curve types.  Also, if, in the future, we
   // allow nonuniform parameterization for lines, then the input parameter t
-  // would become necessary.
+  // would become necessary.  This function assumes that the domain of each
+  // line is [0,1].
   //////////////////////////////////////////////////////////////////////////////
   derivativeAtParm(t : number) : Point
   {
-    let Der : Point = new Point(0.0, 0.0);
-
-    let denominator : number = this.EndParm - this.StartParm;
-
-    if (denominator > 0.0)
-    {
-      let DifferenceVector : Point = this.EndPt.minus(this.StartPt)
-      let scaleFac : number = 1.0/denominator;
-      Der = DifferenceVector.scalarMult(scaleFac);
-    }
+    var Der : Point = this.EndPt.minus(this.StartPt)
 
     return Der;
   }
@@ -2804,23 +2764,25 @@ function CubicSplineTest()
  function TestLine()
  {
     document.writeln("<p>Entering TestLine()</p>");
+
     var P : Point = new Point(0.0, 0.0);
     var Q : Point = new Point(3.0, 4.0)
-    var s : number = 0.0;
-    var t : number = 1.0;
-    var L : Line = new Line(P, Q, s, t);
+    var L : Line = new Line(P, Q);
+
     document.writeln(L.toString());
+
     const iTop : number = 10;
-    const delta : number = t - s;
+    
     for (var i =0; i <= 10; i++)
     {
-      let u : number = s + (i/iTop)*delta;
+      let u : number = i/iTop;
       let pos : Point = L.positionAtParm(u);
       let der : Point = L.derivativeAtParm(u);
       document.writeln("u = " + u.toString() + " ");
       document.writeln("pos = " + pos.toString() + " " + "der = " + der.toString());
       document.writeln("<p>");
     }
+    
     document.writeln("<p>Leaving TestLine()</p>");  
  }
 
