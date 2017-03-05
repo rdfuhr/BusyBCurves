@@ -1049,17 +1049,8 @@ class CubicBezierCurve
   drawControlPolygon(drawData : CurveDrawData,
                      context : CanvasRenderingContext2D)
   {
-     drawData.updateContext(context);
-     context.beginPath();
-     var P : Array<Point> = this.CtrlPts;
-     context.moveTo(P[0].x, P[0].y);
-
-     for (var i = 1; i < P.length; i++)
-     {
-        context.lineTo(P[i].x, P[i].y);
-     }
-
-     context.stroke();
+    let ControlPolygon : PolyLine = new PolyLine(this.CtrlPts);
+    ControlPolygon.draw(drawData, context);
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -2462,6 +2453,27 @@ class PolyLine
      }
     
      return curveData;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // draw - method of PolyLine
+  // Draws this PolyLine with specified appearance
+  //
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  draw(drawData : CurveDrawData,
+       context : CanvasRenderingContext2D)
+  {
+     drawData.updateContext(context);
+     context.beginPath();
+     context.moveTo(this.Pt[0].x, this.Pt[0].y);
+     var n : number = this.Pt.length;
+     for (var i : number = 1; i < n; i++)
+     {
+        context.lineTo(this.Pt[i].x, this.Pt[i].y);
+     }
+     context.stroke();
   }
 
 }   //   End class PolyLine
