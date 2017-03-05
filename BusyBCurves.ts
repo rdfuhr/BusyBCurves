@@ -942,16 +942,16 @@ class CubicBezierCurve
   //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
-     var curveData = "Data for Bezier Curve\n";
+     var stringRep = "Data for Bezier Curve\n";
      var n = this.CtrlPts.length;
      for (var i = 0; i < n; i++)
      {
-        curveData += "<p>"
-        curveData += "CtrlPts[" + i + "] = ";
-        curveData += this.CtrlPts[i].toString();
-        curveData += "</p>";
+        stringRep += "<p>"
+        stringRep += "CtrlPts[" + i + "] = ";
+        stringRep += this.CtrlPts[i].toString();
+        stringRep += "</p>";
      }
-     return curveData;
+     return stringRep;
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -2144,26 +2144,26 @@ class PolyBezier
   //////////////////////////////////////////////////////////////////////////////
   toString() :  string
   {
-    var curveData : string = "Data for PolyBezier Curve\n";
+    var stringRep : string = "Data for PolyBezier Curve\n";
 
     var nComponents : number = this.Component.length;
     for (var i = 0; i < nComponents; i++)
     {
-       curveData += "<p>"
-       curveData += "Component[" + i + "] = ";
-       curveData += this.Component[i].toString();
-       curveData += "</p>";
+       stringRep += "<p>"
+       stringRep += "Component[" + i + "] = ";
+       stringRep += this.Component[i].toString();
+       stringRep += "</p>";
     }
 
     var nBreakpoints : number = this.Breakpoint.length;
     for (var j = 0; j < nBreakpoints; j++)
     {
-       curveData += "<p>"
-       curveData += "Breakpoint[" + j + "] = ";
-       curveData += this.Breakpoint[j].toString();
-       curveData += "</p>";
+       stringRep += "<p>"
+       stringRep += "Breakpoint[" + j + "] = ";
+       stringRep += this.Breakpoint[j].toString();
+       stringRep += "</p>";
     }
-    return curveData;
+    return stringRep;
   }
 
 } // End class PolyBezier
@@ -2249,26 +2249,26 @@ class CubicSpline
   //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
-     var curveData : string = "Data for Spline Curve\n";
+     var stringRep : string = "Data for Spline Curve\n";
 
      var nPts : number = this.CtrlPts.length;
      for (var i = 0; i < nPts; i++)
      {
-        curveData += "<p>"
-        curveData += "CtrlPts[" + i + "] = ";
-        curveData += this.CtrlPts[i].toString();
-        curveData += "</p>";
+        stringRep += "<p>"
+        stringRep += "CtrlPts[" + i + "] = ";
+        stringRep += this.CtrlPts[i].toString();
+        stringRep += "</p>";
      }
 
      var nKts : number = this.ExplicitKnots.length;
      for (var j = 0; j < nKts; j++)
      {
-        curveData += "<p>"
-        curveData += "ExplicitKnots[" + j + "] = ";
-        curveData += this.ExplicitKnots[j].toString();
-        curveData += "</p>";
+        stringRep += "<p>"
+        stringRep += "ExplicitKnots[" + j + "] = ";
+        stringRep += this.ExplicitKnots[j].toString();
+        stringRep += "</p>";
      }
-     return curveData;
+     return stringRep;
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -2329,17 +2329,17 @@ class Line
   //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
-     var curveData : string = "Data for Line";
+     var stringRep : string = "Data for Line";
 
-     curveData += "<p>";
-     curveData += "StartPt = ";
-     curveData += this.StartPt.toString();
-     curveData += "<p>";
-     curveData += "  EndPt = "
-     curveData += this.EndPt.toString();
-     curveData += "<p>";
+     stringRep += "<p>";
+     stringRep += "StartPt = ";
+     stringRep += this.StartPt.toString();
+     stringRep += "<p>";
+     stringRep += "  EndPt = "
+     stringRep += this.EndPt.toString();
+     stringRep += "<p>";
     
-     return curveData;
+     return stringRep;
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -2433,19 +2433,19 @@ class PolyLine
   //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
-     var curveData : string = "Data for PolyLine";
+     var stringRep : string = "Data for PolyLine";
 
      const n : number = this.Pt.length;
 
      for (var i : number = 0; i < n; i++)
      {
-        curveData += "<p>";
-        curveData += "Pt[" + i.toString() + "] = ";
-        curveData += this.Pt[i].toString();
-        curveData += "<p>";
+        stringRep += "<p>";
+        stringRep += "Pt[" + i.toString() + "] = ";
+        stringRep += this.Pt[i].toString();
+        stringRep += "<p>";
      }
     
-     return curveData;
+     return stringRep;
   }
 
   //////////////////////////////////////////////////////////////////////////////
