@@ -686,30 +686,23 @@ function doAllDeCasteljauSteps(P : Array<Point>,
 // input: t - a parameter value
 // input: drawData - an object containing information specifying appearance
 // input: context - the context associated with the canvas
+// Note: Because of the math of the situation, we know that inside the i-loop
+// the array P will be at least of length 2. In previous version of this
+// code we checked the length, but we really don't have to, so we removed the
+// code that did the checking.
 ////////////////////////////////////////////////////////////////////////////////
 function drawAllDeCasteljauLines(P : Array<Point>,
                                  t : number,
                                  drawData : CurveDrawData,
                                  context : CanvasRenderingContext2D)
 {
-   drawData.updateContext(context);
-
    var n : number = P.length
    for (var i = 0; i < n-1; i++)
    {  // begin i-loop
       P = doOneDeCasteljauStep(P, t); // so we are overwriting P
-      var m : number = P.length;
-      if (m > 1)
-      {  // begin case of m > 1
-         context.beginPath();
-         context.moveTo(P[0].x, P[0].y);
-         for (var j = 1; j < m; j++)
-         {
-            context.lineTo(P[j].x, P[j].y);
-         }
-         context.stroke();
-      }  //   end case of m > 1
-   }  //  end i-loop
+      let DeCasteljauPolyLine : PolyLine = new PolyLine(P);
+      DeCasteljauPolyLine.draw(drawData, context);
+    }  //  end i-loop
 }
 
 ////////////////////////////////////////////////////////////////////////////////
