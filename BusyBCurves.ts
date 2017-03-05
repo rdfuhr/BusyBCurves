@@ -2420,6 +2420,50 @@ class Line
 
 class PolyLine
 {   // Begin class PolyLine
+    Pt : Array<Point>;
+
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for PolyLine
+  // Creates an instance of PolyLine
+  //
+  // input: Pt - An array of Point objects
+  //
+  // Note:  To keep things simple, the straight line segment of this PolyLine
+  // from Pt[i] to Pt[i+1] will be parameterized from i to i+1.
+  //////////////////////////////////////////////////////////////////////////////
+  constructor(Pt : Array<Point>)
+  {
+    this.Pt = new Array();
+    const n : number = Pt.length;
+    for (var i = 0; i < n ; i++)
+    {
+      this.Pt.push(Pt[i]);
+    }
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of PolyLine
+  // Returns the string representation of this PolyLine
+  //
+  // returns: the string representation of this PolyLine
+  //////////////////////////////////////////////////////////////////////////////
+  toString() : string
+  {
+     var curveData : string = "Data for PolyLine";
+
+     const n : number = this.Pt.length;
+
+     for (var i : number = 0; i < n; i++)
+     {
+        curveData += "<p>";
+        curveData += "Pt[" + i.toString() + "] = ";
+        curveData += this.Pt[i].toString();
+        curveData += "<p>";
+     }
+    
+     return curveData;
+  }
+
 }   //   End class PolyLine
 
 class Rectangle
@@ -2782,8 +2826,28 @@ function CubicSplineTest()
       document.writeln("pos = " + pos.toString() + " " + "der = " + der.toString());
       document.writeln("<p>");
     }
-    
+
     document.writeln("<p>Leaving TestLine()</p>");  
+ }
+
+ function TestPolyLine()
+ {
+   document.writeln("<p>Entering TestPolyLine()</p>");
+   let P : Array<Point> = new Array();
+   let n = 10;
+   for (var i = 0; i < n; i++)
+   {
+     P[i] = new Point(i, i*i);
+   }
+
+   ArrayLogger("Input points for PolyLine Constructor", "P", P);
+
+   var PL : PolyLine = new PolyLine(P);
+   document.writeln("Polyline PL constructed from the P");
+   document.writeln("<p>")
+   document.writeln(PL.toString());
+
+   document.writeln("<p>Leaving TestPolyLine()</p>");
  }
 
 
@@ -2795,5 +2859,6 @@ function doTests()
    // drawDataTest();
    // TestBinarySearchSortedArray();
    // TestArrayLogger();
-   TestLine();
+   // TestLine();
+   TestPolyLine();
 }
