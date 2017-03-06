@@ -5,6 +5,7 @@
 // TODO: March 3, 2017: Implement a Line class.
 // TODO: March 3, 2017: Implement a PolyLine class.
 // TODO: March 3, 2017: Implement a Rectangle class.
+// TODO: March 5, 2017: Refactor code in PolyLine evaluators
 
 // We will implement the functionality from
 // ~/Dropbox/Public/RichardFuhr/BusyBezier/BusyBezier.js
@@ -2080,7 +2081,7 @@ class PolyBezier
   constructor(C : Array<CubicBezierCurve>,
               t : Array<number>)
   { // begin constructor of PolyBezier
-    // We need to do some validity checking; otherwise we will construct
+    // We need to do some validity checking; if input is invalid we will construct
     // a PolyBezier object with no components.
     this.Component  = new Array<CubicBezierCurve>();
     this.Breakpoint = new Array<number>();
@@ -2164,6 +2165,51 @@ class PolyBezier
        stringRep += "</p>";
     }
     return stringRep;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // positionAtParm - method of PolyBezier
+  // Returns the point on this Line at the input parameter
+  //
+  // input: t - parameter at which to get position on this Line
+  //
+  // returns: position on this PolyBezier at parameter t
+  //
+  //  Note: For parameters out of range, we will extrapolate the first or last
+  //  component.
+  //////////////////////////////////////////////////////////////////////////////
+  positionAtParm(t : number) : Point
+  {
+     let iLastBreakPoint : number = this.Breakpoint.length - 1;
+     let startParm : number = this.Breakpoint[0];
+     let endParm : number = this.Breakpoint[iLastBreakPoint];
+
+     var currBezierIndex : number;
+     var currBezierNormalizedParm : number;
+     var numerator : number;
+     var denominator : number;
+
+     if ((startParm <= t) && (t <= endParm))
+     {   // Begin case where t is in [startParm, endParm]
+         currBezierIndex = BinarySearchSortedArray(t, this.Breakpoint);
+     }   //   End case where t is in [startParm, endParm]
+     else
+     if (t < startParm)
+     {   // Begin case where t < startParm
+       currBezierIndex = 0;
+     }   //   End case where t < startParm
+     else
+     {   // Begin case where t > endParm
+         currBezierIndex = iLastBreakPoint - 1;
+     }   //   End case where t > endParm
+
+     numerator = t - this.Breakpoint[currBezierIndex];
+     denominator = this.Breakpoint[currBezierIndex + 1] - this.Breakpoint[currBezierIndex];
+     currBezierNormalizedParm = numerator/denominator;
+     var currBezierCurve : CubicBezierCurve = this.Component[currBezierIndex];
+     var Pos : Point = currBezierCurve.positionAtParm(currBezierNormalizedParm);
+
+     return Pos;
   }
 
 } // End class PolyBezier
@@ -2456,11 +2502,11 @@ class PolyLine
   //
   // returns: position on this PolyLine at parameter t
   //
-  // Note: This function assumes that the domain of each PolyLine is [0,n].
-  // Also, we allow the input parameter t to be any number, not just in [0,n].
+  // Note: This function assumes that the domain of each PolyLine is [0,n-1].
+  // Also, we allow the input parameter t to be any number, not just in [0,n-1].
   // We assume that the parameterization of the PolyLine is based upon the
   // parameterization of the component Line objects, and we determine the index
-  // of the Line object to be floor(t) if t is in [0,n] and do special handling
+  // of the Line object to be floor(t) if t is in [0,n-1] and do special handling
   // otherwise.
   //////////////////////////////////////////////////////////////////////////////
   positionAtParm(t : number) : Point
@@ -2470,11 +2516,11 @@ class PolyLine
      var currLineIndex : number;
      var currLineParm : number;
 
-     if ((0 <= t) && (t <= n))
-     { // begin case where t is in [0,n]
+     if ((0 <= t) && (t < n-1))
+     { // begin case where t is in [0,n-1)
        currLineIndex = Math.floor(t);
        currLineParm = t - currLineIndex;
-     } //   end case where t is in [0,n]
+     } //   end case where t is in [0,n-1)
      else
      if (t < 0)
      { // begin case where t is negative
@@ -2482,10 +2528,10 @@ class PolyLine
        currLineParm  = t;
      } //   end case where t is negative
      else
-     { // begin case where t > n
+     { // begin case where t >= n - 1
        currLineIndex = lastLineIndex;
        currLineParm  = t - currLineIndex;
-     } //   end case where t > n
+     } //   end case where t >= n - 1
 
      let currLine : Line = new Line(this.Pt[currLineIndex], this.Pt[currLineIndex + 1]);
      var Pos : Point = currLine.positionAtParm(currLineParm);
@@ -2500,11 +2546,11 @@ class PolyLine
   //
   // returns: derivative on this PolyLine at parameter t
   //
-  // Note: This function assumes that the domain of each PolyLine is [0,n].
-  // Also, we allow the input parameter t to be any number, not just in [0,n].
+  // Note: This function assumes that the domain of each PolyLine is [0,n-1].
+  // Also, we allow the input parameter t to be any number, not just in [0,n-1].
   // We assume that the parameterization of the PolyLine is based upon the
   // parameterization of the component Line objects, and we determine the index
-  // of the Line object to be floor(t) if t is in [0,n] and do special handling
+  // of the Line object to be floor(t) if t is in [0,n-1] and do special handling
   // otherwise.
   //////////////////////////////////////////////////////////////////////////////
   derivativeAtParm(t : number) : Point
@@ -2514,11 +2560,11 @@ class PolyLine
      var currLineIndex : number;
      var currLineParm : number;
 
-     if ((0 <= t) && (t <= n))
-     { // begin case where t is in [0,n]
+     if ((0 <= t) && (t < n-1))
+     { // begin case where t is in [0,n-1)
        currLineIndex = Math.floor(t);
        currLineParm = t - currLineIndex;
-     } //   end case where t is in [0,n]
+     } //   end case where t is in [0,n-1)
      else
      if (t < 0)
      { // begin case where t is negative
@@ -2526,10 +2572,10 @@ class PolyLine
        currLineParm  = t;
      } //   end case where t is negative
      else
-     { // begin case where t > n
+     { // begin case where t >= n - 1
        currLineIndex = lastLineIndex;
        currLineParm  = t - currLineIndex;
-     } //   end case where t > n
+     } //   end case where t >= n - 1
 
      let currLine : Line = new Line(this.Pt[currLineIndex], this.Pt[currLineIndex + 1]);
      var Der : Point = currLine.derivativeAtParm(currLineParm);
