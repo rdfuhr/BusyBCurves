@@ -2495,6 +2495,40 @@ class PolyLine
   }
 
   //////////////////////////////////////////////////////////////////////////////
+  // getCurrLineIndexAndCurrLineParm - method of PolyLine
+  // Given a parameter, find the index of the current line and the value of the
+  // local parameter on that line
+  //
+  // input: t - global parameter for PolyLine
+  // output: currLineIndex - the index of the component line associated with t
+  // output: currLineParm - the local parameter on that component that corresponds with t
+  //////////////////////////////////////////////////////////////////////////////
+  getCurrLineIndexAndCurrLineParm(t : number,
+                                  currLineIndex : number,
+                                  currLineParm : number)
+  {
+     const n : number = this.Pt.length;
+     const lastLineIndex : number = n - 2;
+
+     if ((0 <= t) && (t < n-1))
+     { // begin case where t is in [0,n-1)
+       currLineIndex = Math.floor(t);
+       currLineParm = t - currLineIndex;
+     } //   end case where t is in [0,n-1)
+     else
+     if (t < 0)
+     { // begin case where t is negative
+       currLineIndex  = 0;
+       currLineParm  = t;
+     } //   end case where t is negative
+     else
+     { // begin case where t >= n - 1
+       currLineIndex = lastLineIndex;
+       currLineParm  = t - currLineIndex;
+     } //   end case where t >= n - 1
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
   // positionAtParm - method of PolyLine
   // Returns the point on this PolyLine at the input parameter
   //
@@ -2532,6 +2566,10 @@ class PolyLine
        currLineIndex = lastLineIndex;
        currLineParm  = t - currLineIndex;
      } //   end case where t >= n - 1
+
+    //  var currLineIndex : number;
+    //  var currLineParm : number;
+    //  this.getCurrLineIndexAndCurrLineParm(t, currLineIndex, currLineParm);
 
      let currLine : Line = new Line(this.Pt[currLineIndex], this.Pt[currLineIndex + 1]);
      var Pos : Point = currLine.positionAtParm(currLineParm);
@@ -2576,6 +2614,10 @@ class PolyLine
        currLineIndex = lastLineIndex;
        currLineParm  = t - currLineIndex;
      } //   end case where t >= n - 1
+
+    //  var currLineIndex : number;
+    //  var currLineParm : number;
+    //  this.getCurrLineIndexAndCurrLineParm(t, currLineIndex, currLineParm);
 
      let currLine : Line = new Line(this.Pt[currLineIndex], this.Pt[currLineIndex + 1]);
      var Der : Point = currLine.derivativeAtParm(currLineParm);
