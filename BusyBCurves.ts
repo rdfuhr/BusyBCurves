@@ -2448,6 +2448,20 @@ class Line
 
 }   //   End class Line
 
+class PolyLineHelper
+{  // Begin class PolyLineHelper
+   currLineIndex : number;
+   currLineParm : number;
+
+   constructor(currLineIndex : number,
+               currLineParm : number)
+{
+   this.currLineIndex = currLineIndex;
+   this.currLineParm = currLineParm;
+}
+
+}  //   End class PolyLineHelper
+
 class PolyLine
 {   // Begin class PolyLine
     Pt : Array<Point>;
@@ -2500,50 +2514,9 @@ class PolyLine
   // local parameter on that line
   //
   // input: t - global parameter for PolyLine
-  // output: currLineIndex - the index of the component line associated with t
-  // output: currLineParm - the local parameter on that component that corresponds with t
+  // returns: an object of PolyLineHelper class with index & local parameter
   //////////////////////////////////////////////////////////////////////////////
-  getCurrLineIndexAndCurrLineParm(t : number,
-                                  currLineIndex : number,
-                                  currLineParm : number)
-  {
-     const n : number = this.Pt.length;
-     const lastLineIndex : number = n - 2;
-
-     if ((0 <= t) && (t < n-1))
-     { // begin case where t is in [0,n-1)
-       currLineIndex = Math.floor(t);
-       currLineParm = t - currLineIndex;
-     } //   end case where t is in [0,n-1)
-     else
-     if (t < 0)
-     { // begin case where t is negative
-       currLineIndex  = 0;
-       currLineParm  = t;
-     } //   end case where t is negative
-     else
-     { // begin case where t >= n - 1
-       currLineIndex = lastLineIndex;
-       currLineParm  = t - currLineIndex;
-     } //   end case where t >= n - 1
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // positionAtParm - method of PolyLine
-  // Returns the point on this PolyLine at the input parameter
-  //
-  // input: t - parameter at which to get position on this Line
-  //
-  // returns: position on this PolyLine at parameter t
-  //
-  // Note: This function assumes that the domain of each PolyLine is [0,n-1].
-  // Also, we allow the input parameter t to be any number, not just in [0,n-1].
-  // We assume that the parameterization of the PolyLine is based upon the
-  // parameterization of the component Line objects, and we determine the index
-  // of the Line object to be floor(t) if t is in [0,n-1] and do special handling
-  // otherwise.
-  //////////////////////////////////////////////////////////////////////////////
-  positionAtParm(t : number) : Point
+  getCurrLineIndexAndCurrLineParm(t : number) : PolyLineHelper
   {
      const n : number = this.Pt.length;
      const lastLineIndex : number = n - 2;
@@ -2567,9 +2540,29 @@ class PolyLine
        currLineParm  = t - currLineIndex;
      } //   end case where t >= n - 1
 
-    //  var currLineIndex : number;
-    //  var currLineParm : number;
-    //  this.getCurrLineIndexAndCurrLineParm(t, currLineIndex, currLineParm);
+     return new PolyLineHelper(currLineIndex, currLineParm);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // positionAtParm - method of PolyLine
+  // Returns the point on this PolyLine at the input parameter
+  //
+  // input: t - parameter at which to get position on this Line
+  //
+  // returns: position on this PolyLine at parameter t
+  //
+  // Note: This function assumes that the domain of each PolyLine is [0,n-1].
+  // Also, we allow the input parameter t to be any number, not just in [0,n-1].
+  // We assume that the parameterization of the PolyLine is based upon the
+  // parameterization of the component Line objects, and we determine the index
+  // of the Line object to be floor(t) if t is in [0,n-1] and do special handling
+  // otherwise.
+  //////////////////////////////////////////////////////////////////////////////
+  positionAtParm(t : number) : Point
+  {
+     var Results : PolyLineHelper = this.getCurrLineIndexAndCurrLineParm(t);
+     var currLineIndex : number = Results.currLineIndex;
+     var currLineParm : number = Results.currLineParm;
 
      let currLine : Line = new Line(this.Pt[currLineIndex], this.Pt[currLineIndex + 1]);
      var Pos : Point = currLine.positionAtParm(currLineParm);
@@ -2593,32 +2586,9 @@ class PolyLine
   //////////////////////////////////////////////////////////////////////////////
   derivativeAtParm(t : number) : Point
   {
-     const n : number = this.Pt.length;
-     const lastLineIndex : number = n - 2;
-     var currLineIndex : number;
-     var currLineParm : number;
-
-     if ((0 <= t) && (t < n-1))
-     { // begin case where t is in [0,n-1)
-       currLineIndex = Math.floor(t);
-       currLineParm = t - currLineIndex;
-     } //   end case where t is in [0,n-1)
-     else
-     if (t < 0)
-     { // begin case where t is negative
-       currLineIndex  = 0;
-       currLineParm  = t;
-     } //   end case where t is negative
-     else
-     { // begin case where t >= n - 1
-       currLineIndex = lastLineIndex;
-       currLineParm  = t - currLineIndex;
-     } //   end case where t >= n - 1
-
-    //  var currLineIndex : number;
-    //  var currLineParm : number;
-    //  this.getCurrLineIndexAndCurrLineParm(t, currLineIndex, currLineParm);
-
+     var Results : PolyLineHelper = this.getCurrLineIndexAndCurrLineParm(t);
+     var currLineIndex : number = Results.currLineIndex;
+     var currLineParm : number = Results.currLineParm;
      let currLine : Line = new Line(this.Pt[currLineIndex], this.Pt[currLineIndex + 1]);
      var Der : Point = currLine.derivativeAtParm(currLineParm);
      return Der;
