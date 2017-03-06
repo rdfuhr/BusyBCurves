@@ -2454,9 +2454,9 @@ class PolyLine
   //
   // input: t - parameter at which to get position on this Line
   //
-  // returns: position on this Line at parameter t
+  // returns: position on this PolyLine at parameter t
   //
-  // Note: This function assumes that the domain of each Line is [0,n].
+  // Note: This function assumes that the domain of each PolyLine is [0,n].
   // Also, we allow the input parameter t to be any number, not just in [0,n].
   // We assume that the parameterization of the PolyLine is based upon the
   // parameterization of the component Line objects, and we determine the index
@@ -2490,6 +2490,50 @@ class PolyLine
      let currLine : Line = new Line(this.Pt[currLineIndex], this.Pt[currLineIndex + 1]);
      var Pos : Point = currLine.positionAtParm(currLineParm);
      return Pos;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // derivativeAtParm - method of PolyLine
+  // Returns the derivative on this PolyLine at the input parameter
+  //
+  // input: t - parameter at which to get derivative on this Line
+  //
+  // returns: derivative on this PolyLine at parameter t
+  //
+  // Note: This function assumes that the domain of each PolyLine is [0,n].
+  // Also, we allow the input parameter t to be any number, not just in [0,n].
+  // We assume that the parameterization of the PolyLine is based upon the
+  // parameterization of the component Line objects, and we determine the index
+  // of the Line object to be floor(t) if t is in [0,n] and do special handling
+  // otherwise.
+  //////////////////////////////////////////////////////////////////////////////
+  derivativeAtParm(t : number) : Point
+  {
+     const n : number = this.Pt.length;
+     const lastLineIndex : number = n - 2;
+     var currLineIndex : number;
+     var currLineParm : number;
+
+     if ((0 <= t) && (t <= n))
+     { // begin case where t is in [0,n]
+       currLineIndex = Math.floor(t);
+       currLineParm = t - currLineIndex;
+     } //   end case where t is in [0,n]
+     else
+     if (t < 0)
+     { // begin case where t is negative
+       currLineIndex  = 0;
+       currLineParm  = t;
+     } //   end case where t is negative
+     else
+     { // begin case where t > n
+       currLineIndex = lastLineIndex;
+       currLineParm  = t - currLineIndex;
+     } //   end case where t > n
+
+     let currLine : Line = new Line(this.Pt[currLineIndex], this.Pt[currLineIndex + 1]);
+     var Der : Point = currLine.derivativeAtParm(currLineParm);
+     return Der;
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -2886,7 +2930,7 @@ function CubicSplineTest()
    let n = 10;
    for (var i = 0; i < n; i++)
    {
-     P[i] = new Point(i, i*i);
+     P[i] = new Point(i, 10*i);
    }
 
    ArrayLogger("Input points for PolyLine Constructor", "P", P);
@@ -2895,6 +2939,17 @@ function CubicSplineTest()
    document.writeln("Polyline PL constructed from the P");
    document.writeln("<p>")
    document.writeln(PL.toString());
+
+   for (var j = 0; j <= 10*n; j++)
+   {
+     let t : number = j/n;
+     let P : Point = PL.positionAtParm(t);
+     document.writeln("<p>");
+     document.writeln("t = ", t.toString() + " Pos = " + P.toString());
+     let D : Point = PL.derivativeAtParm(t);
+     document.writeln("<p>");
+     document.writeln("t = ", t.toString() + " Der = " + D.toString());
+   }
 
    document.writeln("<p>Leaving TestPolyLine()</p>");
  }
