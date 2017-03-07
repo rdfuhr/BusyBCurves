@@ -2,10 +2,28 @@
 // <!-- richard.fuhr@gmail.com -->
 
 // TODO: Started March 3, 2017
-// TODO: March 3, 2017: Implement a Line class.
-// TODO: March 3, 2017: Implement a PolyLine class.
-// TODO: March 3, 2017: Implement a Rectangle class.
-// TODO: March 5, 2017: Refactor code in PolyLine evaluators
+// TODO: March 3, 2017: Implement a Line class. - DONE
+// TODO: March 3, 2017: Implement a PolyLine class. - DONE
+// TODO: March 3, 2017: Implement a Rectangle class. - 
+// TODO: March 5, 2017: Refactor code in PolyLine evaluators - DONE
+// TODO: March 6, 2017: Refactor code in PolyBezieer evaluators - DONE
+
+// Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
+// and noticed that the following four files were created in this directory, which I
+// have put under git and GitHub control.
+// drwxr-xr-x@ 3 richardfuhr  staff     102 Mar  7 14:26 BusyBCurves
+// -rw-r--r--@ 1 richardfuhr  staff      37 Mar  7 14:22 ProjectSettings.json
+// -rw-r--r--@ 1 richardfuhr  staff     117 Mar  7 14:24 VSWorkspaceState.json
+// -rw-r--r--@ 1 richardfuhr  staff  126976 Mar  7 14:24 slnx.sqlite
+//  where BusyBCurves is a directory that contains the following
+//  drwxr-xr-x@ 3 richardfuhr  staff  102 Mar  7 14:27 v15
+//  and v15 is a directory that contains the following.
+// drwxr-xr-x@ 3 richardfuhr  staff    102 Mar  7 14:27 .
+// drwxr-xr-x@ 3 richardfuhr  staff    102 Mar  7 14:26 ..
+// -rw-r--r--@ 1 richardfuhr  staff  15360 Mar  7 14:24 .suo
+// I suppose I can mainly ignore these, since I will largely be using Visual Studio Code.
+
+
 
 // We will implement the functionality from
 // ~/Dropbox/Public/RichardFuhr/BusyBezier/BusyBezier.js
