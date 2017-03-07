@@ -2222,9 +2222,9 @@ class PolyBezier
 
   //////////////////////////////////////////////////////////////////////////////
   // positionAtParm - method of PolyBezier
-  // Returns the point on this Line at the input parameter
+  // Returns the point on this PolyBezier at the input parameter
   //
-  // input: t - parameter at which to get position on this Line
+  // input: t - parameter at which to get position on this PolyBezier
   //
   // returns: position on this PolyBezier at parameter t
   //
@@ -2241,6 +2241,31 @@ class PolyBezier
      var Pos : Point = currBezierCurve.positionAtParm(currBezierNormalizedParm);
 
      return Pos;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // derivativeAtParm - method of PolyBezier
+  // Returns the derivative on this PolyBezier at the input parameter
+  //
+  // input: t - parameter at which to get derivative on this PolyBezier
+  //
+  // returns: derivative on this PolyBezier at parameter t
+  //
+  //  Note: For parameters out of range, we will extrapolate the first or last
+  //  component.
+  //////////////////////////////////////////////////////////////////////////////
+  derivativeAtParm(t : number) : Point
+  {
+     var Results : PolyBezierHelper = this.getCurrBezierIndexAndCurrBezierNormalizedParm(t);
+     var currBezierIndex : number = Results.currBezierIndex;
+     var currBezierNormalizedParm : number = Results.currBezierNormalizedParm;
+
+     var currBezierCurve : CubicBezierCurve = this.Component[currBezierIndex];
+     var UnscaledDer : Point = currBezierCurve.derivativeAtParm(currBezierNormalizedParm);
+     var scaleFac : number = 1.0/(this.Breakpoint[currBezierIndex + 1] - this.Breakpoint[currBezierIndex]);
+     var Der : Point = UnscaledDer.scalarMult(scaleFac);
+
+     return Der;
   }
 
 } // End class PolyBezier
@@ -2899,6 +2924,9 @@ function CubicSplineTest()
      var t : number = a + i*delta;
      var pos : Point = thePolyBezierObject.positionAtParm(t);
      document.writeln("t = " + t.toString() + "&nbsp &nbsp &nbsp" + "   pos = " + pos.toString());
+     document.writeln("<p>");
+     var der : Point = thePolyBezierObject.derivativeAtParm(t);
+     document.writeln("t = " + t.toString() + "&nbsp &nbsp &nbsp" + "   der = " + der.toString());
      document.writeln("<p>");
    }
 
