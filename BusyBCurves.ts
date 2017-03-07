@@ -2059,6 +2059,19 @@ function DeBoorTriangleAt(t : number,
 // See ~/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
 // /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/BusyBCurves001ts/BusyBSplineResources
 
+class PolyBezierHelper
+{  // Begin class PolyBezierHelper
+   currBezierIndex : number;
+   currBezierNormalizedParm : number;
+
+   constructor(currBezierIndex : number,
+               currBezierNormalizedParm : number)
+   {
+      this.currBezierIndex = currBezierIndex;
+      this.currBezierNormalizedParm = currBezierNormalizedParm;
+   }
+}  // End class PolyBezierHelper 
+
 class PolyBezier
 { // Begin class PolyBezier
   Component : Array<CubicBezierCurve>;
@@ -2168,17 +2181,14 @@ class PolyBezier
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  // positionAtParm - method of PolyBezier
-  // Returns the point on this Line at the input parameter
+  // getCurrLineIndexAndCurrLineParm - method of PolyBezier
+  // Given a parameter, find the index of the current Bezier and the normalized value of the
+  // local parameter on that Bezier
   //
-  // input: t - parameter at which to get position on this Line
-  //
-  // returns: position on this PolyBezier at parameter t
-  //
-  //  Note: For parameters out of range, we will extrapolate the first or last
-  //  component.
+  // input: t - global parameter for PolyLine
+  // returns: an object of PolyLineHelper class with currBezierIndex & currBezierNormalizedParm
   //////////////////////////////////////////////////////////////////////////////
-  positionAtParm(t : number) : Point
+  getCurrBezierIndexAndCurrBezierNormalizedParm(t : number) : PolyBezierHelper
   {
      let iLastBreakPoint : number = this.Breakpoint.length - 1;
      let startParm : number = this.Breakpoint[0];
@@ -2206,6 +2216,27 @@ class PolyBezier
      numerator = t - this.Breakpoint[currBezierIndex];
      denominator = this.Breakpoint[currBezierIndex + 1] - this.Breakpoint[currBezierIndex];
      currBezierNormalizedParm = numerator/denominator;
+     var Results : PolyBezierHelper = new PolyBezierHelper(currBezierIndex, currBezierNormalizedParm);
+     return Results;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // positionAtParm - method of PolyBezier
+  // Returns the point on this Line at the input parameter
+  //
+  // input: t - parameter at which to get position on this Line
+  //
+  // returns: position on this PolyBezier at parameter t
+  //
+  //  Note: For parameters out of range, we will extrapolate the first or last
+  //  component.
+  //////////////////////////////////////////////////////////////////////////////
+  positionAtParm(t : number) : Point
+  {
+     var Results : PolyBezierHelper = this.getCurrBezierIndexAndCurrBezierNormalizedParm(t);
+     var currBezierIndex : number = Results.currBezierIndex;
+     var currBezierNormalizedParm : number = Results.currBezierNormalizedParm;
+
      var currBezierCurve : CubicBezierCurve = this.Component[currBezierIndex];
      var Pos : Point = currBezierCurve.positionAtParm(currBezierNormalizedParm);
 
@@ -2455,10 +2486,10 @@ class PolyLineHelper
 
    constructor(currLineIndex : number,
                currLineParm : number)
-{
-   this.currLineIndex = currLineIndex;
-   this.currLineParm = currLineParm;
-}
+   {
+      this.currLineIndex = currLineIndex;
+      this.currLineParm = currLineParm;
+   }
 
 }  //   End class PolyLineHelper
 
@@ -2589,6 +2620,7 @@ class PolyLine
      var Results : PolyLineHelper = this.getCurrLineIndexAndCurrLineParm(t);
      var currLineIndex : number = Results.currLineIndex;
      var currLineParm : number = Results.currLineParm;
+
      let currLine : Line = new Line(this.Pt[currLineIndex], this.Pt[currLineIndex + 1]);
      var Der : Point = currLine.derivativeAtParm(currLineParm);
      return Der;
