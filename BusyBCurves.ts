@@ -2774,20 +2774,20 @@ function ArrayLogger<T>(ArrayDescription : string,
   EndParagraph();   
 }
 
-function doPointTests()
+function TestPointClass()
 {
   var P = new Point(3,4);
   var Q = new Point(7,8);
   var R : Point = P.plus(Q);
   var d : number = P.dotProd(Q);
-  document.writeln("<p>In doPointTests()</p>")
+  document.writeln("<p>In TestPointClass()</p>")
   document.writeln("<p>    P = " + P.toString() + " </p>");
   document.writeln("<p>    Q = " + Q.toString() + "</p>");
   document.writeln("<p>P + Q = " + R.toString() + "</p>");
   document.writeln("<p>P*Q = " + d.toString() + "</p>");
 }
 // Canvas-related explorations
-function doCanvasTests()
+function TestCanvas()
 {
   var document : Document;
   var canvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("mycanvas");
@@ -2803,9 +2803,9 @@ function simpleAlert()
   alert("Just testing")
 }
 
-function sillyTest()
+function TestJustTesting()
 {
-  document.writeln("In sillyTest()")
+  document.writeln("In TestJustTesting()")
   document.writeln("<p>");
   document.writeln("Just testing")
   for (var i : number = 0; i < 10; i++)
@@ -2816,9 +2816,9 @@ function sillyTest()
   }
 }
 
-function CubicSplineTest()
+function TestCubicSpline()
 {
-  document.writeln("<p>In CubicSplineTest()</p>");
+  document.writeln("<p>In TestCubicSpline()</p>");
   var P0 : Point = new Point(1.01, 2.01);
   var P1 : Point = new Point(3.01, 4.01);
   var P2 : Point = new Point(5.01, 6.01);
@@ -2851,9 +2851,9 @@ function CubicSplineTest()
 
 
 
- function PolyBezierTest()
+ function TestPolyBezier()
  {
-   document.writeln("<p>Entering PolyBezierTest()</p>");
+   document.writeln("<p>Entering TestPolyBezier()</p>");
    // Declare some indices
    var i,j,k,m,n : number;
    // Create some points
@@ -2930,16 +2930,16 @@ function CubicSplineTest()
      document.writeln("<p>");
    }
 
-   document.writeln("<p>Leaving PolyBezierTest()</p>");
+   document.writeln("<p>Leaving TestPolyBezier()</p>");
  }
 
- function drawDataTest()
+ function TestDrawData()
  {
-   document.writeln("<p>Entering drawDataTest()</p>");
+   document.writeln("<p>Entering TestDrawData()</p>");
    var allDrawData : BezierArtifactsDrawData = new BezierArtifactsDrawData();
    var stringRepOfAllDrawData : string = allDrawData.toString();
    document.writeln(stringRepOfAllDrawData);
-   document.writeln("<p> Leaving drawDataTest()</p>");
+   document.writeln("<p> Leaving TestDrawData()</p>");
  }
 
  function TestBinarySearchSortedArray()
@@ -3095,8 +3095,8 @@ function doTests()
 {
    var date : Date = new Date();
    document.writeln(date.toString());
-   PolyBezierTest();
-   // drawDataTest();
+   TestPolyBezier();
+   // TestDrawData();
    // TestBinarySearchSortedArray();
    // TestArrayLogger();
    // TestLine();
