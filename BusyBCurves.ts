@@ -2884,6 +2884,24 @@ function CubicSplineTest()
    var thePolyBezierObjectData = thePolyBezierObject.toString();
    document.writeln(thePolyBezierObjectData);
 
+   document.writeln("<p>");
+   document.writeln("Evaluation Test");
+   document.writeln("<p>");
+   
+   let a : number = thePolyBezierObject.Breakpoint[0];
+   let iLastBreakPoint : number = thePolyBezierObject.Breakpoint.length - 1;
+   let b : number = thePolyBezierObject.Breakpoint[iLastBreakPoint];
+   const nIntervals : number = 90;
+   const delta : number = (b - a)/nIntervals;
+
+   for (i = 0; i <= nIntervals; i++)
+   {
+     var t : number = a + i*delta;
+     var pos : Point = thePolyBezierObject.positionAtParm(t);
+     document.writeln("t = " + t.toString() + "&nbsp &nbsp &nbsp" + "   pos = " + pos.toString());
+     document.writeln("<p>");
+   }
+
    document.writeln("<p>Leaving PolyBezierTest()</p>");
  }
 
@@ -3049,10 +3067,10 @@ function doTests()
 {
    var date : Date = new Date();
    document.writeln(date.toString());
-   // PolyBezierTest();
+   PolyBezierTest();
    // drawDataTest();
    // TestBinarySearchSortedArray();
    // TestArrayLogger();
    // TestLine();
-   TestPolyLine();
+   // TestPolyLine();
 }
