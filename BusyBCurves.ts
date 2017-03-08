@@ -1,12 +1,15 @@
 // <!-- Copyright (C) 2017 Richard David Fuhr - All rights reserved. -->
 // <!-- richard.fuhr@gmail.com -->
 
-// TODO: Started March 3, 2017
-// TODO: March 3, 2017: Implement a Line class. - DONE
-// TODO: March 3, 2017: Implement a PolyLine class. - DONE
-// TODO: March 3, 2017: Implement a Rectangle class. - 
-// TODO: March 5, 2017: Refactor code in PolyLine evaluators - DONE
-// TODO: March 6, 2017: Refactor code in PolyBezieer evaluators - DONE
+// TODO: Started Mar 03, 2017
+// TODO: Mar 03, 2017: Implement a Line class. - DONE
+// TODO: Mar 03, 2017: Implement a PolyLine class. - DONE
+// TODO: Mar 03, 2017: Implement a Rectangle class. - 
+// TODO: Mar 05, 2017: Refactor code in PolyLine evaluators - DONE
+// TODO: Mar 06, 2017: Refactor code in PolyBezieer evaluators - DONE
+// TODO: Mar 08, 2017: Change CubicSpline constructor so it is more general (any number of control points and distinct knots and multiplicities)
+// TODO: Mar 08, 2017: Test deBoorTriangleAt:
+// TODO: Mar 08, 2017: Test CubicSpline::positionAtParm
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
