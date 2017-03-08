@@ -2413,8 +2413,71 @@ class CubicSpline
     }
     return thisIsValid;
   }
+
+// From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
+// -(int)findSpan:(float)t
+// {
+// 	int first = [self degree];
+// 	int last = [self nKts] - [self degree] - 1;
+// 	int spanIndex = [SplineUtilities BinarySearchGivenParm:t Knots:t_ FirstIndex:first LastIndex:last];
+// 	return spanIndex;
+// }  
+  //////////////////////////////////////////////////////////////////////////////
+  // findSpan - method of CubicSpline
+  // Returns the span index on this CubicSpline at the input parameter
+  //
+  // input: t - parameter at which to get span index on this CubicSpline
+  //
+  // returns: span index on this CubicSpline at parameter t
+  //
+  //////////////////////////////////////////////////////////////////////////////
+  findSpan(t : number):number
+  {
+     let spanIndex : number = BinarySearchSortedArray(t, this.ExplicitKnots); // will we need to change the signature of BinarySearchSortedArray to include first and last?
+     return spanIndex;
+  }
+
+
+// From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
+// -(NSPoint)PositionAtParm:(float)t
+// {
+// 	int ispan = [self findSpan:t];
+// 	float xVals[MAXORDER][MAXORDER];
+//  float yVals[MAXORDER][MAXORDER];
+// 	int d = [self degree];
+// 	[SplineUtilities deBoorTriangleAt:t SpanIndex:ispan Degree:d lastColumn:d Knots:t_ Coefs:x_ Triangle:xVals];
+// 	[SplineUtilities deBoorTriangleAt:t SpanIndex:ispan Degree:d lastColumn:d Knots:t_ Coefs:y_ Triangle:yVals];
+// 	NSPoint P;
+// 	P.x = xVals[d][d];
+// 	P.y = yVals[d][d];
+// 	return P;
+// }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // positionAtParm - method of CubicSpline
+  // Returns the point on this CubicSpline at the input parameter
+  //
+  // input: t - parameter at which to get position on this CubicSpline
+  //
+  // returns: position on this CubicSpline at parameter t
+  //
+  //////////////////////////////////////////////////////////////////////////////
+  positionAtParm(t : number) : Point
+  {
+    let ispan : number = this.findSpan(t);
+    const degree : number = 3;
+    const itop : number = degree; // but we may have to make this degree - multiplicity
+    var D : Point[][];
+
+    DeBoorTriangleAt(t, ispan, degree, itop, this.ExplicitKnots, this.CtrlPts, D); // will we get back D?
+
+    let Pos : Point = D[degree][degree];
+    
+    return Pos;
+  }
+
 }
-// End class CubicSpline
+// End class CubicSpline  
 
 //   End code to support BusyBSpline
 
