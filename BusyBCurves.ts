@@ -2064,10 +2064,11 @@ function DeBoorTriangleAt(t : number,
    [P,P,P,P],
    [P,P,P,P],
    [P,P,P,P]];
-  //  alert("t = " + t + " ispan = " + ispan);
-  //  // temporary kludge
-  // if (ispan == 6) ispan = 3;
-  // need to fix findspan when index of high multiple knot is given
+
+  // const order : number = 4;
+  // /*let D : Point[][] = new Array(new Array()); // Does not work*/
+  // var D: Point[][] = new Array(new Array(order*order)); // Does not work
+    
   
    for (j = 0; j <= itop; j++)
    {  // Begin j-loop
@@ -2535,7 +2536,9 @@ class CubicSpline
   //////////////////////////////////////////////////////////////////////////////
   findSpan(t : number):number
   {
+     const order : number = 4;
      let spanIndex : number = BinarySearchSortedArray(t, this.ExplicitKnots); // will we need to change the signature of BinarySearchSortedArray to include first and last?
+     spanIndex = Math.min(spanIndex, this.ExplicitKnots.length - order - 1);
      return spanIndex;
   }
 
@@ -3289,10 +3292,17 @@ function TestCubicSpline()
    // The test passes if the results agree, to within tolerance.
    var i : number;
    let P : Array<Point> = new Array(4);
-   for (i = 0; i < 4; i++)
-   {
-      P[i] = new Point(i,0);
-   }
+   
+   let P0 : Point = new Point(.2958, .7033);
+   let P1 : Point = new Point(1.347, 1.2309);
+   let P2 : Point = new Point(2.8049, 2.5640);
+   let P3 : Point = new Point(3.14159, 2.71818);
+
+   P[0] = P0;
+   P[1] = P1;
+   P[2] = P2;
+   P[3] = P3;
+   
    let theBezierCurve : CubicBezierCurve = new CubicBezierCurve(P[0], P[1], P[2], P[3]);
    document.writeln("<p>")
    document.writeln("Data for theBezierCurve");
@@ -3309,19 +3319,25 @@ function TestCubicSpline()
    document.writeln(theSplineCurve.toString());
 
    let s : Array<number> = new Array(7);
-   const delta : number = 1.0/6.0;
-   for (i = 0; i < 7; i++)
+   const nIntervals : number = 97;
+   const delta : number = 1.0/nIntervals;
+   for (i = 0; i <= nIntervals; i++)
    {
      s[i] = i*delta
    }
 
+  let maxDiff : number = 0.0;
   for (i = 0; i < s.length; i++)
   {
     let BezPos : Point = theBezierCurve.positionAtParm(s[i]);
     document.writeln("BezPos = " + BezPos.toString() + "<p>");
     let SplPos : Point = theSplineCurve.positionAtParm(s[i]);
     document.writeln("SplPos = " + SplPos.toString() + "<p>");
+    let diff : number = BezPos.distanceTo(SplPos);
+    maxDiff = Math.max(diff, maxDiff);
+    document.writeln("diff = " + diff + "<p>");
   }
+  document.writeln("maxDiff = " + maxDiff + "<p>");
    
    document.writeln(" Leaving TestCubicSplineEvaluators");
  }
