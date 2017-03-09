@@ -10,6 +10,7 @@
 // TODO: Mar 08, 2017: Change CubicSpline constructor so it is more general (any number of control points and distinct knots and multiplicities)
 // TODO: Mar 08, 2017: Test deBoorTriangleAt:
 // TODO: Mar 08, 2017: Test CubicSpline::positionAtParm
+// TODO: Mar 09, 2017: Need to take a careful look at findSpan when arg is max knot. Look at my Objective-C code.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -2050,14 +2051,24 @@ function DeBoorTriangleAt(t : number,
                           degree : number,
                           itop : number,
                           kt : number[],
-                          pt : Point[],
-                          D : Point[][])
+                          pt : Point[]) : Point[][]
  {
    var j : number;   // a loop index
    var m : number;   // a loop index
    var a : number;   // one of the scalar multipliers
    var abar : number // one of the scalar multipliers
-
+   // There must be a better way to do this.
+   let P : Point = new Point(0,0);
+   var D = [ 
+   [P,P,P,P],
+   [P,P,P,P],
+   [P,P,P,P],
+   [P,P,P,P]];
+  //  alert("t = " + t + " ispan = " + ispan);
+  //  // temporary kludge
+  // if (ispan == 6) ispan = 3;
+  // need to fix findspan when index of high multiple knot is given
+  
    for (j = 0; j <= itop; j++)
    {  // Begin j-loop
       D[0][j] = pt[ispan-degree+j];
@@ -2072,6 +2083,8 @@ function DeBoorTriangleAt(t : number,
            D[m][j] = linearCombination(a, D[m-1][j], abar, D[m-1][j-1]);
        }   //   End j-loop
    }   //   End m-loop
+
+   return D;
  }
 
 //   End utilities that can be used by PolyBezier and CubicSpline objects
@@ -2327,40 +2340,126 @@ class CubicSpline
   // We should also either check for validity in the constructor or
   // use the isValid() method.
   //////////////////////////////////////////////////////////////////////////////
-  constructor(P0 : Point,
-              P1 : Point,
-              P2 : Point,
-              P3 : Point,
-              P4 : Point,
-              P5 : Point,
-              t0 : number,
-              t1 : number,
-              t2 : number,
-              t3 : number)
-  {
-    this.CtrlPts = new Array<Point>();
-    this.CtrlPts.push(P0);
-    this.CtrlPts.push(P1);
-    this.CtrlPts.push(P2);
-    this.CtrlPts.push(P3);
-    this.CtrlPts.push(P4);
-    this.CtrlPts.push(P5);
+  // constructor(P0 : Point,
+  //             P1 : Point,
+  //             P2 : Point,
+  //             P3 : Point,
+  //             P4 : Point,
+  //             P5 : Point,
+  //             t0 : number,
+  //             t1 : number,
+  //             t2 : number,
+  //             t3 : number)
+  // {
+  //   this.CtrlPts = new Array<Point>();
+  //   this.CtrlPts.push(P0);
+  //   this.CtrlPts.push(P1);
+  //   this.CtrlPts.push(P2);
+  //   this.CtrlPts.push(P3);
+  //   this.CtrlPts.push(P4);
+  //   this.CtrlPts.push(P5);
 
-    this.ExplicitKnots = new Array<number>();
-    // The first knot has multiplicity 4
-    for (var i = 0; i < 4; i++)
-    {
-      this.ExplicitKnots.push(t0);
-    }
-    // The two interior knots each have multiplicity 1
-    this.ExplicitKnots.push(t1);
-    this.ExplicitKnots.push(t2);
-    // The last knot has multiplicity 4
-    for (var j = 0; j < 4; j ++)
-    {
-      this.ExplicitKnots.push(t3);
-    }
-  }
+  //   this.ExplicitKnots = new Array<number>();
+  //   // The first knot has multiplicity 4
+  //   for (var i = 0; i < 4; i++)
+  //   {
+  //     this.ExplicitKnots.push(t0);
+  //   }
+  //   // The two interior knots each have multiplicity 1
+  //   this.ExplicitKnots.push(t1);
+  //   this.ExplicitKnots.push(t2);
+  //   // The last knot has multiplicity 4
+  //   for (var j = 0; j < 4; j ++)
+  //   {
+  //     this.ExplicitKnots.push(t3);
+  //   }
+  // }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for a cubic spline curve
+  // Creates an instance of a CubicSpline
+  //
+  // input: P - the array of control points
+  // input: t - the array of distinct knots
+  // 
+  // Note: It is checked that the number of control points = number of distinct
+  // knots + 2.  It is checked that there are at least 4 control points.  It is
+  // checked that the distinct knots are strictly increasing.  If the input 
+  // passes these checks then a CubicSpline object is constructed that has
+  // knots of multiplicity 4 at the start and at the end, and interior knots
+  // of multiplicity 1.
+  //////////////////////////////////////////////////////////////////////////////
+  constructor(P : Point[],
+              t : number[])
+ {
+   let validInput : boolean = true; // innocent until proven guilty
+   var i : number;
+   const degree : number = 3;
+   const order : number = degree + 1;
+
+   if (P.length < 4)
+   {
+     validInput = false;
+   }
+   else
+   if (P.length != t.length + 2)
+   {
+     validInput = false;
+   }
+   else
+   for ( i = 0; i < t.length - 1; i++)
+   {
+     if (t[i] >= t[i+1])
+     {
+       validInput = false;
+       break;
+     }
+   }
+
+   if (validInput==true)
+   { // Begin case of valid input
+
+     // Load the control points
+     // this.CtrlPts = new Array<Point>(P.length);
+     this.CtrlPts = new Array<Point>();
+     for (i = 0; i < P.length; i++)
+     {
+       // this.CtrlPts[i] = P[i];
+       this.CtrlPts.push(P[i]);
+     }
+
+     // Load the knots
+     // this.ExplicitKnots = new Array<number>(t.length + 2*degree)
+     this.ExplicitKnots = new Array<number>();
+
+     // First make the start knot have multiplicity degree + 1
+     for (i = 0; i < order; i++)
+     {
+       //this.ExplicitKnots[i] = t[0];
+       this.ExplicitKnots.push(t[0]);
+     }
+
+     // Then make the interior knots have multiplicity 1
+     let numInteriorKnots : number = t.length - 2;
+     
+     for (i = 1; i <= numInteriorKnots; i++)
+     {
+       //this.ExplicitKnots[degree + i] = t[i];
+       this.ExplicitKnots.push(t[i]);
+     }
+
+     // Then make the end knot have multiplicity degree + 1
+     const iLastDistinctKnot : number = t.length - 1;
+     const indexOfFirstMultipleEndKnot : number = order + numInteriorKnots;
+     for (i = 0; i < order; i++)
+     {
+       // this.ExplicitKnots[indexOfFirstMultipleEndKnot + i] = t[iLastDistinctKnot];
+       this.ExplicitKnots.push(t[iLastDistinctKnot]);
+     }
+
+   } //   End case of valid input
+
+ }
 
 // Multiple constructor implementations are apparently not allowed.
 
@@ -2377,7 +2476,7 @@ class CubicSpline
      var nPts : number = this.CtrlPts.length;
      for (var i = 0; i < nPts; i++)
      {
-        stringRep += "<p>"
+        stringRep += "<p>";
         stringRep += "CtrlPts[" + i + "] = ";
         stringRep += this.CtrlPts[i].toString();
         stringRep += "</p>";
@@ -2386,7 +2485,7 @@ class CubicSpline
      var nKts : number = this.ExplicitKnots.length;
      for (var j = 0; j < nKts; j++)
      {
-        stringRep += "<p>"
+        stringRep += "<p>";
         stringRep += "ExplicitKnots[" + j + "] = ";
         stringRep += this.ExplicitKnots[j].toString();
         stringRep += "</p>";
@@ -2472,7 +2571,7 @@ class CubicSpline
     const itop : number = degree; // but we may have to make this degree - multiplicity
     var D : Point[][];
 
-    DeBoorTriangleAt(t, ispan, degree, itop, this.ExplicitKnots, this.CtrlPts, D); // will we get back D?
+    D = DeBoorTriangleAt(t, ispan, degree, itop, this.ExplicitKnots, this.CtrlPts); // will we get back D?
 
     let Pos : Point = D[degree][degree];
     
@@ -2902,7 +3001,7 @@ function TestJustTesting()
 
 function TestCubicSpline()
 {
-  document.writeln("<p>In TestCubicSpline()</p>");
+  document.writeln("<p>Entering TestCubicSpline()</p>");
   var P0 : Point = new Point(1.01, 2.01);
   var P1 : Point = new Point(3.01, 4.01);
   var P2 : Point = new Point(5.01, 6.01);
@@ -2915,22 +3014,30 @@ function TestCubicSpline()
   var t2 : number = 2.01;
   var t3 : number = 3.01;
 
-  var C : CubicSpline = new CubicSpline(P0,
-                                        P1,
-                                        P2,
-                                        P3,
-                                        P4,
-                                        P5,
-                                        t0,
-                                        t1,
-                                        t2,
-                                        t3);
+  var P : Array<Point> = new Array();
+  var t : Array<number> = new Array();
+
+  P.push(P0);
+  P.push(P1);
+  P.push(P2);
+  P.push(P3);
+  P.push(P4);
+  P.push(P5);
+
+  t.push(t0);
+  t.push(t1);
+  t.push(t2);
+  t.push(t3);
+
+  var C : CubicSpline = new CubicSpline(P,t);
 
   document.writeln("<p>");
   document.writeln("Data for CubicSpline object");
   var CubicSplineData : string = C.toString();
   document.writeln(CubicSplineData);
   document.writeln("<p>")
+
+   document.writeln("<p>Leaving TestCubicSpline()</p>");
  }
 
 
@@ -3174,15 +3281,62 @@ function TestCubicSpline()
    document.writeln("<p>Leaving TestPolyLine()</p>");
  }
 
+ function TestCubicSplineEvaluators()
+ {
+   document.writeln("Entering TestCubicSplineEvaluators");
+   // First we will create a CubicSpline of one span, and create the equivalent CubicBezierCurve.
+   // Then we will invoke the evaluators on each curve.
+   // The test passes if the results agree, to within tolerance.
+   var i : number;
+   let P : Array<Point> = new Array(4);
+   for (i = 0; i < 4; i++)
+   {
+      P[i] = new Point(i,0);
+   }
+   let theBezierCurve : CubicBezierCurve = new CubicBezierCurve(P[0], P[1], P[2], P[3]);
+   document.writeln("<p>")
+   document.writeln("Data for theBezierCurve");
+   document.writeln("<p>");
+   document.writeln(theBezierCurve.toString());
+
+   let t : Array<number> = new Array(2);
+   t[0] = 0.0;
+   t[1] = 1.0;
+   let theSplineCurve : CubicSpline = new CubicSpline(P, t);
+   document.writeln("<p>")
+   document.writeln("Data for theSplineCurve");
+   document.writeln("<p>");
+   document.writeln(theSplineCurve.toString());
+
+   let s : Array<number> = new Array(7);
+   const delta : number = 1.0/6.0;
+   for (i = 0; i < 7; i++)
+   {
+     s[i] = i*delta
+   }
+
+  for (i = 0; i < s.length; i++)
+  {
+    let BezPos : Point = theBezierCurve.positionAtParm(s[i]);
+    document.writeln("BezPos = " + BezPos.toString() + "<p>");
+    let SplPos : Point = theSplineCurve.positionAtParm(s[i]);
+    document.writeln("SplPos = " + SplPos.toString() + "<p>");
+  }
+   
+   document.writeln(" Leaving TestCubicSplineEvaluators");
+ }
+
 
 function doTests()
 {
    var date : Date = new Date();
    document.writeln(date.toString());
-   TestPolyBezier();
+   // TestPolyBezier();
    // TestDrawData();
    // TestBinarySearchSortedArray();
    // TestArrayLogger();
    // TestLine();
    // TestPolyLine();
+   // TestCubicSpline();
+   TestCubicSplineEvaluators();
 }
