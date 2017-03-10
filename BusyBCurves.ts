@@ -7,10 +7,11 @@
 // TODO: Mar 03, 2017: Implement a Rectangle class. - 
 // TODO: Mar 05, 2017: Refactor code in PolyLine evaluators - DONE
 // TODO: Mar 06, 2017: Refactor code in PolyBezieer evaluators - DONE
-// TODO: Mar 08, 2017: Change CubicSpline constructor so it is more general (any number of control points and distinct knots and multiplicities)
-// TODO: Mar 08, 2017: Test deBoorTriangleAt:
-// TODO: Mar 08, 2017: Test CubicSpline::positionAtParm
-// TODO: Mar 09, 2017: Need to take a careful look at findSpan when arg is max knot. Look at my Objective-C code.
+// TODO: Mar 08, 2017: Change CubicSpline constructor so it is more general (any number of control points and distinct knots and multiplicities) - DONE
+// TODO: Mar 08, 2017: Test deBoorTriangleAt: - DONE
+// TODO: Mar 08, 2017: Test CubicSpline::positionAtParm - DONE
+// TODO: Mar 09, 2017: Need to take a careful look at findSpan when arg is max knot. Look at my Objective-C code. - SORT OF DONE
+// TODO: Mar 10, 2017: Implement and test knot insertion for CubicSpline
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
