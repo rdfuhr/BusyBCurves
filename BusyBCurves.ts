@@ -2058,6 +2058,7 @@ function DeBoorTriangleAt(t : number,
    var a : number;   // one of the scalar multipliers
    var abar : number // one of the scalar multipliers
    // There must be a better way to do this.
+   // I have posted a question on Twitter.
    let P : Point = new Point(0,0);
    var D = [ 
    [P,P,P,P],
@@ -2069,7 +2070,6 @@ function DeBoorTriangleAt(t : number,
   // /*let D : Point[][] = new Array(new Array()); // Does not work*/
   // var D: Point[][] = new Array(new Array(order*order)); // Does not work
     
-  
    for (j = 0; j <= itop; j++)
    {  // Begin j-loop
       D[0][j] = pt[ispan-degree+j];
@@ -3338,6 +3338,50 @@ function TestCubicSpline()
     document.writeln("diff = " + diff + "<p>");
   }
   document.writeln("maxDiff = " + maxDiff + "<p>");
+
+  var Q0 : Point = new Point(1.01, 2.01);
+  var Q1 : Point = new Point(3.01, 4.01);
+  var Q2 : Point = new Point(5.01, 6.01);
+  var Q3 : Point = new Point(7.01, 8.01);
+  var Q4 : Point = new Point(9.01, 10.01);
+  var Q5 : Point = new Point(11.01, 12.01);
+
+  var u0 : number = 0.01;
+  var u1 : number = 1.01;
+  var u2 : number = 2.01;
+  var u3 : number = 3.01;
+
+  var Q : Array<Point> = new Array();
+  var u : Array<number> = new Array();
+
+  Q.push(Q0);
+  Q.push(Q1);
+  Q.push(Q2);
+  Q.push(Q3);
+  Q.push(Q4);
+  Q.push(Q5);
+
+  u.push(u0);
+  u.push(u1);
+  u.push(u2);
+  u.push(u3);
+
+  var threeSpanSpline : CubicSpline = new CubicSpline(Q,u);
+
+  document.writeln("<p>");
+  document.writeln("Data for threeSpanSpline object");
+  var threeSpanSplineData : string = threeSpanSpline.toString();
+  document.writeln(threeSpanSplineData);
+  document.writeln("<p>");
+
+  const kIntervals : number = 10;
+  const kDelta = (u3-u0)/kIntervals
+  for (i = 0; i <= kIntervals; i++)
+  {
+    let kArg : number = u0 + i*kDelta;
+    let kPos : Point = threeSpanSpline.positionAtParm(kArg);
+    document.writeln("kPos = " + kPos.toString() + "<p>");
+  }
    
    document.writeln(" Leaving TestCubicSplineEvaluators");
  }
