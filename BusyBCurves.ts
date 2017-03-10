@@ -3436,13 +3436,66 @@ function TestCubicSpline()
    document.writeln("<p>Leaving TestCubicSplineEvaluatorsCase003</p>"); 
  }
 
+ function TestMarsden()
+ {
+   document.writeln("<p>Entering TestMarsden</p>");
+   var t : Array<number> = new Array();
+   
+   t.push(2);
+   t.push(7);
+   t.push(11);
+   t.push(13);
+   const nCpts = t.length + 2;
+   var P : Array<Point> = new Array();
+   var i : number;
+   var marsdenVals : Array<number> = new Array();
+   marsdenVals.push(t[0] + t[0] + t[0]);
+   marsdenVals.push(t[0] + t[0] + t[1]);
+   marsdenVals.push(t[0] + t[1] + t[2]);
+   marsdenVals.push(t[1] + t[2] + t[3]);
+   marsdenVals.push(t[2] + t[3] + t[3]);
+   marsdenVals.push(t[3] + t[3] + t[3]);
+   for (i = 0; i < marsdenVals.length; i++)
+   {
+     marsdenVals[i] = marsdenVals[i]/3.0;
+   }
+   for (i = 0; i < nCpts; i++)
+   {
+     P.push(new Point(marsdenVals[i],marsdenVals[i]));
+   }
+
+   var marsdenSpline : CubicSpline = new CubicSpline(P, t);
+
+   document.writeln("<p>");
+   document.writeln("Data for marsdenSpline");
+   var DataForMarsdenSpline : string = marsdenSpline.toString();
+   document.writeln(DataForMarsdenSpline);
+   document.writeln("<p>");
+   document.writeln("<p>Leaving TestMarsden</p>");
+
+   var nIntervals : number = 44;
+   var delta : number = (t[t.length-1] - t[0])/nIntervals;
+   var maxError = 0.0;
+   for (i = 0; i <= nIntervals; i++)
+   {
+     let u : number = t[0] + i*delta;
+     let Q : Point = marsdenSpline.positionAtParm(u);
+     document.writeln("For u = " + u + "&nbsp &nbsp &nbsp");
+     document.writeln("Q = " + Q.toString() + "<p>");
+     let curError : number = Math.abs(Q.x - u);
+     maxError = Math.max(maxError, curError);
+   }
+   document.writeln("<p> maxError = " + maxError.toString() + "<p>");
+ }
+
  function TestCubicSplineEvaluators()
  {
    document.writeln("Entering TestCubicSplineEvaluators");
    
   //  TestCubicSplineEvaluatorsCase001();
   //  TestCubicSplineEvaluatorsCase002();
-  TestCubicSplineEvaluatorsCase003();
+  //  TestCubicSplineEvaluatorsCase003();
+  TestMarsden();
   
    document.writeln(" Leaving TestCubicSplineEvaluators");
  }
