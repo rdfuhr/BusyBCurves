@@ -3005,17 +3005,17 @@ function TestJustTesting()
 function TestCubicSpline()
 {
   document.writeln("<p>Entering TestCubicSpline()</p>");
-  var P0 : Point = new Point(1.01, 2.01);
-  var P1 : Point = new Point(3.01, 4.01);
-  var P2 : Point = new Point(5.01, 6.01);
-  var P3 : Point = new Point(7.01, 8.01);
-  var P4 : Point = new Point(9.01, 10.01);
-  var P5 : Point = new Point(11.01, 12.01);
+  var P0 : Point = new Point(1.00, 2.00);
+  var P1 : Point = new Point(3.00, 4.00);
+  var P2 : Point = new Point(5.00, 6.00);
+  var P3 : Point = new Point(7.00, 8.00);
+  var P4 : Point = new Point(9.00, 10.00);
+  var P5 : Point = new Point(11.00, 12.00);
 
-  var t0 : number = 0.01;
-  var t1 : number = 1.01;
-  var t2 : number = 2.01;
-  var t3 : number = 3.01;
+  var t0 : number = 0.00;
+  var t1 : number = 1.00;
+  var t2 : number = 2.00;
+  var t3 : number = 3.00;
 
   var P : Array<Point> = new Array();
   var t : Array<number> = new Array();
@@ -3284,9 +3284,9 @@ function TestCubicSpline()
    document.writeln("<p>Leaving TestPolyLine()</p>");
  }
 
- function TestCubicSplineEvaluators()
+ function TestCubicSplineEvaluatorsCase001()
  {
-   document.writeln("Entering TestCubicSplineEvaluators");
+   document.writeln("<p>Entering TestCubicSplineEvaluatorsCase001</p>");
    // First we will create a CubicSpline of one span, and create the equivalent CubicBezierCurve.
    // Then we will invoke the evaluators on each curve.
    // The test passes if the results agree, to within tolerance.
@@ -3338,18 +3338,25 @@ function TestCubicSpline()
     document.writeln("diff = " + diff + "<p>");
   }
   document.writeln("maxDiff = " + maxDiff + "<p>");
+  document.writeln("<p>Leaving TestCubicSplineEvaluatorsCase001</p>");
+ }
 
-  var Q0 : Point = new Point(1.01, 2.01);
-  var Q1 : Point = new Point(3.01, 4.01);
-  var Q2 : Point = new Point(5.01, 6.01);
-  var Q3 : Point = new Point(7.01, 8.01);
-  var Q4 : Point = new Point(9.01, 10.01);
-  var Q5 : Point = new Point(11.01, 12.01);
+ function TestCubicSplineEvaluatorsCase002()
+ {
+  document.writeln("<p>Entering TestCubicSplineEvaluatorsCase002</p>");
+  var i : number;
 
-  var u0 : number = 0.01;
-  var u1 : number = 1.01;
-  var u2 : number = 2.01;
-  var u3 : number = 3.01;
+  var Q0 : Point = new Point(1.00, 2.00);
+  var Q1 : Point = new Point(3.00, 4.00);
+  var Q2 : Point = new Point(5.00, 6.00);
+  var Q3 : Point = new Point(7.00, 8.00);
+  var Q4 : Point = new Point(9.00, 10.00);
+  var Q5 : Point = new Point(11.00, 12.00);
+
+  var u0 : number = 0.00;
+  var u1 : number = 1.00;
+  var u2 : number = 2.00;
+  var u3 : number = 3.00;
 
   var Q : Array<Point> = new Array();
   var u : Array<number> = new Array();
@@ -3374,16 +3381,94 @@ function TestCubicSpline()
   document.writeln(threeSpanSplineData);
   document.writeln("<p>");
 
-  const kIntervals : number = 10;
+  const kIntervals : number = 50;
   const kDelta = (u3-u0)/kIntervals
   for (i = 0; i <= kIntervals; i++)
   {
     let kArg : number = u0 + i*kDelta;
     let kPos : Point = threeSpanSpline.positionAtParm(kArg);
+    document.writeln("For kArg = " + kArg + "&nbsp &nbsp &nbsp");
     document.writeln("kPos = " + kPos.toString() + "<p>");
   }
+    document.writeln("<p>Leaving TestCubicSplineEvaluatorsCase002</p>"); 
+ }
+
+ function TestCubicSplineEvaluatorsCase003()
+ {
+   document.writeln("<p>Entering TestCubicSplineEvaluatorsCase003</p>"); 
+   var P : Array<Point> = new Array();
+   const basisIndex : number = 2;
+   for (var i : number = 0; i < 4; i++)
+   {
+     P.push(new Point(i/3.0, KroneckerDelta(i,basisIndex))); // This controls the basis index
+   }
+
+   var t : Array<number> = new Array();
+   t.push(0.0);
+   t.push(1.0);
+
+   var GraphOfCubic : CubicSpline = new CubicSpline(P, t);
+
+  document.writeln("<p>");
+  document.writeln("Data for GraphOfCubic object");
+  var GraphOfCubicData : string = GraphOfCubic.toString();
+  document.writeln(GraphOfCubicData);
+  document.writeln("<p>");
+
+  const kIntervals : number = 100;
+  const kDelta = (t[1] - t[0])/kIntervals
+  var maxXerror : number = 0.0;
+  var maxYerror : number = 0.0;
+  for (i = 0; i <= kIntervals; i++)
+  {
+    let kArg : number = t[0] + i*kDelta;
+    let kPos : Point = GraphOfCubic.positionAtParm(kArg);
+    document.writeln("For kArg = " + kArg + "&nbsp &nbsp &nbsp");
+    document.writeln("kPos = " + kPos.toString() + "<p>");
+    var Xerror : number = Math.abs(kArg - kPos.x);
+    var Yerror : number = Math.abs(3.0*(1.0 - kArg)*kArg*kArg - kPos.y); // to match appropriate cubic Bernstein basis function
+    maxXerror = Math.max(maxXerror, Xerror);
+    maxYerror = Math.max(maxYerror, Yerror);
+  }  
+  document.writeln("maxXerror = " + maxXerror.toString() + "<p>");
+  document.writeln("maxYerror = " + maxYerror.toString() + "<p>");
    
+   document.writeln("<p>Leaving TestCubicSplineEvaluatorsCase003</p>"); 
+ }
+
+ function TestCubicSplineEvaluators()
+ {
+   document.writeln("Entering TestCubicSplineEvaluators");
+   
+  //  TestCubicSplineEvaluatorsCase001();
+  //  TestCubicSplineEvaluatorsCase002();
+  TestCubicSplineEvaluatorsCase003();
+  
    document.writeln(" Leaving TestCubicSplineEvaluators");
+ }
+
+ function get2DArray():Array<Array<Point>>
+ {
+   const n : number = 3;
+   let D : Array<Array<Point>> = new Array<Array<Point>>(n*n);
+   var i : number;
+   var j : number;
+   for (i = 0; i < n; i++)
+   {
+     for (j = 0; j < n; j++)
+     {
+       alert("i = "+ i + " j = " + j);
+       D[i][j] = new Point(i,j);
+     }
+   }
+   return D;
+ }
+
+ function Test2DArray()
+ {
+   document.writeln("<p>Entering Test2DArray</p>");
+   let D : Array<Array<Point>> = get2DArray();
+   document.writeln("<p>Leaving Test2DArray</p>");
  }
 
 
@@ -3399,4 +3484,5 @@ function doTests()
    // TestPolyLine();
    // TestCubicSpline();
    TestCubicSplineEvaluators();
+   // Test2DArray()
 }
