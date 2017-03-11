@@ -2734,6 +2734,94 @@ class CubicSpline
   }
 }
 
+// From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
+// We will use the following Objective-C code as a basis for implementing the corresponding TypeScript function.
+// -(CubicPolyBezierModel *) convertToPolyBezier
+// {
+// 	// only do this if the degree is 3
+ 	
+// 	CubicPolyBezierModel * polyBezierCurve = nil;
+	
+// 	if ([self degree] == 3)
+// 	{
+// 		CubicSplineModel * clone = [self copy];
+
+// 		int nInternalDistinctKnots = [clone nDistinctKnots] - 2;
+// 		for (int i = 1; i <= nInternalDistinctKnots; i++)
+// 		{
+// 			float currDistinctKnot = [clone distinctKnotAtIndex:i];
+// 			int currMultiplicity = [clone multiplicityAtIndex:i];
+// 			int nInsertionsHere = [clone degree] - currMultiplicity;
+// 			for (int j = 0; j < nInsertionsHere; j++)
+// 			{
+// 				[clone addKnot:currDistinctKnot];
+// 			}
+// 		}
+		
+// 		// Do some sanity checks for the resulting spline
+// 		// All internal knots should be of multiplicity equal to 3
+		
+// 		nInternalDistinctKnots = [clone nDistinctKnots] - 2;
+// 		BOOL allInternalKnotsHaveMultiplicityThree = YES; // innocent until proven guilty
+// 		BOOL numberOfControlPointsIsCorrect = NO; // guilty until proven innocent
+// 		for (int i = 1; i <= nInternalDistinctKnots; i++)
+// 		{
+// 			if ([clone multiplicityAtIndex:i] != 3)
+// 			{
+// 				allInternalKnotsHaveMultiplicityThree = NO;
+// 				break;
+// 			}
+// 		}
+		
+// 		// NSLog(@"In convertToPolyBezier:  allInternalKnotsHaveMultiplicityThree = %d", allInternalKnotsHaveMultiplicityThree);
+		
+// 		if (allInternalKnotsHaveMultiplicityThree)
+// 		{ 
+			
+// 			// want to make sure that the number of control points is of the form 4 + 3*(n-1) where n is the number of non-trivial spans
+// 			if ((([clone nCpts] - 4) % 3)==0)
+// 				numberOfControlPointsIsCorrect = YES;
+// 		}
+		
+// 		if (allInternalKnotsHaveMultiplicityThree && numberOfControlPointsIsCorrect)
+// 		{
+// 			int nBezierComponents = (([clone nCpts] - 4)/ 3) + 1;
+// 			// NSLog(@"nBezierComponents = %d",nBezierComponents);
+// 			polyBezierCurve = [[[CubicPolyBezierModel alloc] init] autorelease];
+			
+// 			for (int iComponent = 0; iComponent < nBezierComponents; iComponent++)
+// 			{
+// 				// Create a Bezier curve using the correct control points
+// 				int firstIndex = 3*iComponent;
+// 				NSPoint currControlPoints[4];
+// 				for (int iCurrControlPoint = 0; iCurrControlPoint < 4; iCurrControlPoint++)
+// 				{
+// 					currControlPoints[iCurrControlPoint] = [clone controlPointAtIndex:firstIndex + iCurrControlPoint];
+// 				}
+// 				CubicBezierModel * currBezierCurve = [[[CubicBezierModel alloc] initWithControlPoints:currControlPoints] autorelease]; // added the autorelease RDF 4:30 PM August 10
+// 				// printf("Data for currBezierCurve");
+// 				// [currBezierCurve dump];
+				
+// 				// call appendCubicBezier with that cubic Bezier
+				
+// 				float startParm = [clone distinctKnotAtIndex:iComponent];
+// 				float endParm = [clone distinctKnotAtIndex:iComponent + 1];
+				
+// 				[polyBezierCurve appendCubicBezier:currBezierCurve withStartParm:startParm andEndParm:endParm];
+// 				// [currBezierCurve release]; // removed the release RDF 4:30 PM August 10
+				
+				
+// 			}
+			
+// 		}
+// 			[clone release];
+// 	}
+	
+// 	return polyBezierCurve;
+	
+// }
+
+
 
 // End class CubicSpline  
 
