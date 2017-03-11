@@ -2582,7 +2582,159 @@ class CubicSpline
     return Pos;
   }
 
+//   // Based on maddknot but with changes to reflect our present implementation
+// From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
+// -(void)addKnot:(float)kvalue
+// {
+// 	// Only add a knot in the open interval of the domain
+// 	float firstKnot = [self knotAtIndex:0];
+// 	float lastKnot = [self knotAtIndex:[self nKts]-1];
+// 	if ((firstKnot < kvalue) && (kvalue < lastKnot))
+// 	{   // begin case of kvalue in open interval of the domain
+		
+// 		// Declare local variables
+
+// 		int i,j,m,noldkts,noldpts,nnewkts,nnewpts;
+// 		int nleft,nright;
+// 		double a,abar;
+// 		float * oldkt;
+// 		float * newkt;
+// 		float * oldx;
+// 		float * oldy;
+// 		float * newx;
+// 		float * newy;
+		
+// 		int iSpan = [self findSpan:kvalue];
+// 		noldkts = [self nKts];
+// 		noldpts = [self nCpts];
+// 		nnewkts = noldkts + 1;
+// 		nnewpts = noldpts + 1;
+// 		newkt = (float *)malloc(nnewkts*sizeof(float));
+// 		newx = (float *)malloc(nnewpts*sizeof(float));
+// 		newy = (float *)malloc(nnewpts*sizeof(float));
+		
+// 		// copy those that can be copied
+// 		oldkt = t_;
+// 		oldx = x_;
+// 		oldy = y_;
+// 		m = [self degree];
+// 		i = iSpan + 1;
+		
+// 		nleft = i;
+// 		memcpy(&newkt[0], &oldkt[0], nleft*sizeof(float));
+// 		newkt[i] = kvalue;
+// 		nright = nnewkts - nleft - 1;
+// 		memcpy(&newkt[i+1], &oldkt[i], nright*sizeof(float));
+		
+// 		nleft = i - m;
+// 		memcpy(&newx[0], &oldx[0], nleft*sizeof(float));
+// 		memcpy(&newy[0], &oldy[0], nleft*sizeof(float));
+// 		nright = nnewpts - nleft - m;
+// 		memcpy(&newx[nleft + m], &oldx[nleft + m - 1], nright*sizeof(float));
+// 		memcpy(&newy[nleft + m], &oldy[nleft + m - 1], nright*sizeof(float));
+		
+// 		// calculate those that need to be calculated
+// 		for (j = i - m; j <= i - 1; j++)
+// 		{
+// 			a = (kvalue - oldkt[j])/(oldkt[j+m] - oldkt[j]);
+// 			abar = 1.0 - a;
+//      newx[j] = a*oldx[j] + abar*oldx[j-1];
+// 			newy[j] = a*oldy[j] + abar*oldy[j-1];
+// 		}
+		
+// 		// out with the old and in with the new
+// 		free(oldkt);
+// 		free(oldx);
+// 		free(oldy);
+		
+// 		t_ = newkt;
+// 		x_ = newx;
+// 		y_ = newy;
+		
+// 		// Since this is not a production system, we will do this in not the most efficient way
+// 		++nCpts_;
+// 		[self establishDistinctKnotsAndMultiplicities];
+		
+// 	}   //   end case of kvalue in open interval of the domain
+// }
+  addknot(kvalue : number)
+  {
+    const degree : number = 3;
+    let firstKnot : number = this.ExplicitKnots[0];
+    let lastKnot : number = this.ExplicitKnots[this.ExplicitKnots.length-1];
+    if ((firstKnot < kvalue) && (kvalue < lastKnot))
+    { // begin case of kvalue in open interval of the domain
+      var iSpan : number = this.findSpan(kvalue);
+      var noldkts : number = this.ExplicitKnots.length;
+      var noldpts : number = this.CtrlPts.length;
+      var nnewkts : number = noldkts + 1;
+      var nnewpts : number = noldpts + 1;
+      var oldkt : Array<number> = new Array(noldkts);
+      var oldpt : Array<Point> = new Array(noldpts);
+
+
+      var newkt : Array<number> = new Array(nnewkts);
+      var newpt : Array<Point> = new Array(nnewpts);
+
+      var index : number; // to be used as the index in those cases where the old code used memcpy.
+
+      for (index = 0; index < noldkts; index++)
+      {
+        oldkt[index] = this.ExplicitKnots[index];
+      }
+
+      for (index = 0; index < noldpts; index++)
+      {
+        oldpt[index] = this.CtrlPts[index];
+      }
+
+                 
+      let m : number = degree;
+      let i : number = iSpan + 1;
+
+      var nleft : number = i;
+      for (index = 0; index < nleft; index++)
+      {
+        newkt[index] = oldkt[index];
+      }
+
+      newkt[i] = kvalue;
+
+      var nright : number = nnewkts - nleft - 1;
+      for (index = 0; index < nright; index++)
+      {
+        newkt[i+1+index] = oldkt[i + index];
+      }
+
+      nleft = i - m;
+      for (index = 0; index < nleft; index++)
+      {
+        newpt[index] = oldpt[index];
+      }
+
+      nright = nnewpts - nleft - m;
+      for (index = 0; index < nright; index++)
+      {
+        newpt[nleft + m + index] = oldpt[nleft + m - 1 + index];
+      }
+
+
+      var j : number;
+      for (j = i - m; j <= i - 1; j++)
+      {
+        var a = (kvalue - oldkt[j])/(oldkt[j+m] - oldkt[j]);
+        var abar = 1.0 - a;
+        newpt[j] = linearCombination(a, oldpt[j], abar, oldpt[j-1]);
+      }
+
+      this.CtrlPts = newpt;
+      this.ExplicitKnots = newkt;
+
+    } // end case of kvalue in open interval of the domain
+  }
 }
+
+
 // End class CubicSpline  
 
 //   End code to support BusyBSpline
@@ -3487,6 +3639,29 @@ function TestCubicSpline()
      maxError = Math.max(maxError, curError);
    }
    document.writeln("<p> maxError = " + maxError.toString() + "<p>");
+   
+   // We should put addknot tests into their own routine.
+   marsdenSpline.addknot(6.0);
+   document.writeln("<p>");
+   document.writeln("After adding a knot at 6 Data for marsdenSpline");
+   var DataForMarsdenSplineAfterAddingKnot : string = marsdenSpline.toString();
+   document.writeln(DataForMarsdenSplineAfterAddingKnot);
+   document.writeln("<p>");
+
+   maxError = 0.0;
+   for (i = 0; i <= nIntervals; i++)
+   {
+     let u : number = t[0] + i*delta;
+     let Q : Point = marsdenSpline.positionAtParm(u);
+     document.writeln("For u = " + u + "&nbsp &nbsp &nbsp");
+     document.writeln("Q = " + Q.toString() + "<p>");
+     let curError : number = Math.abs(Q.x - u);
+     maxError = Math.max(maxError, curError);
+   }
+   document.writeln("<p> maxError After Adding Knot = " + maxError.toString() + "<p>");
+
+
+   document.writeln("<p>Leaving TestMarsden</p>");
  }
 
  function TestCubicSplineEvaluators()
