@@ -2314,6 +2314,7 @@ class PolyBezier
 // Begin class CubicSpline
 class CubicSpline
 {
+  readonly degree: number;
   CtrlPts : Array<Point>;
   ExplicitKnots : Array<number>;
 
@@ -2396,9 +2397,7 @@ class CubicSpline
  {
    let validInput : boolean = true; // innocent until proven guilty
    var i : number;
-   const degree : number = 3;
-   const order : number = degree + 1;
-
+   
    if (P.length < 4)
    {
      validInput = false;
@@ -2420,6 +2419,8 @@ class CubicSpline
 
    if (validInput==true)
    { // Begin case of valid input
+     this.degree = 3;
+     const order : number = this.degree + 1;
 
      // Load the control points
      // this.CtrlPts = new Array<Point>(P.length);
@@ -2508,8 +2509,8 @@ class CubicSpline
     var thisIsValid : boolean = true; // innocent until proven guilty
     var nCrtlPts : number = this.CtrlPts.length;
     var nKts : number = this.ExplicitKnots.length;
-    var degree : number = 3; // we know it is 3 in this case
-    var order : number = degree + 1;
+    
+    var order : number = this.degree + 1;
     var delta : number = nKts - nCrtlPts;
     if (delta != order)
     {
@@ -2571,13 +2572,13 @@ class CubicSpline
   positionAtParm(t : number) : Point
   {
     let ispan : number = this.findSpan(t);
-    const degree : number = 3;
-    const itop : number = degree; // but we may have to make this degree - multiplicity
+    
+    const itop : number = this.degree; // but we may have to make this degree - multiplicity
     var D : Point[][];
 
-    D = DeBoorTriangleAt(t, ispan, degree, itop, this.ExplicitKnots, this.CtrlPts); // will we get back D?
+    D = DeBoorTriangleAt(t, ispan, this.degree, itop, this.ExplicitKnots, this.CtrlPts); // will we get back D?
 
-    let Pos : Point = D[degree][degree];
+    let Pos : Point = D[this.degree][this.degree];
     
     return Pos;
   }
@@ -2659,7 +2660,7 @@ class CubicSpline
 // }
   addknot(kvalue : number)
   {
-    const degree : number = 3;
+    // const degree : number = 3;
     let firstKnot : number = this.ExplicitKnots[0];
     let lastKnot : number = this.ExplicitKnots[this.ExplicitKnots.length-1];
     if ((firstKnot < kvalue) && (kvalue < lastKnot))
@@ -2689,7 +2690,7 @@ class CubicSpline
       }
 
                  
-      let m : number = degree;
+      let m : number = this.degree;
       let i : number = iSpan + 1;
 
       var nleft : number = i;
