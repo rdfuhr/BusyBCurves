@@ -3785,27 +3785,41 @@ function TestCubicSpline()
    document.writeln(" Leaving TestCubicSplineEvaluators");
  }
 
- function get2DArray():Array<Array<Point>>
+ function get2DArray(n : number):Point[][]
  {
-   const n : number = 3;
-   let D : Array<Array<Point>> = new Array<Array<Point>>(n*n);
-   var i : number;
-   var j : number;
-   for (i = 0; i < n; i++)
+    
+   var D : Point[][] = new Array(n);
+   for (var i = 0; i < n; i++)
    {
-     for (j = 0; j < n; j++)
+     D[i] = new Array(n);
+   }
+
+   for (var i = 0; i < n; i++)
+   {
+     for (var j = 0; j < n; j++)
      {
-       alert("i = "+ i + " j = " + j);
        D[i][j] = new Point(i,j);
      }
    }
+
    return D;
  }
 
  function Test2DArray()
  {
+   const n : number = 4;
    document.writeln("<p>Entering Test2DArray</p>");
-   let D : Array<Array<Point>> = get2DArray();
+   let D : Point[][] = get2DArray(n);
+   for (var i = 0; i < n; i++)
+   {
+     for (var j = 0; j < n; j++)
+     {
+       document.writeln("<p>");
+       document.writeln("D["+ i + "][" + j + "] = ")
+       document.writeln(D[i][j].toString());
+       document.writeln("</p>");
+     }
+   }
    document.writeln("<p>Leaving Test2DArray</p>");
  }
 
@@ -3881,6 +3895,6 @@ function doTests()
    // TestPolyLine();
    // TestCubicSpline();
    //TestCubicSplineEvaluators();
-   // Test2DArray()
-   TestAddKnot();
+   Test2DArray()
+   // TestAddKnot();
 }
