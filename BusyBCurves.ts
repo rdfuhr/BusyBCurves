@@ -2312,9 +2312,9 @@ class PolyBezier
 
 
 
-// Begin class CubicSpline
+
 class CubicSpline
-{
+{  // Begin class CubicSpline
   readonly degree: number;
   CtrlPts : Array<Point>;
   ExplicitKnots : Array<number>;
@@ -2664,7 +2664,7 @@ class CubicSpline
 // 	}   //   end case of kvalue in open interval of the domain
 // }
   addknot(kvalue : number)
-  {
+  { // begin addknot
     // const degree : number = 3;
     let firstKnot : number = this.ExplicitKnots[0];
     let lastKnot : number = this.ExplicitKnots[this.ExplicitKnots.length-1];
@@ -2737,7 +2737,22 @@ class CubicSpline
       this.ExplicitKnots = newkt;
 
     } // end case of kvalue in open interval of the domain
-  }
+  } // end addknot
+
+
+getKnotMultiplicityAtIndex(IndexOfExplicitKnot: number) : number
+{
+  var multiplicity : number = 0; // we will return 0 if IndexOfExplicitKnot is outside of the legal range
+  let bot : number = 0; // the index of the lowest explicit knot
+  let top : number = this.ExplicitKnots.length - 1; // the index of the highest explicit knot
+  var i : number; // loop index
+  
+  if ((bot <= IndexOfExplicitKnot) && (IndexOfExplicitKnot <= top))
+  {  // begin case where IndexOfExplicitKnot is in the legal range
+    multiplicity = 1; // we know that the multiplicity is going to be at least 1 
+  }  //   end case where IndexOfExplicitKnot is in the legal range
+  
+  return multiplicity;
 }
 
 // From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
@@ -2829,7 +2844,7 @@ class CubicSpline
 
 
 
-// End class CubicSpline  
+} // End class CubicSpline  
 
 //   End code to support BusyBSpline
 
