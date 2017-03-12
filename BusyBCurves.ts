@@ -2477,6 +2477,10 @@ class CubicSpline
   {
      var stringRep : string = "Data for Spline Curve\n";
 
+     stringRep += "<p>";
+     stringRep += "degree = " + this.degree.toString();
+     stringRep += "</p>";
+
      var nPts : number = this.CtrlPts.length;
      for (var i = 0; i < nPts; i++)
      {
@@ -3790,6 +3794,65 @@ function TestCubicSpline()
    document.writeln("<p>Leaving Test2DArray</p>");
  }
 
+ function TestAddKnot()
+ {
+   document.writeln("<p>Entering TestAddKnot</p>");
+   // Create two CubicSpline objects using identical input data.
+   var P : Array<Point> = new Array();
+   P.push(new Point(0,0));
+   P.push(new Point(1,3));
+   P.push(new Point(3,2));
+   P.push(new Point(5,4));
+   P.push(new Point(7,6));
+   P.push(new Point(9,8));
+
+   var t : Array<number> = new Array();
+   t.push(0);
+   t.push(2);
+   t.push(7);
+   t.push(10);
+
+   var Before : CubicSpline = new CubicSpline(P, t);
+   var After : CubicSpline = new CubicSpline(P, t);
+
+   document.writeln("<p>");
+   document.writeln("Data for Before");
+   document.writeln("<p>");
+   var DataForBefore : string = Before.toString();
+   document.writeln(DataForBefore);
+   document.writeln("<p>");
+
+   // Then add knots to one of them
+   After.addknot(2.71828);
+   After.addknot(3.14159);
+   After.addknot(7);
+
+   document.writeln("<p>");
+   document.writeln("Data for After");
+   document.writeln("<p>");
+   var DataForAfter : string = After.toString();
+   document.writeln(DataForAfter);
+   document.writeln("<p>");
+
+// Then do an evaluation test
+   var maxDiff = 0.0;
+   const nIntervals : number = 7033;
+   const Delta : number = 1/nIntervals;
+
+   for (var i = 0; i <= nIntervals; i++)
+   {
+     var s : number = t[0] + i*Delta;
+     var PtOnBefore : Point = Before.positionAtParm(s);
+     var PtOnAfter : Point = After.positionAtParm(s);
+     var Diff : number = PtOnBefore.distanceTo(PtOnAfter);
+     maxDiff = Math.max(Diff, maxDiff)
+   }
+
+   document.writeln("<p> maxError After Adding Knot = " + maxDiff.toString() + "<p>");
+   
+   document.writeln("<p>Leaving TestAddKnot</p>");
+ }
+
 
 function doTests()
 {
@@ -3802,6 +3865,7 @@ function doTests()
    // TestLine();
    // TestPolyLine();
    // TestCubicSpline();
-   TestCubicSplineEvaluators();
+   //TestCubicSplineEvaluators();
    // Test2DArray()
+   TestAddKnot();
 }
