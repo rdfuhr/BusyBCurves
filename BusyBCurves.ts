@@ -3890,7 +3890,7 @@ function TestCubicSpline()
    document.writeln("<p>");
 
    document.writeln("<p>Testing getKnotMultiplicityAtIndex</p>");
-   for (var i = 0; i <= After.ExplicitKnots.length -1; i++)
+   for (var i = -1; i <= After.ExplicitKnots.length; i++)
    {
      var multiplicity : number = After.getKnotMultiplicityAtIndex(i);
      document.writeln("<p>");
