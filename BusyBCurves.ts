@@ -2750,6 +2750,32 @@ getKnotMultiplicityAtIndex(IndexOfExplicitKnot: number) : number
   if ((bot <= IndexOfExplicitKnot) && (IndexOfExplicitKnot <= top))
   {  // begin case where IndexOfExplicitKnot is in the legal range
     multiplicity = 1; // we know that the multiplicity is going to be at least 1 
+    var ExplicitKnot : number = this.ExplicitKnots[IndexOfExplicitKnot];
+
+    for (i = IndexOfExplicitKnot + 1; i <= top; i++)
+    {
+      if (this.ExplicitKnots[i]==ExplicitKnot)
+      {
+        ++multiplicity
+      }
+      else
+      {
+        break;
+      }
+    }
+
+    for (i = IndexOfExplicitKnot - 1; i >=bot; i--)
+    {
+      if (this.ExplicitKnots[i]==ExplicitKnot)
+      {
+        ++multiplicity
+      }
+      else
+      {
+        break;
+      }
+    }
+
   }  //   end case where IndexOfExplicitKnot is in the legal range
   
   return multiplicity;
@@ -3863,6 +3889,15 @@ function TestCubicSpline()
    document.writeln(DataForAfter);
    document.writeln("<p>");
 
+   document.writeln("<p>Testing getKnotMultiplicityAtIndex</p>");
+   for (var i = 0; i <= After.ExplicitKnots.length -1; i++)
+   {
+     var multiplicity : number = After.getKnotMultiplicityAtIndex(i);
+     document.writeln("<p>");
+     document.writeln("For index " + i.toString() + " multiplicity = " + multiplicity.toString())
+     document.writeln("</p>");
+   }
+
 // Then do an evaluation test
    var maxDiff = 0.0;
    const nIntervals : number = 7033;
@@ -3894,7 +3929,7 @@ function doTests()
    // TestLine();
    // TestPolyLine();
    // TestCubicSpline();
-   //TestCubicSplineEvaluators();
-   Test2DArray()
-   // TestAddKnot();
+   // TestCubicSplineEvaluators();
+   // Test2DArray()
+   TestAddKnot();
 }
