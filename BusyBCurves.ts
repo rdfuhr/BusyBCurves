@@ -2518,6 +2518,14 @@ class CubicSpline
         stringRep += this.ExplicitKnots[j].toString();
         stringRep += "</p>";
      }
+
+     var DistinctKnotsAndMultiplicities : Array<DistinctKnotAndMultiplicity> = this.getDistinctKnotsAndMultiplicities();
+     for (var k = 0; k < DistinctKnotsAndMultiplicities.length; k++)
+     {
+       stringRep += "<p>";
+       stringRep += DistinctKnotsAndMultiplicities[k].toString();
+       stringRep += "</p>";
+     }
      return stringRep;
   }
 
@@ -2804,9 +2812,31 @@ class CubicSpline
   getDistinctKnotsAndMultiplicities() : Array<DistinctKnotAndMultiplicity>
   {
     var DistinctKnotsAndMultiplicities : Array<DistinctKnotAndMultiplicity> = new Array();
-    // Still need to do the work...
+    var numExplicitKnots = this.ExplicitKnots.length;
+    var TempArray : Array<DistinctKnotAndMultiplicity> = new Array(numExplicitKnots);
+    for (var i : number = 0; i < numExplicitKnots; i++)
+    {
+      var knot : number = this.ExplicitKnots[i];
+      var multiplicity : number = this.getKnotMultiplicityAtIndex(i);
+
+      TempArray[i] = new DistinctKnotAndMultiplicity(knot, multiplicity);
+    }
+
+    i = 0;
+    while (i < numExplicitKnots)
+    {
+       var currKnot : number = TempArray[i].DistinctKnot;
+       var currMult : number = TempArray[i].Multiplicity;
+       var currItem : DistinctKnotAndMultiplicity = new DistinctKnotAndMultiplicity(currKnot, currMult);
+       DistinctKnotsAndMultiplicities.push(currItem);
+       i = i + currMult;
+    }
+    
     return DistinctKnotsAndMultiplicities;
   }
+
+  
+
 
   convertToPolyBezier() : PolyBezier
   {
@@ -3920,6 +3950,8 @@ function TestCubicSpline()
    // Then add knots to one of them
    After.addknot(2.71828);
    After.addknot(3.14159);
+   After.addknot(3.14159);
+   After.addknot(7);
    After.addknot(7);
 
    document.writeln("<p>");
