@@ -12,7 +12,8 @@
 // TODO: Mar 08, 2017: Test CubicSpline::positionAtParm - DONE
 // TODO: Mar 09, 2017: Need to take a careful look at findSpan when arg is max knot. Look at my Objective-C code. - SORT OF DONE
 // TODO: Mar 10, 2017: Implement and test knot insertion for CubicSpline - SORT OF DONE
-// TODO: Mar 11, 2017: Implement and test getKnotMultiplicityAtIndex for CubicSpline
+// TODO: Mar 11, 2017: Implement and test getKnotMultiplicityAtIndex for CubicSpline - DONE
+// TODO: Mar 12, 2017: Implement, test, and use getDistinctKnotsAndMultiplicities
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -2308,7 +2309,26 @@ class PolyBezier
 } // End class PolyBezier
 
 
+class DistinctKnotAndMultiplicity
+{
+  DistinctKnot : number;
+  Multiplicity : number;
 
+  constructor(DistinctKnot : number, 
+              Multiplicity : number)
+  {
+    this.DistinctKnot = DistinctKnot;
+    this.Multiplicity = Multiplicity;
+  }
+
+  toString() : string
+  {
+    var stringRep : string;
+    stringRep = "Distinct Knot = " + this.DistinctKnot.toString() + " Multiplicity = " + this.Multiplicity.toString();
+    return stringRep;
+  }
+    
+}
 
 
 
@@ -2779,6 +2799,13 @@ class CubicSpline
     }  //   end case where IndexOfExplicitKnot is in the legal range
   
     return multiplicity;
+  }
+
+  getDistinctKnotsAndMultiplicities() : Array<DistinctKnotAndMultiplicity>
+  {
+    var DistinctKnotsAndMultiplicities : Array<DistinctKnotAndMultiplicity> = new Array();
+    // Still need to do the work...
+    return DistinctKnotsAndMultiplicities;
   }
 
   convertToPolyBezier() : PolyBezier
