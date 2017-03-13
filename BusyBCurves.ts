@@ -2740,46 +2740,58 @@ class CubicSpline
   } // end addknot
 
 
-getKnotMultiplicityAtIndex(IndexOfExplicitKnot: number) : number
-{
-  var multiplicity : number = 0; // we will return 0 if IndexOfExplicitKnot is outside of the legal range
-  let bot : number = 0; // the index of the lowest explicit knot
-  let top : number = this.ExplicitKnots.length - 1; // the index of the highest explicit knot
-  var i : number; // loop index
+  getKnotMultiplicityAtIndex(IndexOfExplicitKnot: number) : number
+  {
+    var multiplicity : number = 0; // we will return 0 if IndexOfExplicitKnot is outside of the legal range
+    let bot : number = 0; // the index of the lowest explicit knot
+    let top : number = this.ExplicitKnots.length - 1; // the index of the highest explicit knot
+    var i : number; // loop index
   
-  if ((bot <= IndexOfExplicitKnot) && (IndexOfExplicitKnot <= top))
-  {  // begin case where IndexOfExplicitKnot is in the legal range
-    multiplicity = 1; // we know that the multiplicity is going to be at least 1 
-    var ExplicitKnot : number = this.ExplicitKnots[IndexOfExplicitKnot];
+    if ((bot <= IndexOfExplicitKnot) && (IndexOfExplicitKnot <= top))
+    {  // begin case where IndexOfExplicitKnot is in the legal range
+      multiplicity = 1; // we know that the multiplicity is going to be at least 1 
+      var ExplicitKnot : number = this.ExplicitKnots[IndexOfExplicitKnot];
 
-    for (i = IndexOfExplicitKnot + 1; i <= top; i++)
-    {
-      if (this.ExplicitKnots[i]==ExplicitKnot)
+      for (i = IndexOfExplicitKnot + 1; i <= top; i++)
       {
-        ++multiplicity
+        if (this.ExplicitKnots[i]==ExplicitKnot)
+        {
+          ++multiplicity
+        }
+        else
+        {
+          break;
+        }
       }
-      else
-      {
-        break;
-      }
-    }
 
-    for (i = IndexOfExplicitKnot - 1; i >=bot; i--)
-    {
-      if (this.ExplicitKnots[i]==ExplicitKnot)
+      for (i = IndexOfExplicitKnot - 1; i >=bot; i--)
       {
-        ++multiplicity
+        if (this.ExplicitKnots[i]==ExplicitKnot)
+        {
+          ++multiplicity
+        }
+        else
+        {
+          break;
+        }
       }
-      else
-      {
-        break;
-      }
-    }
 
-  }  //   end case where IndexOfExplicitKnot is in the legal range
+    }  //   end case where IndexOfExplicitKnot is in the legal range
   
-  return multiplicity;
-}
+    return multiplicity;
+  }
+
+  convertToPolyBezier() : PolyBezier
+  {
+    // Only do this if the degree is 3
+    var polyBezierCurve : PolyBezier = null;
+    if (this.degree==3)
+    { // begin case where degree is 3
+      var clone : CubicSpline = this;
+
+    } //   end case where degree is 3
+    return polyBezierCurve;
+  }
 
 // From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
 // We will use the following Objective-C code as a basis for implementing the corresponding TypeScript function.
@@ -2867,6 +2879,7 @@ getKnotMultiplicityAtIndex(IndexOfExplicitKnot: number) : number
 // 	return polyBezierCurve;
 	
 // }
+
 
 
 
