@@ -14,6 +14,7 @@
 // TODO: Mar 10, 2017: Implement and test knot insertion for CubicSpline - SORT OF DONE
 // TODO: Mar 11, 2017: Implement and test getKnotMultiplicityAtIndex for CubicSpline - DONE
 // TODO: Mar 12, 2017: Implement, test, and use getDistinctKnotsAndMultiplicities
+// TODO: Mar 13, 2017: Change the constructor for CubicSpline so that it takes control points and explicit knots, including multiple start and end knots.  Don't do any input checking.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -2844,7 +2845,7 @@ class CubicSpline
     var polyBezierCurve : PolyBezier = null;
     if (this.degree==3)
     { // begin case where degree is 3
-      var clone : CubicSpline = this;
+      
 
     } //   end case where degree is 3
     return polyBezierCurve;
@@ -3939,6 +3940,7 @@ function TestCubicSpline()
 
    var Before : CubicSpline = new CubicSpline(P, t);
    var After : CubicSpline = new CubicSpline(P, t);
+   // var After : CubicSpline = Before; // This will cause side effects.
 
    document.writeln("<p>");
    document.writeln("Data for Before");
@@ -3959,6 +3961,13 @@ function TestCubicSpline()
    document.writeln("<p>");
    var DataForAfter : string = After.toString();
    document.writeln(DataForAfter);
+   document.writeln("<p>");
+
+   document.writeln("<p>");
+   document.writeln("Data for Before (AFTER adding knots to After!");
+   document.writeln("<p>");
+   var DataForBeforeAfterAddingKnotsToAfter : string = Before.toString();
+   document.writeln(DataForBeforeAfterAddingKnotsToAfter);
    document.writeln("<p>");
 
    document.writeln("<p>Testing getKnotMultiplicityAtIndex</p>");
