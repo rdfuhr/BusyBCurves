@@ -2341,153 +2341,39 @@ class CubicSpline
   CtrlPts : Array<Point>;
   ExplicitKnots : Array<number>;
 
-  // The following is a special-purpose constructor in which we build a 3-span cubic spline curve
-  // that has 6 control points and 10 knots.  It remains to determine whether
-  // we should check the object for validity.  Perhaps we should use the
-  // isValid() method.
-
-  //////////////////////////////////////////////////////////////////////////////
-  // constructor for a 3-span cubic spline curve
-  // Creates an instance of a CubicSpline
-  //
-  // input: P0 - the 0th control point
-  // input: P1 - the 1st control point
-  // input: P2 - the 2nd control point
-  // input: P3 - the 3rd control point
-  // input: P4 - the 3rd control point
-  // input: P5 - the 3rd control point
-  // input: t0 - the 0th distinct knot
-  // input: t1 - the 1st distinct knot
-  // input: t2 - the 2nd distinct knot
-  // input: t3 - the 3rd distinct knot
-  //
-  // Note: This is a very special-purpose constructor.
-  // We should eventually replace this with a general constructor.
-  // We should also either check for validity in the constructor or
-  // use the isValid() method.
-  //////////////////////////////////////////////////////////////////////////////
-  // constructor(P0 : Point,
-  //             P1 : Point,
-  //             P2 : Point,
-  //             P3 : Point,
-  //             P4 : Point,
-  //             P5 : Point,
-  //             t0 : number,
-  //             t1 : number,
-  //             t2 : number,
-  //             t3 : number)
-  // {
-  //   this.CtrlPts = new Array<Point>();
-  //   this.CtrlPts.push(P0);
-  //   this.CtrlPts.push(P1);
-  //   this.CtrlPts.push(P2);
-  //   this.CtrlPts.push(P3);
-  //   this.CtrlPts.push(P4);
-  //   this.CtrlPts.push(P5);
-
-  //   this.ExplicitKnots = new Array<number>();
-  //   // The first knot has multiplicity 4
-  //   for (var i = 0; i < 4; i++)
-  //   {
-  //     this.ExplicitKnots.push(t0);
-  //   }
-  //   // The two interior knots each have multiplicity 1
-  //   this.ExplicitKnots.push(t1);
-  //   this.ExplicitKnots.push(t2);
-  //   // The last knot has multiplicity 4
-  //   for (var j = 0; j < 4; j ++)
-  //   {
-  //     this.ExplicitKnots.push(t3);
-  //   }
-  // }
-
   //////////////////////////////////////////////////////////////////////////////
   // constructor for a cubic spline curve
   // Creates an instance of a CubicSpline
   //
-  // input: P - the array of control points
-  // input: t - the array of distinct knots
+  // input: CtrlPts - the array of control points
+  // input: ExplicitKnots - the array of distinct knots
   // 
-  // Note: It is checked that the number of control points = number of distinct
-  // knots + 2.  It is checked that there are at least 4 control points.  It is
-  // checked that the distinct knots are strictly increasing.  If the input 
-  // passes these checks then a CubicSpline object is constructed that has
-  // knots of multiplicity 4 at the start and at the end, and interior knots
-  // of multiplicity 1.
+  // Note: No input checking is done by this constructor
   //////////////////////////////////////////////////////////////////////////////
-  constructor(P : Point[],
-              t : number[])
- {
-   let validInput : boolean = true; // innocent until proven guilty
-   var i : number;
-   
-   if (P.length < 4)
-   {
-     validInput = false;
-   }
-   else
-   if (P.length != t.length + 2)
-   {
-     validInput = false;
-   }
-   else
-   for ( i = 0; i < t.length - 1; i++)
-   {
-     if (t[i] >= t[i+1])
-     {
-       validInput = false;
-       break;
-     }
-   }
+    constructor(CtrlPts : Point[],
+                ExplicitKnots : number[])
+    {
+      this.degree = 3;
+      
+      this.CtrlPts = new Array<Point>();
+      
+      for (var iPt : number = 0; iPt < CtrlPts.length; iPt++)
+      {
+        var x : number = CtrlPts[iPt].x;
+        var y : number = CtrlPts[iPt].y;
+        var P : Point = new Point(x,y);
+        this.CtrlPts.push(P)
+      }
 
-   if (validInput==true)
-   { // Begin case of valid input
-     this.degree = 3;
-     const order : number = this.degree + 1;
+      this.ExplicitKnots = new Array<number>();
 
-     // Load the control points
-     // this.CtrlPts = new Array<Point>(P.length);
-     this.CtrlPts = new Array<Point>();
-     for (i = 0; i < P.length; i++)
-     {
-       // this.CtrlPts[i] = P[i];
-       this.CtrlPts.push(P[i]);
-     }
+      for (var iKt : number = 0; iKt < ExplicitKnots.length; iKt++)
+      {
+        var t : number = ExplicitKnots[iKt];
+        this.ExplicitKnots.push(t);
+      }
 
-     // Load the knots
-     // this.ExplicitKnots = new Array<number>(t.length + 2*degree)
-     this.ExplicitKnots = new Array<number>();
-
-     // First make the start knot have multiplicity degree + 1
-     for (i = 0; i < order; i++)
-     {
-       //this.ExplicitKnots[i] = t[0];
-       this.ExplicitKnots.push(t[0]);
-     }
-
-     // Then make the interior knots have multiplicity 1
-     let numInteriorKnots : number = t.length - 2;
-     
-     for (i = 1; i <= numInteriorKnots; i++)
-     {
-       //this.ExplicitKnots[degree + i] = t[i];
-       this.ExplicitKnots.push(t[i]);
-     }
-
-     // Then make the end knot have multiplicity degree + 1
-     const iLastDistinctKnot : number = t.length - 1;
-     const indexOfFirstMultipleEndKnot : number = order + numInteriorKnots;
-     for (i = 0; i < order; i++)
-     {
-       // this.ExplicitKnots[indexOfFirstMultipleEndKnot + i] = t[iLastDistinctKnot];
-       this.ExplicitKnots.push(t[iLastDistinctKnot]);
-     }
-
-   } //   End case of valid input
-
- }
-
-// Multiple constructor implementations are apparently not allowed.
+    }
 
   //////////////////////////////////////////////////////////////////////////////
   // toString - method of CubicSpline
@@ -3388,8 +3274,14 @@ function TestCubicSpline()
   P.push(P5);
 
   t.push(t0);
+  t.push(t0);
+  t.push(t0);
+  t.push(t0)
   t.push(t1);
   t.push(t2);
+  t.push(t3);
+  t.push(t3);
+  t.push(t3);
   t.push(t3);
 
   var C : CubicSpline = new CubicSpline(P,t);
@@ -3669,9 +3561,15 @@ function TestCubicSpline()
    document.writeln("<p>");
    document.writeln(theBezierCurve.toString());
 
-   let t : Array<number> = new Array(2);
+   let t : Array<number> = new Array(8);
    t[0] = 0.0;
-   t[1] = 1.0;
+   t[1] = 0.0;
+   t[2] = 0.0;
+   t[3] = 0.0;
+   t[4] = 1.0;
+   t[5] = 1.0;
+   t[6] = 1.0;
+   t[7] = 1.0;
    let theSplineCurve : CubicSpline = new CubicSpline(P, t);
    document.writeln("<p>")
    document.writeln("Data for theSplineCurve");
@@ -3729,8 +3627,14 @@ function TestCubicSpline()
   Q.push(Q5);
 
   u.push(u0);
+  u.push(u0);
+  u.push(u0);
+  u.push(u0);
   u.push(u1);
   u.push(u2);
+  u.push(u3);
+  u.push(u3);
+  u.push(u3);
   u.push(u3);
 
   var threeSpanSpline : CubicSpline = new CubicSpline(Q,u);
@@ -3765,6 +3669,12 @@ function TestCubicSpline()
 
    var t : Array<number> = new Array();
    t.push(0.0);
+   t.push(0.0);
+   t.push(0.0);
+   t.push(0.0);
+   t.push(1.0);
+   t.push(1.0);
+   t.push(1.0);
    t.push(1.0);
 
    var GraphOfCubic : CubicSpline = new CubicSpline(P, t);
@@ -3776,7 +3686,8 @@ function TestCubicSpline()
   document.writeln("<p>");
 
   const kIntervals : number = 100;
-  const kDelta = (t[1] - t[0])/kIntervals
+  const iLast = t.length - 1;
+  const kDelta = (t[iLast] - t[0])/kIntervals
   var maxXerror : number = 0.0;
   var maxYerror : number = 0.0;
   for (i = 0; i <= kIntervals; i++)
@@ -3802,19 +3713,24 @@ function TestCubicSpline()
    var t : Array<number> = new Array();
    
    t.push(2);
+   t.push(2);
+   t.push(2);
+   t.push(2)
    t.push(7);
    t.push(11);
    t.push(13);
-   const nCpts = t.length + 2;
+   t.push(13);
+   t.push(13);
+   t.push(13);
+   const nCpts = t.length - 4;
    var P : Array<Point> = new Array();
    var i : number;
    var marsdenVals : Array<number> = new Array();
-   marsdenVals.push(t[0] + t[0] + t[0]);
-   marsdenVals.push(t[0] + t[0] + t[1]);
-   marsdenVals.push(t[0] + t[1] + t[2]);
-   marsdenVals.push(t[1] + t[2] + t[3]);
-   marsdenVals.push(t[2] + t[3] + t[3]);
-   marsdenVals.push(t[3] + t[3] + t[3]);
+   for (i = 0; i < nCpts; i++)
+   {
+     marsdenVals.push(t[i+1] + t[i+2] + t[i+3]);
+   }
+   
    for (i = 0; i < marsdenVals.length; i++)
    {
      marsdenVals[i] = marsdenVals[i]/3.0;
@@ -3831,8 +3747,7 @@ function TestCubicSpline()
    var DataForMarsdenSpline : string = marsdenSpline.toString();
    document.writeln(DataForMarsdenSpline);
    document.writeln("<p>");
-   document.writeln("<p>Leaving TestMarsden</p>");
-
+   
    var nIntervals : number = 44;
    var delta : number = (t[t.length-1] - t[0])/nIntervals;
    var maxError = 0.0;
@@ -3875,9 +3790,9 @@ function TestCubicSpline()
  {
    document.writeln("Entering TestCubicSplineEvaluators");
    
-  //  TestCubicSplineEvaluatorsCase001();
-  //  TestCubicSplineEvaluatorsCase002();
-  //  TestCubicSplineEvaluatorsCase003();
+  TestCubicSplineEvaluatorsCase001();
+  TestCubicSplineEvaluatorsCase002();
+  TestCubicSplineEvaluatorsCase003();
   TestMarsden();
   
    document.writeln(" Leaving TestCubicSplineEvaluators");
@@ -3935,14 +3850,19 @@ function TestCubicSpline()
 
    var t : Array<number> = new Array();
    t.push(0);
+   t.push(0);
+   t.push(0);
+   t.push(0);
    t.push(2);
    t.push(7);
+   t.push(10);
+   t.push(10);
+   t.push(10);
    t.push(10);
 
    var Before : CubicSpline = new CubicSpline(P, t);
    var After : CubicSpline = new CubicSpline(P, t);
-   // var After : CubicSpline = Before; // This will cause side effects.
-
+   
    document.writeln("<p>");
    document.writeln("Data for Before");
    document.writeln("<p>");
@@ -3964,13 +3884,7 @@ function TestCubicSpline()
    document.writeln(DataForAfter);
    document.writeln("<p>");
 
-   document.writeln("<p>");
-   document.writeln("Data for Before (AFTER adding knots to After!");
-   document.writeln("<p>");
-   var DataForBeforeAfterAddingKnotsToAfter : string = Before.toString();
-   document.writeln(DataForBeforeAfterAddingKnotsToAfter);
-   document.writeln("<p>");
-
+   
    document.writeln("<p>Testing getKnotMultiplicityAtIndex</p>");
    for (var i = -1; i <= After.ExplicitKnots.length; i++)
    {
@@ -4010,8 +3924,8 @@ function doTests()
    // TestArrayLogger();
    // TestLine();
    // TestPolyLine();
-   // TestCubicSpline();
-   // TestCubicSplineEvaluators();
+   TestCubicSpline();
+   TestCubicSplineEvaluators();
    // Test2DArray()
    TestAddKnot();
 }
