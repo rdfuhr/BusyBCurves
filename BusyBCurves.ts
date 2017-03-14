@@ -2440,6 +2440,18 @@ class CubicSpline
     return thisIsValid;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // clone - method of CubicSpline
+  // Create and return an exact copy of this CubicSpline
+  //
+  // returns: an exact copy of this CubicSpline
+  /////////////////////////////////////////////////////////////////////////////
+  clone() : CubicSpline
+  {
+    var ClonedSpline : CubicSpline = new CubicSpline(this.CtrlPts, this.ExplicitKnots)
+    return ClonedSpline;
+  }
+
 // From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
 // -(int)findSpan:(float)t
 // {
