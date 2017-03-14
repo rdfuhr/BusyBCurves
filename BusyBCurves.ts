@@ -3873,7 +3873,7 @@ function TestCubicSpline()
    t.push(10);
 
    var Before : CubicSpline = new CubicSpline(P, t);
-   var After : CubicSpline = new CubicSpline(P, t);
+   var After : CubicSpline = Before.clone();
    
    document.writeln("<p>");
    document.writeln("Data for Before");
@@ -3936,8 +3936,8 @@ function doTests()
    // TestArrayLogger();
    // TestLine();
    // TestPolyLine();
-   TestCubicSpline();
-   TestCubicSplineEvaluators();
+   // TestCubicSpline();
+   // TestCubicSplineEvaluators();
    // Test2DArray()
    TestAddKnot();
 }
