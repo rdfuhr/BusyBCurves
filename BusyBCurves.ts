@@ -2744,9 +2744,24 @@ class CubicSpline
     var polyBezierCurve : PolyBezier = null;
     if (this.degree==3)
     { // begin case where degree is 3
-      
 
-    } //   end case where degree is 3
+      var clone : CubicSpline = this.clone();
+      var DistincKnotsAndMultiplicities : DistinctKnotAndMultiplicity[] = clone.getDistinctKnotsAndMultiplicities()
+      var nInternalDistinctKnots = DistincKnotsAndMultiplicities.length - 2;
+      var i : number; // loop index
+      var j : number; // loop index
+      for (i = 1; i <= nInternalDistinctKnots; i++)
+      {  // begin i-loop
+        var currDistinctKnot : number = DistincKnotsAndMultiplicities[i].DistinctKnot;
+        var currMultiplicity : number = DistincKnotsAndMultiplicities[i].Multiplicity;
+        var nInsertionsHere : number = clone.degree - currMultiplicity;
+        for (j = 0; j < nInsertionsHere; j++)
+        {  // begin j-loop
+          clone.addknot(currDistinctKnot);
+        }  //  end j-loop
+      }  // end i-loop
+      
+      } //   end case where degree is 3
     return polyBezierCurve;
   }
 
