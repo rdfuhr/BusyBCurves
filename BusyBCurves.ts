@@ -4057,6 +4057,12 @@ function TestCubicSpline()
    document.writeln("<p>Leaving TestAddKnot</p>");
  }
 
+ function TestConvertToPolyBezier()
+ {
+    document.writeln("<p>Entering TestConvertToPolyBezier</p>"); 
+    document.writeln("<p>Leaving TestConvertToPolyBezier</p>");  
+ }
+
 
 function doTests()
 {
@@ -4071,5 +4077,6 @@ function doTests()
    // TestCubicSpline();
    // TestCubicSplineEvaluators();
    // Test2DArray()
-   TestAddKnot();
+   // TestAddKnot();
+   TestConvertToPolyBezier();
 }
