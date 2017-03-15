@@ -6,7 +6,7 @@
 // TODO: Mar 03, 2017: Implement a PolyLine class. - DONE
 // TODO: Mar 03, 2017: Implement a Rectangle class. - DEFERRED
 // TODO: Mar 05, 2017: Refactor code in PolyLine evaluators - DONE
-// TODO: Mar 06, 2017: Refactor code in PolyBezieer evaluators - DONE
+// TODO: Mar 06, 2017: Refactor code in PolyBezier evaluators - DONE
 // TODO: Mar 08, 2017: Change CubicSpline constructor so it is more general (any number of control points and distinct knots and multiplicities) - DONE
 // TODO: Mar 08, 2017: Test deBoorTriangleAt: - DONE
 // TODO: Mar 08, 2017: Test CubicSpline::positionAtParm - DONE
@@ -546,7 +546,7 @@ class TextDrawData
 } //   End class TextDrawData
 
 class BezierArtifactsDrawData
-{ // Begin class BezierArtifactsDrawData 
+{ // Begin class BezierArtifactsDrawData
   forBezierCurve : CurveDrawData;
   forControlPolygon : CurveDrawData;
   forControlPoints : CircleDrawData;
@@ -564,8 +564,8 @@ class BezierArtifactsDrawData
   // Creates an instance of BezierArtifactsDrawData
   //
   // Set each data member to the default value
-  // 
-  ////////////////////////////////////////////////////////////////////////////// 
+  //
+  //////////////////////////////////////////////////////////////////////////////
   constructor()
   {
     this.forBezierCurve = defaultDrawDataForBezierCurve();
@@ -592,63 +592,63 @@ class BezierArtifactsDrawData
     var stringRep : string = "Begin data for this BezierArtifactsDrawData\n";
 
     stringRep = stringRep + "<p>";
-    stringRep = stringRep + "Data for this.forBezierCurve"; 
+    stringRep = stringRep + "Data for this.forBezierCurve";
     stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forBezierCurve.toString();
 
     stringRep = stringRep + "<p>";
-    stringRep = stringRep + "Data for this.forControlPolygon"; 
+    stringRep = stringRep + "Data for this.forControlPolygon";
     stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forControlPolygon.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forControlPoints";
-    stringRep = stringRep + "<p>";    
+    stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forControlPoints.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forPointOnCurve";
-    stringRep = stringRep + "<p>";     
+    stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forPointOnCurve.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forDecasteljauLines";
-    stringRep = stringRep + "<p>";     
+    stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forDecasteljauLines.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forDecasteljauPoints";
-    stringRep = stringRep + "<p>";     
+    stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forDecasteljauPoints.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forGraphOfCubicBernstein";
-    stringRep = stringRep + "<p>";     
+    stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forGraphOfCubicBernstein.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forPointOnGraph";
-    stringRep = stringRep + "<p>";     
+    stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forPointOnGraph.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forVerticalLineFromCurveForParm";
-    stringRep = stringRep + "<p>";     
+    stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forVerticalLineFromCurveForParm.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forTextNearPointOnCurve";
-    stringRep = stringRep + "<p>";     
+    stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forTextNearPointOnCurve.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forTextNearPointOnGraph";
-    stringRep = stringRep + "<p>";     
+    stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forTextNearPointOnGraph.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "End data for this BezierArtifactsDrawData";
-    stringRep = stringRep + "<p>";    
+    stringRep = stringRep + "<p>";
 
     return stringRep;
   }
@@ -876,7 +876,7 @@ function annotateGraphOfCubicBernstein(i : number,
       var textWidth : number = context.measureText(t.toFixed(2)).width;
       P.x = P.x - textWidth;
    }
-   drawTextForNumber(y, P, drawData, context); 
+   drawTextForNumber(y, P, drawData, context);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -886,7 +886,7 @@ function annotateGraphOfCubicBernstein(i : number,
 // input: i - an integer
 // input: j - an integer
 //
-// returns: 1 if i equals j 
+// returns: 1 if i equals j
 //          0 if i does not equal j
 // note: we do not check whether i and j are integers
 // note: we use this function in buildGraphOfCubicBernstein
@@ -922,8 +922,8 @@ function buildGraphOfCubicBernstein(iCubicBernstein : number,
 {
    const degree : number = 3;
    const order : number = degree + 1;
-   var Q : Array<Point> = new Array(); 
-   var iPoint : number; 
+   var Q : Array<Point> = new Array();
+   var iPoint : number;
    for (iPoint = 0; iPoint < order; iPoint++)
    {
       var x : number = iPoint/degree;
@@ -1106,7 +1106,7 @@ class CubicBezierCurve
   //////////////////////////////////////////////////////////////////////////////
   drawControlPointsWeightedForParm(t : number,
                                    drawData : CircleDrawData,
-                                   context : CanvasRenderingContext2D) 
+                                   context : CanvasRenderingContext2D)
   {
      var controlPoints : Array<Point> = this.CtrlPts;
      var order : number = controlPoints.length;
@@ -1187,7 +1187,7 @@ class CubicBezierCurve
                              context: CanvasRenderingContext2D)
   {
      // We will use globalConstMaxRadius to help position the graphs.
- 
+
      var delta1 = new Point( 1.0*globalConstMaxRadius, -1.0*globalConstMaxRadius);
      var delta2 = new Point(-3.0*globalConstMaxRadius, -1.0*globalConstMaxRadius);
      var upperLeft
@@ -1213,7 +1213,7 @@ class CubicBezierCurve
 
         graphOfCubicBernstein.drawPointOnCurveForParm(t,
                                                       pointOnGraphRadius,
-                                                      drawDataForAllBezierArtifacts.forPointOnGraph, 
+                                                      drawDataForAllBezierArtifacts.forPointOnGraph,
                                                       context);
 
         graphOfCubicBernstein.drawVerticalLineFromCurveForParm(t,
@@ -1271,7 +1271,7 @@ class CubicBezierCurve
                               drawDataForAllBezierArtifacts.forDecasteljauLines,
                               context);
 
-      
+
       drawAllDeCasteljauPoints(this.CtrlPts,
                                tGlobal,
                                drawDataForAllBezierArtifacts.forDecasteljauPoints,
@@ -1342,7 +1342,7 @@ class CubicBezierCurve
   editControlPoint(evt : MouseEvent,
                    drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
                    context : CanvasRenderingContext2D,
-                   canvas : HTMLCanvasElement) 
+                   canvas : HTMLCanvasElement)
   {
      var mousePos : Point = getMousePos(canvas, evt);
      this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
@@ -1579,7 +1579,7 @@ function defaultDrawDataForGraphOfCubicBernstein() : CurveDrawData
   const graphWidth : number = 2;
   var drawDataForGraphOfCubicBernstein : CurveDrawData = new CurveDrawData(graphStrokeColor,
                                                                            graphWidth);
-  return drawDataForGraphOfCubicBernstein;                                                               
+  return drawDataForGraphOfCubicBernstein;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1609,7 +1609,7 @@ function defaultDrawDataForVerticalLineFromCurveForParm() : CurveDrawData
   const lineWidth : number = 2;
   var drawDataForVerticalLineFromCurveForParm : CurveDrawData = new CurveDrawData(lineStrokeColor,
                                                                            lineWidth);
-  return drawDataForVerticalLineFromCurveForParm;                                                                         
+  return drawDataForVerticalLineFromCurveForParm;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1635,7 +1635,7 @@ function defaultDrawDataForTextNearPointOnGraph() : TextDrawData
   const fontSpec : string = 'lighter 45px Sans-Serif';
   const fillColor = "black";
   var drawDataForTextNearPointOnGraph : TextDrawData = new TextDrawData(fontSpec, fillColor);
-  return drawDataForTextNearPointOnGraph;  
+  return drawDataForTextNearPointOnGraph;
 }
 
 
@@ -1657,7 +1657,7 @@ function defaultDrawDataForTextNearPointOnGraph() : TextDrawData
 function animation(drawingCanvas : HTMLCanvasElement,
                    drawingContext : CanvasRenderingContext2D,
                    C : CubicBezierCurve,
-                   drawDataForAllBezierArtifacts : BezierArtifactsDrawData) 
+                   drawDataForAllBezierArtifacts : BezierArtifactsDrawData)
 {
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
@@ -1711,13 +1711,13 @@ function StartAnimation()
    var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
-  
+
    var drawDataForAllBezierArtifacts : BezierArtifactsDrawData = new BezierArtifactsDrawData();
 
-   globalLoop = setInterval(animation, 
+   globalLoop = setInterval(animation,
                             10,
                             drawingCanvas,
-                            drawingContext, 
+                            drawingContext,
                             C,
                             drawDataForAllBezierArtifacts);
 }
@@ -1773,7 +1773,7 @@ function getMousePos(canvas : HTMLCanvasElement,
 //
 ////////////////////////////////////////////////////////////////////////////////
 function onMouseDown(evt : MouseEvent,
-                     theCanvas : HTMLCanvasElement) 
+                     theCanvas : HTMLCanvasElement)
 {
    var mousePos : Point = getMousePos(theCanvas, evt);
 
@@ -1809,7 +1809,7 @@ function onMouseMove(evt : MouseEvent,
                      C : CubicBezierCurve,
                      drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
   					         drawingContext : CanvasRenderingContext2D,
-					           drawingCanvas : HTMLCanvasElement) 
+					           drawingCanvas : HTMLCanvasElement)
 {
 
 	if (globalModifyingPointOnCurve==true)
@@ -1968,7 +1968,7 @@ function HelpInTheFormOfAWebPage()
 // input: i - a number
 // input: a - a sorted array (we do NOT check inside this function whether a is sorted)
 //
-// returns the largest index i such that a[i] <= t < a[i+1] 
+// returns the largest index i such that a[i] <= t < a[i+1]
 // with the following exceptions...
 ////////////////////////////////////////////////////////////////////////////////
 function BinarySearchSortedArray(t : number,
@@ -1993,7 +1993,7 @@ function BinarySearchSortedArray(t : number,
   return bottom;
 }
 
-// Objective-C Code from 
+// Objective-C Code from
 // /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/SplineUtilities.m
 // commented out, so this will compile.
 // The goal is to implement a TypeScript version right below it.
@@ -2038,17 +2038,17 @@ function BinarySearchSortedArray(t : number,
 // {
 // 	int j,m;
 // 	double a,abar;
-	
+
 // 	for (j = 0; j <= itop; j++)
 // 		D[0][j] = pt[ispan-degree+j];
-	
+
 // 	for (m = 1; m <= itop; m++)
 // 		for (j = m; j <= itop; j++)
 // 		{
 // 			a = (t - kt[ispan + j -degree])/(kt[ispan + j + 1 -m] - kt[ispan + j -degree]);
 // 			abar = 1.0 - a;
 // 			D[m][j] = a*D[m-1][j] + abar*D[m-1][j-1];
-// 		}	
+// 		}
 // }
 
 function DeBoorTriangleAt(t : number,
@@ -2065,7 +2065,7 @@ function DeBoorTriangleAt(t : number,
    // There must be a better way to do this.
    // I have posted a question on Twitter.
    let P : Point = new Point(0,0);
-   var D = [ 
+   var D = [
    [P,P,P,P],
    [P,P,P,P],
    [P,P,P,P],
@@ -2074,7 +2074,7 @@ function DeBoorTriangleAt(t : number,
   // const order : number = 4;
   // /*let D : Point[][] = new Array(new Array()); // Does not work*/
   // var D: Point[][] = new Array(new Array(order*order)); // Does not work
-    
+
    for (j = 0; j <= itop; j++)
    {  // Begin j-loop
       D[0][j] = pt[ispan-degree+j];
@@ -2110,7 +2110,7 @@ class PolyBezierHelper
       this.currBezierIndex = currBezierIndex;
       this.currBezierNormalizedParm = currBezierNormalizedParm;
    }
-}  // End class PolyBezierHelper 
+}  // End class PolyBezierHelper
 
 class PolyBezier
 { // Begin class PolyBezier
@@ -2221,7 +2221,7 @@ class PolyBezier
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  // getCurrLineIndexAndCurrLineParm - method of PolyBezier
+  // getCurrBezierIndexAndCurrBezierParm - method of PolyBezier
   // Given a parameter, find the index of the current Bezier and the normalized value of the
   // local parameter on that Bezier
   //
@@ -2316,7 +2316,7 @@ class DistinctKnotAndMultiplicity
   DistinctKnot : number;
   Multiplicity : number;
 
-  constructor(DistinctKnot : number, 
+  constructor(DistinctKnot : number,
               Multiplicity : number)
   {
     this.DistinctKnot = DistinctKnot;
@@ -2329,7 +2329,7 @@ class DistinctKnotAndMultiplicity
     stringRep = "Distinct Knot = " + this.DistinctKnot.toString() + " Multiplicity = " + this.Multiplicity.toString();
     return stringRep;
   }
-    
+
 }
 
 
@@ -2347,16 +2347,16 @@ class CubicSpline
   //
   // input: CtrlPts - the array of control points
   // input: ExplicitKnots - the array of distinct knots
-  // 
+  //
   // Note: No input checking is done by this constructor
   //////////////////////////////////////////////////////////////////////////////
     constructor(CtrlPts : Point[],
                 ExplicitKnots : number[])
     {
       this.degree = 3;
-      
+
       this.CtrlPts = new Array<Point>();
-      
+
       for (var iPt : number = 0; iPt < CtrlPts.length; iPt++)
       {
         var x : number = CtrlPts[iPt].x;
@@ -2430,7 +2430,7 @@ class CubicSpline
     var thisIsValid : boolean = true; // innocent until proven guilty
     var nCrtlPts : number = this.CtrlPts.length;
     var nKts : number = this.ExplicitKnots.length;
-    
+
     var order : number = this.degree + 1;
     var delta : number = nKts - nCrtlPts;
     if (delta != order)
@@ -2459,7 +2459,7 @@ class CubicSpline
 // 	int last = [self nKts] - [self degree] - 1;
 // 	int spanIndex = [SplineUtilities BinarySearchGivenParm:t Knots:t_ FirstIndex:first LastIndex:last];
 // 	return spanIndex;
-// }  
+// }
   //////////////////////////////////////////////////////////////////////////////
   // findSpan - method of CubicSpline
   // Returns the span index on this CubicSpline at the input parameter
@@ -2505,14 +2505,14 @@ class CubicSpline
   positionAtParm(t : number) : Point
   {
     let ispan : number = this.findSpan(t);
-    
+
     const itop : number = this.degree; // but we may have to make this degree - multiplicity
     var D : Point[][];
 
     D = DeBoorTriangleAt(t, ispan, this.degree, itop, this.ExplicitKnots, this.CtrlPts); // will we get back D?
 
     let Pos : Point = D[this.degree][this.degree];
-    
+
     return Pos;
   }
 
@@ -2525,7 +2525,7 @@ class CubicSpline
 // 	float lastKnot = [self knotAtIndex:[self nKts]-1];
 // 	if ((firstKnot < kvalue) && (kvalue < lastKnot))
 // 	{   // begin case of kvalue in open interval of the domain
-		
+
 // 		// Declare local variables
 
 // 		int i,j,m,noldkts,noldpts,nnewkts,nnewpts;
@@ -2537,7 +2537,7 @@ class CubicSpline
 // 		float * oldy;
 // 		float * newx;
 // 		float * newy;
-		
+
 // 		int iSpan = [self findSpan:kvalue];
 // 		noldkts = [self nKts];
 // 		noldpts = [self nCpts];
@@ -2546,27 +2546,27 @@ class CubicSpline
 // 		newkt = (float *)malloc(nnewkts*sizeof(float));
 // 		newx = (float *)malloc(nnewpts*sizeof(float));
 // 		newy = (float *)malloc(nnewpts*sizeof(float));
-		
+
 // 		// copy those that can be copied
 // 		oldkt = t_;
 // 		oldx = x_;
 // 		oldy = y_;
 // 		m = [self degree];
 // 		i = iSpan + 1;
-		
+
 // 		nleft = i;
 // 		memcpy(&newkt[0], &oldkt[0], nleft*sizeof(float));
 // 		newkt[i] = kvalue;
 // 		nright = nnewkts - nleft - 1;
 // 		memcpy(&newkt[i+1], &oldkt[i], nright*sizeof(float));
-		
+
 // 		nleft = i - m;
 // 		memcpy(&newx[0], &oldx[0], nleft*sizeof(float));
 // 		memcpy(&newy[0], &oldy[0], nleft*sizeof(float));
 // 		nright = nnewpts - nleft - m;
 // 		memcpy(&newx[nleft + m], &oldx[nleft + m - 1], nright*sizeof(float));
 // 		memcpy(&newy[nleft + m], &oldy[nleft + m - 1], nright*sizeof(float));
-		
+
 // 		// calculate those that need to be calculated
 // 		for (j = i - m; j <= i - 1; j++)
 // 		{
@@ -2575,20 +2575,20 @@ class CubicSpline
 //      newx[j] = a*oldx[j] + abar*oldx[j-1];
 // 			newy[j] = a*oldy[j] + abar*oldy[j-1];
 // 		}
-		
+
 // 		// out with the old and in with the new
 // 		free(oldkt);
 // 		free(oldx);
 // 		free(oldy);
-		
+
 // 		t_ = newkt;
 // 		x_ = newx;
 // 		y_ = newy;
-		
+
 // 		// Since this is not a production system, we will do this in not the most efficient way
 // 		++nCpts_;
 // 		[self establishDistinctKnotsAndMultiplicities];
-		
+
 // 	}   //   end case of kvalue in open interval of the domain
 // }
   addknot(kvalue : number)
@@ -2622,7 +2622,7 @@ class CubicSpline
         oldpt[index] = this.CtrlPts[index];
       }
 
-                 
+
       let m : number = this.degree;
       let i : number = iSpan + 1;
 
@@ -2674,10 +2674,10 @@ class CubicSpline
     let bot : number = 0; // the index of the lowest explicit knot
     let top : number = this.ExplicitKnots.length - 1; // the index of the highest explicit knot
     var i : number; // loop index
-  
+
     if ((bot <= IndexOfExplicitKnot) && (IndexOfExplicitKnot <= top))
     {  // begin case where IndexOfExplicitKnot is in the legal range
-      multiplicity = 1; // we know that the multiplicity is going to be at least 1 
+      multiplicity = 1; // we know that the multiplicity is going to be at least 1
       var ExplicitKnot : number = this.ExplicitKnots[IndexOfExplicitKnot];
 
       for (i = IndexOfExplicitKnot + 1; i <= top; i++)
@@ -2705,7 +2705,7 @@ class CubicSpline
       }
 
     }  //   end case where IndexOfExplicitKnot is in the legal range
-  
+
     return multiplicity;
   }
 
@@ -2731,11 +2731,11 @@ class CubicSpline
        DistinctKnotsAndMultiplicities.push(currItem);
        i = i + currMult;
     }
-    
+
     return DistinctKnotsAndMultiplicities;
   }
 
-  
+
 
 
   convertToPolyBezier() : PolyBezier
@@ -2761,7 +2761,7 @@ class CubicSpline
         }  //  end j-loop
       }  // end i-loop
 
-      // Begin validity checks (temporary)
+      // Begin validity checks
       var DistinctKnotsAndMultiplicities1 : DistinctKnotAndMultiplicity[] = clone.getDistinctKnotsAndMultiplicities();
       var allInternalKnotsHaveMultiplicityThree : boolean = true; // innocent until proven guilty
       for (i = 1; i < DistinctKnotsAndMultiplicities1.length - 1; i++)
@@ -2773,47 +2773,108 @@ class CubicSpline
         }
       }
 
-      if (allInternalKnotsHaveMultiplicityThree)
-      {
-        alert("All Internal Knots Have Multiplicity Three");
-      }
-      else
-      {
-        alert("NOT All Internal Knots Have Multiplicity Three");
-      }
+      // if (allInternalKnotsHaveMultiplicityThree)
+      // {
+      //   alert("All Internal Knots Have Multiplicity Three");
+      // }
+      // else
+      // {
+      //   alert("NOT All Internal Knots Have Multiplicity Three");
+      // }
 
       var modularityOfNumberOfControlPointsIsCorrect : boolean = false; // guilty unless proven innocent
       var nCpts : number = clone.CtrlPts.length;
-     if ( ((nCpts - 4) % 3) == 0)
-     {
-       modularityOfNumberOfControlPointsIsCorrect = true;
-     }
+      if ( ((nCpts - 4) % 3) == 0)
+      {
+        modularityOfNumberOfControlPointsIsCorrect = true;
+      }
 
-     if (modularityOfNumberOfControlPointsIsCorrect)
-     {
-       alert("The modularity of the number of control points is correct")
-     }
-     else
-     {
-       alert("The modularity of the number of control points is not correct");
-     }
+      //  if (modularityOfNumberOfControlPointsIsCorrect)
+      //  {
+      //    alert("The modularity of the number of control points is correct")
+      //  }
+      //  else
+      //  {
+      //    alert("The modularity of the number of control points is not correct");
+      //  }
+      //   End validity checks
 
-     
+      // If and only if the validity tests passed, represent the clone with multiplicity-degree
+      // internal knots as a PolyBezier object.
 
-      //   End validity checks (temporary)
-      
+      if (allInternalKnotsHaveMultiplicityThree && modularityOfNumberOfControlPointsIsCorrect)
+      {  // Begin representing the clone as a PolyBezier object
+        //  alert("Begin representing the clone as a PolyBezier object.");
+        var nBezierComponents : number = (clone.CtrlPts.length - 4)/3 + 1;
+        //  alert("nBezierComponents = " + nBezierComponents);
+
+        //	for (int iComponent = 0; iComponent < nBezierComponents; iComponent++)
+        // 			{
+        // 				// Create a Bezier curve using the correct control points
+        // 				int firstIndex = 3*iComponent;
+        // 				NSPoint currControlPoints[4];
+        // 				for (int iCurrControlPoint = 0; iCurrControlPoint < 4; iCurrControlPoint++)
+        // 				{
+        // 					currControlPoints[iCurrControlPoint] = [clone controlPointAtIndex:firstIndex + iCurrControlPoint];
+        // 				}
+        // 				CubicBezierModel * currBezierCurve = [[[CubicBezierModel alloc] initWithControlPoints:currControlPoints] autorelease]; // added the autorelease RDF 4:30 PM August 10
+        // 				// printf("Data for currBezierCurve");
+        // 				// [currBezierCurve dump];
+
+        // 				// call appendCubicBezier with that cubic Bezier
+
+        // 				float startParm = [clone distinctKnotAtIndex:iComponent];
+        // 				float endParm = [clone distinctKnotAtIndex:iComponent + 1];
+
+        // 				[polyBezierCurve appendCubicBezier:currBezierCurve withStartParm:startParm andEndParm:endParm];
+        // 				// [currBezierCurve release]; // removed the release RDF 4:30 PM August 10
+
+
+        // 			}
+        var iComponent : number;
+        var iBreakPoint : number;
+        var Components : CubicBezierCurve[] = new Array();
+        var Breakpoints : number[] = new Array();
+        for (iComponent = 0; iComponent < nBezierComponents; iComponent++)
+        {  // begin iComponent loop
+          var firstIndex : number = 3*iComponent;
+          var currControlPoints : Point[] = new Array<Point>(4);
+          for (var iCurrControlPoint : number = 0; iCurrControlPoint < 4; iCurrControlPoint++)
+          {
+            currControlPoints[iCurrControlPoint] = clone.CtrlPts[firstIndex + iCurrControlPoint];
+          }
+
+          var currBezierCurve : CubicBezierCurve = new CubicBezierCurve(currControlPoints[0],
+            currControlPoints[1],
+            currControlPoints[2],
+            currControlPoints[3]);
+
+            Components.push(currBezierCurve);
+          }  //   end iComponent loop
+
+          var nBreakpoints = DistinctKnotsAndMultiplicities1.length;
+          for (iBreakPoint = 0; iBreakPoint < nBreakpoints; iBreakPoint++)
+          {
+            var currBreakPoint = DistinctKnotsAndMultiplicities1[iBreakPoint].DistinctKnot;
+            Breakpoints.push(currBreakPoint);
+          }
+
+          polyBezierCurve = new PolyBezier(Components, Breakpoints);
+
+        }  //   End representing the clone as a PolyBezier object
+
       } //   end case where degree is 3
-    return polyBezierCurve;
-  }
+      return polyBezierCurve;
+    }
 
 // From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
 // We will use the following Objective-C code as a basis for implementing the corresponding TypeScript function.
 // -(CubicPolyBezierModel *) convertToPolyBezier
 // {
 // 	// only do this if the degree is 3
- 	
+
 // 	CubicPolyBezierModel * polyBezierCurve = nil;
-	
+
 // 	if ([self degree] == 3)
 // 	{
 // 		CubicSplineModel * clone = [self copy];
@@ -2829,10 +2890,10 @@ class CubicSpline
 // 				[clone addKnot:currDistinctKnot];
 // 			}
 // 		}
-		
+
 // 		// Do some sanity checks for the resulting spline
 // 		// All internal knots should be of multiplicity equal to 3
-		
+
 // 		nInternalDistinctKnots = [clone nDistinctKnots] - 2;
 // 		BOOL allInternalKnotsHaveMultiplicityThree = YES; // innocent until proven guilty
 // 		BOOL numberOfControlPointsIsCorrect = NO; // guilty until proven innocent
@@ -2844,23 +2905,23 @@ class CubicSpline
 // 				break;
 // 			}
 // 		}
-		
+
 // 		// NSLog(@"In convertToPolyBezier:  allInternalKnotsHaveMultiplicityThree = %d", allInternalKnotsHaveMultiplicityThree);
-		
+
 // 		if (allInternalKnotsHaveMultiplicityThree)
-// 		{ 
-			
+// 		{
+
 // 			// want to make sure that the number of control points is of the form 4 + 3*(n-1) where n is the number of non-trivial spans
 // 			if ((([clone nCpts] - 4) % 3)==0)
 // 				numberOfControlPointsIsCorrect = YES;
 // 		}
-		
+
 // 		if (allInternalKnotsHaveMultiplicityThree && numberOfControlPointsIsCorrect)
 // 		{
 // 			int nBezierComponents = (([clone nCpts] - 4)/ 3) + 1;
 // 			// NSLog(@"nBezierComponents = %d",nBezierComponents);
 // 			polyBezierCurve = [[[CubicPolyBezierModel alloc] init] autorelease];
-			
+
 // 			for (int iComponent = 0; iComponent < nBezierComponents; iComponent++)
 // 			{
 // 				// Create a Bezier curve using the correct control points
@@ -2873,30 +2934,30 @@ class CubicSpline
 // 				CubicBezierModel * currBezierCurve = [[[CubicBezierModel alloc] initWithControlPoints:currControlPoints] autorelease]; // added the autorelease RDF 4:30 PM August 10
 // 				// printf("Data for currBezierCurve");
 // 				// [currBezierCurve dump];
-				
+
 // 				// call appendCubicBezier with that cubic Bezier
-				
+
 // 				float startParm = [clone distinctKnotAtIndex:iComponent];
 // 				float endParm = [clone distinctKnotAtIndex:iComponent + 1];
-				
+
 // 				[polyBezierCurve appendCubicBezier:currBezierCurve withStartParm:startParm andEndParm:endParm];
 // 				// [currBezierCurve release]; // removed the release RDF 4:30 PM August 10
-				
-				
+
+
 // 			}
-			
+
 // 		}
 // 			[clone release];
 // 	}
-	
+
 // 	return polyBezierCurve;
-	
+
 // }
 
 
 
 
-} // End class CubicSpline  
+} // End class CubicSpline
 
 //   End code to support BusyBSpline
 
@@ -2906,7 +2967,7 @@ class Line
 {   // Begin class Line
     StartPt : Point;
     EndPt : Point;
-    
+
   //////////////////////////////////////////////////////////////////////////////
   // constructor for Line
   // Creates an instance of Line
@@ -2940,7 +3001,7 @@ class Line
      stringRep += "  EndPt = "
      stringRep += this.EndPt.toString();
      stringRep += "<p>";
-    
+
      return stringRep;
   }
 
@@ -2958,7 +3019,7 @@ class Line
   positionAtParm(t : number) : Point
   {
      var Pos : Point = linearCombination(1.0 - t, this.StartPt, t, this.EndPt);
-     
+
      return Pos;
   }
 
@@ -3060,7 +3121,7 @@ class PolyLine
         stringRep += this.Pt[i].toString();
         stringRep += "<p>";
      }
-    
+
      return stringRep;
   }
 
@@ -3271,7 +3332,7 @@ function ArrayLogger<T>(ArrayDescription : string,
   }
   StartParagraph();
   document.writeln("  End " + ArrayDescription);
-  EndParagraph();   
+  EndParagraph();
 }
 
 function TestPointClass()
@@ -3426,7 +3487,7 @@ function TestCubicSpline()
    document.writeln("<p>");
    document.writeln("Evaluation Test");
    document.writeln("<p>");
-   
+
    let a : number = thePolyBezierObject.Breakpoint[0];
    let iLastBreakPoint : number = thePolyBezierObject.Breakpoint.length - 1;
    let b : number = thePolyBezierObject.Breakpoint[iLastBreakPoint];
@@ -3530,8 +3591,8 @@ function TestCubicSpline()
      document.writeln(jFound.toString());
      document.writeln("<p>")
    }
-   
-   document.writeln("<p> Leaving TestBinarySearchSortedArray()</p>");    
+
+   document.writeln("<p> Leaving TestBinarySearchSortedArray()</p>");
  }
 
  function TestArrayLogger()
@@ -3559,7 +3620,7 @@ function TestCubicSpline()
     document.writeln(L.toString());
 
     const iTop : number = 10;
-    
+
     for (var i =0; i <= 10; i++)
     {
       let u : number = i/iTop;
@@ -3570,7 +3631,7 @@ function TestCubicSpline()
       document.writeln("<p>");
     }
 
-    document.writeln("<p>Leaving TestLine()</p>");  
+    document.writeln("<p>Leaving TestLine()</p>");
  }
 
  function TestPolyLine()
@@ -3612,7 +3673,7 @@ function TestCubicSpline()
    // The test passes if the results agree, to within tolerance.
    var i : number;
    let P : Array<Point> = new Array(4);
-   
+
    let P0 : Point = new Point(.2958, .7033);
    let P1 : Point = new Point(1.347, 1.2309);
    let P2 : Point = new Point(2.8049, 2.5640);
@@ -3622,7 +3683,7 @@ function TestCubicSpline()
    P[1] = P1;
    P[2] = P2;
    P[3] = P3;
-   
+
    let theBezierCurve : CubicBezierCurve = new CubicBezierCurve(P[0], P[1], P[2], P[3]);
    document.writeln("<p>")
    document.writeln("Data for theBezierCurve");
@@ -3722,12 +3783,12 @@ function TestCubicSpline()
     document.writeln("For kArg = " + kArg + "&nbsp &nbsp &nbsp");
     document.writeln("kPos = " + kPos.toString() + "<p>");
   }
-    document.writeln("<p>Leaving TestCubicSplineEvaluatorsCase002</p>"); 
+    document.writeln("<p>Leaving TestCubicSplineEvaluatorsCase002</p>");
  }
 
  function TestCubicSplineEvaluatorsCase003()
  {
-   document.writeln("<p>Entering TestCubicSplineEvaluatorsCase003</p>"); 
+   document.writeln("<p>Entering TestCubicSplineEvaluatorsCase003</p>");
    var P : Array<Point> = new Array();
    const basisIndex : number = 2;
    for (var i : number = 0; i < 4; i++)
@@ -3768,18 +3829,18 @@ function TestCubicSpline()
     var Yerror : number = Math.abs(3.0*(1.0 - kArg)*kArg*kArg - kPos.y); // to match appropriate cubic Bernstein basis function
     maxXerror = Math.max(maxXerror, Xerror);
     maxYerror = Math.max(maxYerror, Yerror);
-  }  
+  }
   document.writeln("maxXerror = " + maxXerror.toString() + "<p>");
   document.writeln("maxYerror = " + maxYerror.toString() + "<p>");
-   
-   document.writeln("<p>Leaving TestCubicSplineEvaluatorsCase003</p>"); 
+
+   document.writeln("<p>Leaving TestCubicSplineEvaluatorsCase003</p>");
  }
 
  function TestMarsden()
  {
    document.writeln("<p>Entering TestMarsden</p>");
    var t : Array<number> = new Array();
-   
+
    t.push(2);
    t.push(2);
    t.push(2);
@@ -3798,7 +3859,7 @@ function TestCubicSpline()
    {
      marsdenVals.push(t[i+1] + t[i+2] + t[i+3]);
    }
-   
+
    for (i = 0; i < marsdenVals.length; i++)
    {
      marsdenVals[i] = marsdenVals[i]/3.0;
@@ -3815,7 +3876,7 @@ function TestCubicSpline()
    var DataForMarsdenSpline : string = marsdenSpline.toString();
    document.writeln(DataForMarsdenSpline);
    document.writeln("<p>");
-   
+
    var nIntervals : number = 44;
    var delta : number = (t[t.length-1] - t[0])/nIntervals;
    var maxError = 0.0;
@@ -3829,7 +3890,7 @@ function TestCubicSpline()
      maxError = Math.max(maxError, curError);
    }
    document.writeln("<p> maxError = " + maxError.toString() + "<p>");
-   
+
    // We should put addknot tests into their own routine.
    marsdenSpline.addknot(6.0);
    document.writeln("<p>");
@@ -3857,18 +3918,18 @@ function TestCubicSpline()
  function TestCubicSplineEvaluators()
  {
    document.writeln("Entering TestCubicSplineEvaluators");
-   
+
   TestCubicSplineEvaluatorsCase001();
   TestCubicSplineEvaluatorsCase002();
   TestCubicSplineEvaluatorsCase003();
   TestMarsden();
-  
+
    document.writeln(" Leaving TestCubicSplineEvaluators");
  }
 
  function get2DArray(n : number):Point[][]
  {
-    
+
    var D : Point[][] = new Array(n);
    for (var i = 0; i < n; i++)
    {
@@ -3930,7 +3991,7 @@ function TestCubicSpline()
 
    var Before : CubicSpline = new CubicSpline(P, t);
    var After : CubicSpline = Before.clone();
-   
+
    document.writeln("<p>");
    document.writeln("Data for Before");
    document.writeln("<p>");
@@ -3955,7 +4016,7 @@ function TestCubicSpline()
    document.writeln(DataForAfter);
    document.writeln("<p>");
 
-   
+
    document.writeln("<p>Testing getKnotMultiplicityAtIndex</p>");
    for (var i = -1; i <= After.ExplicitKnots.length; i++)
    {
@@ -3983,7 +4044,16 @@ function TestCubicSpline()
 
    // Temporarily throw in convertToPolyBezier
    var polyBezierCurve : PolyBezier = After.convertToPolyBezier();
-      
+   // This should become its own test, but for starters we will do it here
+
+   document.writeln("<p>");
+   document.writeln("Data for PolyBezier");
+   document.writeln("<p>");
+   var DataForPolyBezier : string = polyBezierCurve.toString();
+   document.writeln(DataForPolyBezier);
+   document.writeln("<p>");
+
+
    document.writeln("<p>Leaving TestAddKnot</p>");
  }
 
