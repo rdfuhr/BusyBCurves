@@ -2746,20 +2746,61 @@ class CubicSpline
     { // begin case where degree is 3
 
       var clone : CubicSpline = this.clone();
-      var DistincKnotsAndMultiplicities : DistinctKnotAndMultiplicity[] = clone.getDistinctKnotsAndMultiplicities()
-      var nInternalDistinctKnots = DistincKnotsAndMultiplicities.length - 2;
+      var DistincKnotsAndMultiplicities0 : DistinctKnotAndMultiplicity[] = clone.getDistinctKnotsAndMultiplicities();
+      var nInternalDistinctKnots = DistincKnotsAndMultiplicities0.length - 2;
       var i : number; // loop index
       var j : number; // loop index
       for (i = 1; i <= nInternalDistinctKnots; i++)
       {  // begin i-loop
-        var currDistinctKnot : number = DistincKnotsAndMultiplicities[i].DistinctKnot;
-        var currMultiplicity : number = DistincKnotsAndMultiplicities[i].Multiplicity;
+        var currDistinctKnot : number = DistincKnotsAndMultiplicities0[i].DistinctKnot;
+        var currMultiplicity : number = DistincKnotsAndMultiplicities0[i].Multiplicity;
         var nInsertionsHere : number = clone.degree - currMultiplicity;
         for (j = 0; j < nInsertionsHere; j++)
         {  // begin j-loop
           clone.addknot(currDistinctKnot);
         }  //  end j-loop
       }  // end i-loop
+
+      // Begin validity checks (temporary)
+      var DistinctKnotsAndMultiplicities1 : DistinctKnotAndMultiplicity[] = clone.getDistinctKnotsAndMultiplicities();
+      var allInternalKnotsHaveMultiplicityThree : boolean = true; // innocent until proven guilty
+      for (i = 1; i < DistinctKnotsAndMultiplicities1.length - 1; i++)
+      {
+        if (DistinctKnotsAndMultiplicities1[i].Multiplicity != clone.degree)
+        {
+          allInternalKnotsHaveMultiplicityThree = false;
+          break;
+        }
+      }
+
+      if (allInternalKnotsHaveMultiplicityThree)
+      {
+        alert("All Internal Knots Have Multiplicity Three");
+      }
+      else
+      {
+        alert("NOT All Internal Knots Have Multiplicity Three");
+      }
+
+      var modularityOfNumberOfControlPointsIsCorrect : boolean = false; // guilty unless proven innocent
+      var nCpts : number = clone.CtrlPts.length;
+     if ( ((nCpts - 4) % 3) == 0)
+     {
+       modularityOfNumberOfControlPointsIsCorrect = true;
+     }
+
+     if (modularityOfNumberOfControlPointsIsCorrect)
+     {
+       alert("The modularity of the number of control points is correct")
+     }
+     else
+     {
+       alert("The modularity of the number of control points is not correct");
+     }
+
+     
+
+      //   End validity checks (temporary)
       
       } //   end case where degree is 3
     return polyBezierCurve;
@@ -3901,6 +3942,9 @@ function TestCubicSpline()
    After.addknot(2.71828);
    After.addknot(3.14159);
    After.addknot(3.14159);
+   After.addknot(4.000);
+   After.addknot(4.000);
+   After.addknot(4.000);
    After.addknot(7);
    After.addknot(7);
 
@@ -3936,7 +3980,10 @@ function TestCubicSpline()
    }
 
    document.writeln("<p> maxError After Adding Knot = " + maxDiff.toString() + "<p>");
-   
+
+   // Temporarily throw in convertToPolyBezier
+   var polyBezierCurve : PolyBezier = After.convertToPolyBezier();
+      
    document.writeln("<p>Leaving TestAddKnot</p>");
  }
 
