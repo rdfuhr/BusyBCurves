@@ -4132,6 +4132,67 @@ function TestCubicSpline()
     document.writeln("<p>Leaving TestConvertToPolyBezier</p>");  
  }
 
+ function TestCubicSplineDerivativeAtParm()
+ {
+   document.writeln("<p>Entering TestCubicSplineDerivativeAtParm</p>");
+   // First let's try it with the basic spline C(t) = (t, t^3)
+   var t : Array<number> = new Array();
+   t.push(0);
+   t.push(0);
+   t.push(0);
+   t.push(0)
+   t.push(1);
+   t.push(1);
+   t.push(1);
+   t.push(1);
+     
+   const nCpts = t.length - 4;
+   var P : Array<Point> = new Array();
+   var i : number;
+  //  var marsdenVals : Array<number> = new Array();
+  //  for (i = 0; i < nCpts; i++)
+  //  {
+  //    marsdenVals.push(t[i+1] + t[i+2] + t[i+3]);
+  //  }
+
+  //  for (i = 0; i < marsdenVals.length; i++)
+  //  {
+  //    marsdenVals[i] = marsdenVals[i]/3.0;
+  //  }
+   for (i = 0; i < nCpts; i++)
+   {
+     P.push(new Point(KroneckerDelta(i,2),KroneckerDelta(i,3)));
+   }
+
+// We are constructing the curve whose X component and Y component
+// are each cubic Bernstein polynomials.
+
+   var ParametricBernstein : CubicSpline = new CubicSpline(P, t);
+
+   ParametricBernstein.addknot(.37);
+   ParametricBernstein.addknot(.53);
+   ParametricBernstein.addknot(.53);
+
+   const nIntervals : number = 100;
+   const delta : number = (t[t.length-1] - t[0])/nIntervals;
+   var maxDiff = 0.0;
+   for (i = 0; i <= nIntervals; i++)
+   {
+     var u = t[0] + i*delta;
+     var expectedDerivativeX : number = 6*u - 9*u*u;
+     var expectedDerivativeY : number = 3*u*u;
+     var expectedDerivative : Point = new Point(expectedDerivativeX, expectedDerivativeY);
+     var computedDerivative = ParametricBernstein.derivativeAtParm(u);
+     document.writeln("<p>For u = " + u + "&nbsp &nbsp &nbsp" + "<p>");
+     document.writeln("expectedDerivative = " + expectedDerivative.toString() + "<p>");
+     document.writeln("computedDerivative = " + computedDerivative.toString() + "<p>");
+     var diff : number = expectedDerivative.distanceTo(computedDerivative);
+     maxDiff = Math.max(diff, maxDiff);
+   }
+   document.writeln("maxDiff between expectedDerivative and computedDerivative = " + maxDiff);
+   document.writeln("<p>Leaving  TestCubicSplineDerivativeAtParm</p>");  
+ }
+
 
 function doTests()
 {
@@ -4147,5 +4208,6 @@ function doTests()
    // TestCubicSplineEvaluators();
    // Test2DArray()
    // TestAddKnot();
-   TestConvertToPolyBezier();
+   // TestConvertToPolyBezier();
+   TestCubicSplineDerivativeAtParm();
 }
