@@ -2516,6 +2516,23 @@ class CubicSpline
     return Pos;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // derivativeAtParm - method of CubicSpline
+  // Returns the derivative of this CubicBezierCurve at the input parameter
+  //
+  // input: t - parameter at which to get derivative of this CubicBezierCurve
+  // returns: derivative of this CubicSpline at parameter t
+  //
+  // Note: In this version, we are converting this CubicSpline to a 
+  // PolyBezier and then taking the derivative of the PolyBezier.
+  //////////////////////////////////////////////////////////////////////////////
+  derivativeAtParm(t : number) : Point
+  {
+     var thePolyBezier = this.convertToPolyBezier();
+     var der : Point = thePolyBezier.derivativeAtParm(t);
+     return der;
+  }
+
 //   // Based on maddknot but with changes to reflect our present implementation
 // From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
 // -(void)addKnot:(float)kvalue
