@@ -4042,24 +4042,76 @@ function TestCubicSpline()
 
    document.writeln("<p> maxError After Adding Knot = " + maxDiff.toString() + "<p>");
 
-   // Temporarily throw in convertToPolyBezier
-   var polyBezierCurve : PolyBezier = After.convertToPolyBezier();
-   // This should become its own test, but for starters we will do it here
-
-   document.writeln("<p>");
-   document.writeln("Data for PolyBezier");
-   document.writeln("<p>");
-   var DataForPolyBezier : string = polyBezierCurve.toString();
-   document.writeln(DataForPolyBezier);
-   document.writeln("<p>");
-
-
    document.writeln("<p>Leaving TestAddKnot</p>");
  }
 
  function TestConvertToPolyBezier()
  {
-    document.writeln("<p>Entering TestConvertToPolyBezier</p>"); 
+   document.writeln("<p>Entering TestConvertToPolyBezier</p>"); 
+   var P : Array<Point> = new Array();
+   P.push(new Point(0,0));
+   P.push(new Point(1,3));
+   P.push(new Point(3,2));
+   P.push(new Point(5,4));
+   P.push(new Point(7,6));
+   P.push(new Point(9,8));
+
+   var t : Array<number> = new Array();
+   t.push(0);
+   t.push(0);
+   t.push(0);
+   t.push(0);
+   t.push(2);
+   t.push(7);
+   t.push(10);
+   t.push(10);
+   t.push(10);
+   t.push(10);
+
+   var theSpline : CubicSpline = new CubicSpline(P, t);
+   
+   theSpline.addknot(2.71828);
+   theSpline.addknot(3.14159);
+   theSpline.addknot(3.14159);
+   theSpline.addknot(4.000);
+   theSpline.addknot(4.000);
+   theSpline.addknot(4.000);
+   theSpline.addknot(7);
+   theSpline.addknot(7);
+
+   document.writeln("<p>");
+   document.writeln("Data for theSpline");
+   document.writeln("<p>");
+   var DataFortheSpline : string = theSpline.toString();
+   document.writeln(DataFortheSpline);
+   document.writeln("<p>");
+
+   var thePolyBezier : PolyBezier = theSpline.convertToPolyBezier();
+
+   document.writeln("<p>");
+   document.writeln("Data for thePolyBezier");
+   document.writeln("<p>");
+   var DataForthePolyBezier : string = thePolyBezier.toString();
+   document.writeln(DataForthePolyBezier);
+   document.writeln("<p>");
+
+   var a : number = theSpline.ExplicitKnots[0];
+   var b : number = theSpline.ExplicitKnots[theSpline.ExplicitKnots.length-1];
+   const nIntervals : number = 777;
+   const delta : number = (b -a )/nIntervals;
+   var maxError = 0.0;
+
+   for (var i = 0; i <= nIntervals; i++)
+   {
+     var u : number = 1 + i*delta;
+     var splPos : Point = theSpline.positionAtParm(u);
+     var bezPos : Point = thePolyBezier.positionAtParm(u);
+     var error : number = splPos.distanceTo(bezPos);
+     maxError = Math.max(error, maxError);
+   }
+   
+   document.writeln("maxError = " + maxError.toString());
+
     document.writeln("<p>Leaving TestConvertToPolyBezier</p>");  
  }
 
