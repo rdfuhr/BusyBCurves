@@ -2452,14 +2452,8 @@ class CubicSpline
     return ClonedSpline;
   }
 
-// From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
-// -(int)findSpan:(float)t
-// {
-// 	int first = [self degree];
-// 	int last = [self nKts] - [self degree] - 1;
-// 	int spanIndex = [SplineUtilities BinarySearchGivenParm:t Knots:t_ FirstIndex:first LastIndex:last];
-// 	return spanIndex;
-// }
+
+  // Based on /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
   //////////////////////////////////////////////////////////////////////////////
   // findSpan - method of CubicSpline
   // Returns the span index on this CubicSpline at the input parameter
@@ -2477,22 +2471,7 @@ class CubicSpline
      return spanIndex;
   }
 
-
-// From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
-// -(NSPoint)PositionAtParm:(float)t
-// {
-// 	int ispan = [self findSpan:t];
-// 	float xVals[MAXORDER][MAXORDER];
-//  float yVals[MAXORDER][MAXORDER];
-// 	int d = [self degree];
-// 	[SplineUtilities deBoorTriangleAt:t SpanIndex:ispan Degree:d lastColumn:d Knots:t_ Coefs:x_ Triangle:xVals];
-// 	[SplineUtilities deBoorTriangleAt:t SpanIndex:ispan Degree:d lastColumn:d Knots:t_ Coefs:y_ Triangle:yVals];
-// 	NSPoint P;
-// 	P.x = xVals[d][d];
-// 	P.y = yVals[d][d];
-// 	return P;
-// }
-
+  // Based on /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
   //////////////////////////////////////////////////////////////////////////////
   // positionAtParm - method of CubicSpline
   // Returns the point on this CubicSpline at the input parameter
@@ -2533,81 +2512,8 @@ class CubicSpline
      return der;
   }
 
-//   // Based on maddknot but with changes to reflect our present implementation
-// From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
-// -(void)addKnot:(float)kvalue
-// {
-// 	// Only add a knot in the open interval of the domain
-// 	float firstKnot = [self knotAtIndex:0];
-// 	float lastKnot = [self knotAtIndex:[self nKts]-1];
-// 	if ((firstKnot < kvalue) && (kvalue < lastKnot))
-// 	{   // begin case of kvalue in open interval of the domain
 
-// 		// Declare local variables
-
-// 		int i,j,m,noldkts,noldpts,nnewkts,nnewpts;
-// 		int nleft,nright;
-// 		double a,abar;
-// 		float * oldkt;
-// 		float * newkt;
-// 		float * oldx;
-// 		float * oldy;
-// 		float * newx;
-// 		float * newy;
-
-// 		int iSpan = [self findSpan:kvalue];
-// 		noldkts = [self nKts];
-// 		noldpts = [self nCpts];
-// 		nnewkts = noldkts + 1;
-// 		nnewpts = noldpts + 1;
-// 		newkt = (float *)malloc(nnewkts*sizeof(float));
-// 		newx = (float *)malloc(nnewpts*sizeof(float));
-// 		newy = (float *)malloc(nnewpts*sizeof(float));
-
-// 		// copy those that can be copied
-// 		oldkt = t_;
-// 		oldx = x_;
-// 		oldy = y_;
-// 		m = [self degree];
-// 		i = iSpan + 1;
-
-// 		nleft = i;
-// 		memcpy(&newkt[0], &oldkt[0], nleft*sizeof(float));
-// 		newkt[i] = kvalue;
-// 		nright = nnewkts - nleft - 1;
-// 		memcpy(&newkt[i+1], &oldkt[i], nright*sizeof(float));
-
-// 		nleft = i - m;
-// 		memcpy(&newx[0], &oldx[0], nleft*sizeof(float));
-// 		memcpy(&newy[0], &oldy[0], nleft*sizeof(float));
-// 		nright = nnewpts - nleft - m;
-// 		memcpy(&newx[nleft + m], &oldx[nleft + m - 1], nright*sizeof(float));
-// 		memcpy(&newy[nleft + m], &oldy[nleft + m - 1], nright*sizeof(float));
-
-// 		// calculate those that need to be calculated
-// 		for (j = i - m; j <= i - 1; j++)
-// 		{
-// 			a = (kvalue - oldkt[j])/(oldkt[j+m] - oldkt[j]);
-// 			abar = 1.0 - a;
-//      newx[j] = a*oldx[j] + abar*oldx[j-1];
-// 			newy[j] = a*oldy[j] + abar*oldy[j-1];
-// 		}
-
-// 		// out with the old and in with the new
-// 		free(oldkt);
-// 		free(oldx);
-// 		free(oldy);
-
-// 		t_ = newkt;
-// 		x_ = newx;
-// 		y_ = newy;
-
-// 		// Since this is not a production system, we will do this in not the most efficient way
-// 		++nCpts_;
-// 		[self establishDistinctKnotsAndMultiplicities];
-
-// 	}   //   end case of kvalue in open interval of the domain
-// }
+  // Based upon /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
   addknot(kvalue : number)
   { // begin addknot
     // const degree : number = 3;
@@ -2754,7 +2660,7 @@ class CubicSpline
 
 
 
-
+  // The following is based on /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
   convertToPolyBezier() : PolyBezier
   {
     // Only do this if the degree is 3
@@ -2790,15 +2696,6 @@ class CubicSpline
         }
       }
 
-      // if (allInternalKnotsHaveMultiplicityThree)
-      // {
-      //   alert("All Internal Knots Have Multiplicity Three");
-      // }
-      // else
-      // {
-      //   alert("NOT All Internal Knots Have Multiplicity Three");
-      // }
-
       var modularityOfNumberOfControlPointsIsCorrect : boolean = false; // guilty unless proven innocent
       var nCpts : number = clone.CtrlPts.length;
       if ( ((nCpts - 4) % 3) == 0)
@@ -2806,48 +2703,14 @@ class CubicSpline
         modularityOfNumberOfControlPointsIsCorrect = true;
       }
 
-      //  if (modularityOfNumberOfControlPointsIsCorrect)
-      //  {
-      //    alert("The modularity of the number of control points is correct")
-      //  }
-      //  else
-      //  {
-      //    alert("The modularity of the number of control points is not correct");
-      //  }
-      //   End validity checks
-
-      // If and only if the validity tests passed, represent the clone with multiplicity-degree
+       // If and only if the validity tests passed, represent the clone with multiplicity-degree
       // internal knots as a PolyBezier object.
 
       if (allInternalKnotsHaveMultiplicityThree && modularityOfNumberOfControlPointsIsCorrect)
       {  // Begin representing the clone as a PolyBezier object
-        //  alert("Begin representing the clone as a PolyBezier object.");
+        
         var nBezierComponents : number = (clone.CtrlPts.length - 4)/3 + 1;
-        //  alert("nBezierComponents = " + nBezierComponents);
-
-        //	for (int iComponent = 0; iComponent < nBezierComponents; iComponent++)
-        // 			{
-        // 				// Create a Bezier curve using the correct control points
-        // 				int firstIndex = 3*iComponent;
-        // 				NSPoint currControlPoints[4];
-        // 				for (int iCurrControlPoint = 0; iCurrControlPoint < 4; iCurrControlPoint++)
-        // 				{
-        // 					currControlPoints[iCurrControlPoint] = [clone controlPointAtIndex:firstIndex + iCurrControlPoint];
-        // 				}
-        // 				CubicBezierModel * currBezierCurve = [[[CubicBezierModel alloc] initWithControlPoints:currControlPoints] autorelease]; // added the autorelease RDF 4:30 PM August 10
-        // 				// printf("Data for currBezierCurve");
-        // 				// [currBezierCurve dump];
-
-        // 				// call appendCubicBezier with that cubic Bezier
-
-        // 				float startParm = [clone distinctKnotAtIndex:iComponent];
-        // 				float endParm = [clone distinctKnotAtIndex:iComponent + 1];
-
-        // 				[polyBezierCurve appendCubicBezier:currBezierCurve withStartParm:startParm andEndParm:endParm];
-        // 				// [currBezierCurve release]; // removed the release RDF 4:30 PM August 10
-
-
-        // 			}
+        
         var iComponent : number;
         var iBreakPoint : number;
         var Components : CubicBezierCurve[] = new Array();
@@ -2883,97 +2746,6 @@ class CubicSpline
       } //   end case where degree is 3
       return polyBezierCurve;
     }
-
-// From /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
-// We will use the following Objective-C code as a basis for implementing the corresponding TypeScript function.
-// -(CubicPolyBezierModel *) convertToPolyBezier
-// {
-// 	// only do this if the degree is 3
-
-// 	CubicPolyBezierModel * polyBezierCurve = nil;
-
-// 	if ([self degree] == 3)
-// 	{
-// 		CubicSplineModel * clone = [self copy];
-
-// 		int nInternalDistinctKnots = [clone nDistinctKnots] - 2;
-// 		for (int i = 1; i <= nInternalDistinctKnots; i++)
-// 		{
-// 			float currDistinctKnot = [clone distinctKnotAtIndex:i];
-// 			int currMultiplicity = [clone multiplicityAtIndex:i];
-// 			int nInsertionsHere = [clone degree] - currMultiplicity;
-// 			for (int j = 0; j < nInsertionsHere; j++)
-// 			{
-// 				[clone addKnot:currDistinctKnot];
-// 			}
-// 		}
-
-// 		// Do some sanity checks for the resulting spline
-// 		// All internal knots should be of multiplicity equal to 3
-
-// 		nInternalDistinctKnots = [clone nDistinctKnots] - 2;
-// 		BOOL allInternalKnotsHaveMultiplicityThree = YES; // innocent until proven guilty
-// 		BOOL numberOfControlPointsIsCorrect = NO; // guilty until proven innocent
-// 		for (int i = 1; i <= nInternalDistinctKnots; i++)
-// 		{
-// 			if ([clone multiplicityAtIndex:i] != 3)
-// 			{
-// 				allInternalKnotsHaveMultiplicityThree = NO;
-// 				break;
-// 			}
-// 		}
-
-// 		// NSLog(@"In convertToPolyBezier:  allInternalKnotsHaveMultiplicityThree = %d", allInternalKnotsHaveMultiplicityThree);
-
-// 		if (allInternalKnotsHaveMultiplicityThree)
-// 		{
-
-// 			// want to make sure that the number of control points is of the form 4 + 3*(n-1) where n is the number of non-trivial spans
-// 			if ((([clone nCpts] - 4) % 3)==0)
-// 				numberOfControlPointsIsCorrect = YES;
-// 		}
-
-// 		if (allInternalKnotsHaveMultiplicityThree && numberOfControlPointsIsCorrect)
-// 		{
-// 			int nBezierComponents = (([clone nCpts] - 4)/ 3) + 1;
-// 			// NSLog(@"nBezierComponents = %d",nBezierComponents);
-// 			polyBezierCurve = [[[CubicPolyBezierModel alloc] init] autorelease];
-
-// 			for (int iComponent = 0; iComponent < nBezierComponents; iComponent++)
-// 			{
-// 				// Create a Bezier curve using the correct control points
-// 				int firstIndex = 3*iComponent;
-// 				NSPoint currControlPoints[4];
-// 				for (int iCurrControlPoint = 0; iCurrControlPoint < 4; iCurrControlPoint++)
-// 				{
-// 					currControlPoints[iCurrControlPoint] = [clone controlPointAtIndex:firstIndex + iCurrControlPoint];
-// 				}
-// 				CubicBezierModel * currBezierCurve = [[[CubicBezierModel alloc] initWithControlPoints:currControlPoints] autorelease]; // added the autorelease RDF 4:30 PM August 10
-// 				// printf("Data for currBezierCurve");
-// 				// [currBezierCurve dump];
-
-// 				// call appendCubicBezier with that cubic Bezier
-
-// 				float startParm = [clone distinctKnotAtIndex:iComponent];
-// 				float endParm = [clone distinctKnotAtIndex:iComponent + 1];
-
-// 				[polyBezierCurve appendCubicBezier:currBezierCurve withStartParm:startParm andEndParm:endParm];
-// 				// [currBezierCurve release]; // removed the release RDF 4:30 PM August 10
-
-
-// 			}
-
-// 		}
-// 			[clone release];
-// 	}
-
-// 	return polyBezierCurve;
-
-// }
-
-
-
-
 } // End class CubicSpline
 
 //   End code to support BusyBSpline
