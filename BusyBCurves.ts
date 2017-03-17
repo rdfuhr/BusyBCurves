@@ -4132,9 +4132,9 @@ function TestCubicSpline()
     document.writeln("<p>Leaving TestConvertToPolyBezier</p>");  
  }
 
- function TestCubicSplineDerivativeAtParm()
+ function TestCubicSplineEvaluatorsAtParm()
  {
-   document.writeln("<p>Entering TestCubicSplineDerivativeAtParm</p>");
+   document.writeln("<p>Entering TestCubicSplineEvaluatorsAtParm</p>");
    // First let's try it with the basic spline C(t) = (t, t^3)
    var t : Array<number> = new Array();
    t.push(0);
@@ -4149,16 +4149,7 @@ function TestCubicSpline()
    const nCpts = t.length - 4;
    var P : Array<Point> = new Array();
    var i : number;
-  //  var marsdenVals : Array<number> = new Array();
-  //  for (i = 0; i < nCpts; i++)
-  //  {
-  //    marsdenVals.push(t[i+1] + t[i+2] + t[i+3]);
-  //  }
-
-  //  for (i = 0; i < marsdenVals.length; i++)
-  //  {
-  //    marsdenVals[i] = marsdenVals[i]/3.0;
-  //  }
+  
    for (i = 0; i < nCpts; i++)
    {
      P.push(new Point(KroneckerDelta(i,2),KroneckerDelta(i,3)));
@@ -4175,10 +4166,21 @@ function TestCubicSpline()
 
    const nIntervals : number = 100;
    const delta : number = (t[t.length-1] - t[0])/nIntervals;
-   var maxDiff = 0.0;
+   var maxPosDiff = 0.0;
+   var maxDerDiff = 0.0;
    for (i = 0; i <= nIntervals; i++)
    {
      var u = t[0] + i*delta;
+     var expectedPositionX : number = 3*(1.0-u)*u*u;
+     var expectedPositionY : number = u*u*u;
+     var expectedPosition : Point = new Point(expectedPositionX, expectedPositionY);
+     var computedPosition = ParametricBernstein.positionAtParm(u);
+     document.writeln("<p>For u = " + u + "&nbsp &nbsp &nbsp" + "<p>");
+     document.writeln("expectedPosition = " + expectedPosition.toString() + "<p>");
+     document.writeln("computedPosition = " + computedPosition.toString() + "<p>");
+     var PosDiff : number = expectedPosition.distanceTo(computedPosition);
+     maxPosDiff = Math.max(PosDiff, maxPosDiff);
+
      var expectedDerivativeX : number = 6*u - 9*u*u;
      var expectedDerivativeY : number = 3*u*u;
      var expectedDerivative : Point = new Point(expectedDerivativeX, expectedDerivativeY);
@@ -4186,11 +4188,12 @@ function TestCubicSpline()
      document.writeln("<p>For u = " + u + "&nbsp &nbsp &nbsp" + "<p>");
      document.writeln("expectedDerivative = " + expectedDerivative.toString() + "<p>");
      document.writeln("computedDerivative = " + computedDerivative.toString() + "<p>");
-     var diff : number = expectedDerivative.distanceTo(computedDerivative);
-     maxDiff = Math.max(diff, maxDiff);
+     var DerDiff : number = expectedDerivative.distanceTo(computedDerivative);
+     maxDerDiff = Math.max(DerDiff, maxDerDiff);
    }
-   document.writeln("maxDiff between expectedDerivative and computedDerivative = " + maxDiff);
-   document.writeln("<p>Leaving  TestCubicSplineDerivativeAtParm</p>");  
+   document.writeln("<p>maxDiff between expectedPosition and computedPosition = " + maxPosDiff + "<p>");
+   document.writeln("<p>maxDiff between expectedDerivative and computedDerivative = " + maxDerDiff + "<p>");
+   document.writeln("<p>Leaving  TestCubicSplineEvaluatorsAtParm</p>");  
  }
 
 
@@ -4209,5 +4212,5 @@ function doTests()
    // Test2DArray()
    // TestAddKnot();
    // TestConvertToPolyBezier();
-   TestCubicSplineDerivativeAtParm();
+   TestCubicSplineEvaluatorsAtParm();
 }
