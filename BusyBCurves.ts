@@ -2094,6 +2094,34 @@ function DeBoorTriangleAt(t : number,
    return D;
  }
 
+ function getGraphsOfCubicBSplineBasisFunctions(knots : number[]) : CubicSpline[]
+{
+  const degree : number = 3;
+  const nKts : number = knots.length;
+  const nCtrlPts : number = nKts - degree - 1;
+  var GraphsOfCubicBSplineBasisFunctions : CubicSpline[] = new Array<CubicSpline>(nCtrlPts);
+  var iBasis : number;
+  var jCtrlPt : number;
+  var x : number[] = new Array(nCtrlPts);
+  for (jCtrlPt = 0; jCtrlPt < nCtrlPts; jCtrlPt++)
+  {
+    x[jCtrlPt] = knots[jCtrlPt + 1] + knots[jCtrlPt + 2] + knots[jCtrlPt + 3];
+    x[jCtrlPt] = x[jCtrlPt]/degree;
+  }
+  for (iBasis = 0; iBasis < nCtrlPts; iBasis++)
+  {
+    var CtrlPts : Point[] = new Array<Point>(nCtrlPts);
+    for (jCtrlPt = 0; jCtrlPt < nCtrlPts; jCtrlPt++)
+    {
+      var y = KroneckerDelta(iBasis, jCtrlPt)
+      CtrlPts[jCtrlPt] = new Point(x[jCtrlPt],y);
+    }
+    var CurrGraphOfBasisFunction : CubicSpline = new CubicSpline(CtrlPts, knots);
+    GraphsOfCubicBSplineBasisFunctions[iBasis] = CurrGraphOfBasisFunction;
+  }
+  return GraphsOfCubicBSplineBasisFunctions;
+}
+
 //   End utilities that can be used by PolyBezier and CubicSpline objects
 
 
