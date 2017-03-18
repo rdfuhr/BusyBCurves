@@ -2746,6 +2746,26 @@ class CubicSpline
       } //   end case where degree is 3
       return polyBezierCurve;
     }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // scale - method of CubicSpline
+  // Scales this CubicSpline using specified scale factors
+  //
+  // input: xScale - the scale factor in the x direction
+  // input: yScale - the scale factor in the y direction
+  //
+  // Note: This function was copied directly from CubicBezierCurve
+  //////////////////////////////////////////////////////////////////////////////
+  scale(xScale : number,
+        yScale : number)
+  {
+     for (var i = 0; i < this.CtrlPts.length; i++)
+     {
+        this.CtrlPts[i].x *= xScale;
+        this.CtrlPts[i].y *= yScale;
+     }
+  }
+  
 } // End class CubicSpline
 
 //   End code to support BusyBSpline
