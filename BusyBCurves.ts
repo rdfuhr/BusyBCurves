@@ -2828,6 +2828,27 @@ class CubicSpline
     ControlPolygon.draw(drawData, context);
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawControlPoints - method of CubicSpline
+  // Draws control points of this CubicSpline with specified appearance
+  //
+  // input: radius - the radius of the circles representing the control points
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  // Note: This function was copied directly from CubicBezierCurve
+  //////////////////////////////////////////////////////////////////////////////
+  drawControlPoints(radius : number,
+                    drawData : CircleDrawData,
+                    context : CanvasRenderingContext2D)
+  {
+     var controlPoints : Array<Point> = this.CtrlPts;
+     var n : number = controlPoints.length;
+     for (var i = 0; i < n; i++)
+     {
+        controlPoints[i].drawCircleHere(radius, drawData, context);
+     }
+  }
+
 } // End class CubicSpline
 
 //   End code to support BusyBSpline
