@@ -2799,6 +2799,20 @@ class CubicSpline
      }
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawCurve - method of CubicSpline
+  // Draws this CubicSpline with specified appearance
+  //
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  drawCurve(drawData : CurveDrawData,
+            context : CanvasRenderingContext2D)
+  {
+     var thePolyBezier : PolyBezier = this.convertToPolyBezier();
+     thePolyBezier.drawCurve(drawData, context);
+  }
+
 } // End class CubicSpline
 
 //   End code to support BusyBSpline
