@@ -2813,6 +2813,21 @@ class CubicSpline
      thePolyBezier.drawCurve(drawData, context);
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawControlPolygon - method of CubicSpline
+  // Draws control polygon of this CubicSpline with specified appearance
+  //
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  // Note: This function was copied directly from CubicBezierCurve
+  //////////////////////////////////////////////////////////////////////////////
+  drawControlPolygon(drawData : CurveDrawData,
+                     context : CanvasRenderingContext2D)
+  {
+    let ControlPolygon : PolyLine = new PolyLine(this.CtrlPts);
+    ControlPolygon.draw(drawData, context);
+  }
+
 } // End class CubicSpline
 
 //   End code to support BusyBSpline
