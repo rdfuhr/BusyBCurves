@@ -4039,7 +4039,7 @@ function TestCubicSpline()
  function TestCubicSplineEvaluatorsAtParm()
  {
    document.writeln("<p>Entering TestCubicSplineEvaluatorsAtParm</p>");
-   // First let's try it with the basic spline C(t) = (t, t^3)
+   
    var t : Array<number> = new Array();
    t.push(0);
    t.push(0);
@@ -4100,6 +4100,119 @@ function TestCubicSpline()
    document.writeln("<p>Leaving  TestCubicSplineEvaluatorsAtParm</p>");  
  }
 
+ function TestGetGraphsOfCubicBSplineBasisFunctions()
+ {
+   document.writeln("<p>Entering TestGetGraphsOfCubicBSplineBasisFunctions</p>");
+   var t : Array<number> = new Array();
+   t.push(0);
+   t.push(0);
+   t.push(0);
+   t.push(0);
+   t.push(1);
+   t.push(3);
+   t.push(7);
+   t.push(9);
+   t.push(9);
+   t.push(9);
+   t.push(9);
+     
+   const nCpts = t.length - 4;
+   var P : Array<Point> = new Array();
+   var i : number;
+   var j : number;
+  
+   P.push(new Point(2,5));
+   P.push(new Point(3,8));
+   P.push(new Point(5,11))
+   P.push(new Point(12,14));
+   P.push(new Point(15,13));
+   P.push(new Point(17,19));
+   P.push(new Point(21, 23));
+
+
+
+
+   var theCubicSpline : CubicSpline = new CubicSpline(P, t);
+
+   theCubicSpline.addknot(2.958);
+   theCubicSpline.addknot(7.033);
+   theCubicSpline.addknot(7.033);
+
+   var GraphsOfCubicBSplineBasisFunctions : CubicSpline[] = getGraphsOfCubicBSplineBasisFunctions(theCubicSpline.ExplicitKnots);
+
+   var nGraphs = GraphsOfCubicBSplineBasisFunctions.length;
+
+   for (var iGraph = 0; iGraph < nGraphs; iGraph++)
+   {
+     document.writeln("<p>Graph of basis function with index = " + iGraph.toString() + "</p>");
+     document.writeln(GraphsOfCubicBSplineBasisFunctions[iGraph].toString());
+   }
+
+   const nIntervals : number = 7777;
+   const delta : number = (t[t.length-1] - t[0])/nIntervals;
+   var maxError : number;
+   var curError : number;
+   var u : number;
+   document.writeln("<p>Begin x-component test</p>");
+   maxError = 0;
+   for (i = 0; i < GraphsOfCubicBSplineBasisFunctions.length; i++)
+   {
+     for (j = 0; j <= nIntervals; j++)
+     {
+       u = t[0] + j*delta; 
+       var Pos : Point = GraphsOfCubicBSplineBasisFunctions[i].positionAtParm(u);
+       var actualXcomponent : number = Pos.x;
+       var expectedXcomponent : number = u;
+       curError = Math.abs(actualXcomponent-expectedXcomponent);
+       maxError = Math.max(curError, maxError);
+     }
+   }
+   document.writeln("<p>maxError in x-component test = " + maxError.toString() + "</p>");
+   document.writeln("<p>End x-component test</p>");
+   
+   document.writeln("<p>Begin partition of unity test</p>");
+   maxError = 0;
+   const expectedSumOfBasisFunctions : number = 1.0;
+   for (j = 0; j <= nIntervals; j++)
+   {
+     u = t[0] + j*delta;
+     var actualSumOfBasisFunctions : number = 0;
+     for (i = 0; i < GraphsOfCubicBSplineBasisFunctions.length; i++)
+     {
+       var Pos : Point = GraphsOfCubicBSplineBasisFunctions[i].positionAtParm(u);
+       actualSumOfBasisFunctions = actualSumOfBasisFunctions + Pos.y;
+     }
+     curError = Math.abs(actualSumOfBasisFunctions - expectedSumOfBasisFunctions);
+     maxError = Math.max(curError, maxError);
+   }
+   document.writeln("<p>maxError in partition of unity test = " + maxError.toString() + "</p>");
+   document.writeln("<p>End partition of unity test</p>");
+
+
+   document.writeln("<p>Begin linear-combination vs evaluator test</p>");
+   maxError = 0.0;
+   
+   for (j = 0; j <= nIntervals; j++)
+   {
+     u = t[0] + delta;
+     var PositionFromEvaluation : Point = theCubicSpline.positionAtParm(u);
+
+     var PositionFromLinearCombination : Point = new Point(0.0, 0.0);
+     for (i = 0; i < GraphsOfCubicBSplineBasisFunctions.length; i++)
+     {
+       var basisval : number = GraphsOfCubicBSplineBasisFunctions[i].positionAtParm(u).y;
+       var curContribution : Point = theCubicSpline.CtrlPts[i].scalarMult(basisval);
+       PositionFromLinearCombination = PositionFromLinearCombination.plus(curContribution)
+     }
+     curError = PositionFromEvaluation.distanceTo(PositionFromLinearCombination);
+     maxError = Math.max(curError, maxError);
+   }
+   document.writeln("<p>maxError in linear-combination vs evaluator test = " + maxError.toString() + "</p>");
+   document.writeln("<p>End linear-combination vs evaluator test</p>");
+   
+   document.writeln("<p>Leaving TestGetGraphsOfCubicBSplineBasisFunctions</p>");
+ }
+
 
 function doTests()
 {
@@ -4116,5 +4229,6 @@ function doTests()
    // Test2DArray()
    // TestAddKnot();
    // TestConvertToPolyBezier();
-   TestCubicSplineEvaluatorsAtParm();
-}
+   // TestCubicSplineEvaluatorsAtParm();
+   TestGetGraphsOfCubicBSplineBasisFunctions();
+   }
