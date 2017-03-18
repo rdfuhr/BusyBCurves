@@ -2765,7 +2765,23 @@ class CubicSpline
         this.CtrlPts[i].y *= yScale;
      }
   }
-  
+
+  //////////////////////////////////////////////////////////////////////////////
+  // translate - method of CubicSpline
+  // Traslates this CubicSpline using specified displacement
+  //
+  // input: P - specified displacement
+  // Note: This function was copied directly from CubicBezierCurve
+  //////////////////////////////////////////////////////////////////////////////
+  translate(P : Point)
+  {
+     for (var i = 0; i < this.CtrlPts.length; i++)
+     {
+        this.CtrlPts[i].x += P.x;
+        this.CtrlPts[i].y += P.y;
+     }
+  }
+
 } // End class CubicSpline
 
 //   End code to support BusyBSpline
