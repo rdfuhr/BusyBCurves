@@ -2308,6 +2308,23 @@ class PolyBezier
      return Der;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawCurve - method of PolyBezier
+  // Draws this PolyBezier with specified appearance
+  //
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  drawCurve(drawData : CurveDrawData,
+            context : CanvasRenderingContext2D)
+  {
+     var nComponents : number = this.Component.length;
+     for (var i : number = 0; i < nComponents; i++)
+     {
+       this.Component[i].drawCurve(drawData, context);
+     }
+  }
+
 } // End class PolyBezier
 
 
