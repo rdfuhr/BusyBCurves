@@ -1772,6 +1772,23 @@ function defaultDrawDataForTextNearPointOnGraph() : TextDrawData
   return drawDataForTextNearPointOnGraph;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForKnots - function
+// Return the default draw data for the knots.
+//
+////////////////////////////////////////////////////////////////////////////////
+function defaultDrawDataForKnots() : RectangleDrawData
+{
+  const pointOnCurveFillColor : string = "black";
+  const pointOnCurveStrokeColor : string = "yellow";
+  const pointOnCurveStrokeWidth : number = 5.0;
+  var drawDataForKnots : RectangleDrawData =
+    new RectangleDrawData(pointOnCurveFillColor,
+                       pointOnCurveStrokeColor,
+                       pointOnCurveStrokeWidth);
+  return drawDataForKnots;
+}
+
 
 //   End implementing functions that construct and return draw data.
 
