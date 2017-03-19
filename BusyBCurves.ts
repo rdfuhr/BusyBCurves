@@ -2879,6 +2879,59 @@ class CubicSpline
      }
   }
 
+//////////////////////////////////////////////////////////////////////////////
+  // drawControlPointsWeightedForParm - method of CubicSpline
+  // Draws control points with areas proportional to basis function values
+  //
+  // input: t - the parameter for the basis functions
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //
+  // note: the sum of all the control point areas is now a global const
+  // note: the bsplineValues are now being obtained by evaluating the 
+  // appropriate element in a global array of graphs of cubic B-spline basis
+  // functions.  
+  //////////////////////////////////////////////////////////////////////////////
+  drawControlPointsWeightedForParm(t : number,
+                                   drawData : CircleDrawData,
+                                   context : CanvasRenderingContext2D)
+  {
+     var controlPoints : Array<Point> = this.CtrlPts;
+     var order : number = controlPoints.length;
+     var degree : number = order - 1;
+
+     for (var i = 0; i < order; i++)
+     {
+        var bsplineValue : number = globalGraphsOfCubicBSplineBasisFunctions[i].positionAtParm(t).y;
+        var actualArea : number = globalConstSumOfControlPointAreas*bsplineValue;
+        // NOTE: actualArea = Math.PI*(actualRadius)^2
+        // so actualRadius = sqrt(actualArea/Math.PI)
+        var actualRadius : number = Math.sqrt(actualArea/Math.PI);
+        controlPoints[i].drawCircleHere(actualRadius, drawData, context);
+        globalControlPointTargets[i] = new Circle(controlPoints[i], actualRadius);
+     }
+
+  } 
+
+  //////////////////////////////////////////////////////////////////////////////
+  // drawPointOnCurveForParm - method of CubicSpline
+  // Draws point on curve at specified parameter with specified appearance
+  //
+  // input: t - parameter at which corresponding point is to be drawn
+  // input: radius - the radius of the circle representing the point
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  // Note: This function was copied directly from CubicBezierCurve
+  //////////////////////////////////////////////////////////////////////////////
+  drawPointOnCurveForParm(t : number,
+                          radius : number,
+                          drawData : CircleDrawData,
+                          context : CanvasRenderingContext2D)
+  {
+     var P : Point = this.positionAtParm(t);
+     P.drawCircleHere(radius, drawData, context);
+  }   
+
 } // End class CubicSpline
 
 //   End code to support BusyBSpline
