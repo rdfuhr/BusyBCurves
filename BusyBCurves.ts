@@ -3029,6 +3029,31 @@ class CubicSpline
   }
 
   //////////////////////////////////////////////////////////////////////////////
+  // drawKnots - method of CubicSpline
+  // Draws knots of this CubicSpline with specified appearance
+  //
+  // input: width - the width of the rectangles representing the knots
+  // input: height - the height of the rectangles representing the knots
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  drawKnots(width : number,
+            height : number,
+            drawData : RectangleDrawData,
+            context : CanvasRenderingContext2D)
+  {
+     var DistinctKnotsAndMultiplicities : DistinctKnotAndMultiplicity[] = this.getDistinctKnotsAndMultiplicities()
+     var numInternalKnots : number = DistinctKnotsAndMultiplicities.length - 2;
+     
+     for (var i = 0; i < numInternalKnots; i++)
+     {
+        var t : number = DistinctKnotsAndMultiplicities[i].DistinctKnot;
+        var P : Point = this.positionAtParm(t);
+        P.drawRectangleHere(width, height, drawData, context);
+     }
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
   // drawControlPointsWeightedForParm - method of CubicSpline
   // Draws control points with areas proportional to basis function values
   //
