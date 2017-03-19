@@ -276,6 +276,29 @@ class Point
   }
 
   //////////////////////////////////////////////////////////////////////////////
+  // drawRectangleHere - method of Point
+  // Draws a rectangle centered at this Point with specified width, height and appearance
+  //
+  // input: width - the width of the rectangle to be drawn
+  // input: height - the height of the rectangle to be drawn
+  // input: drawData - an object containing information specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  drawRectangleHere(width : number,
+                    height : number,
+                    drawData : RectangleDrawData,
+                    context : CanvasRenderingContext2D)
+  {
+     drawData.updateContext(context);
+     context.beginPath();
+     var x : number = this.x - width/2;
+     var y : number = this.y - height/2;
+     context.rect(x, y, width, height)
+     context.fill();
+     context.stroke();
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
   // isInsideCircle - method of Point
   // Determines whether this Point is inside the given Circle
   //
