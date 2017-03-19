@@ -2932,6 +2932,40 @@ class CubicSpline
      P.drawCircleHere(radius, drawData, context);
   }   
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawVerticalLineFromCurveForParm - method of CubicSpline
+  // Draw a vertical line from a point on a curve to its local X-axis
+  //
+  // input: t - parameter that determines point on the curve
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  // input: context - the context associated with the canvas
+  // Note: This function was copied directly from CubicBezierCurve
+  //////////////////////////////////////////////////////////////////////////////
+  drawVerticalLineFromCurveForParm(t : number,
+                                   drawData : CurveDrawData,
+                                   context :CanvasRenderingContext2D)
+  {
+     var P : Point = this.positionAtParm(t);
+     // Now, we will create a point Q that has the same x coordinate as P and whose
+     // y coordinate is equal to the maximum of the y coordinates of the control points
+     // of this CubicBezierCurve.  That is because y increases as we go downward.
+     var controlPoints : Array<Point> = this.CtrlPts;
+     var yMax : number = controlPoints[0].y;
+     for (var i = 1; i < controlPoints.length; i++)
+     {
+        var yCurr : number = controlPoints[i].y;
+        if (yMax < yCurr)
+        {
+           yMax = yCurr;
+        }
+     }
+     var  Q : Point = new Point(P.x, yMax);
+
+     let VerticalLine : Line = new Line(P, Q);
+     VerticalLine.draw(drawData, context);
+  }  
+
 } // End class CubicSpline
 
 //   End code to support BusyBSpline
