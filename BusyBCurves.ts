@@ -453,6 +453,61 @@ class CircleDrawData
   }
 } // End class CircleDrawData
 
+class RectangleDrawData
+{ // Begin class RectangleDrawData
+  fillColor : string;
+  strokeColor : string;
+  curveWidth : number;
+
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for RectangleDrawData
+  // Creates an instance of RectangleDrawData
+  //
+  // input: fillColor - the color with which to fill the Circle
+  // input: strokeColor - the color with which to stroke the Circle
+  // input: curveWidth - the width of the Circle to be drawn
+  //////////////////////////////////////////////////////////////////////////////
+  constructor(fillColor : string,
+              strokeColor : string,
+              curveWidth : number)
+  {
+    this.fillColor = fillColor;
+    this.strokeColor = strokeColor;
+    this.curveWidth = curveWidth;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of RectangleDrawData
+  // Returns the string representation of this RectangleDrawData
+  //
+  // returns: the string representation of this RectangleDrawData
+  //////////////////////////////////////////////////////////////////////////////
+  toString() : string
+  {
+     var stringRep : string = "fillColor = " + this.fillColor;
+     stringRep = stringRep + "<p>";
+     stringRep = stringRep + "strokeColor = " + this.strokeColor;
+     stringRep = stringRep + "<p>";
+     var curveWidthString : string;
+     curveWidthString = this.curveWidth.toString();
+     stringRep = stringRep + "curveWidth = " + curveWidthString;
+     return stringRep;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // updateContext - method of RectangleDrawData
+  // Updates the context for the canvas using the data in RectangleDrawData
+  //
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  updateContext(context :CanvasRenderingContext2D)
+  {
+     context.fillStyle = this.fillColor;
+     context.strokeStyle = this.strokeColor;
+     context.lineWidth = this.curveWidth;
+  }
+} // End class RectangleDrawData
+
 
 class CurveDrawData
 { // Begin class CurveDrawData
