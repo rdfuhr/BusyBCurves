@@ -1465,6 +1465,53 @@ function initializeCubicBezierCurve() : CubicBezierCurve
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// initializeCubicSpline - function
+// Construct CubicSpline in its initial state
+//
+// returns: a CubicSpline
+////////////////////////////////////////////////////////////////////////////////
+function initializeCubicSpline() : CubicSpline
+{
+  var drawingCanvas : HTMLCanvasElement =
+    <HTMLCanvasElement>document.getElementById('drawingCanvas');
+
+  var width : number = drawingCanvas.width;
+  var height : number = drawingCanvas.height;
+
+  const lowerMargin : number = 0.18;
+  const upperMargin : number = 1.0 - lowerMargin;
+  
+  
+  const degree : number = 3;
+  const order : number = degree + 1;
+  const nCtrlPts : number = 6;
+  const nKts : number = nCtrlPts + order;
+  const xDelta : number = (upperMargin - lowerMargin)/(nCtrlPts-1);
+  var P : Point[] = new Array<Point>(nCtrlPts);
+  P[0] = new Point(lowerMargin*width, lowerMargin*height)
+  P[1] = new Point(P[0].x + xDelta*width, upperMargin*height);
+  P[2] = new Point(P[1].x + xDelta*width, lowerMargin*height);
+  P[3] = new Point(P[2].x + xDelta*width, upperMargin*height);
+  P[4] = new Point(P[3].x + xDelta*width, lowerMargin*height);
+  P[5] = new Point(upperMargin*width, upperMargin*height);
+  var t : number[] = new Array<number>(nKts);
+  t[0] = 0.0;
+  t[1] = 0.0;
+  t[2] = 0.0;
+  t[3] = 0.0;
+  t[4] = 1.0;
+  t[5] = 2.0;
+  t[6] = 3.0;
+  t[7] = 3.0;
+  t[8] = 3.0;
+  t[9] = 3.0;
+  var Crv : CubicSpline = new CubicSpline(P, t);
+  globalMinParm = t[0];
+   globalMaxParm = t[t.length-1];
+  return Crv;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // clearCanvas - function
 // Clear the drawing canvas
 //
