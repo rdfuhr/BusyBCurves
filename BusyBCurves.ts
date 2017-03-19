@@ -4475,7 +4475,7 @@ function TestCubicSpline()
    document.writeln("<p>Leaving TestGetGraphsOfCubicBSplineBasisFunctions</p>");
  }
 
- function testInitializeCubicSpline()
+ function TestInitializeCubicSpline()
  {
    var theDrawDataForSpline : CurveDrawData = defaultDrawDataForBezierCurve();
    var theDrawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
@@ -4518,5 +4518,5 @@ function doTests()
    // TestConvertToPolyBezier();
    // TestCubicSplineEvaluatorsAtParm();
    // TestGetGraphsOfCubicBSplineBasisFunctions();
-   testInitializeCubicSpline()
+   TestInitializeCubicSpline()
    }
