@@ -101,6 +101,7 @@ const globalConstSumOfControlPointAreas : number = globalCircleAreaFactor*10000.
 const globalConstMaxRadius : number = Math.sqrt(globalConstSumOfControlPointAreas/Math.PI);
 const globalConstMaxDiameter : number = 2.0*globalConstMaxRadius;
 const globalConstPointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
+var globalGraphsOfCubicBSplineBasisFunctions : CubicSpline[];
 
 //   End declaring some of the globals
 
