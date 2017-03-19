@@ -1779,13 +1779,13 @@ function defaultDrawDataForTextNearPointOnGraph() : TextDrawData
 ////////////////////////////////////////////////////////////////////////////////
 function defaultDrawDataForKnots() : RectangleDrawData
 {
-  const pointOnCurveFillColor : string = "black";
-  const pointOnCurveStrokeColor : string = "yellow";
-  const pointOnCurveStrokeWidth : number = 5.0;
+  const knotFillColor : string = "black";
+  const knotStrokeColor : string = "black";
+  const knotStrokeWidth : number = 5.0;
   var drawDataForKnots : RectangleDrawData =
-    new RectangleDrawData(pointOnCurveFillColor,
-                       pointOnCurveStrokeColor,
-                       pointOnCurveStrokeWidth);
+    new RectangleDrawData(knotFillColor,
+                       knotStrokeColor,
+                       knotStrokeWidth);
   return drawDataForKnots;
 }
 
@@ -3045,7 +3045,7 @@ class CubicSpline
      var DistinctKnotsAndMultiplicities : DistinctKnotAndMultiplicity[] = this.getDistinctKnotsAndMultiplicities()
      var numInternalKnots : number = DistinctKnotsAndMultiplicities.length - 2;
      
-     for (var i = 0; i < numInternalKnots; i++)
+     for (var i = 1; i <= numInternalKnots; i++)
      {
         var t : number = DistinctKnotsAndMultiplicities[i].DistinctKnot;
         var P : Point = this.positionAtParm(t);
@@ -4481,6 +4481,7 @@ function TestCubicSpline()
    var theDrawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
    var theDrawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
    var theDrawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
+   var theDrawDataForKnots : RectangleDrawData = defaultDrawDataForKnots();
   
    var theCubicSpline : CubicSpline = initializeCubicSpline();
    clearCanvas();
@@ -4493,6 +4494,9 @@ function TestCubicSpline()
    theCubicSpline.drawControlPointsWeightedForParm(tGlobal, theDrawDataForControlPoints, context);
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
    theCubicSpline.drawPointOnCurveForParm(tGlobal, radius, theDrawDataForPointOnCurve, context);
+   var width = radius/2.0;
+   var height = radius/3.0;
+   theCubicSpline.drawKnots(width, height, theDrawDataForKnots, context);
 
  }
 
