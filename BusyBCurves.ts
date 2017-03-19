@@ -13,10 +13,11 @@
 // TODO: Mar 09, 2017: Need to take a careful look at findSpan when arg is max knot. Look at my Objective-C code. - SORT OF DONE
 // TODO: Mar 10, 2017: Implement and test knot insertion for CubicSpline - SORT OF DONE
 // TODO: Mar 11, 2017: Implement and test getKnotMultiplicityAtIndex for CubicSpline - DONE
-// TODO: Mar 12, 2017: Implement, test, and use getDistinctKnotsAndMultiplicities
-// TODO: Mar 13, 2017: Change the constructor for CubicSpline so that it takes control points and explicit knots, including multiple start and end knots.  Don't do any input checking.
-// TODO: Mar 13, 2017: Implement a clone() function for CubicSpline.
-// TODO: Mar 18, 2017: Implement function that generates array of graphs of cubic B-Splines given knots
+// TODO: Mar 12, 2017: Implement, test, and use getDistinctKnotsAndMultiplicities - DONE
+// TODO: Mar 13, 2017: Change the constructor for CubicSpline so that it takes control points and explicit knots, including multiple start and end knots.  Don't do any input checking. - DONE
+// TODO: Mar 13, 2017: Implement a clone() function for CubicSpline. - DONE
+// TODO: Mar 18, 2017: Implement function that generates array of graphs of cubic B-Splines given knots - DONE
+// TODO: Mar 18, 2017: Add a globalMinParm and a globalMaxParm.  For Bezier these are 0.0 and 1.0 but what about for CubicSpline?
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -95,6 +96,8 @@ var globalPointOnCurveForParmTarget : Circle; // cannot be made a const
 var globalControlPointTargets : Array<Circle> = new Array();
 var tGlobal : number = 0.0; // cannot be made a const
 var tDeltaGlobal : number = 0.001; // cannot be made a const
+var globalMinParm : number;
+var globalMaxParm : number;
 const globalCircleAreaFactor : number = 2.0;
 const globalCircleRadiusFactor : number = Math.sqrt(globalCircleAreaFactor);
 const globalConstSumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
@@ -1320,8 +1323,8 @@ class CubicBezierCurve
         dt = ((M.minus(P)).dotProd(V))/vdotv
      }
      tGlobal += dt;
-     if (tGlobal < 0.0) tGlobal = 0.0;
-     if (tGlobal > 1.0) tGlobal = 1.0;
+     if (tGlobal < globalMinParm) tGlobal = globalMinParm;
+     if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
 
      context.clearRect(0, 0, canvas.width, canvas.height);
      this.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
@@ -1421,15 +1424,15 @@ function drawTextForNumber(t : number,
 function tGlobalUpdate() // updates the global t
 {
    tGlobal = tGlobal + tDeltaGlobal;
-   if (tGlobal > 1.0)
+   if (tGlobal > globalMaxParm)
    {
-      tGlobal = 1.0;
+      tGlobal = globalMaxParm;
       tDeltaGlobal = -1.0*tDeltaGlobal;
    }
    else
-   if (tGlobal < 0.0)
+   if (tGlobal < globalMinParm)
    {
-      tGlobal = 0.0;
+      tGlobal = globalMinParm;
       tDeltaGlobal = -1.0*tDeltaGlobal;
    }
 }
@@ -1456,6 +1459,8 @@ function initializeCubicBezierCurve() : CubicBezierCurve
   var P2 : Point = new Point(P1.x + xDelta*width, P0.y);
   var P3 : Point = new Point(upperMargin*width, P1.y);
   var Crv : CubicBezierCurve = new CubicBezierCurve(P0, P1, P2, P3);
+  globalMinParm = 0.0;
+  globalMaxParm = 1.0;
   return Crv;
 }
 
