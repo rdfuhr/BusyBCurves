@@ -1508,6 +1508,7 @@ function initializeCubicSpline() : CubicSpline
   var Crv : CubicSpline = new CubicSpline(P, t);
   globalMinParm = t[0];
   globalMaxParm = t[t.length-1];
+  globalGraphsOfCubicBSplineBasisFunctions = getGraphsOfCubicBSplineBasisFunctions(Crv.ExplicitKnots);
   return Crv;
 }
 
@@ -4367,7 +4368,8 @@ function TestCubicSpline()
    theCubicSpline.drawCurve(theDrawDataForSpline, context);
    theCubicSpline.drawControlPolygon(theDrawDataForControlPolygon, context);
    var radius = 30.0;
-   theCubicSpline.drawControlPoints(radius, theDrawDataForControlPoints, context);
+   // theCubicSpline.drawControlPoints(radius, theDrawDataForControlPoints, context);
+   theCubicSpline.drawControlPointsWeightedForParm(tGlobal, theDrawDataForControlPoints, context);
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
    theCubicSpline.drawPointOnCurveForParm(tGlobal, radius, theDrawDataForPointOnCurve, context);
 
