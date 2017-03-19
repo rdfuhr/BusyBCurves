@@ -1373,7 +1373,7 @@ class CubicBezierCurve
 ////////////////////////////////////////////////////////////////////////////////
 function getDrawingCanvas() : HTMLCanvasElement
 {
-   var document : Document;
+   // var document : Document;
    var drawingCanvas : HTMLCanvasElement =
      <HTMLCanvasElement>document.getElementById('drawingCanvas');
    return drawingCanvas;
@@ -1507,7 +1507,7 @@ function initializeCubicSpline() : CubicSpline
   t[9] = 3.0;
   var Crv : CubicSpline = new CubicSpline(P, t);
   globalMinParm = t[0];
-   globalMaxParm = t[t.length-1];
+  globalMaxParm = t[t.length-1];
   return Crv;
 }
 
@@ -4353,11 +4353,31 @@ function TestCubicSpline()
    document.writeln("<p>Leaving TestGetGraphsOfCubicBSplineBasisFunctions</p>");
  }
 
+ function testInitializeCubicSpline()
+ {
+   var theDrawDataForSpline : CurveDrawData = defaultDrawDataForBezierCurve();
+   var theDrawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
+   var theDrawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
+   var theDrawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
+  
+   var theCubicSpline : CubicSpline = initializeCubicSpline();
+   clearCanvas();
+   var context : CanvasRenderingContext2D = getDrawingContext();
+
+   theCubicSpline.drawCurve(theDrawDataForSpline, context);
+   theCubicSpline.drawControlPolygon(theDrawDataForControlPolygon, context);
+   var radius = 30.0;
+   theCubicSpline.drawControlPoints(radius, theDrawDataForControlPoints, context);
+   tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
+   theCubicSpline.drawPointOnCurveForParm(tGlobal, radius, theDrawDataForPointOnCurve, context);
+
+ }
+
 
 function doTests()
 {
    var date : Date = new Date();
-   document.writeln(date.toString());
+   // document.writeln(date.toString());
    // TestPolyBezier();
    // TestDrawData();
    // TestBinarySearchSortedArray();
@@ -4370,5 +4390,6 @@ function doTests()
    // TestAddKnot();
    // TestConvertToPolyBezier();
    // TestCubicSplineEvaluatorsAtParm();
-   TestGetGraphsOfCubicBSplineBasisFunctions();
+   // TestGetGraphsOfCubicBSplineBasisFunctions();
+   testInitializeCubicSpline()
    }
