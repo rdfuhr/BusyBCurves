@@ -1293,7 +1293,7 @@ class CubicBezierCurve
 
         graphOfCubicBernstein.drawCurve(drawDataForAllBezierArtifacts.forGraphOfCubicBernstein, context);
 
-        var pointOnGraphRadius = 3.0;
+        var pointOnGraphRadius : number = 3.0;
 
         graphOfCubicBernstein.drawPointOnCurveForParm(t,
                                                       pointOnGraphRadius,
@@ -4499,7 +4499,7 @@ function TestCubicSpline()
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
    tGlobal = tGlobal + 2.0;
    theCubicSpline.drawControlPointsWeightedForParm(tGlobal, theDrawDataForControlPoints, context);
-   theCubicSpline.drawPointOnCurveForParm(tGlobal, radius, theDrawDataForPointOnCurve, context);
+   theCubicSpline.drawPointOnCurveForParm(tGlobal, globalConstPointOnCurveRadius, theDrawDataForPointOnCurve, context);
    var width = radius/2.0;
    var height = radius/3.0;
    theCubicSpline.drawKnots(width, height, theDrawDataForKnots, context);
@@ -4523,7 +4523,9 @@ function TestCubicSpline()
    drawDataForPointOnAwakenedGraph.strokeColor = "red";
    
    var yDelta : Point = new Point(0, -sy);
-   var xDelta : Point = new Point(sx, 0)
+   var xDelta : Point = new Point(sx, 0);
+   var pointOnGraphRadius : number = 3.0;
+
    for (var i : number = 0; i < globalGraphsOfCubicBSplineBasisFunctions.length; i++)
    {
       var drawDataForPointOnGraph : CircleDrawData;
@@ -4548,7 +4550,7 @@ function TestCubicSpline()
       ClonedSpline.translate(yDelta);
       ClonedSpline.translate(xDelta);
       ClonedSpline.drawCurve(theDrawDataForBasisFunctions, context);
-      ClonedSpline.drawPointOnCurveForParm(tGlobal, radius/3.0, drawDataForPointOnGraph, context);
+      ClonedSpline.drawPointOnCurveForParm(tGlobal, pointOnGraphRadius, drawDataForPointOnGraph, context);
       
    }
    // End experiment
