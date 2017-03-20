@@ -1563,7 +1563,7 @@ function initializeCubicSpline() : CubicSpline
   
   const degree : number = 3;
   const order : number = degree + 1;
-  const nCtrlPts : number = 6;
+  const nCtrlPts : number = 7;
   const nKts : number = nCtrlPts + order;
   const xDelta : number = (upperMargin - lowerMargin)/(nCtrlPts-1);
   var P : Point[] = new Array<Point>(nCtrlPts);
@@ -1572,7 +1572,9 @@ function initializeCubicSpline() : CubicSpline
   P[2] = new Point(P[1].x + xDelta*width, lowerMargin*height);
   P[3] = new Point(P[2].x + xDelta*width, upperMargin*height);
   P[4] = new Point(P[3].x + xDelta*width, lowerMargin*height);
-  P[5] = new Point(upperMargin*width, upperMargin*height);
+  P[5] = new Point(P[4].x + xDelta*width, upperMargin*height);
+  P[6] = new Point(P[5].x + xDelta*width, lowerMargin*height);
+  
   var t : number[] = new Array<number>(nKts);
   t[0] = 0.0;
   t[1] = 0.0;
@@ -1581,9 +1583,10 @@ function initializeCubicSpline() : CubicSpline
   t[4] = 1.0;
   t[5] = 2.0;
   t[6] = 3.0;
-  t[7] = 3.0;
-  t[8] = 3.0;
-  t[9] = 3.0;
+  t[7] = 4.0;
+  t[8] = 4.0;
+  t[9] = 4.0;
+  t[10] = 4.0;
   var Crv : CubicSpline = new CubicSpline(P, t);
   globalMinParm = t[0];
   globalMaxParm = t[t.length-1];
@@ -2624,11 +2627,11 @@ class CubicSpline
   isValid() : boolean
   {
     var thisIsValid : boolean = true; // innocent until proven guilty
-    var nCrtlPts : number = this.CtrlPts.length;
+    var nControlPts : number = this.CtrlPts.length;
     var nKts : number = this.ExplicitKnots.length;
 
     var order : number = this.degree + 1;
-    var delta : number = nKts - nCrtlPts;
+    var delta : number = nKts - nControlPts;
     if (delta != order)
     {
       thisIsValid = false;
@@ -4482,6 +4485,8 @@ function TestCubicSpline()
    var theDrawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
    var theDrawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
    var theDrawDataForKnots : RectangleDrawData = defaultDrawDataForKnots();
+   theDrawDataForKnots.fillColor = "red";
+   theDrawDataForKnots.strokeColor = "red";
   
    var theCubicSpline : CubicSpline = initializeCubicSpline();
    clearCanvas();
@@ -4497,6 +4502,29 @@ function TestCubicSpline()
    var width = radius/2.0;
    var height = radius/3.0;
    theCubicSpline.drawKnots(width, height, theDrawDataForKnots, context);
+
+   // Begin experiment
+   var w : number = getDrawingCanvas().width;
+   var h : number = getDrawingCanvas().height;
+   var d : number = theCubicSpline.ExplicitKnots[theCubicSpline.ExplicitKnots.length-1]-theCubicSpline.ExplicitKnots[0];
+   var s = Math.min(h, w/d);
+   var theDrawDataForBasisFunctions : CurveDrawData = defaultDrawDataForGraphOfCubicBernstein();
+   theDrawDataForKnots.fillColor = "green";
+   theDrawDataForKnots.strokeColor = "green";
+   for (var i : number = 0; i < globalGraphsOfCubicBSplineBasisFunctions.length; i++)
+   {
+      var ClonedSpline = globalGraphsOfCubicBSplineBasisFunctions[i].clone();
+      var nCtrlPts = ClonedSpline.CtrlPts.length;
+      for (var iPt : number = 0; iPt < nCtrlPts; iPt++)
+      {
+        ClonedSpline.CtrlPts[iPt].y = 1.0 - ClonedSpline.CtrlPts[iPt].y; // could implement a yMirror method.
+      }
+      
+      ClonedSpline.scale(s,s);
+      ClonedSpline.drawCurve(theDrawDataForBasisFunctions, context);
+      ClonedSpline.drawKnots(width, height, theDrawDataForKnots, context);
+   }
+   // End experiment
 
  }
 
