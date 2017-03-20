@@ -19,6 +19,7 @@
 // TODO: Mar 18, 2017: Implement function that generates array of graphs of cubic B-Splines given knots - DONE
 // TODO: Mar 18, 2017: Add a globalMinParm and a globalMaxParm.  For Bezier these are 0.0 and 1.0 but what about for CubicSpline? - DONE
 // TODO: Mar 18, 2017: Add a method to the CubicSpline class to draw the interior knots
+// TODO: Mar 20, 2017: Implement and use positionAndDeBoorTriangleFromParm for CubicSpline class
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
