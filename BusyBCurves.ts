@@ -1563,7 +1563,7 @@ function initializeCubicSpline() : CubicSpline
   
   const degree : number = 3;
   const order : number = degree + 1;
-  const nCtrlPts : number = 7;
+  const nCtrlPts : number = 8;
   const nKts : number = nCtrlPts + order;
   const xDelta : number = (upperMargin - lowerMargin)/(nCtrlPts-1);
   var P : Point[] = new Array<Point>(nCtrlPts);
@@ -1574,6 +1574,7 @@ function initializeCubicSpline() : CubicSpline
   P[4] = new Point(P[3].x + xDelta*width, lowerMargin*height);
   P[5] = new Point(P[4].x + xDelta*width, upperMargin*height);
   P[6] = new Point(P[5].x + xDelta*width, lowerMargin*height);
+  P[7] = new Point(P[6].x + xDelta*width, upperMargin*height);
   
   var t : number[] = new Array<number>(nKts);
   t[0] = 0.0;
@@ -1584,9 +1585,10 @@ function initializeCubicSpline() : CubicSpline
   t[5] = 2.0;
   t[6] = 3.0;
   t[7] = 4.0;
-  t[8] = 4.0;
-  t[9] = 4.0;
-  t[10] = 4.0;
+  t[8] = 5.0;
+  t[9] = 5.0;
+  t[10] = 5.0;
+  t[11] = 5.0;
   var Crv : CubicSpline = new CubicSpline(P, t);
   globalMinParm = t[0];
   globalMaxParm = t[t.length-1];
@@ -4496,23 +4498,47 @@ function TestCubicSpline()
    theCubicSpline.drawControlPolygon(theDrawDataForControlPolygon, context);
    var radius = 30.0;
    // theCubicSpline.drawControlPoints(radius, theDrawDataForControlPoints, context);
-   theCubicSpline.drawControlPointsWeightedForParm(tGlobal, theDrawDataForControlPoints, context);
+   
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
+   tGlobal = tGlobal + 2.0;
+   theCubicSpline.drawControlPointsWeightedForParm(tGlobal, theDrawDataForControlPoints, context);
    theCubicSpline.drawPointOnCurveForParm(tGlobal, radius, theDrawDataForPointOnCurve, context);
    var width = radius/2.0;
    var height = radius/3.0;
    theCubicSpline.drawKnots(width, height, theDrawDataForKnots, context);
 
    // Begin experiment
+   const basisValTol : number = 0.000000001;
    var w : number = getDrawingCanvas().width;
    var h : number = getDrawingCanvas().height;
    var d : number = theCubicSpline.ExplicitKnots[theCubicSpline.ExplicitKnots.length-1]-theCubicSpline.ExplicitKnots[0];
-   var s = Math.min(h, w/d);
+   var s : number = Math.min(h, w/d);
+   s = s/2;
+   var sy : number = s;
+   var L = theCubicSpline.ExplicitKnots[theCubicSpline.ExplicitKnots.length-1]-theCubicSpline.ExplicitKnots[0];
+   var sx : number = sy/L;
    var theDrawDataForBasisFunctions : CurveDrawData = defaultDrawDataForGraphOfCubicBernstein();
-   theDrawDataForKnots.fillColor = "green";
-   theDrawDataForKnots.strokeColor = "green";
+   var drawDataForPointOnSleepingGraph : CircleDrawData = defaultDrawDataForPointOnGraph();
+   drawDataForPointOnSleepingGraph.fillColor = "black";
+   drawDataForPointOnSleepingGraph.strokeColor = "black";
+   var drawDataForPointOnAwakenedGraph : CircleDrawData = defaultDrawDataForPointOnGraph();
+   drawDataForPointOnAwakenedGraph.fillColor = "red";
+   drawDataForPointOnAwakenedGraph.strokeColor = "red";
+   
+   var yDelta : Point = new Point(0, -sy);
+   var xDelta : Point = new Point(sx, 0)
    for (var i : number = 0; i < globalGraphsOfCubicBSplineBasisFunctions.length; i++)
    {
+      var drawDataForPointOnGraph : CircleDrawData;
+      var basisVal : number = globalGraphsOfCubicBSplineBasisFunctions[i].positionAtParm(tGlobal).y
+      if (basisVal > basisValTol)
+      {
+        drawDataForPointOnGraph = drawDataForPointOnAwakenedGraph;
+      }
+      else
+      {
+        drawDataForPointOnGraph = drawDataForPointOnSleepingGraph;
+      }
       var ClonedSpline = globalGraphsOfCubicBSplineBasisFunctions[i].clone();
       var nCtrlPts = ClonedSpline.CtrlPts.length;
       for (var iPt : number = 0; iPt < nCtrlPts; iPt++)
@@ -4520,9 +4546,13 @@ function TestCubicSpline()
         ClonedSpline.CtrlPts[iPt].y = 1.0 - ClonedSpline.CtrlPts[iPt].y; // could implement a yMirror method.
       }
       
-      ClonedSpline.scale(s,s);
+      ClonedSpline.scale(sx, sy);
+      ClonedSpline.translate(theCubicSpline.CtrlPts[i]);
+      ClonedSpline.translate(yDelta);
+      ClonedSpline.translate(xDelta);
       ClonedSpline.drawCurve(theDrawDataForBasisFunctions, context);
-      ClonedSpline.drawKnots(width, height, theDrawDataForKnots, context);
+      ClonedSpline.drawPointOnCurveForParm(tGlobal, radius/3.0, drawDataForPointOnGraph, context);
+      
    }
    // End experiment
 
