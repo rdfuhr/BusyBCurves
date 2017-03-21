@@ -844,6 +844,21 @@ function drawAllDeCasteljauPoints(P : Array<Point>,
    }  //  end i-loop
 }
 
+function DrawAllDeBoorPoints(D : Point[][],
+                             drawData : CircleDrawData,
+                             context : CanvasRenderingContext2D)
+{
+  var n = D.length;
+  for (var i = 0; i < n; i++)
+  {
+    var m = D[i].length;
+    for (var j = 0; j < m; j++)
+    {
+      D[i][j].drawCircleHere(3.0, drawData, context);
+    }
+  }
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // bezierHodographPoints - function
 // Given control points of Bezier curve return control points of its hodograph
