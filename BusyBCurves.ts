@@ -21,6 +21,7 @@
 // TODO: Mar 18, 2017: Add a method to the CubicSpline class to draw the interior knots - DONE
 // TODO: Mar 20, 2017: Implement and use positionAndDeBoorTriangleFromParm for CubicSpline class - DONE
 // TODO: Mar 20, 2017: Implement a radio button set in the HTML file to toggle between Bezier and Spline and implement code in the TS file to respond to it.
+// TODO: Mar 21, 2017: Implement an enumerated type for Bezier and Spline and a global variable that is set to one of these as governed by the radio button.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
