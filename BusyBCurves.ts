@@ -277,6 +277,25 @@ class Point
   }
 
   //////////////////////////////////////////////////////////////////////////////
+  // drawUnfilledCircleHere - method of Point
+  // Draws a circle centered at this Point with specified radius and appearance
+  //
+  // input: radius - the radius of the circle to be drawn
+  // input: drawData - an object containing information specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  drawUnfilledCircleHere(radius : number,
+                       drawData : CircleDrawData,
+                        context : CanvasRenderingContext2D)
+  {
+     drawData.updateContext(context);
+     context.beginPath();
+     var anticlockwise : boolean = true; // It doesn't really matter for a full circle
+     context.arc(this.x, this.y, radius, 0, Math.PI*2, anticlockwise);
+     context.stroke();
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
   // drawRectangleHere - method of Point
   // Draws a rectangle centered at this Point with specified width, height and appearance
   //
@@ -3103,6 +3122,33 @@ class CubicSpline
   }
 
   //////////////////////////////////////////////////////////////////////////////
+  // drawControlPointsWithMaxRadius - method of CubicSpline
+  // Draws control points all with the same radius
+  //
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //
+  // note: the sum of all the control point areas is now a global const
+  //////////////////////////////////////////////////////////////////////////////
+  drawControlPointsWithMaxRadius(drawData : CircleDrawData,
+                                 context : CanvasRenderingContext2D)
+  {
+     var controlPoints : Array<Point> = this.CtrlPts;
+     var nControlPts : number = controlPoints.length;
+     
+     for (var i = 0; i < nControlPts; i++)
+     {
+        var actualArea : number = globalConstSumOfControlPointAreas;
+        // NOTE: actualArea = Math.PI*(actualRadius)^2
+        // so actualRadius = sqrt(actualArea/Math.PI)
+        var actualRadius : number = Math.sqrt(actualArea/Math.PI);
+        controlPoints[i].drawUnfilledCircleHere(actualRadius, drawData, context);
+        globalControlPointTargets[i] = new Circle(controlPoints[i], actualRadius);
+     }
+
+  } 
+
+  //////////////////////////////////////////////////////////////////////////////
   // drawControlPointsWeightedForParm - method of CubicSpline
   // Draws control points with areas proportional to basis function values
   //
@@ -3120,10 +3166,9 @@ class CubicSpline
                                    context : CanvasRenderingContext2D)
   {
      var controlPoints : Array<Point> = this.CtrlPts;
-     var order : number = controlPoints.length;
-     var degree : number = order - 1;
-
-     for (var i = 0; i < order; i++)
+     var nControlPts : number = controlPoints.length;
+     
+     for (var i = 0; i < nControlPts; i++)
      {
         var bsplineValue : number = globalGraphsOfCubicBSplineBasisFunctions[i].positionAtParm(t).y;
         var actualArea : number = globalConstSumOfControlPointAreas*bsplineValue;
@@ -3131,7 +3176,6 @@ class CubicSpline
         // so actualRadius = sqrt(actualArea/Math.PI)
         var actualRadius : number = Math.sqrt(actualArea/Math.PI);
         controlPoints[i].drawCircleHere(actualRadius, drawData, context);
-        globalControlPointTargets[i] = new Circle(controlPoints[i], actualRadius);
      }
 
   } 
@@ -4531,6 +4575,10 @@ function TestCubicSpline()
    var theDrawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
    var theDrawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
    var theDrawDataForKnots : RectangleDrawData = defaultDrawDataForKnots();
+   var fillColor : string = "white";
+   var strokeColor : string = "black";
+   var curveWidth : number = 1;
+   var theDrawDataForControlPointsWithMaxRadius : CircleDrawData = new CircleDrawData(fillColor, strokeColor, curveWidth);
    
    var theCubicSpline : CubicSpline = initializeCubicSpline();
    clearCanvas();
@@ -4543,6 +4591,7 @@ function TestCubicSpline()
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
    tGlobal = tGlobal + 2.0;
    theCubicSpline.drawControlPointsWeightedForParm(tGlobal, theDrawDataForControlPoints, context);
+   theCubicSpline.drawControlPointsWithMaxRadius(theDrawDataForControlPointsWithMaxRadius, context);
    theCubicSpline.drawPointOnCurveForParm(tGlobal, globalConstPointOnCurveRadius, theDrawDataForPointOnCurve, context);
    var width = radius/2.0;
    var height = radius/3.0;
@@ -4560,11 +4609,11 @@ function TestCubicSpline()
    var sx : number = sy/L;
    var theDrawDataForBasisFunctions : CurveDrawData = defaultDrawDataForGraphOfCubicBernstein();
    var drawDataForPointOnSleepingGraph : CircleDrawData = defaultDrawDataForPointOnGraph();
-   drawDataForPointOnSleepingGraph.fillColor = "black";
-   drawDataForPointOnSleepingGraph.strokeColor = "black";
+   drawDataForPointOnSleepingGraph.fillColor = "red";
+   drawDataForPointOnSleepingGraph.strokeColor = "red";
    var drawDataForPointOnAwakenedGraph : CircleDrawData = defaultDrawDataForPointOnGraph();
-   drawDataForPointOnAwakenedGraph.fillColor = "red";
-   drawDataForPointOnAwakenedGraph.strokeColor = "red";
+   drawDataForPointOnAwakenedGraph.fillColor = "blue";
+   drawDataForPointOnAwakenedGraph.strokeColor = "blue";
    var D : Point[][] = theCubicSpline.DeBoorTriangleAtParm(tGlobal);
    var drawDataForDeBoorPoints : CircleDrawData = defaultDrawDataForDecasteljauPoints();
    DrawAllDeBoorPoints(D, drawDataForDeBoorPoints, context);
