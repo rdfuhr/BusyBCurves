@@ -848,16 +848,32 @@ function DrawAllDeBoorPoints(D : Point[][],
                              drawData : CircleDrawData,
                              context : CanvasRenderingContext2D)
 {
-  var n = D.length;
-  for (var i = 0; i < n; i++)
+  const degree : number = 3;
+  const order : number = degree + 1;
+  for (var i = 0; i < order; i++)
   {
-    var m = D[i].length;
-    for (var j = 0; j < m; j++)
+    for (var j = i; j < order; j++)
     {
       D[i][j].drawCircleHere(3.0, drawData, context);
     }
   }
 }
+
+function DrawAllDeBoorLines(D : Point[][],
+                            drawData : CurveDrawData,
+                            context : CanvasRenderingContext2D)
+{
+  const degree : number = 3;
+  const order : number = degree + 1
+  for (var i = 0; i < order; i++)
+  {
+    for (var j = i; j < degree; j++)
+    {
+      var L : Line = new Line(D[i][j], D[i][j+1])
+      L.draw(drawData, context);
+    }
+  }
+}                            
 
 ////////////////////////////////////////////////////////////////////////////////
 // bezierHodographPoints - function
@@ -4552,6 +4568,8 @@ function TestCubicSpline()
    var D : Point[][] = theCubicSpline.DeBoorTriangleAtParm(tGlobal);
    var drawDataForDeBoorPoints : CircleDrawData = defaultDrawDataForDecasteljauPoints();
    DrawAllDeBoorPoints(D, drawDataForDeBoorPoints, context);
+   var drawDataForDeBoorLines : CurveDrawData = defaultDrawDataForDecasteljauLines();
+   DrawAllDeBoorLines(D, drawDataForDeBoorLines, context);
    
    var yDelta : Point = new Point(0, -sy);
    var xDelta : Point = new Point(sx, 0);
