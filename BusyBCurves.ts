@@ -2673,6 +2673,18 @@ class CubicSpline
      return spanIndex;
   }
 
+  DeBoorTriangleAtParm(t : number) : Point[][]
+  {
+    let ispan : number = this.findSpan(t);
+
+    const itop : number = this.degree; // but we may have to make this degree - multiplicity
+    var D : Point[][];
+
+    D = DeBoorTriangleAt(t, ispan, this.degree, itop, this.ExplicitKnots, this.CtrlPts);   
+
+    return D; 
+  }
+
   // Based on /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
   //////////////////////////////////////////////////////////////////////////////
   // positionAtParm - method of CubicSpline
@@ -4522,6 +4534,7 @@ function TestCubicSpline()
    var drawDataForPointOnAwakenedGraph : CircleDrawData = defaultDrawDataForPointOnGraph();
    drawDataForPointOnAwakenedGraph.fillColor = "red";
    drawDataForPointOnAwakenedGraph.strokeColor = "red";
+   var D : Point[][] = theCubicSpline.DeBoorTriangleAtParm(tGlobal);
    
    var yDelta : Point = new Point(0, -sy);
    var xDelta : Point = new Point(sx, 0);
