@@ -4550,6 +4550,8 @@ function TestCubicSpline()
    drawDataForPointOnAwakenedGraph.fillColor = "red";
    drawDataForPointOnAwakenedGraph.strokeColor = "red";
    var D : Point[][] = theCubicSpline.DeBoorTriangleAtParm(tGlobal);
+   var drawDataForDeBoorPoints : CircleDrawData = defaultDrawDataForDecasteljauPoints();
+   DrawAllDeBoorPoints(D, drawDataForDeBoorPoints, context);
    
    var yDelta : Point = new Point(0, -sy);
    var xDelta : Point = new Point(sx, 0);
