@@ -1577,6 +1577,8 @@ function tGlobalUpdate() // updates the global t
 ////////////////////////////////////////////////////////////////////////////////
 function initializeCubicBezierCurve() : CubicBezierCurve
 {
+  globalCurveType = CurveType.Bezier;
+  UpdateRadioButtonBasedOnGlobalCurveType();
   var drawingCanvas : HTMLCanvasElement =
     <HTMLCanvasElement>document.getElementById('drawingCanvas');
 
@@ -1604,6 +1606,8 @@ function initializeCubicBezierCurve() : CubicBezierCurve
 ////////////////////////////////////////////////////////////////////////////////
 function initializeCubicSpline() : CubicSpline
 {
+  globalCurveType = CurveType.Spline;
+  UpdateRadioButtonBasedOnGlobalCurveType();
   var drawingCanvas : HTMLCanvasElement =
     <HTMLCanvasElement>document.getElementById('drawingCanvas');
 
@@ -2161,6 +2165,26 @@ function ExploreWithMouse()
 enum CurveType {Bezier, Spline};
 
 var globalCurveType : CurveType;
+
+function UpdateRadioButtonBasedOnGlobalCurveType()
+{
+    var curvetypes = document.getElementsByName('curvetype')
+    var n = curvetypes.length;
+    for (var i : number = 0; i < n; i++)
+    {
+        var curItem : HTMLInputElement = <HTMLInputElement> curvetypes[i];
+        if (globalCurveType==CurveType.Bezier && curItem.value=="Bezier")
+        {
+          curItem.checked=true;
+          break;
+        }
+        else if (globalCurveType==CurveType.Spline && curItem.value=="Spline")
+        {
+          curItem.checked=true;
+          break;
+        }
+    } 
+}
 
 function UpdateGlobalCurveTypeBasedOnRadioButton()
 {
