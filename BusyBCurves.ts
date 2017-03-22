@@ -2158,6 +2158,11 @@ function ExploreWithMouse()
 
 //   End code related to ExploreWithMouse()
 
+function ProcessCurveTypeChange()
+{
+  
+}
+
 // Begin code related to HelpInTheFormOfAWebPage()
 function HelpInTheFormOfAWebPage()
 {
