@@ -2198,11 +2198,13 @@ function UpdateGlobalCurveTypeBasedOnRadioButton()
             if (curItem.value=="Bezier")
             {
                 globalCurveType = CurveType.Bezier;
+                ExploreWithMouse(); // temporary
                 break;
             }
             else if (curItem.value=="Spline")
             {
                 globalCurveType = CurveType.Spline;
+                TestInitializeCubicSpline(); // temporary
                 break;
             }
         }
