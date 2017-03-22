@@ -2158,9 +2158,36 @@ function ExploreWithMouse()
 
 //   End code related to ExploreWithMouse()
 
+enum CurveType {Bezier, Spline};
+
+var globalCurveType : CurveType;
+
+function UpdateGlobalCurveTypeBasedOnRadioButton()
+{
+    var curvetypes = document.getElementsByName('curvetype')
+    var n = curvetypes.length;
+    for (var i : number = 0; i < n; i++)
+    {
+        var curItem : HTMLInputElement = <HTMLInputElement> curvetypes[i];
+        if (curItem.checked)
+        {
+            if (curItem.value=="Bezier")
+            {
+                globalCurveType = CurveType.Bezier;
+                break;
+            }
+            else if (curItem.value=="Spline")
+            {
+                globalCurveType = CurveType.Spline;
+                break;
+            }
+        }
+    }
+}
+
 function HandleCurveTypeRadioButtonChange()
 {
-   alert("HandleCurveTypeRadioButtonChange()");
+  UpdateGlobalCurveTypeBasedOnRadioButton();
 }
 
 // Begin code related to HelpInTheFormOfAWebPage()
