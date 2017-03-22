@@ -2158,9 +2158,9 @@ function ExploreWithMouse()
 
 //   End code related to ExploreWithMouse()
 
-function ProcessCurveTypeChange()
+function HandleCurveTypeRadioButtonChange()
 {
-  
+   alert("HandleCurveTypeRadioButtonChange()");
 }
 
 // Begin code related to HelpInTheFormOfAWebPage()

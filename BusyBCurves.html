@@ -66,11 +66,14 @@
            id = "DoTests"
            onclick="doTests()" />
 
+</div>
+<div>           
+
     <input type="radio" 
          name="curvetype" 
          value="Bezier" 
          id="Bezier" 
-         onchange="processCurveTypeChange()"
+         onchange="HandleCurveTypeRadioButtonChange()"
          checked>
          Bezier<br>
 
@@ -78,7 +81,7 @@
          name="curvetype"
          value="Spline" 
          id="Spline"
-         onchange="processCurveTypeChange()"
+         onchange="HandleCurveTypeRadioButtonChange()"
          >
          Spline<br>       
 
