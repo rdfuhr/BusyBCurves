@@ -1900,6 +1900,28 @@ function DisableEnableButtons(startAnimationButtonDisabled : boolean,
    exploreWithMouseButton.disabled = exploreWithMouseButtonDisabled;
 }
 
+function DisableRadioButtons()
+{
+    var curvetypes = document.getElementsByName('curvetype')
+    var n = curvetypes.length;
+    for (var i : number = 0; i < n; i++)
+    {
+        var curItem : HTMLInputElement = <HTMLInputElement> curvetypes[i];
+        curItem.disabled = true;
+    }   
+}
+
+function EnableRadioButtons()
+{
+    var curvetypes = document.getElementsByName('curvetype')
+    var n = curvetypes.length;
+    for (var i : number = 0; i < n; i++)
+    {
+        var curItem : HTMLInputElement = <HTMLInputElement> curvetypes[i];
+        curItem.disabled = false;
+    }   
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Note:  It would be nice if we could replace globalLoop with a non-global, but that
 // may not be possible  From experimentation, it seems that globalLoop is an integer
@@ -1919,6 +1941,7 @@ function StartAnimation()
    var stopAnimationButtonDisabled : boolean = false;
    var exploreWithMouseButtonDisabled : boolean = true;
    DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, exploreWithMouseButtonDisabled);
+   DisableRadioButtons();
 
    var drawingCanvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('drawingCanvas');
    var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
@@ -1948,6 +1971,7 @@ function StopAnimation()
    var stopAnimationButtonDisabled : boolean = true;
    var exploreWithMouseButtonDisabled : boolean = false;
    DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, exploreWithMouseButtonDisabled);
+   EnableRadioButtons();
 
    clearInterval(globalLoop);
 }
