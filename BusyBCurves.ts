@@ -659,7 +659,7 @@ class BCurveArtifactsDrawData
   forControlPoints : CircleDrawData;
   forPointOnCurve : CircleDrawData;
   forIntermediateLines : CurveDrawData;
-  forDecasteljauPoints : CircleDrawData;
+  forIntermediatePoints : CircleDrawData;
   forGraphOfCubicBernstein : CurveDrawData;
   forPointOnGraph : CircleDrawData;
   forVerticalLineFromCurveForParm : CurveDrawData;
@@ -680,7 +680,7 @@ class BCurveArtifactsDrawData
     this.forControlPoints = defaultDrawDataForControlPoints();
     this.forPointOnCurve = defaultDrawDataForPointOnCurve();
     this.forIntermediateLines = defaultDrawDataForIntermediateLines();
-    this.forDecasteljauPoints = defaultDrawDataForIntermediatePoints();
+    this.forIntermediatePoints = defaultDrawDataForIntermediatePoints();
     this.forGraphOfCubicBernstein = defaultDrawDataForGraphOfCubicBernstein();
     this.forPointOnGraph = defaultDrawDataForPointOnGraph();
     this.forVerticalLineFromCurveForParm = defaultDrawDataForVerticalLineFromCurveForParm();
@@ -724,9 +724,9 @@ class BCurveArtifactsDrawData
     stringRep = stringRep + this.forIntermediateLines.toString();
 
     stringRep = stringRep + "<p>";
-    stringRep = stringRep + "Data for this.forDecasteljauPoints";
+    stringRep = stringRep + "Data for this.forIntermediatePoints";
     stringRep = stringRep + "<p>";
-    stringRep = stringRep + this.forDecasteljauPoints.toString();
+    stringRep = stringRep + this.forIntermediatePoints.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forGraphOfCubicBernstein";
@@ -1412,7 +1412,7 @@ class CubicBezierCurve
 
       drawAllDeCasteljauPoints(this.CtrlPts,
                                tGlobal,
-                               drawDataForAllBezierArtifacts.forDecasteljauPoints,
+                               drawDataForAllBezierArtifacts.forIntermediatePoints,
                                context);
   }
 
@@ -1762,10 +1762,10 @@ function defaultDrawDataForIntermediatePoints() : CircleDrawData
   const fillColor : string = "orange"
   const strokeColor : string = "orange"
   const strokeWidth : number = 5.0;
-  var drawDataForDeCasteljauPoints = new CircleDrawData(fillColor,
+  var drawDataForIntermediatePoints = new CircleDrawData(fillColor,
                                                             strokeColor,
                                                             strokeWidth);
-  return drawDataForDeCasteljauPoints;
+  return drawDataForIntermediatePoints;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
