@@ -679,7 +679,7 @@ class BCurveArtifactsDrawData
     this.forControlPolygon = defaultDrawDataForControlPolygon();
     this.forControlPoints = defaultDrawDataForControlPoints();
     this.forPointOnCurve = defaultDrawDataForPointOnCurve();
-    this.forDecasteljauLines = defaultDrawDataForDecasteljauLines();
+    this.forDecasteljauLines = defaultDrawDataForIntermediateLines();
     this.forDecasteljauPoints = defaultDrawDataForDecasteljauPoints();
     this.forGraphOfCubicBernstein = defaultDrawDataForGraphOfCubicBernstein();
     this.forPointOnGraph = defaultDrawDataForPointOnGraph();
@@ -1740,11 +1740,11 @@ function defaultDrawDataForPointOnCurve() : CircleDrawData
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// defaultDrawDataForDecasteljauLines - function
-// Return the default draw data for the Decasteljau Lines.
+// defaultDrawDataForIntermediateLines - function
+// Return the default draw data for the Intermediate Lines.
 //
 ////////////////////////////////////////////////////////////////////////////////
-function defaultDrawDataForDecasteljauLines() : CurveDrawData
+function defaultDrawDataForIntermediateLines() : CurveDrawData
 {
   const strokeColor : string = "brown";
   const curveWidth : number = 2;
@@ -1754,7 +1754,7 @@ function defaultDrawDataForDecasteljauLines() : CurveDrawData
 
 ////////////////////////////////////////////////////////////////////////////////
 // defaultDrawDataForDecasteljauPoints - function
-// Return the default draw data for the Decasteljau Points.
+// Return the default draw data for the Intermediate Points.
 //
 ////////////////////////////////////////////////////////////////////////////////
 function defaultDrawDataForDecasteljauPoints() : CircleDrawData
@@ -4711,7 +4711,7 @@ function TestCubicSpline()
    var D : Point[][] = theCubicSpline.DeBoorTriangleAtParm(tGlobal);
    var drawDataForDeBoorPoints : CircleDrawData = defaultDrawDataForDecasteljauPoints();
    DrawAllDeBoorPoints(D, drawDataForDeBoorPoints, context);
-   var drawDataForDeBoorLines : CurveDrawData = defaultDrawDataForDecasteljauLines();
+   var drawDataForDeBoorLines : CurveDrawData = defaultDrawDataForIntermediateLines();
    DrawAllDeBoorLines(D, drawDataForDeBoorLines, context);
    
    var yDelta : Point = new Point(0, -sy);
