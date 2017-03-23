@@ -658,7 +658,7 @@ class BCurveArtifactsDrawData
   forControlPolygon : CurveDrawData;
   forControlPoints : CircleDrawData;
   forPointOnCurve : CircleDrawData;
-  forDecasteljauLines : CurveDrawData;
+  forIntermediateLines : CurveDrawData;
   forDecasteljauPoints : CircleDrawData;
   forGraphOfCubicBernstein : CurveDrawData;
   forPointOnGraph : CircleDrawData;
@@ -679,7 +679,7 @@ class BCurveArtifactsDrawData
     this.forControlPolygon = defaultDrawDataForControlPolygon();
     this.forControlPoints = defaultDrawDataForControlPoints();
     this.forPointOnCurve = defaultDrawDataForPointOnCurve();
-    this.forDecasteljauLines = defaultDrawDataForIntermediateLines();
+    this.forIntermediateLines = defaultDrawDataForIntermediateLines();
     this.forDecasteljauPoints = defaultDrawDataForIntermediatePoints();
     this.forGraphOfCubicBernstein = defaultDrawDataForGraphOfCubicBernstein();
     this.forPointOnGraph = defaultDrawDataForPointOnGraph();
@@ -719,9 +719,9 @@ class BCurveArtifactsDrawData
     stringRep = stringRep + this.forPointOnCurve.toString();
 
     stringRep = stringRep + "<p>";
-    stringRep = stringRep + "Data for this.forDecasteljauLines";
+    stringRep = stringRep + "Data for this.forIntermediateLines";
     stringRep = stringRep + "<p>";
-    stringRep = stringRep + this.forDecasteljauLines.toString();
+    stringRep = stringRep + this.forIntermediateLines.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forDecasteljauPoints";
@@ -1406,7 +1406,7 @@ class CubicBezierCurve
 
       drawAllDeCasteljauLines(this.CtrlPts,
                               tGlobal,
-                              drawDataForAllBezierArtifacts.forDecasteljauLines,
+                              drawDataForAllBezierArtifacts.forIntermediateLines,
                               context);
 
 
@@ -1748,8 +1748,8 @@ function defaultDrawDataForIntermediateLines() : CurveDrawData
 {
   const strokeColor : string = "brown";
   const curveWidth : number = 2;
-  var drawDataForDeCasteljauLines : CurveDrawData = new CurveDrawData(strokeColor, curveWidth);
-  return drawDataForDeCasteljauLines;
+  var drawDataForIntermediateLines : CurveDrawData = new CurveDrawData(strokeColor, curveWidth);
+  return drawDataForIntermediateLines;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
