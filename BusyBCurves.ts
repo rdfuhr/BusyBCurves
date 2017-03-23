@@ -652,8 +652,8 @@ class TextDrawData
 
 } //   End class TextDrawData
 
-class BezierArtifactsDrawData
-{ // Begin class BezierArtifactsDrawData
+class BCurveArtifactsDrawData
+{ // Begin class BCurveArtifactsDrawData
   forBezierCurve : CurveDrawData;
   forControlPolygon : CurveDrawData;
   forControlPoints : CircleDrawData;
@@ -667,8 +667,8 @@ class BezierArtifactsDrawData
   forTextNearPointOnGraph : TextDrawData;
 
   //////////////////////////////////////////////////////////////////////////////
-  // constructor for BezierArtifactsDrawData
-  // Creates an instance of BezierArtifactsDrawData
+  // constructor for BCurveArtifactsDrawData
+  // Creates an instance of BCurveArtifactsDrawData
   //
   // Set each data member to the default value
   //
@@ -689,14 +689,14 @@ class BezierArtifactsDrawData
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  // toString - method of BezierArtifactsDrawData
-  // Returns the string representation of this BezierArtifactsDrawData
+  // toString - method of BCurveArtifactsDrawData
+  // Returns the string representation of this BCurveArtifactsDrawData
   //
-  // returns: the string representation of this BezierArtifactsDrawData
+  // returns: the string representation of this BCurveArtifactsDrawData
   //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
-    var stringRep : string = "Begin data for this BezierArtifactsDrawData\n";
+    var stringRep : string = "Begin data for this BCurveArtifactsDrawData\n";
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forBezierCurve";
@@ -754,13 +754,13 @@ class BezierArtifactsDrawData
     stringRep = stringRep + this.forTextNearPointOnGraph.toString();
 
     stringRep = stringRep + "<p>";
-    stringRep = stringRep + "End data for this BezierArtifactsDrawData";
+    stringRep = stringRep + "End data for this BCurveArtifactsDrawData";
     stringRep = stringRep + "<p>";
 
     return stringRep;
   }
 
-} //   End class BezierArtifactsDrawData
+} //   End class BCurveArtifactsDrawData
 
 
 // Begin utilities that are used by the CubicBezierCurve class
@@ -1321,7 +1321,7 @@ class CubicBezierCurve
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawBasisFunctionsWithParm(t : number,
-                             drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
+                             drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
                              context: CanvasRenderingContext2D)
   {
      // We will use globalConstMaxRadius to help position the graphs.
@@ -1375,7 +1375,7 @@ class CubicBezierCurve
   // input: drawDataForAllBezierArtifacts - styles for drawing everything
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
-  drawAllBezierArtifacts(drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
+  drawAllBezierArtifacts(drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
                          context : CanvasRenderingContext2D)
   {
      this.drawCurve(drawDataForAllBezierArtifacts.forBezierCurve, context);
@@ -1442,7 +1442,7 @@ class CubicBezierCurve
   //
   //////////////////////////////////////////////////////////////////////////////
   editPointOnCurve(evt : MouseEvent,
-                   drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
+                   drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement)
   {
@@ -1478,7 +1478,7 @@ class CubicBezierCurve
   //
   //////////////////////////////////////////////////////////////////////////////
   editControlPoint(evt : MouseEvent,
-                   drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
+                   drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement)
   {
@@ -1874,7 +1874,7 @@ function defaultDrawDataForKnots() : RectangleDrawData
 function animation(drawingCanvas : HTMLCanvasElement,
                    drawingContext : CanvasRenderingContext2D,
                    C : CubicBezierCurve,
-                   drawDataForAllBezierArtifacts : BezierArtifactsDrawData)
+                   drawDataForAllBezierArtifacts : BCurveArtifactsDrawData)
 {
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
@@ -1952,7 +1952,7 @@ function StartAnimation()
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
 
-   var drawDataForAllBezierArtifacts : BezierArtifactsDrawData = new BezierArtifactsDrawData();
+   var drawDataForAllBezierArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
    globalLoop = setInterval(animation,
                             10,
@@ -2048,7 +2048,7 @@ function onMouseDown(evt : MouseEvent,
 ///////////////////////////////////////////////////////////////////////////////
 function onMouseMove(evt : MouseEvent,
                      C : CubicBezierCurve,
-                     drawDataForAllBezierArtifacts : BezierArtifactsDrawData,
+                     drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
   					         drawingContext : CanvasRenderingContext2D,
 					           drawingCanvas : HTMLCanvasElement)
 {
@@ -2158,7 +2158,7 @@ function ExploreWithMouse()
 
    var C : CubicBezierCurve = initializeCubicBezierCurve();
 
-   var drawDataForAllBezierArtifacts : BezierArtifactsDrawData = new BezierArtifactsDrawData();
+   var drawDataForAllBezierArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
 
@@ -3881,7 +3881,7 @@ function TestCubicSpline()
  function TestDrawData()
  {
    document.writeln("<p>Entering TestDrawData()</p>");
-   var allDrawData : BezierArtifactsDrawData = new BezierArtifactsDrawData();
+   var allDrawData : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
    var stringRepOfAllDrawData : string = allDrawData.toString();
    document.writeln(stringRepOfAllDrawData);
    document.writeln("<p> Leaving TestDrawData()</p>");
