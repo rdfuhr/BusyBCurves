@@ -681,7 +681,7 @@ class BCurveArtifactsDrawData
     this.forPointOnCurve = defaultDrawDataForPointOnCurve();
     this.forIntermediateLines = defaultDrawDataForIntermediateLines();
     this.forIntermediatePoints = defaultDrawDataForIntermediatePoints();
-    this.forGraphOfCubicBernstein = defaultDrawDataForGraphOfCubicBernstein();
+    this.forGraphOfCubicBernstein = defaultDrawDataForGraphOfBasisFunction();
     this.forPointOnGraph = defaultDrawDataForPointOnGraph();
     this.forVerticalLineFromCurveForParm = defaultDrawDataForVerticalLineFromCurveForParm();
     this.forTextNearPointOnCurve = defaultDrawDataForTextNearPointOnCurve();
@@ -1769,11 +1769,12 @@ function defaultDrawDataForIntermediatePoints() : CircleDrawData
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// defaultDrawDataForGraphOfCubicBernstein - function
-// Return the default draw data for the graphs of the cubic Bernstein polynomials.
+// defaultDrawDataForGraphOfBasisFunction - function
+// Return the default draw data for the graphs of the basis functions, which
+// include the Bernstein polynomials and the B-Splines.
 //
 ////////////////////////////////////////////////////////////////////////////////
-function defaultDrawDataForGraphOfCubicBernstein() : CurveDrawData
+function defaultDrawDataForGraphOfBasisFunction() : CurveDrawData
 {
   const graphStrokeColor : string = "green";
   const graphWidth : number = 2;
@@ -4701,7 +4702,7 @@ function TestCubicSpline()
    var sy : number = s;
    var L = theCubicSpline.ExplicitKnots[theCubicSpline.ExplicitKnots.length-1]-theCubicSpline.ExplicitKnots[0];
    var sx : number = sy/L;
-   var theDrawDataForBasisFunctions : CurveDrawData = defaultDrawDataForGraphOfCubicBernstein();
+   var theDrawDataForBasisFunctions : CurveDrawData = defaultDrawDataForGraphOfBasisFunction();
    var drawDataForPointOnSleepingGraph : CircleDrawData = defaultDrawDataForPointOnGraph();
    drawDataForPointOnSleepingGraph.fillColor = "red";
    drawDataForPointOnSleepingGraph.strokeColor = "red";
