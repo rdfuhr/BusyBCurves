@@ -654,7 +654,7 @@ class TextDrawData
 
 class BCurveArtifactsDrawData
 { // Begin class BCurveArtifactsDrawData
-  forBezierCurve : CurveDrawData;
+  forBCurve : CurveDrawData;
   forControlPolygon : CurveDrawData;
   forControlPoints : CircleDrawData;
   forPointOnCurve : CircleDrawData;
@@ -675,7 +675,7 @@ class BCurveArtifactsDrawData
   //////////////////////////////////////////////////////////////////////////////
   constructor()
   {
-    this.forBezierCurve = defaultDrawDataForBCurve();
+    this.forBCurve = defaultDrawDataForBCurve();
     this.forControlPolygon = defaultDrawDataForControlPolygon();
     this.forControlPoints = defaultDrawDataForControlPoints();
     this.forPointOnCurve = defaultDrawDataForPointOnCurve();
@@ -699,9 +699,9 @@ class BCurveArtifactsDrawData
     var stringRep : string = "Begin data for this BCurveArtifactsDrawData\n";
 
     stringRep = stringRep + "<p>";
-    stringRep = stringRep + "Data for this.forBezierCurve";
+    stringRep = stringRep + "Data for this.forBCurve";
     stringRep = stringRep + "<p>";
-    stringRep = stringRep + this.forBezierCurve.toString();
+    stringRep = stringRep + this.forBCurve.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forControlPolygon";
@@ -1378,7 +1378,7 @@ class CubicBezierCurve
   drawAllBezierArtifacts(drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
                          context : CanvasRenderingContext2D)
   {
-     this.drawCurve(drawDataForAllBezierArtifacts.forBezierCurve, context);
+     this.drawCurve(drawDataForAllBezierArtifacts.forBCurve, context);
      this.drawControlPolygon(drawDataForAllBezierArtifacts.forControlPolygon, context);
 
      this.drawControlPointsWeightedForParm(tGlobal,
