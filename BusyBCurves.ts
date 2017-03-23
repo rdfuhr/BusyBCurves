@@ -1580,6 +1580,7 @@ function initializeCubicBezierCurve() : CubicBezierCurve
 {
   globalCurveType = CurveType.Bezier;
   UpdateRadioButtonBasedOnGlobalCurveType();
+  
   var drawingCanvas : HTMLCanvasElement =
     <HTMLCanvasElement>document.getElementById('drawingCanvas');
 
@@ -1596,6 +1597,7 @@ function initializeCubicBezierCurve() : CubicBezierCurve
   var Crv : CubicBezierCurve = new CubicBezierCurve(P0, P1, P2, P3);
   globalMinParm = 0.0;
   globalMaxParm = 1.0;
+  globalControlPointTargets = new Array<Circle>(Crv.CtrlPts.length);
   return Crv;
 }
 
@@ -1651,6 +1653,7 @@ function initializeCubicSpline() : CubicSpline
   globalMinParm = t[0];
   globalMaxParm = t[t.length-1];
   globalGraphsOfCubicBSplineBasisFunctions = getGraphsOfCubicBSplineBasisFunctions(Crv.ExplicitKnots);
+  globalControlPointTargets = new Array<Circle>(Crv.CtrlPts.length);
   return Crv;
 }
 
