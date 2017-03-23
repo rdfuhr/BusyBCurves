@@ -1686,9 +1686,9 @@ function defaultDrawDataForBCurve() : CurveDrawData
 {
   const curveStrokeColor : string = "red";
   const curveWidth : number = 10;
-  var drawDataForBezierCurve : CurveDrawData =
+  var drawDataForBCurve : CurveDrawData =
      new CurveDrawData(curveStrokeColor, curveWidth);
-  return drawDataForBezierCurve;
+  return drawDataForBCurve;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
