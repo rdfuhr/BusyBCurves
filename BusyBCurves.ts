@@ -660,7 +660,7 @@ class BCurveArtifactsDrawData
   forPointOnCurve : CircleDrawData;
   forIntermediateLines : CurveDrawData;
   forIntermediatePoints : CircleDrawData;
-  forGraphOfCubicBernstein : CurveDrawData;
+  forGraphOfBasisFunction : CurveDrawData;
   forPointOnGraph : CircleDrawData;
   forVerticalLineFromCurveForParm : CurveDrawData;
   forTextNearPointOnCurve : TextDrawData;
@@ -681,7 +681,7 @@ class BCurveArtifactsDrawData
     this.forPointOnCurve = defaultDrawDataForPointOnCurve();
     this.forIntermediateLines = defaultDrawDataForIntermediateLines();
     this.forIntermediatePoints = defaultDrawDataForIntermediatePoints();
-    this.forGraphOfCubicBernstein = defaultDrawDataForGraphOfBasisFunction();
+    this.forGraphOfBasisFunction = defaultDrawDataForGraphOfBasisFunction();
     this.forPointOnGraph = defaultDrawDataForPointOnGraph();
     this.forVerticalLineFromCurveForParm = defaultDrawDataForVerticalLineFromCurveForParm();
     this.forTextNearPointOnCurve = defaultDrawDataForTextNearPointOnCurve();
@@ -729,9 +729,9 @@ class BCurveArtifactsDrawData
     stringRep = stringRep + this.forIntermediatePoints.toString();
 
     stringRep = stringRep + "<p>";
-    stringRep = stringRep + "Data for this.forGraphOfCubicBernstein";
+    stringRep = stringRep + "Data for this.forGraphOfBasisFunction";
     stringRep = stringRep + "<p>";
-    stringRep = stringRep + this.forGraphOfCubicBernstein.toString();
+    stringRep = stringRep + this.forGraphOfBasisFunction.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forPointOnGraph";
@@ -1345,7 +1345,7 @@ class CubicBezierCurve
                                                                globalConstMaxDiameter,
                                                                globalConstMaxDiameter);
 
-        graphOfCubicBernstein.drawCurve(drawDataForAllBezierArtifacts.forGraphOfCubicBernstein, context);
+        graphOfCubicBernstein.drawCurve(drawDataForAllBezierArtifacts.forGraphOfBasisFunction, context);
 
         var pointOnGraphRadius : number = 3.0;
 
@@ -1778,9 +1778,9 @@ function defaultDrawDataForGraphOfBasisFunction() : CurveDrawData
 {
   const graphStrokeColor : string = "green";
   const graphWidth : number = 2;
-  var drawDataForGraphOfCubicBernstein : CurveDrawData = new CurveDrawData(graphStrokeColor,
+  var drawDataForGraphOfBasisFunction : CurveDrawData = new CurveDrawData(graphStrokeColor,
                                                                            graphWidth);
-  return drawDataForGraphOfCubicBernstein;
+  return drawDataForGraphOfBasisFunction;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
