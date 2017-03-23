@@ -675,7 +675,7 @@ class BCurveArtifactsDrawData
   //////////////////////////////////////////////////////////////////////////////
   constructor()
   {
-    this.forBezierCurve = defaultDrawDataForBezierCurve();
+    this.forBezierCurve = defaultDrawDataForBCurve();
     this.forControlPolygon = defaultDrawDataForControlPolygon();
     this.forControlPoints = defaultDrawDataForControlPoints();
     this.forPointOnCurve = defaultDrawDataForPointOnCurve();
@@ -1678,11 +1678,11 @@ function clearCanvas()
 
 // Begin implementing functions that construct and return draw data.
 ////////////////////////////////////////////////////////////////////////////////
-// defaultDrawDataForBezierCurve - function
+// defaultDrawDataForBCurve - function
 // Return the default draw data for the Bezier curve.
 //
 ////////////////////////////////////////////////////////////////////////////////
-function defaultDrawDataForBezierCurve() : CurveDrawData
+function defaultDrawDataForBCurve() : CurveDrawData
 {
   const curveStrokeColor : string = "red";
   const curveWidth : number = 10;
@@ -4664,7 +4664,7 @@ function TestCubicSpline()
 
  function TestInitializeCubicSpline()
  {
-   var theDrawDataForSpline : CurveDrawData = defaultDrawDataForBezierCurve();
+   var theDrawDataForSpline : CurveDrawData = defaultDrawDataForBCurve();
    var theDrawDataForControlPolygon : CurveDrawData = defaultDrawDataForControlPolygon();
    var theDrawDataForControlPoints : CircleDrawData = defaultDrawDataForControlPoints();
    var theDrawDataForPointOnCurve : CircleDrawData = defaultDrawDataForPointOnCurve();
