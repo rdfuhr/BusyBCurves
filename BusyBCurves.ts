@@ -2052,6 +2052,12 @@ function onMouseMove(evt : MouseEvent,
   					         drawingContext : CanvasRenderingContext2D,
 					           drawingCanvas : HTMLCanvasElement)
 {
+  // The following is a temporary workaround until we get a proper implementation 
+  // for CurveType.Spline
+  if(globalCurveType != CurveType.Bezier)
+  {
+    return;
+  }
 
 	if (globalModifyingPointOnCurve==true)
 	{
