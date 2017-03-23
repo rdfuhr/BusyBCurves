@@ -680,7 +680,7 @@ class BCurveArtifactsDrawData
     this.forControlPoints = defaultDrawDataForControlPoints();
     this.forPointOnCurve = defaultDrawDataForPointOnCurve();
     this.forDecasteljauLines = defaultDrawDataForIntermediateLines();
-    this.forDecasteljauPoints = defaultDrawDataForDecasteljauPoints();
+    this.forDecasteljauPoints = defaultDrawDataForIntermediatePoints();
     this.forGraphOfCubicBernstein = defaultDrawDataForGraphOfCubicBernstein();
     this.forPointOnGraph = defaultDrawDataForPointOnGraph();
     this.forVerticalLineFromCurveForParm = defaultDrawDataForVerticalLineFromCurveForParm();
@@ -1753,11 +1753,11 @@ function defaultDrawDataForIntermediateLines() : CurveDrawData
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// defaultDrawDataForDecasteljauPoints - function
+// defaultDrawDataForIntermediatePoints - function
 // Return the default draw data for the Intermediate Points.
 //
 ////////////////////////////////////////////////////////////////////////////////
-function defaultDrawDataForDecasteljauPoints() : CircleDrawData
+function defaultDrawDataForIntermediatePoints() : CircleDrawData
 {
   const fillColor : string = "orange"
   const strokeColor : string = "orange"
@@ -4709,7 +4709,7 @@ function TestCubicSpline()
    drawDataForPointOnAwakenedGraph.fillColor = "blue";
    drawDataForPointOnAwakenedGraph.strokeColor = "blue";
    var D : Point[][] = theCubicSpline.DeBoorTriangleAtParm(tGlobal);
-   var drawDataForDeBoorPoints : CircleDrawData = defaultDrawDataForDecasteljauPoints();
+   var drawDataForDeBoorPoints : CircleDrawData = defaultDrawDataForIntermediatePoints();
    DrawAllDeBoorPoints(D, drawDataForDeBoorPoints, context);
    var drawDataForDeBoorLines : CurveDrawData = defaultDrawDataForIntermediateLines();
    DrawAllDeBoorLines(D, drawDataForDeBoorLines, context);
