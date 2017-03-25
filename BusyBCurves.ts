@@ -3726,6 +3726,42 @@ class PolyLine
 
 class Rectangle
 {   // Begin class Rectangle
+  // This is based on https://www.w3.org/TR/2dcontext/#drawing-rectangles-to-the-canvas
+  xMin : number;
+  yMin : number;
+  width : number;
+  height : number;
+
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for Rectangle
+  // Creates an instance of Rectangle
+  //
+  // input: xMin - the minimum x coordinate of the rectangle
+  // input: yMin - the minimum y coordinate of the rectangle
+  // input: width - the width of the rectangle
+  // input: height - the height of the rectangle
+  //
+  // Note:  This is based on 
+  // https://www.w3.org/TR/2dcontext/#drawing-rectangles-to-the-canvas
+  // in which the positive x direction is TO THE RIGHT 
+  // and the positive y direction is DOWN when drawing to the canvas
+  // Therefore the point (xMin, yMin) is at the upper left corner when drawn
+  // Thus the four vertices of this Rectangle are as follows
+  // (xMin, yMin)
+  // (xMin + width, yMin)
+  // (xMin, yMin + height)
+  // (xMin + width, yMin + height)
+  //////////////////////////////////////////////////////////////////////////////
+  constructor(xMin : number,
+              yMin : number,
+              width : number,
+              height: number)
+ {
+   this.xMin = xMin;
+   this.yMin = yMin;
+   this.width = width;
+   this.height = height;
+ }
 }   //   End class Rectangle
 
 //   End code for classes Line, PolyLine, Rectangle
