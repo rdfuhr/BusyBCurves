@@ -1649,6 +1649,17 @@ function initializeCubicSpline() : CubicSpline
   t[9] = 5.0;
   t[10] = 5.0;
   t[11] = 5.0;
+  // Normalize the t so that they go from 0 to 1.
+  // This will make the animation  part easier
+  // because we can use the same tDeltaGlobal
+  // that we were using for Bezier.
+  const bot : number = t[t.length-1] - t[0];
+  for (var i : number = 0; i < t.length; i++)
+  {
+    let top = t[i] - t[0];
+    t[i] = top/bot;
+  }
+ 
   var Crv : CubicSpline = new CubicSpline(P, t);
   globalMinParm = t[0];
   globalMaxParm = t[t.length-1];
@@ -4783,7 +4794,7 @@ function TestCubicSpline()
    var radius = 30.0;
      
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
-   tGlobal = tGlobal + 2.0;
+   
    theCubicSpline.drawControlPointsWeightedForParm(tGlobal, theDrawDataForControlPoints, context);
    theCubicSpline.drawControlPointsWithMaxRadius(theDrawDataForControlPointsWithMaxRadius, context);
    theCubicSpline.drawPointOnCurveForParm(tGlobal, globalConstPointOnCurveRadius, theDrawDataForPointOnCurve, context);
@@ -4795,12 +4806,17 @@ function TestCubicSpline()
    const basisValTol : number = 0.000000001;
    var w : number = getDrawingCanvas().width;
    var h : number = getDrawingCanvas().height;
-   var d : number = theCubicSpline.ExplicitKnots[theCubicSpline.ExplicitKnots.length-1]-theCubicSpline.ExplicitKnots[0];
+   // var d : number = theCubicSpline.ExplicitKnots[theCubicSpline.ExplicitKnots.length-1]-theCubicSpline.ExplicitKnots[0];
+   var d : number = 5;
    var s : number = Math.min(h, w/d);
    s = s/2;
    var sy : number = s;
-   var L = theCubicSpline.ExplicitKnots[theCubicSpline.ExplicitKnots.length-1]-theCubicSpline.ExplicitKnots[0];
+   // var L = theCubicSpline.ExplicitKnots[theCubicSpline.ExplicitKnots.length-1]-theCubicSpline.ExplicitKnots[0];
+   var L : number = 5; // experiment.
+   
    var sx : number = sy/L;
+   var stretchFac : number = 3; // experiment
+   sx = sx*stretchFac; // experiment
    var theDrawDataForBasisFunctions : CurveDrawData = defaultDrawDataForGraphOfBasisFunction();
    var drawDataForPointOnSleepingGraph : CircleDrawData = defaultDrawDataForPointOnGraph();
    drawDataForPointOnSleepingGraph.fillColor = "red";
