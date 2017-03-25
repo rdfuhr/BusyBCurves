@@ -3359,6 +3359,13 @@ class CubicSpline
                                   drawDataForAllSplineArtifacts.forPointOnCurve,
                                   context);
 
+// The following is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData 
+     var theDrawDataForKnots : RectangleDrawData = defaultDrawDataForKnots();
+     const width : number = 15.0;
+     const height : number = 10.0;
+// The preceding is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData      
+     this.drawKnots(width, height, theDrawDataForKnots, context);                                 
+
       // var pointOnCurve : Point = this.positionAtParm(tGlobal);
       // globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
