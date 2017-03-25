@@ -1886,6 +1886,32 @@ function animation(drawingCanvas : HTMLCanvasElement,
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// splineAnimation - function
+// Manage the animation in which a point moves back and forth along a spline
+// curve, and in which the size of the control points and the indicators on the graphs
+// of the basis functions vary accordingly.  One call to this function generates
+// one frame of the animation.
+//
+// input: drawingCanvas - the canvas on which we are drawing
+// input: drawingContext - the context associated with the canvas
+// input: S - the main CubicSpline
+// input: drawDataForAllSplineArtifacts - styles for drawing everything
+//
+////////////////////////////////////////////////////////////////////////////////
+function splineAnimation(drawingCanvas : HTMLCanvasElement,
+                         drawingContext : CanvasRenderingContext2D,
+                         S : CubicSpline,
+                         drawDataForAllSplineArtifacts : BCurveArtifactsDrawData)
+{
+   drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+
+   tGlobalUpdate(); // the global value of t is adjusted
+
+   S.drawAllSplineArtifacts(drawDataForAllSplineArtifacts,
+                            drawingContext);
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // DisableEnableButtons - function
 // Disable and enable specified buttons
 //
@@ -1967,7 +1993,16 @@ function StartAnimation()
    else
    if (globalCurveType==CurveType.Spline)
    {
-     alert("StartAnimation Code for Spline will go here.")
+     var S : CubicSpline = initializeCubicSpline();
+
+     var drawDataForAllSplineArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
+
+     globalLoop = setInterval(splineAnimation,
+                              10,
+                              drawingCanvas,
+                              drawingContext,
+                              S,
+                              drawDataForAllSplineArtifacts);
    }
 }
 //   End code related to StartAnimation()
