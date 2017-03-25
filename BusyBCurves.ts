@@ -1951,16 +1951,24 @@ function StartAnimation()
    var drawingCanvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('drawingCanvas');
    var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
 
-   var C : CubicBezierCurve = initializeCubicBezierCurve();
+   if (globalCurveType==CurveType.Bezier)
+   {
+      var C : CubicBezierCurve = initializeCubicBezierCurve();
 
-   var drawDataForAllBezierArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
+      var drawDataForAllBezierArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
-   globalLoop = setInterval(animation,
-                            10,
-                            drawingCanvas,
-                            drawingContext,
-                            C,
-                            drawDataForAllBezierArtifacts);
+      globalLoop = setInterval(animation,
+                               10,
+                               drawingCanvas,
+                               drawingContext,
+                               C,
+                               drawDataForAllBezierArtifacts);
+   }
+   else
+   if (globalCurveType==CurveType.Spline)
+   {
+     alert("StartAnimation Code for Spline will go here.")
+   }
 }
 //   End code related to StartAnimation()
 
