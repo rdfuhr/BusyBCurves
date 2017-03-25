@@ -3276,6 +3276,62 @@ class CubicSpline
   } 
 
   //////////////////////////////////////////////////////////////////////////////
+  // drawAllSplineArtifacts - method of CubicSpline
+  // Draw all information associated with this CubicSpline
+  //
+  // input: drawDataForAllSplineArtifacts - styles for drawing everything
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  drawAllSplineArtifacts(drawDataForAllSplineArtifacts : BCurveArtifactsDrawData,
+                         context : CanvasRenderingContext2D)
+  {
+     this.drawCurve(drawDataForAllSplineArtifacts.forBCurve, context);
+     this.drawControlPolygon(drawDataForAllSplineArtifacts.forControlPolygon, context);
+
+     this.drawControlPointsWeightedForParm(tGlobal,
+                                           drawDataForAllSplineArtifacts.forControlPoints,
+                                           context);
+
+// The following is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData
+     var fillColor : string = "white";
+     var strokeColor : string = "black";
+     var curveWidth : number = 1;
+// The preceding is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData     
+     var theDrawDataForControlPointsWithMaxRadius : CircleDrawData = new CircleDrawData(fillColor, strokeColor, curveWidth);
+     this.drawControlPointsWithMaxRadius(theDrawDataForControlPointsWithMaxRadius, context);                                     
+
+     this.drawPointOnCurveForParm(tGlobal,
+                                  globalConstPointOnCurveRadius,
+                                  drawDataForAllSplineArtifacts.forPointOnCurve,
+                                  context);
+
+      // var pointOnCurve : Point = this.positionAtParm(tGlobal);
+      // globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
+
+      // var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - globalConstPointOnCurveRadius);
+
+      // drawTextForNumber(tGlobal,
+      //                   textLocation,
+      //                   drawDataForAllSplineArtifacts.forTextNearPointOnCurve,
+      //                   context);
+
+      //  this.drawBasisFunctionsWithParm(tGlobal,
+      //                                  drawDataForAllSplineArtifacts,
+      //                                  context);
+
+      // drawAllDeCasteljauLines(this.CtrlPts,
+      //                         tGlobal,
+      //                         drawDataForAllSplineArtifacts.forIntermediateLines,
+      //                         context);
+
+
+      // drawAllDeCasteljauPoints(this.CtrlPts,
+      //                          tGlobal,
+      //                          drawDataForAllSplineArtifacts.forIntermediatePoints,
+      //                          context);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
   // drawPointOnCurveForParm - method of CubicSpline
   // Draws point on curve at specified parameter with specified appearance
   //
