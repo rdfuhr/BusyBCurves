@@ -3780,6 +3780,38 @@ class Rectangle
 
      return stringRep;
   } 
+
+  //////////////////////////////////////////////////////////////////////////////
+  // stroke - method of Rectangle
+  // Strokes this Rectangle with specified appearance
+  //
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  stroke(drawData : RectangleDrawData,
+       context : CanvasRenderingContext2D)
+  {
+     drawData.updateContext(context);
+     context.beginPath();
+     context.rect(this.xMin,this.yMin,this.width,this.height)
+     context.stroke();
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // fill - method of Rectangle
+  // Fills this Rectangle with specified appearance
+  //
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  fill(drawData : RectangleDrawData,
+       context : CanvasRenderingContext2D)
+  {
+     drawData.updateContext(context);
+     context.beginPath();
+     context.rect(this.xMin,this.yMin,this.width,this.height)
+     context.fill();
+  }  
 }   //   End class Rectangle
 
 //   End code for classes Line, PolyLine, Rectangle
