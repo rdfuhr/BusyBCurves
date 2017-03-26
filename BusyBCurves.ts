@@ -3446,6 +3446,28 @@ class CubicSpline
      VerticalLine.draw(drawData, context);
   }  
 
+  getBoundingBox() : Rectangle
+  {
+    var xMin : number = this.CtrlPts[0].x;
+    var yMin : number = this.CtrlPts[0].y;
+    var xMax : number = this.CtrlPts[0].x;
+    var yMax : number = this.CtrlPts[0].y;
+    var nPts : number = this.CtrlPts.length;
+    for (var i = 1; i < nPts; i++)
+    {
+      var xCur = this.CtrlPts[i].x;
+      var yCur = this.CtrlPts[i].y;
+      xMin = Math.min(xMin, xCur);
+      yMin = Math.min(yMin, yCur);
+      xMax = Math.max(xMax, xCur);
+      yMax = Math.max(yMax, yCur);
+    }
+    var width : number = xMax = xMin;
+    var height : number = yMax - yMin;
+    var BoundingBox : Rectangle = new Rectangle(xMin, yMin, width, height);
+    return BoundingBox;
+  }
+
 } // End class CubicSpline
 
 //   End code to support BusyBSpline
