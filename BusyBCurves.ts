@@ -3430,17 +3430,20 @@ class CubicSpline
 // The preceding is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData      
      this.drawKnots(width, height, theDrawDataForKnots, context);
 
-// The following draws the graphs of the B-Spline basis functions
+// The following draws the graphs of the B-Spline basis functions and the corresponding point being evaluated on the graph
      var nBasisFunctions : number = globalGraphsOfCubicBSplineBasisFunctions.length;
      var theDrawDataForBasisFunctions : CurveDrawData = defaultDrawDataForGraphOfBasisFunction();
+     var theDrawDataForPointOnGraph : CircleDrawData = defaultDrawDataForPointOnGraph();
+     var pointOnGraphRadius : number = 3.0;
 
      for (var basisIndex : number = 0; basisIndex < nBasisFunctions; basisIndex++)
      {
        var alignedBSplineGraph : CubicSpline = alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex);
        alignedBSplineGraph.drawCurve(theDrawDataForBasisFunctions, context);
+       alignedBSplineGraph.drawPointOnCurveForParm(tGlobal, pointOnGraphRadius, theDrawDataForPointOnGraph, context);
      }
-
-// The preceding draws the graphs of the B-Spline basis functions     
+// The preceding draws the graphs of the B-Spline basis functions and the corresponding point being evaluated on the graph
+  
       // var pointOnCurve : Point = this.positionAtParm(tGlobal);
       // globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
@@ -5009,8 +5012,8 @@ function TestCubicSpline()
    sx = sx*stretchFac; // experiment
    var theDrawDataForBasisFunctions : CurveDrawData = defaultDrawDataForGraphOfBasisFunction();
    var drawDataForPointOnSleepingGraph : CircleDrawData = defaultDrawDataForPointOnGraph();
-   drawDataForPointOnSleepingGraph.fillColor = "red";
-   drawDataForPointOnSleepingGraph.strokeColor = "red";
+   drawDataForPointOnSleepingGraph.fillColor = "black";
+   drawDataForPointOnSleepingGraph.strokeColor = "black";
    var drawDataForPointOnAwakenedGraph : CircleDrawData = defaultDrawDataForPointOnGraph();
    drawDataForPointOnAwakenedGraph.fillColor = "blue";
    drawDataForPointOnAwakenedGraph.strokeColor = "blue";
