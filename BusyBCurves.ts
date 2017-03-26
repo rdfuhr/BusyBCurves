@@ -2478,6 +2478,69 @@ function DeBoorTriangleAt(t : number,
   return GraphsOfCubicBSplineBasisFunctions;
 }
 
+function alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex) : CubicSpline
+{
+  var alignedBSplineGraph : CubicSpline = null;
+  // Do validity checks
+  let validInput : boolean = true; // innocent until proven guilty
+  if (globalGraphsOfCubicBSplineBasisFunctions.length!=globalControlPointTargets.length)
+  {
+    validInput = false;
+    return alignedBSplineGraph;
+  }
+
+  let nControlPointTargets : number = globalControlPointTargets.length;
+
+  if ((basisIndex < 0) || (basisIndex >= nControlPointTargets))
+  {
+    validInput = false;
+    return alignedBSplineGraph;
+  }
+
+  if (validInput==true)
+  {  // begin case of valid input
+    alignedBSplineGraph = globalGraphsOfCubicBSplineBasisFunctions[basisIndex].clone();
+    var CorrespondingControlPointCircle : Circle = globalControlPointTargets[basisIndex];
+
+    // Reflect the graph about the line y = 1 because the positive direction is downward
+    for (var i : number = 0; i < alignedBSplineGraph.CtrlPts.length; i++)
+    {
+      alignedBSplineGraph.CtrlPts[i].y = 1.0 - alignedBSplineGraph.CtrlPts[i].y;
+    }
+
+    // Scale the alignedBSplineGraph so that its bounding box is a square of the same
+    // size as the bounding box of the CorrespondingControlPointCircle.  That is, the
+    // sides should have lengths equal to the diameter of the CorrespondingControlPointCircle.
+
+    var diameter : number = 2.0*CorrespondingControlPointCircle.radius;
+
+    var BoundingBoxOfUnscaledBSplineGraph : Rectangle = alignedBSplineGraph.getBoundingBox();
+
+    var xScale : number = diameter/BoundingBoxOfUnscaledBSplineGraph.width;
+    var yScale : number = diameter/BoundingBoxOfUnscaledBSplineGraph.height;
+
+    alignedBSplineGraph.scale(xScale, yScale);
+   
+   // Now translate the alignedBSplineGraph so that the lower left corner of its bounding box
+   // coincides with the lower right corner of the bounding box of the CorrespondingControlPointCircle.
+
+   var BoundingBoxOfScaledBSplineGraph : Rectangle = alignedBSplineGraph.getBoundingBox();
+   var x0 : number = BoundingBoxOfScaledBSplineGraph.xMin;
+   var y0 : number = BoundingBoxOfScaledBSplineGraph.yMin + BoundingBoxOfScaledBSplineGraph.height;
+   var P0 : Point = new Point(x0,y0);
+
+   var x1 : number = CorrespondingControlPointCircle.center.x + CorrespondingControlPointCircle.radius;
+   var y1 : number = CorrespondingControlPointCircle.center.y + CorrespondingControlPointCircle.radius;
+   var P1 : Point = new Point(x1,y1);
+
+   var TranslationVector : Point = P1.minus(P0);
+
+   alignedBSplineGraph.translate(TranslationVector);
+  }  //   end case of valid input
+  
+  return alignedBSplineGraph;
+}
+
 //   End utilities that can be used by PolyBezier and CubicSpline objects
 
 
