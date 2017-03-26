@@ -2508,15 +2508,14 @@ function alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex) : Cubi
       alignedBSplineGraph.CtrlPts[i].y = 1.0 - alignedBSplineGraph.CtrlPts[i].y;
     }
 
-    // Scale the alignedBSplineGraph so that its bounding box is a square of the same
-    // size as the bounding box of the CorrespondingControlPointCircle.  That is, the
-    // sides should have lengths equal to the diameter of the CorrespondingControlPointCircle.
+    // Scale the alignedBSplineGraph
 
-    var diameter : number = 2.0*CorrespondingControlPointCircle.radius;
+    var radius : number = CorrespondingControlPointCircle.radius;
+    var diameter : number = 2.0*radius;
 
     var BoundingBoxOfUnscaledBSplineGraph : Rectangle = alignedBSplineGraph.getBoundingBox();
 
-    var xScale : number = diameter/BoundingBoxOfUnscaledBSplineGraph.width;
+    var xScale : number = radius/BoundingBoxOfUnscaledBSplineGraph.width;
     var yScale : number = diameter/BoundingBoxOfUnscaledBSplineGraph.height;
 
     alignedBSplineGraph.scale(xScale, yScale);
@@ -3443,7 +3442,7 @@ class CubicSpline
        alignedBSplineGraph.drawPointOnCurveForParm(tGlobal, pointOnGraphRadius, theDrawDataForPointOnGraph, context);
      }
 // The preceding draws the graphs of the B-Spline basis functions and the corresponding point being evaluated on the graph
-  
+
       // var pointOnCurve : Point = this.positionAtParm(tGlobal);
       // globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
