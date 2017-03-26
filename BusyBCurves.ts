@@ -3762,6 +3762,24 @@ class Rectangle
    this.width = width;
    this.height = height;
  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of Rectangle
+  // Returns the string representation of this Rectangle
+  //
+  // returns: the string representation of this Rectangle
+  //////////////////////////////////////////////////////////////////////////////
+  toString() : string
+  {
+     var stringRep : string = "<p>" + "Data for Rectangle" + "<p>";
+     
+     stringRep += "xMin = " + this.xMin.toString() + "<p>";
+     stringRep += "yMin = " + this.yMin.toString() + "<p>";
+     stringRep += "width = " + this.width.toString() + "<p>";
+     stringRep += "height = " + this.height.toString() + "<p>";
+
+     return stringRep;
+  } 
 }   //   End class Rectangle
 
 //   End code for classes Line, PolyLine, Rectangle
@@ -4896,7 +4914,7 @@ function TestCubicSpline()
       {
         ClonedSpline.CtrlPts[iPt].y = 1.0 - ClonedSpline.CtrlPts[iPt].y; // could implement a yMirror method.
       }
-      
+            
       ClonedSpline.scale(sx, sy);
       ClonedSpline.translate(theCubicSpline.CtrlPts[i]);
       ClonedSpline.translate(yDelta);
