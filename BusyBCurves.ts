@@ -3462,7 +3462,7 @@ class CubicSpline
       xMax = Math.max(xMax, xCur);
       yMax = Math.max(yMax, yCur);
     }
-    var width : number = xMax = xMin;
+    var width : number = xMax - xMin;
     var height : number = yMax - yMin;
     var BoundingBox : Rectangle = new Rectangle(xMin, yMin, width, height);
     return BoundingBox;
@@ -4973,9 +4973,24 @@ function TestCubicSpline()
       ClonedSpline.translate(theCubicSpline.CtrlPts[i]);
       ClonedSpline.translate(yDelta);
       ClonedSpline.translate(xDelta);
+      // See if I can move the graphs downward by an amount equal to the radius of the big control point circles
+      var bigR : number = globalControlPointTargets[i].radius;
+      var movebyBigR : Point = new Point(0.0, bigR);
+      ClonedSpline.translate(movebyBigR);
+      // See if I can move the graphs to the left so that min x on graph equals max x on corresponding control point circle
+      var max_x_on_circle : number = globalControlPointTargets[i].center.x + globalControlPointTargets[i].radius;
+      var min_x_on_graph : number = ClonedSpline.getBoundingBox().xMin;
+      var moveLeft : Point = new Point(max_x_on_circle-min_x_on_graph, 0.0);
+      ClonedSpline.translate(moveLeft);
+
       ClonedSpline.drawCurve(theDrawDataForBasisFunctions, context);
       ClonedSpline.drawPointOnCurveForParm(tGlobal, pointOnGraphRadius, drawDataForPointOnGraph, context);
-      
+
+      // test getBoundingBox
+      // var BoundingBox : Rectangle = ClonedSpline.getBoundingBox();
+      // var theDrawDataForBoundingBox: RectangleDrawData = new RectangleDrawData("white", "red", 1);
+      // BoundingBox.stroke(theDrawDataForBoundingBox, context);
+     
    }
    // End experiment
 
