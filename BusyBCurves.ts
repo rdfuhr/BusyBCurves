@@ -3428,8 +3428,19 @@ class CubicSpline
      const width : number = 15.0;
      const height : number = 10.0;
 // The preceding is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData      
-     this.drawKnots(width, height, theDrawDataForKnots, context);                                 
+     this.drawKnots(width, height, theDrawDataForKnots, context);
 
+// The following draws the graphs of the B-Spline basis functions
+     var nBasisFunctions : number = globalGraphsOfCubicBSplineBasisFunctions.length;
+     var theDrawDataForBasisFunctions : CurveDrawData = defaultDrawDataForGraphOfBasisFunction();
+
+     for (var basisIndex : number = 0; basisIndex < nBasisFunctions; basisIndex++)
+     {
+       var alignedBSplineGraph : CubicSpline = alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex);
+       alignedBSplineGraph.drawCurve(theDrawDataForBasisFunctions, context);
+     }
+
+// The preceding draws the graphs of the B-Spline basis functions     
       // var pointOnCurve : Point = this.positionAtParm(tGlobal);
       // globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
