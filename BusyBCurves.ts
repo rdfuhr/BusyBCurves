@@ -107,9 +107,10 @@ var globalMaxParm : number;
 const globalCircleAreaFactor : number = 2.0;
 const globalCircleRadiusFactor : number = Math.sqrt(globalCircleAreaFactor);
 const globalConstPointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
-var globalSumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
-var globalMaxRadius : number = Math.sqrt(globalSumOfControlPointAreas/Math.PI);
-var globalMaxDiameter : number = 2.0*globalMaxRadius;
+// The following are declared here but are computed in initializeGlobalMetrics().
+var globalSumOfControlPointAreas : number; /* = globalCircleAreaFactor*10000.0; */
+var globalMaxRadius : number; /* = Math.sqrt(globalSumOfControlPointAreas/Math.PI); */
+var globalMaxDiameter : number; /* = 2.0*globalMaxRadius; */
 
 // We need to put the following into an init function and make these non-constants
 // var globalDrawingCanvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('drawingCanvas');
@@ -1578,6 +1579,14 @@ function tGlobalUpdate() // updates the global t
    }
 }
 
+function initializeGlobalMetrics()
+{
+   var canvas : HTMLCanvasElement = getDrawingCanvas();
+   globalMaxRadius  = 0.10*canvas.height;
+   globalMaxDiameter = 2.0*globalMaxRadius;
+   globalSumOfControlPointAreas = Math.PI*globalMaxRadius*globalMaxRadius;  
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // initializeCubicBezierCurve - function
 // Construct CubicBezierCurve in its initial state
@@ -1587,6 +1596,7 @@ function tGlobalUpdate() // updates the global t
 function initializeCubicBezierCurve() : CubicBezierCurve
 {
   globalCurveType = CurveType.Bezier;
+  initializeGlobalMetrics();
   UpdateRadioButtonBasedOnGlobalCurveType();
   
   var drawingCanvas : HTMLCanvasElement =
@@ -1618,6 +1628,7 @@ function initializeCubicBezierCurve() : CubicBezierCurve
 function initializeCubicSpline() : CubicSpline
 {
   globalCurveType = CurveType.Spline;
+  initializeGlobalMetrics();
   UpdateRadioButtonBasedOnGlobalCurveType();
   var drawingCanvas : HTMLCanvasElement =
     <HTMLCanvasElement>document.getElementById('drawingCanvas');
