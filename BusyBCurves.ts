@@ -106,10 +106,17 @@ var globalMinParm : number;
 var globalMaxParm : number;
 const globalCircleAreaFactor : number = 2.0;
 const globalCircleRadiusFactor : number = Math.sqrt(globalCircleAreaFactor);
+const globalConstPointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
 const globalConstSumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
 const globalConstMaxRadius : number = Math.sqrt(globalConstSumOfControlPointAreas/Math.PI);
 const globalConstMaxDiameter : number = 2.0*globalConstMaxRadius;
-const globalConstPointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
+
+// We need to put the following into an init function and make these non-constants
+// var globalDrawingCanvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('drawingCanvas');
+// const globalConstMaxRadius : number = 0.10*globalDrawingCanvas.height;
+// const globalConstMaxDiameter = 2.0*globalConstMaxRadius;
+// const globalConstSumOfControlPointAreas : number = Math.PI*globalConstMaxRadius*globalConstMaxRadius;
+
 var globalGraphsOfCubicBSplineBasisFunctions : CubicSpline[];
 
 //   End declaring some of the globals
@@ -5072,6 +5079,14 @@ function TestCubicSpline()
 
  }
 
+function TestSomeGlobalConsts()
+{
+  let canvas : HTMLCanvasElement  = getDrawingCanvas();
+  document.writeln("canvas.height = " + canvas.height + "<p>");
+  document.writeln("globalConstMaxRadius = " + globalConstMaxRadius + "<p>");
+  var should_be_close_to_zero = globalConstSumOfControlPointAreas - Math.PI*globalConstMaxRadius*globalConstMaxRadius;
+  document.writeln("should_be_close_to_zero = " + should_be_close_to_zero + "<p>");
+}
 
 function doTests()
 {
@@ -5090,5 +5105,6 @@ function doTests()
    // TestConvertToPolyBezier();
    // TestCubicSplineEvaluatorsAtParm();
    // TestGetGraphsOfCubicBSplineBasisFunctions();
-   TestInitializeCubicSpline()
+   // TestInitializeCubicSpline()
+   TestSomeGlobalConsts();
    }
