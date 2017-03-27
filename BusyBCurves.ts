@@ -107,15 +107,15 @@ var globalMaxParm : number;
 const globalCircleAreaFactor : number = 2.0;
 const globalCircleRadiusFactor : number = Math.sqrt(globalCircleAreaFactor);
 const globalConstPointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
-const globalConstSumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
-const globalConstMaxRadius : number = Math.sqrt(globalConstSumOfControlPointAreas/Math.PI);
-const globalConstMaxDiameter : number = 2.0*globalConstMaxRadius;
+var globalSumOfControlPointAreas : number = globalCircleAreaFactor*10000.0;
+var globalMaxRadius : number = Math.sqrt(globalSumOfControlPointAreas/Math.PI);
+var globalMaxDiameter : number = 2.0*globalMaxRadius;
 
 // We need to put the following into an init function and make these non-constants
 // var globalDrawingCanvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('drawingCanvas');
-// const globalConstMaxRadius : number = 0.10*globalDrawingCanvas.height;
-// const globalConstMaxDiameter = 2.0*globalConstMaxRadius;
-// const globalConstSumOfControlPointAreas : number = Math.PI*globalConstMaxRadius*globalConstMaxRadius;
+// const globalMaxRadius : number = 0.10*globalDrawingCanvas.height;
+// const globalMaxDiameter = 2.0*globalMaxRadius;
+// const globalSumOfControlPointAreas : number = Math.PI*globalMaxRadius*globalMaxRadius;
 
 var globalGraphsOfCubicBSplineBasisFunctions : CubicSpline[];
 
@@ -1260,7 +1260,7 @@ class CubicBezierCurve
 
      for (var i = 0; i < order; i++)
      {
-        var actualArea : number = globalConstSumOfControlPointAreas*bernsteinValue(i, degree, t);
+        var actualArea : number = globalSumOfControlPointAreas*bernsteinValue(i, degree, t);
         // NOTE: actualArea = Math.PI*(actualRadius)^2
         // so actualRadius = sqrt(actualArea/Math.PI)
         var actualRadius : number = Math.sqrt(actualArea/Math.PI);
@@ -1332,10 +1332,10 @@ class CubicBezierCurve
                              drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
                              context: CanvasRenderingContext2D)
   {
-     // We will use globalConstMaxRadius to help position the graphs.
+     // We will use globalMaxRadius to help position the graphs.
 
-     var delta1 = new Point( 1.0*globalConstMaxRadius, -1.0*globalConstMaxRadius);
-     var delta2 = new Point(-3.0*globalConstMaxRadius, -1.0*globalConstMaxRadius);
+     var delta1 = new Point( 1.0*globalMaxRadius, -1.0*globalMaxRadius);
+     var delta2 = new Point(-3.0*globalMaxRadius, -1.0*globalMaxRadius);
      var upperLeft
 
      for (var indx = 0; indx < 4; indx++)
@@ -1350,8 +1350,8 @@ class CubicBezierCurve
         }
         var graphOfCubicBernstein = buildGraphOfCubicBernstein(indx,
                                                                upperLeft,
-                                                               globalConstMaxDiameter,
-                                                               globalConstMaxDiameter);
+                                                               globalMaxDiameter,
+                                                               globalMaxDiameter);
 
         graphOfCubicBernstein.drawCurve(drawDataForAllBezierArtifacts.forGraphOfBasisFunction, context);
 
@@ -3357,7 +3357,7 @@ class CubicSpline
      
      for (var i = 0; i < nControlPts; i++)
      {
-        var actualArea : number = globalConstSumOfControlPointAreas;
+        var actualArea : number = globalSumOfControlPointAreas;
         // NOTE: actualArea = Math.PI*(actualRadius)^2
         // so actualRadius = sqrt(actualArea/Math.PI)
         var actualRadius : number = Math.sqrt(actualArea/Math.PI);
@@ -3390,7 +3390,7 @@ class CubicSpline
      for (var i = 0; i < nControlPts; i++)
      {
         var bsplineValue : number = globalGraphsOfCubicBSplineBasisFunctions[i].positionAtParm(t).y;
-        var actualArea : number = globalConstSumOfControlPointAreas*bsplineValue;
+        var actualArea : number = globalSumOfControlPointAreas*bsplineValue;
         // NOTE: actualArea = Math.PI*(actualRadius)^2
         // so actualRadius = sqrt(actualArea/Math.PI)
         var actualRadius : number = Math.sqrt(actualArea/Math.PI);
@@ -5079,12 +5079,12 @@ function TestCubicSpline()
 
  }
 
-function TestSomeGlobalConsts()
+function TestSomeGlobals()
 {
   let canvas : HTMLCanvasElement  = getDrawingCanvas();
   document.writeln("canvas.height = " + canvas.height + "<p>");
-  document.writeln("globalConstMaxRadius = " + globalConstMaxRadius + "<p>");
-  var should_be_close_to_zero = globalConstSumOfControlPointAreas - Math.PI*globalConstMaxRadius*globalConstMaxRadius;
+  document.writeln("globalMaxRadius = " + globalMaxRadius + "<p>");
+  var should_be_close_to_zero = globalSumOfControlPointAreas - Math.PI*globalMaxRadius*globalMaxRadius;
   document.writeln("should_be_close_to_zero = " + should_be_close_to_zero + "<p>");
 }
 
@@ -5106,5 +5106,5 @@ function doTests()
    // TestCubicSplineEvaluatorsAtParm();
    // TestGetGraphsOfCubicBSplineBasisFunctions();
    // TestInitializeCubicSpline()
-   TestSomeGlobalConsts();
+   TestSomeGlobals();
    }
