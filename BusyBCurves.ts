@@ -23,7 +23,8 @@
 // TODO: Mar 20, 2017: Implement a radio button set in the HTML file to toggle between Bezier and Spline and implement code in the TS file to respond to it. - DONE
 // TODO: Mar 21, 2017: Implement an enumerated type for Bezier and Spline and a global variable that is set to one of these as governed by the radio button. - DONE
 // TODO: Mar 21, 2017: Implement drawAllSplineArtifacts and implement the animation code for spline. - IN PROGRESS
-// TODO: Mar 24, 2017: Implement a much more elegant way to scale and translate the graphs of the B-Spline basis functions that is actually understandable.
+// TODO: Mar 24, 2017: Implement a much more elegant way to scale and translate the graphs of the B-Spline basis functions that is actually understandable. - DONE
+// TODO: Mar 27, 2017: Implement BCurve class (possibly abstract) from which CubicBezierCurve and CubicSpline are derived and see if we can handle the addEventListener calls using BCurve.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -2239,9 +2240,9 @@ function ExploreWithMouse()
    C.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
                             drawingContext);
 // begin experiment
-drawingCanvas.removeEventListener('mousedown');
-drawingCanvas.removeEventListener('mousemove');
-drawingCanvas.removeEventListener('mouseup');
+// drawingCanvas.removeEventListener('mousedown');
+// drawingCanvas.removeEventListener('mousemove');
+// drawingCanvas.removeEventListener('mouseup');
 //   end experiment
       drawingCanvas.addEventListener('mousedown', function(evt)
          {
@@ -2263,9 +2264,9 @@ drawingCanvas.removeEventListener('mouseup');
             onMouseUp();
          }, false);
 // begin experiment - these calls seem to have no effect
-drawingCanvas.removeEventListener('mousedown');
-drawingCanvas.removeEventListener('mousemove');
-drawingCanvas.removeEventListener('mouseup');
+// drawingCanvas.removeEventListener('mousedown');
+// drawingCanvas.removeEventListener('mousemove');
+// drawingCanvas.removeEventListener('mouseup');
 //   end experiment - these calls seem to have no effect
 // Begin adding code based on
 // http://stackoverflow.com/questions/5186441/javascript-drag-and-drop-for-touch-devices/6362527#6362527
