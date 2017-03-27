@@ -3461,8 +3461,8 @@ class CubicSpline
      }
 // The preceding draws the graphs of the B-Spline basis functions and the corresponding point being evaluated on the graph
 
-      // var pointOnCurve : Point = this.positionAtParm(tGlobal);
-      // globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
+      var pointOnCurve : Point = this.positionAtParm(tGlobal);
+      globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
       // var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - globalConstPointOnCurveRadius);
 
