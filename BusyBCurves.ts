@@ -2238,7 +2238,11 @@ function ExploreWithMouse()
 
    C.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
                             drawingContext);
-
+// begin experiment
+drawingCanvas.removeEventListener('mousedown');
+drawingCanvas.removeEventListener('mousemove');
+drawingCanvas.removeEventListener('mouseup');
+//   end experiment
       drawingCanvas.addEventListener('mousedown', function(evt)
          {
             onMouseDown(evt,
@@ -2258,7 +2262,11 @@ function ExploreWithMouse()
          {
             onMouseUp();
          }, false);
-
+// begin experiment - these calls seem to have no effect
+drawingCanvas.removeEventListener('mousedown');
+drawingCanvas.removeEventListener('mousemove');
+drawingCanvas.removeEventListener('mouseup');
+//   end experiment - these calls seem to have no effect
 // Begin adding code based on
 // http://stackoverflow.com/questions/5186441/javascript-drag-and-drop-for-touch-devices/6362527#6362527
     drawingCanvas.addEventListener("touchstart", touchHandler, true);
