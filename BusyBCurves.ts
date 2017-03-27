@@ -1088,8 +1088,16 @@ function buildGraphOfCubicBernstein(iCubicBernstein : number,
 }
 // End Bernstein utilities
 
+abstract class BCurve
+{  // Begin class BCurve
+  constructor()
+  {
+    // Do nothing
+  }
+}  //   End class BCurve
 
-class CubicBezierCurve
+
+class CubicBezierCurve extends BCurve
 { // Begin class CubicBezierCurve
   CtrlPts : Array<Point>;
 
@@ -1107,6 +1115,7 @@ class CubicBezierCurve
               P2 : Point,
               P3 : Point)
   {
+    super();
     this.CtrlPts = new Array(P0, P1, P2, P3);
   }
 
@@ -2826,7 +2835,7 @@ class DistinctKnotAndMultiplicity
 
 
 
-class CubicSpline
+class CubicSpline extends BCurve
 {  // Begin class CubicSpline
   readonly degree: number;
   CtrlPts : Array<Point>;
@@ -2844,6 +2853,7 @@ class CubicSpline
     constructor(CtrlPts : Point[],
                 ExplicitKnots : number[])
     {
+      super();
       this.degree = 3;
 
       this.CtrlPts = new Array<Point>();
@@ -3574,6 +3584,9 @@ class CubicSpline
 } // End class CubicSpline
 
 //   End code to support BusyBSpline
+
+
+
 
 // Begin code for classes Line, PolyLine, Rectangle
 
