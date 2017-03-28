@@ -24,7 +24,8 @@
 // TODO: Mar 21, 2017: Implement an enumerated type for Bezier and Spline and a global variable that is set to one of these as governed by the radio button. - DONE
 // TODO: Mar 21, 2017: Implement drawAllSplineArtifacts and implement the animation code for spline. - IN PROGRESS
 // TODO: Mar 24, 2017: Implement a much more elegant way to scale and translate the graphs of the B-Spline basis functions that is actually understandable. - DONE
-// TODO: Mar 27, 2017: Implement BCurve class (possibly abstract) from which CubicBezierCurve and CubicSpline are derived and see if we can handle the addEventListener calls using BCurve.
+// TODO: Mar 27, 2017: Implement BCurve class (possibly abstract) from which CubicBezierCurve and CubicSpline are derived and see if we can handle the addEventListener calls using BCurve. - SORT OF DONE
+// TODO: Mar 27, 2017: Consider making the main BCurve be a global
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
