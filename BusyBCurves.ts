@@ -1094,6 +1094,23 @@ abstract class BCurve
   {
     // Do nothing
   }
+
+  editPointOnCurve(evt : MouseEvent,
+                   drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
+                   context : CanvasRenderingContext2D,
+                   canvas : HTMLCanvasElement)
+ {
+    // Do nothing
+ }  
+
+ editControlPoint(evt : MouseEvent,
+                  drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
+                  context : CanvasRenderingContext2D,
+                  canvas : HTMLCanvasElement) 
+ {    
+   // Do nothing
+ }
+
 }  //   End class BCurve
 
 
