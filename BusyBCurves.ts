@@ -1100,7 +1100,7 @@ abstract class BCurve
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement)
  {
-    // Do nothing
+    alert("In BCurve editPointOnCurve"); // Do nothing
  }  
 
  editControlPoint(evt : MouseEvent,
@@ -1108,7 +1108,7 @@ abstract class BCurve
                   context : CanvasRenderingContext2D,
                   canvas : HTMLCanvasElement) 
  {    
-   // Do nothing
+   alert("In BCurve editControlPoint");// Do nothing
  }
 
  drawAllBCurveArtifacts(drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
@@ -2159,12 +2159,12 @@ function onMouseMove(evt : MouseEvent,
   					         drawingContext : CanvasRenderingContext2D,
 					           drawingCanvas : HTMLCanvasElement)
 {
-  // The following is a temporary workaround until we get a proper implementation 
-  // for CurveType.Spline
-  if(globalCurveType != CurveType.Bezier)
-  {
-    return;
-  }
+  // // The following is a temporary workaround until we get a proper implementation 
+  // // for CurveType.Spline
+  // if(globalCurveType != CurveType.Bezier)
+  // {
+  //   return;
+  // }
 
 	if (globalModifyingPointOnCurve==true)
 	{
@@ -2263,7 +2263,16 @@ function ExploreWithMouse()
    // Inline code corresponding to clearCanvas
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
-   var C : BCurve = initializeCubicBezierCurve();
+   var C : BCurve;
+   if (globalCurveType==CurveType.Bezier)
+   {
+     C = initializeCubicBezierCurve();
+   }
+   else
+   if (globalCurveType==CurveType.Spline)
+   {
+     C = initializeCubicSpline();
+   }
 
    var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
@@ -2339,13 +2348,13 @@ function UpdateGlobalCurveTypeBasedOnRadioButton()
             if (curItem.value=="Bezier")
             {
                 globalCurveType = CurveType.Bezier;
-                ExploreWithMouse(); // temporary
+                ExploreWithMouse(); 
                 break;
             }
             else if (curItem.value=="Spline")
             {
                 globalCurveType = CurveType.Spline;
-                TestInitializeCubicSpline(); // temporary
+                ExploreWithMouse();
                 break;
             }
         }
@@ -4095,7 +4104,8 @@ function resize()
   drawingCanvas.width = widthScaleFac*window.innerWidth;
   drawingCanvas.height = heightScaleFac*window.innerHeight;
 
-  ExploreWithMouse();
+  // ExploreWithMouse();
+  UpdateGlobalCurveTypeBasedOnRadioButton();
 }
 
 // I replaced window.onload = ExploreWithMouse with the following.
