@@ -2264,7 +2264,7 @@ function ExploreWithMouse()
    // Inline code corresponding to clearCanvas
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
-   var C : BCurve;
+   var C : BCurve = null;
    if (globalCurveType==CurveType.Bezier)
    {
      C = initializeCubicBezierCurve();
