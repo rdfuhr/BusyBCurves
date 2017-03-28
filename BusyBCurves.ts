@@ -1096,7 +1096,7 @@ abstract class BCurve
   }
 
   editPointOnCurve(evt : MouseEvent,
-                   drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
+                   drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement)
  {
@@ -1104,14 +1104,14 @@ abstract class BCurve
  }  
 
  editControlPoint(evt : MouseEvent,
-                  drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
+                  drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                   context : CanvasRenderingContext2D,
                   canvas : HTMLCanvasElement) 
  {    
    // Do nothing
  }
 
- drawAllBezierArtifacts(drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
+ drawAllBCurveArtifacts(drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
                         context : CanvasRenderingContext2D)
 {
    // Do nothing
@@ -1411,25 +1411,25 @@ class CubicBezierCurve extends BCurve
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  // drawAllBezierArtifacts - method of CubicBezierCurve
+  // drawAllBCurveArtifacts - method of CubicBezierCurve
   // Draw all information associated with this CubicBezierCurve
   //
   // input: drawDataForAllBezierArtifacts - styles for drawing everything
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
-  drawAllBezierArtifacts(drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
+  drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                          context : CanvasRenderingContext2D)
   {
-     this.drawCurve(drawDataForAllBezierArtifacts.forBCurve, context);
-     this.drawControlPolygon(drawDataForAllBezierArtifacts.forControlPolygon, context);
+     this.drawCurve(drawDataForAllBCurveArtifacts.forBCurve, context);
+     this.drawControlPolygon(drawDataForAllBCurveArtifacts.forControlPolygon, context);
 
      this.drawControlPointsWeightedForParm(tGlobal,
-                                           drawDataForAllBezierArtifacts.forControlPoints,
+                                           drawDataForAllBCurveArtifacts.forControlPoints,
                                            context);
 
      this.drawPointOnCurveForParm(tGlobal,
                                   globalConstPointOnCurveRadius,
-                                  drawDataForAllBezierArtifacts.forPointOnCurve,
+                                  drawDataForAllBCurveArtifacts.forPointOnCurve,
                                   context);
 
       var pointOnCurve : Point = this.positionAtParm(tGlobal);
@@ -1439,22 +1439,22 @@ class CubicBezierCurve extends BCurve
 
       drawTextForNumber(tGlobal,
                         textLocation,
-                        drawDataForAllBezierArtifacts.forTextNearPointOnCurve,
+                        drawDataForAllBCurveArtifacts.forTextNearPointOnCurve,
                         context);
 
        this.drawBasisFunctionsWithParm(tGlobal,
-                                       drawDataForAllBezierArtifacts,
+                                       drawDataForAllBCurveArtifacts,
                                        context);
 
       drawAllDeCasteljauLines(this.CtrlPts,
                               tGlobal,
-                              drawDataForAllBezierArtifacts.forIntermediateLines,
+                              drawDataForAllBCurveArtifacts.forIntermediateLines,
                               context);
 
 
       drawAllDeCasteljauPoints(this.CtrlPts,
                                tGlobal,
-                               drawDataForAllBezierArtifacts.forIntermediatePoints,
+                               drawDataForAllBCurveArtifacts.forIntermediatePoints,
                                context);
   }
 
@@ -1484,7 +1484,7 @@ class CubicBezierCurve extends BCurve
   //
   //////////////////////////////////////////////////////////////////////////////
   editPointOnCurve(evt : MouseEvent,
-                   drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
+                   drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement)
   {
@@ -1502,7 +1502,7 @@ class CubicBezierCurve extends BCurve
      if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
 
      context.clearRect(0, 0, canvas.width, canvas.height);
-     this.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
+     this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
                                  context);
   }
 
@@ -1520,7 +1520,7 @@ class CubicBezierCurve extends BCurve
   //
   //////////////////////////////////////////////////////////////////////////////
   editControlPoint(evt : MouseEvent,
-                   drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
+                   drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement)
   {
@@ -1528,7 +1528,7 @@ class CubicBezierCurve extends BCurve
      this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
      context.clearRect(0, 0, canvas.width, canvas.height);
 
-     this.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
+     this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
                                  context);
   }
 
@@ -1938,13 +1938,13 @@ function defaultDrawDataForKnots() : RectangleDrawData
 function animation(drawingCanvas : HTMLCanvasElement,
                    drawingContext : CanvasRenderingContext2D,
                    C : CubicBezierCurve,
-                   drawDataForAllBezierArtifacts : BCurveArtifactsDrawData)
+                   drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData)
 {
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
    tGlobalUpdate(); // the global value of t is adjusted
 
-   C.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
+   C.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
                             drawingContext);
 }
 
@@ -2265,11 +2265,11 @@ function ExploreWithMouse()
 
    var C : BCurve = initializeCubicBezierCurve();
 
-   var drawDataForAllBezierArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
+   var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
 
-   C.drawAllBezierArtifacts(drawDataForAllBezierArtifacts,
+   C.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
                             drawingContext);
 // begin experiment
 // drawingCanvas.removeEventListener('mousedown');
@@ -2286,7 +2286,7 @@ function ExploreWithMouse()
          {
             onMouseMove(evt,
                         C,
-                        drawDataForAllBezierArtifacts,
+                        drawDataForAllBCurveArtifacts,
                         drawingContext,
                         drawingCanvas);
          }, true);
@@ -3603,6 +3603,80 @@ class CubicSpline extends BCurve
     var BoundingBox : Rectangle = new Rectangle(xMin, yMin, width, height);
     return BoundingBox;
   }
+
+//////////////////////////////////////////////////////////////////////////////
+  // editPointOnCurve - method of CubicSpline
+  // Called when user has clicked the point on this curve and is moving it.
+  //
+  // input: evt - the mouse event
+  // input: drawDataForAllBCurveArtifacts - styles for drawing everything
+  // input: context - the context associated with the canvas
+  // input: canvas - the canvas on which we are drawing
+  //
+  // NOTE: to get the updated position of the point on the curve, we are
+  // using information about the derivative of the curve, and we are using
+  // the linear approximation theorem.  In effect, we are projecting the
+  // updated mouse position onto the tangent line to the curve at the previous
+  // point, and we use this projected point to get a dt value.  We update the
+  // the current parameter, which is called tGlobal, and we use this to redraw
+  // this Bezier curve and its associated artifacts.
+  //
+  // TODO: I think we can get by without passing the canvas as a parameter
+  // because we should be able to get it from evt.
+  //
+  // TODO: We should document in detail how we get the updated position of the
+  // point on the curve by using TeX and save the TeX as well as the generated
+  // PDF file in this folder and put it under git control.
+  //
+  //////////////////////////////////////////////////////////////////////////////
+  editPointOnCurve(evt : MouseEvent,
+                   drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
+                   context : CanvasRenderingContext2D,
+                   canvas : HTMLCanvasElement)
+  {
+     var P : Point = this.positionAtParm(tGlobal);
+     var V : Point = this.derivativeAtParm(tGlobal);
+     var M : Point = getMousePos(canvas, evt);
+     var vdotv : number = V.dotProd(V);
+     var dt : number = 0.0;
+     if (vdotv > 0.0)
+     {
+        dt = ((M.minus(P)).dotProd(V))/vdotv
+     }
+     tGlobal += dt;
+     if (tGlobal < globalMinParm) tGlobal = globalMinParm;
+     if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
+
+     context.clearRect(0, 0, canvas.width, canvas.height);
+     this.drawAllSplineArtifacts(drawDataForAllBCurveArtifacts,
+                                 context);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // editControlPoint - method of CubicSpline
+  // Called when user has clicked a control point on this curve and is moving it
+  //
+  // input: evt - the mouse event
+  // input: drawDataForAllBCurveArtifacts - styles for drawing everything
+  // input: context - the context associated with the canvas
+  // input: canvas - the canvas on which we are drawing
+  //
+  // TODO: I think we can get by without passing the canvas as a parameter
+  // because we should be able to get it from evt.
+  //
+  //////////////////////////////////////////////////////////////////////////////
+  editControlPoint(evt : MouseEvent,
+                   drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
+                   context : CanvasRenderingContext2D,
+                   canvas : HTMLCanvasElement)
+  {
+     var mousePos : Point = getMousePos(canvas, evt);
+     this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
+     context.clearRect(0, 0, canvas.width, canvas.height);
+
+     this.drawAllSplineArtifacts(drawDataForAllBCurveArtifacts,
+                                 context);
+  }  
 
 } // End class CubicSpline
 
