@@ -1958,19 +1958,19 @@ function animation(drawingCanvas : HTMLCanvasElement,
 // input: drawingCanvas - the canvas on which we are drawing
 // input: drawingContext - the context associated with the canvas
 // input: S - the main CubicSpline
-// input: drawDataForAllSplineArtifacts - styles for drawing everything
+// input: drawDataForAllBCurveArtifacts - styles for drawing everything
 //
 ////////////////////////////////////////////////////////////////////////////////
 function splineAnimation(drawingCanvas : HTMLCanvasElement,
                          drawingContext : CanvasRenderingContext2D,
                          S : CubicSpline,
-                         drawDataForAllSplineArtifacts : BCurveArtifactsDrawData)
+                         drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData)
 {
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
    tGlobalUpdate(); // the global value of t is adjusted
 
-   S.drawAllSplineArtifacts(drawDataForAllSplineArtifacts,
+   S.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
                             drawingContext);
 }
 
@@ -2058,14 +2058,14 @@ function StartAnimation()
    {
      var S : CubicSpline = initializeCubicSpline();
 
-     var drawDataForAllSplineArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
+     var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
      globalLoop = setInterval(splineAnimation,
                               10,
                               drawingCanvas,
                               drawingContext,
                               S,
-                              drawDataForAllSplineArtifacts);
+                              drawDataForAllBCurveArtifacts);
    }
 }
 //   End code related to StartAnimation()
@@ -3453,20 +3453,20 @@ class CubicSpline extends BCurve
   } 
 
   //////////////////////////////////////////////////////////////////////////////
-  // drawAllSplineArtifacts - method of CubicSpline
+  // drawAllBCurveArtifacts - method of CubicSpline
   // Draw all information associated with this CubicSpline
   //
-  // input: drawDataForAllSplineArtifacts - styles for drawing everything
+  // input: drawDataForAllBCurveArtifacts - styles for drawing everything
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
-  drawAllSplineArtifacts(drawDataForAllSplineArtifacts : BCurveArtifactsDrawData,
+  drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                          context : CanvasRenderingContext2D)
   {
-     this.drawCurve(drawDataForAllSplineArtifacts.forBCurve, context);
-     this.drawControlPolygon(drawDataForAllSplineArtifacts.forControlPolygon, context);
+     this.drawCurve(drawDataForAllBCurveArtifacts.forBCurve, context);
+     this.drawControlPolygon(drawDataForAllBCurveArtifacts.forControlPolygon, context);
 
      this.drawControlPointsWeightedForParm(tGlobal,
-                                           drawDataForAllSplineArtifacts.forControlPoints,
+                                           drawDataForAllBCurveArtifacts.forControlPoints,
                                            context);
 
 // The following is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData
@@ -3479,7 +3479,7 @@ class CubicSpline extends BCurve
 
      this.drawPointOnCurveForParm(tGlobal,
                                   globalConstPointOnCurveRadius,
-                                  drawDataForAllSplineArtifacts.forPointOnCurve,
+                                  drawDataForAllBCurveArtifacts.forPointOnCurve,
                                   context);
 
 // The following is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData 
@@ -3510,22 +3510,22 @@ class CubicSpline extends BCurve
 
       // drawTextForNumber(tGlobal,
       //                   textLocation,
-      //                   drawDataForAllSplineArtifacts.forTextNearPointOnCurve,
+      //                   drawDataForAllBCurveArtifacts.forTextNearPointOnCurve,
       //                   context);
 
       //  this.drawBasisFunctionsWithParm(tGlobal,
-      //                                  drawDataForAllSplineArtifacts,
+      //                                  drawDataForAllBCurveArtifacts,
       //                                  context);
 
       // drawAllDeCasteljauLines(this.CtrlPts,
       //                         tGlobal,
-      //                         drawDataForAllSplineArtifacts.forIntermediateLines,
+      //                         drawDataForAllBCurveArtifacts.forIntermediateLines,
       //                         context);
 
 
       // drawAllDeCasteljauPoints(this.CtrlPts,
       //                          tGlobal,
-      //                          drawDataForAllSplineArtifacts.forIntermediatePoints,
+      //                          drawDataForAllBCurveArtifacts.forIntermediatePoints,
       //                          context);
   }
 
@@ -3648,7 +3648,7 @@ class CubicSpline extends BCurve
      if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
 
      context.clearRect(0, 0, canvas.width, canvas.height);
-     this.drawAllSplineArtifacts(drawDataForAllBCurveArtifacts,
+     this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
                                  context);
   }
 
@@ -3674,7 +3674,7 @@ class CubicSpline extends BCurve
      this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
      context.clearRect(0, 0, canvas.width, canvas.height);
 
-     this.drawAllSplineArtifacts(drawDataForAllBCurveArtifacts,
+     this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
                                  context);
   }  
 
