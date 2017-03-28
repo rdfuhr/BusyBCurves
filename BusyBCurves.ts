@@ -1111,6 +1111,12 @@ abstract class BCurve
    // Do nothing
  }
 
+ drawAllBezierArtifacts(drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
+                        context : CanvasRenderingContext2D)
+{
+   // Do nothing
+}
+
 }  //   End class BCurve
 
 
@@ -2142,13 +2148,13 @@ function onMouseDown(evt : MouseEvent,
 // This is called in response to a mousemove event detected by the canvas
 //
 // input: evt - the mouse event
-// input: C - the CubicBezierCurve
+// input: C - the BCurve
 // input: drawDataForAllBezierArtifacts - styles for drawing everything
 // input: drawingContext - the context associated with the canvas
 // input: drawingCanvas - the canvas on which we are drawing
 ///////////////////////////////////////////////////////////////////////////////
 function onMouseMove(evt : MouseEvent,
-                     C : CubicBezierCurve,
+                     C : BCurve,
                      drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
   					         drawingContext : CanvasRenderingContext2D,
 					           drawingCanvas : HTMLCanvasElement)
@@ -2257,7 +2263,7 @@ function ExploreWithMouse()
    // Inline code corresponding to clearCanvas
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
-   var C : CubicBezierCurve = initializeCubicBezierCurve();
+   var C : BCurve = initializeCubicBezierCurve();
 
    var drawDataForAllBezierArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
