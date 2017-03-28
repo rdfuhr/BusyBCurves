@@ -2155,7 +2155,7 @@ function onMouseDown(evt : MouseEvent,
 ///////////////////////////////////////////////////////////////////////////////
 function onMouseMove(evt : MouseEvent,
                      C : BCurve,
-                     drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
+                     drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
   					         drawingContext : CanvasRenderingContext2D,
 					           drawingCanvas : HTMLCanvasElement)
 {
@@ -2169,14 +2169,14 @@ function onMouseMove(evt : MouseEvent,
 	if (globalModifyingPointOnCurve==true)
 	{
 	   C.editPointOnCurve(evt,
-              drawDataForAllBezierArtifacts,
-						  drawingContext,
-						  drawingCanvas);
+                        drawDataForAllBCurveArtifacts,
+						            drawingContext,
+						            drawingCanvas);
 	}
 	else if (globalIndexOfModifiedControlPoint > -1)
 	{
 	   C.editControlPoint(evt,
-                        drawDataForAllBezierArtifacts,
+                        drawDataForAllBCurveArtifacts,
 						            drawingContext,
 						            drawingCanvas);
 	}
