@@ -3507,6 +3507,14 @@ class CubicSpline extends BCurve
      }
 // The preceding draws the graphs of the B-Spline basis functions and the corresponding point being evaluated on the graph
 
+     // The following is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData
+     var D : Point[][] = this.DeBoorTriangleAtParm(tGlobal);
+     var drawDataForDeBoorPoints : CircleDrawData = defaultDrawDataForIntermediatePoints();
+     DrawAllDeBoorPoints(D, drawDataForDeBoorPoints, context);
+     var drawDataForDeBoorLines : CurveDrawData = defaultDrawDataForIntermediateLines();
+     DrawAllDeBoorLines(D, drawDataForDeBoorLines, context);
+     // The preceding is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData
+
       var pointOnCurve : Point = this.positionAtParm(tGlobal);
       globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
