@@ -100,6 +100,7 @@
 
 // Begin declaring some of the globals
 
+var globalBCurve : BCurve = null;
 var globalPointOnCurveForParmTarget : Circle; // cannot be made a const
 var globalControlPointTargets : Array<Circle> = new Array();
 var tGlobal : number = 0.0; // cannot be made a const
@@ -2043,7 +2044,7 @@ function StartAnimation()
 
    if (globalCurveType==CurveType.Bezier)
    {
-      var C : CubicBezierCurve = initializeCubicBezierCurve();
+      // var C : CubicBezierCurve = initializeCubicBezierCurve();
 
       var drawDataForAllBezierArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
@@ -2051,13 +2052,13 @@ function StartAnimation()
                                10,
                                drawingCanvas,
                                drawingContext,
-                               C,
+                               globalBCurve, // instead of  var C : CubicBezierCurve = initializeCubicBezierCurve();
                                drawDataForAllBezierArtifacts);
    }
    else
    if (globalCurveType==CurveType.Spline)
    {
-     var S : CubicSpline = initializeCubicSpline();
+     // var S : CubicSpline = initializeCubicSpline();
 
      var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
@@ -2065,7 +2066,7 @@ function StartAnimation()
                               10,
                               drawingCanvas,
                               drawingContext,
-                              S,
+                              globalBCurve,  // instead of var S : CubicSpline = initializeCubicSpline();
                               drawDataForAllBCurveArtifacts);
    }
 }
@@ -2264,23 +2265,22 @@ function ExploreWithMouse()
    // Inline code corresponding to clearCanvas
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
 
-   var C : BCurve = null;
    if (globalCurveType==CurveType.Bezier)
    {
-     C = initializeCubicBezierCurve();
+     globalBCurve = initializeCubicBezierCurve();
    }
    else
    if (globalCurveType==CurveType.Spline)
    {
-     C = initializeCubicSpline();
+     globalBCurve = initializeCubicSpline();
    }
 
    var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
 
-   C.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
-                            drawingContext);
+   globalBCurve.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts, drawingContext);
+   
 
       drawingCanvas.addEventListener('mousedown', function(evt)
          {
@@ -2291,7 +2291,7 @@ function ExploreWithMouse()
       drawingCanvas.addEventListener('mousemove', function(evt)
          {
             onMouseMove(evt,
-                        C,
+                        globalBCurve,
                         drawDataForAllBCurveArtifacts,
                         drawingContext,
                         drawingCanvas);
