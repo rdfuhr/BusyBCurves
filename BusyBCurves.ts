@@ -1984,18 +1984,18 @@ function splineAnimation(drawingCanvas : HTMLCanvasElement,
 //
 // input: startAnimationButtonDisabled - disable if true, enable if false
 // input: stopAnimationButtonDisabled - disable if true, enable if false
-// input: exploreWithMouseButtonDisabled - disable if true, enable if false
+// input: ResetCurveButtonDisabled - disable if true, enable if false
 ////////////////////////////////////////////////////////////////////////////////
 function DisableEnableButtons(startAnimationButtonDisabled : boolean,
                               stopAnimationButtonDisabled : boolean,
-                              exploreWithMouseButtonDisabled : boolean)
+                              ResetCurveButtonDisabled : boolean)
 {
    var startAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StartAnimation");
    var stopAnimationButton : HTMLInputElement = <HTMLInputElement>document.getElementById("StopAnimation");
-   var exploreWithMouseButton : HTMLInputElement = <HTMLInputElement>document.getElementById("ExploreWithMouse");
+   var ResetCurveButton : HTMLInputElement = <HTMLInputElement>document.getElementById("ResetCurve");
    startAnimationButton.disabled = startAnimationButtonDisabled;
    stopAnimationButton.disabled = stopAnimationButtonDisabled;
-   exploreWithMouseButton.disabled = exploreWithMouseButtonDisabled;
+   ResetCurveButton.disabled = ResetCurveButtonDisabled;
 }
 
 function DisableRadioButtons()
@@ -2037,8 +2037,8 @@ function StartAnimation()
 {
    var startAnimationButtonDisabled : boolean = true;
    var stopAnimationButtonDisabled : boolean = false;
-   var exploreWithMouseButtonDisabled : boolean = true;
-   DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, exploreWithMouseButtonDisabled);
+   var ResetCurveButtonDisabled : boolean = true;
+   DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, ResetCurveButtonDisabled);
    DisableRadioButtons();
 
    var drawingCanvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('drawingCanvas');
@@ -2084,15 +2084,15 @@ function StopAnimation()
 {
    var startAnimationButtonDisabled : boolean = false;
    var stopAnimationButtonDisabled : boolean = true;
-   var exploreWithMouseButtonDisabled : boolean = false;
-   DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, exploreWithMouseButtonDisabled);
+   var ResetCurveButtonDisabled : boolean = false;
+   DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, ResetCurveButtonDisabled);
    EnableRadioButtons();
 
    clearInterval(globalLoop);
 }
 //   End code related to StopAnimation()
 
-// Begin code related to ExploreWithMouse()
+// Begin code related to ResetCurve()
 var globalIndexOfModifiedControlPoint : number = -1;
 // -1 means none is being modified.
 var globalModifyingPointOnCurve : boolean = false;
@@ -2251,15 +2251,15 @@ function touchHandler(event) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// ExploreWithMouse - function
+// ResetCurve - function
 // Constructs the curve and declares callbacks for exploring with the mouse.
 //
 // TODO - There is a refactoring opportunity for constructing the curve.
 // TODO - Look for other refactoring opportunities
 // Note: This function is called when user clicks Explore With Mouse button
 ////////////////////////////////////////////////////////////////////////////////
-function ExploreWithMouse()
-{  // Begin function ExploreWithMouse
+function ResetCurve()
+{  // Begin function ResetCurve
    var drawingCanvas : HTMLCanvasElement =
      <HTMLCanvasElement>document.getElementById('drawingCanvas');
    var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
@@ -2311,9 +2311,9 @@ function ExploreWithMouse()
     drawingCanvas.addEventListener("touchend", touchHandler, true);
 //   End adding code based on
 // http://stackoverflow.com/questions/5186441/javascript-drag-and-drop-for-touch-devices/6362527#6362527
-}  // End function ExploreWithMouse
+}  // End function ResetCurve
 
-//   End code related to ExploreWithMouse()
+//   End code related to ResetCurve()
 
 enum CurveType {Bezier, Spline};
 
@@ -2351,13 +2351,13 @@ function UpdateGlobalCurveTypeBasedOnRadioButton()
             if (curItem.value=="Bezier")
             {
                 globalCurveType = CurveType.Bezier;
-                ExploreWithMouse(); 
+                ResetCurve(); 
                 break;
             }
             else if (curItem.value=="Spline")
             {
                 globalCurveType = CurveType.Spline;
-                ExploreWithMouse();
+                ResetCurve();
                 break;
             }
         }
@@ -4115,11 +4115,11 @@ function resize()
   drawingCanvas.width = widthScaleFac*window.innerWidth;
   drawingCanvas.height = heightScaleFac*window.innerHeight;
 
-  // ExploreWithMouse();
+  // ResetCurve();
   UpdateGlobalCurveTypeBasedOnRadioButton();
 }
 
-// I replaced window.onload = ExploreWithMouse with the following.
+// I replaced window.onload = ResetCurve with the following.
 window.onload = resize;
 window.onresize = resize;
 
