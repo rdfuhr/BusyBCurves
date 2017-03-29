@@ -27,7 +27,7 @@
 // TODO: Mar 27, 2017: Implement BCurve class (possibly abstract) from which CubicBezierCurve and CubicSpline are derived and see if we can handle the addEventListener calls using BCurve. - SORT OF DONE
 // TODO: Mar 27, 2017: Consider making the main BCurve be a global - DONE
 // TODO: Mar 28, 2017: Upload files to https://richardfuhr.neocities.org/BusyBCurves.html and https://richardfuhr.neocities.org/BusyBCurves.js - DONE!!
-// TODO: Mar 29, 2017: Call DrawAllDeBoorLines and DrawAllDeBoorPoints inside drawAllBCurveArtifacts for CubicSpline.
+// TODO: Mar 29, 2017: Call DrawAllDeBoorLines and DrawAllDeBoorPoints inside drawAllBCurveArtifacts for CubicSpline. - DONE
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
