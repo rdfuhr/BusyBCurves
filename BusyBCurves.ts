@@ -28,6 +28,7 @@
 // TODO: Mar 27, 2017: Consider making the main BCurve be a global - DONE
 // TODO: Mar 28, 2017: Upload files to https://richardfuhr.neocities.org/BusyBCurves.html and https://richardfuhr.neocities.org/BusyBCurves.js - DONE!!
 // TODO: Mar 29, 2017: Call DrawAllDeBoorLines and DrawAllDeBoorPoints inside drawAllBCurveArtifacts for CubicSpline. - DONE
+// TODO: Mar 29, 2017: Continue working on the slider. In particular, have changes in tGlobal be reflected by the slider if user drags point.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -5229,6 +5230,25 @@ function TestSomeGlobals()
   document.writeln("globalMaxRadius = " + globalMaxRadius + "<p>");
   var should_be_close_to_zero = globalSumOfControlPointAreas - Math.PI*globalMaxRadius*globalMaxRadius;
   document.writeln("should_be_close_to_zero = " + should_be_close_to_zero + "<p>");
+}
+
+function TestSlider()
+{
+  var ParameterRangeSlider : HTMLInputElement = <HTMLInputElement> document.getElementById("ParameterRange")
+  var min : string = ParameterRangeSlider.min;
+  var max : string = ParameterRangeSlider.max;
+  var value : string = ParameterRangeSlider.value;
+ 
+  var minNumber : number = +min;
+  var maxNumber : number = +max;
+  var valNumber : number = +value;
+  var tCurr = (valNumber - minNumber)/(maxNumber - minNumber);
+  // console.log("tCurr = " + tCurr.toString());
+  tGlobal = tCurr;
+  var context : CanvasRenderingContext2D = getDrawingContext()
+  var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
+  clearCanvas();
+  globalBCurve.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts, context);
 }
 
 function doTests()
