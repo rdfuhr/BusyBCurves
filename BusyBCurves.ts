@@ -1505,6 +1505,7 @@ class CubicBezierCurve extends BCurve
      tGlobal += dt;
      if (tGlobal < globalMinParm) tGlobal = globalMinParm;
      if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
+     UpdateSliderBasedOnTglobal();
 
      context.clearRect(0, 0, canvas.width, canvas.height);
      this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
@@ -1615,6 +1616,8 @@ function tGlobalUpdate() // updates the global t
       tGlobal = globalMinParm;
       tDeltaGlobal = -1.0*tDeltaGlobal;
    }
+
+   UpdateSliderBasedOnTglobal();
 }
 
 function initializeGlobalMetrics()
@@ -2281,6 +2284,7 @@ function ResetCurve()
    var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
    tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
+   UpdateSliderBasedOnTglobal();
 
    globalBCurve.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts, drawingContext);
    
@@ -2365,10 +2369,34 @@ function UpdateGlobalCurveTypeBasedOnRadioButton()
     }
 }
 
+
 function HandleCurveTypeRadioButtonChange()
 {
   UpdateGlobalCurveTypeBasedOnRadioButton();
 }
+
+function UpdateSliderBasedOnTglobal()
+{
+  var ParameterRangeSlider : HTMLInputElement = <HTMLInputElement> document.getElementById("ParameterRange");
+  var min : number = +ParameterRangeSlider.min;
+  var max : number = +ParameterRangeSlider.max;
+  var val : number = tGlobal*(max - min) + min;
+
+  ParameterRangeSlider.value = val.toString();
+}
+
+function UpdateTglobalBasedOnSlider()
+{
+  var ParameterRangeSlider : HTMLInputElement = <HTMLInputElement> document.getElementById("ParameterRange");
+  var min : number = +ParameterRangeSlider.min;
+  var max : number = +ParameterRangeSlider.max
+  var val : number = +ParameterRangeSlider.value;
+ 
+  tGlobal = (val - min)/(max - min);
+}
+
+
+
 
 // Begin code related to HelpInTheFormOfAWebPage()
 function HelpInTheFormOfAWebPage()
@@ -3659,6 +3687,8 @@ class CubicSpline extends BCurve
      tGlobal += dt;
      if (tGlobal < globalMinParm) tGlobal = globalMinParm;
      if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
+
+     UpdateSliderBasedOnTglobal();
 
      context.clearRect(0, 0, canvas.width, canvas.height);
      this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
@@ -5234,17 +5264,7 @@ function TestSomeGlobals()
 
 function TestSlider()
 {
-  var ParameterRangeSlider : HTMLInputElement = <HTMLInputElement> document.getElementById("ParameterRange")
-  var min : string = ParameterRangeSlider.min;
-  var max : string = ParameterRangeSlider.max;
-  var value : string = ParameterRangeSlider.value;
- 
-  var minNumber : number = +min;
-  var maxNumber : number = +max;
-  var valNumber : number = +value;
-  var tCurr = (valNumber - minNumber)/(maxNumber - minNumber);
-  // console.log("tCurr = " + tCurr.toString());
-  tGlobal = tCurr;
+  UpdateTglobalBasedOnSlider();
   var context : CanvasRenderingContext2D = getDrawingContext()
   var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
   clearCanvas();
