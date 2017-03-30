@@ -36,39 +36,14 @@
 </canvas>
 </div>
 
-
+<table>
+<tr>
+<td>
+       &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+</td>  
 <div>
-
-
-    <input type="button"
-           value="Start Animation"
-           id = "StartAnimation"
-           onclick="StartAnimation()" />
-
-    <input type="button"
-           disabled
-           value="Stop Animation"
-           id = "StopAnimation"
-           onclick="StopAnimation()" />
-
-    <input type="button"
-           value="Reset Curve"
-           id = "ResetCurve"
-           onclick="ResetCurve()" />
-
-    <input type="button"
-           value="Help"
-           id = "Help"
-           onclick="HelpInTheFormOfAWebPage()" />
-
-    <input type="button"
-           value="Do Tests"
-           id = "DoTests"
-           onclick="doTests()" />
-
-</div>
-<div>           
-
+<td>
+<div>  
     <input type="radio" 
          name="curvetype" 
          value="Bezier" 
@@ -83,11 +58,56 @@
          id="Spline"
          onchange="HandleCurveTypeRadioButtonChange()"
          >
-         Spline<br>       
-
-
-    <input type="range" id="ParameterRange" min="0" max="1000" value="300"   oninput="TestSlider()"/>
+         Spline<br> 
 </div>
+</td> 
+<td>
+       &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+</td>     
+<td>
+    <input type="button"
+           value="Start Animation"
+           id = "StartAnimation"
+           onclick="StartAnimation()" />
+</td>
+<td>
+    <input type="button"
+           disabled
+           value="Stop Animation"
+           id = "StopAnimation"
+           onclick="StopAnimation()" />
+</td>
+<td>
+    <input type="button"
+           value="Reset Curve"
+           id = "ResetCurve"
+           onclick="ResetCurve()" />
+</td>
+<td>
+    <input type="button"
+           value="Help"
+           id = "Help"
+           onclick="HelpInTheFormOfAWebPage()" />
+</td>
+<td>
+    <input type="button"
+           value="Do Tests"
+           id = "DoTests"
+           onclick="doTests()" />
+</td>
+
+</div>
+   <td>
+       &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+   </td>      
+
+
+<td>
+    <input type="range" id="ParameterRange" min="0" max="1000" value="300"   oninput="TestSlider()"/>
+</td>
+</tr>
+<table>    
+
 
 
 
