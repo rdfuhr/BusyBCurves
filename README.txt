@@ -43,3 +43,5 @@ I just did the following (on my iMac on Feb 10, 2017) to make a soft link in Dro
 ln -s  ~/Documents/Sandbox/typeScriptLearn/BusyBCurves ~/Dropbox/BusyBCurves
 
 I am back on the iMac and can confirm that the text I entered into this file, README.txt, is here on the iMac.
+
+On Thursday, March 30, 2017, I am going to copy BusyBCurvesHelp.html to both BezierHelp.html and SplineHelp.html and edit each of those, hooking them up to the TypeScript code.
