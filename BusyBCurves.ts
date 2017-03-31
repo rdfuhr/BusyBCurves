@@ -2401,7 +2401,15 @@ function UpdateTglobalBasedOnSlider()
 // Begin code related to HelpInTheFormOfAWebPage()
 function HelpInTheFormOfAWebPage()
 {
-   window.open("BusyBCurvesHelp.html");
+  if (globalCurveType==CurveType.Bezier)
+  {
+    window.open("BezierHelp.html");
+  }
+  else
+  if (globalCurveType==CurveType.Spline)
+  {
+    window.open("SplineHelp.html");
+  }
 }
 //   End code related to HelpInTheFormOfAWebPage()
 
@@ -3547,12 +3555,12 @@ class CubicSpline extends BCurve
       var pointOnCurve : Point = this.positionAtParm(tGlobal);
       globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
-      // var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - globalConstPointOnCurveRadius);
+      var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - globalConstPointOnCurveRadius);
 
-      // drawTextForNumber(tGlobal,
-      //                   textLocation,
-      //                   drawDataForAllBCurveArtifacts.forTextNearPointOnCurve,
-      //                   context);
+      drawTextForNumber(tGlobal,
+                        textLocation,
+                        drawDataForAllBCurveArtifacts.forTextNearPointOnCurve,
+                        context);
 
       //  this.drawBasisFunctionsWithParm(tGlobal,
       //                                  drawDataForAllBCurveArtifacts,

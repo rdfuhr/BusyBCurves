@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<!-- Copyright (C) 2014 Richard David Fuhr - All rights reserved. -->
+<!-- Copyright (C) 2017 Richard David Fuhr - All rights reserved. -->
 <!-- richard.fuhr@gmail.com -->
 
 <meta charset="UTF-8">
 
 <html>
 <head>
-    <title>Help With Exploring Bezier Curves</title>
+    <title>Help With Exploring Spline Curves</title>
 </head>
 <body>
 <p>
 This program enables you to explore some properties of cubic
-<a href="http://en.wikipedia.org/wiki/B%C3%A9zier_curve"><i>Bezier curves</i></a>.
+<a href="https://en.wikipedia.org/wiki/Spline_(mathematics)"><i>Spline curves</i></a>.
 </p>
 <p>
-The yellow circle on the red cubic Bezier curve is <b>always</b> at the
+The yellow circle on the red cubic Spline curve is <b>always</b> at the
 <i>center of mass</i> of the blue <i>control points</i>.
 </p>
 <p>
@@ -22,42 +22,35 @@ The number next to this yellow circle (the <i>parameter</i>) varies between 0 an
 </p>
 <p>
 As this number varies, the yellow circle moves along the red curve,
-and the blue control points increase or decrease in area.
+and the blue control points increase or decrease in area, with at most four of the control points having some blue for any parameter.
 </p>
 <p>
-The areas of the four blue circles <b>always</b> add up to 1.  (NOTE: In this demo, the areas of
-the circles are rounded to two decimal places, so there can be cases where the sum of
-these <i>rounded</i> areas does not equal 1.)
+The areas of the four blue circles <b>always</b> add up to 1.
 </p>
-<p>
-The number near each blue circle is the <i>area</i> of that circle.
-</p>
+
 <p>
 These areas are equal to the <i>values of the functions</i> whose green graphs
 are drawn next to the blue circles.
 </p>
 <p>
 These functions are called
-<a href="http://en.wikipedia.org/wiki/Bernstein_polynomials"><i>Bernstein basis polynomials</i></a>.
+<a href="https://en.wikipedia.org/wiki/B-spline"><i>B-Spline basis functions</i></a>.
 </p>
 <p>
-The black polyline connecting the blue control points is the <i>control polygon</i> for the Bezier
-curve.  (NOTE: The Bezier curve is <i>always tangent</i> to its control polygon at the endpoints,
+The black polyline connecting the blue control points is the <i>control polygon</i> for the Spline
+curve.  (NOTE: The Spline curve is <i>always tangent</i> to its control polygon at the endpoints,
 no matter how you move the control points.)
 </p>
 <p>
 Finally, the brown lines connecting the small orange circles illustrate
-<a href="https://en.wikipedia.org/wiki/De_Casteljau%27s_algorithm"><i>DeCasteljau's algorithm</i></a>
-for evaluating a point on the Bezier curve at a particular parameter value.
+<a href="https://en.wikipedia.org/wiki/De_Boor%27s_algorithm"><i>de Boor's algorithm</i></a>
+for evaluating a point on the Spline curve at a particular parameter value.
 <br>
-Starting with each edge
-of the control polygon, an orange circle is placed along that edge at a position determined by the
-current parameter value.
+Starting with only those edges
+of the control polygon for which the end points are participating, an orange circle is placed along that edge at a position determined by the
+current parameter value according to a somewhat complex formula.
 <br>
-For instance, if the current parameter value is 0.38, then each new orange circle is placed
-38% of the way along that edge.
-<br>
-Then new edges are created connecing successive orange circles, and the
+Then new edges are created connecting successive orange circles, and the
 process is repeated, creating new orange circles and brown edges, until we finally arrive at the point on the curve.
 </p>
 <p>
@@ -79,8 +72,14 @@ You can click on the yellow circle and drag it along the curve
 and watch the areas of the blue circles change accordingly.
 The <i>locations</i> of the centers of the blue circles will <b>not</b> change.
 </li>
+<li>
+In most browsers you can grab the slider <i>Parameter Range</i> near the bottom and move it to make the yellow circle move.
+</li>
 </ol>
 </p>
+<p>
+You can switch from Spline to Bezier by clicking the radio button next to <i>Curve Type</i>, and you can get help with exploring Bezier
+curves <a href="BezierHelp.html">here</a>
 <p>
 ---
 </p>
