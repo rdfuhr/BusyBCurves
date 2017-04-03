@@ -3475,12 +3475,8 @@ class CubicSpline extends BCurve
      
      for (var i = 0; i < nControlPts; i++)
      {
-        var actualArea : number = globalSumOfControlPointAreas;
-        // NOTE: actualArea = Math.PI*(actualRadius)^2
-        // so actualRadius = sqrt(actualArea/Math.PI)
-        var actualRadius : number = Math.sqrt(actualArea/Math.PI);
-        controlPoints[i].drawUnfilledCircleHere(actualRadius, drawData, context);
-        globalControlPointTargets[i] = new Circle(controlPoints[i], actualRadius);
+        controlPoints[i].drawUnfilledCircleHere(globalMaxRadius, drawData, context);
+        globalControlPointTargets[i] = new Circle(controlPoints[i], globalMaxRadius);
      }
 
   } 
