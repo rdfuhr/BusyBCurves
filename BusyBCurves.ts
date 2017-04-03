@@ -681,6 +681,7 @@ class BCurveArtifactsDrawData
   forVerticalLineFromCurveForParm : CurveDrawData;
   forTextNearPointOnCurve : TextDrawData;
   forTextNearPointOnGraph : TextDrawData;
+  forKnots : RectangleDrawData;
 
   //////////////////////////////////////////////////////////////////////////////
   // constructor for BCurveArtifactsDrawData
@@ -703,6 +704,7 @@ class BCurveArtifactsDrawData
     this.forVerticalLineFromCurveForParm = defaultDrawDataForVerticalLineFromCurveForParm();
     this.forTextNearPointOnCurve = defaultDrawDataForTextNearPointOnCurve();
     this.forTextNearPointOnGraph = defaultDrawDataForTextNearPointOnGraph();
+    this.forKnots = defaultDrawDataForKnots();
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -774,6 +776,11 @@ class BCurveArtifactsDrawData
     stringRep = stringRep + "Data for this.forTextNearPointOnGraph";
     stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forTextNearPointOnGraph.toString();
+
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forKnots";
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + this.forKnots.toString();
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "End data for this BCurveArtifactsDrawData";
@@ -3537,12 +3544,9 @@ class CubicSpline extends BCurve
                                   drawDataForAllBCurveArtifacts.forPointOnCurve,
                                   context);
 
-// The following is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData 
-     var theDrawDataForKnots : RectangleDrawData = defaultDrawDataForKnots();
      const width : number = 15.0;
      const height : number = 10.0;
-// The preceding is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData      
-     this.drawKnots(width, height, theDrawDataForKnots, context);
+     this.drawKnots(width, height, drawDataForAllBCurveArtifacts.forKnots, context);
 
 // The following draws the graphs of the B-Spline basis functions and the corresponding point being evaluated on the graph
      var nBasisFunctions : number = globalGraphsOfCubicBSplineBasisFunctions.length;
