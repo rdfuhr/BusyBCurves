@@ -3550,15 +3550,15 @@ class CubicSpline extends BCurve
 
 // The following draws the graphs of the B-Spline basis functions and the corresponding point being evaluated on the graph
      var nBasisFunctions : number = globalGraphsOfCubicBSplineBasisFunctions.length;
-     var theDrawDataForBasisFunctions : CurveDrawData = defaultDrawDataForGraphOfBasisFunction();
-     var theDrawDataForPointOnGraph : CircleDrawData = defaultDrawDataForPointOnGraph();
+     
      var pointOnGraphRadius : number = 3.0;
 
      for (var basisIndex : number = 0; basisIndex < nBasisFunctions; basisIndex++)
      {
        var alignedBSplineGraph : CubicSpline = alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex);
-       alignedBSplineGraph.drawCurve(theDrawDataForBasisFunctions, context);
-       alignedBSplineGraph.drawPointOnCurveForParm(tGlobal, pointOnGraphRadius, theDrawDataForPointOnGraph, context);
+      
+       alignedBSplineGraph.drawCurve(drawDataForAllBCurveArtifacts.forGraphOfBasisFunction, context);
+       alignedBSplineGraph.drawPointOnCurveForParm(tGlobal, pointOnGraphRadius, drawDataForAllBCurveArtifacts.forPointOnGraph, context);
      }
 // The preceding draws the graphs of the B-Spline basis functions and the corresponding point being evaluated on the graph
 
