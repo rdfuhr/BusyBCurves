@@ -27,7 +27,7 @@
 // TODO: Mar 27, 2017: Implement BCurve class (possibly abstract) from which CubicBezierCurve and CubicSpline are derived and see if we can handle the addEventListener calls using BCurve. - SORT OF DONE
 // TODO: Mar 27, 2017: Consider making the main BCurve be a global - DONE
 // TODO: Mar 28, 2017: Upload files to https://richardfuhr.neocities.org/BusyBCurves.html and https://richardfuhr.neocities.org/BusyBCurves.js - DONE!!
-// TODO: Mar 29, 2017: Call DrawAllDeBoorLines and DrawAllDeBoorPoints inside drawAllBCurveArtifacts for CubicSpline. - DONE
+// TODO: Mar 29, 2017: Call drawAllDeBoorLines and drawAllDeBoorPoints inside drawAllBCurveArtifacts for CubicSpline. - DONE
 // TODO: Mar 29, 2017: Continue working on the slider. In particular, have changes in tGlobal be reflected by the slider if user drags point.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
@@ -881,7 +881,7 @@ function drawAllDeCasteljauPoints(P : Array<Point>,
    }  //  end i-loop
 }
 
-function DrawAllDeBoorPoints(D : Point[][],
+function drawAllDeBoorPoints(D : Point[][],
                              drawData : CircleDrawData,
                              context : CanvasRenderingContext2D)
 {
@@ -896,7 +896,7 @@ function DrawAllDeBoorPoints(D : Point[][],
   }
 }
 
-function DrawAllDeBoorLines(D : Point[][],
+function drawAllDeBoorLines(D : Point[][],
                             drawData : CurveDrawData,
                             context : CanvasRenderingContext2D)
 {
@@ -3547,9 +3547,9 @@ class CubicSpline extends BCurve
      // The following is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData
      var D : Point[][] = this.DeBoorTriangleAtParm(tGlobal);
      var drawDataForDeBoorPoints : CircleDrawData = defaultDrawDataForIntermediatePoints();
-     DrawAllDeBoorPoints(D, drawDataForDeBoorPoints, context);
+     drawAllDeBoorPoints(D, drawDataForDeBoorPoints, context);
      var drawDataForDeBoorLines : CurveDrawData = defaultDrawDataForIntermediateLines();
-     DrawAllDeBoorLines(D, drawDataForDeBoorLines, context);
+     drawAllDeBoorLines(D, drawDataForDeBoorLines, context);
      // The preceding is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData
 
       var pointOnCurve : Point = this.positionAtParm(tGlobal);
@@ -5207,9 +5207,9 @@ function TestCubicSpline()
    drawDataForPointOnAwakenedGraph.strokeColor = "blue";
    var D : Point[][] = theCubicSpline.DeBoorTriangleAtParm(tGlobal);
    var drawDataForDeBoorPoints : CircleDrawData = defaultDrawDataForIntermediatePoints();
-   DrawAllDeBoorPoints(D, drawDataForDeBoorPoints, context);
+   drawAllDeBoorPoints(D, drawDataForDeBoorPoints, context);
    var drawDataForDeBoorLines : CurveDrawData = defaultDrawDataForIntermediateLines();
-   DrawAllDeBoorLines(D, drawDataForDeBoorLines, context);
+   drawAllDeBoorLines(D, drawDataForDeBoorLines, context);
    
    var yDelta : Point = new Point(0, -sy);
    var xDelta : Point = new Point(sx, 0);
