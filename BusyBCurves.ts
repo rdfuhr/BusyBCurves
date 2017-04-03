@@ -672,6 +672,7 @@ class BCurveArtifactsDrawData
   forBCurve : CurveDrawData;
   forControlPolygon : CurveDrawData;
   forControlPoints : CircleDrawData;
+  forControlPointsWithMaxRadius : CircleDrawData;
   forPointOnCurve : CircleDrawData;
   forIntermediateLines : CurveDrawData;
   forIntermediatePoints : CircleDrawData;
@@ -693,6 +694,7 @@ class BCurveArtifactsDrawData
     this.forBCurve = defaultDrawDataForBCurve();
     this.forControlPolygon = defaultDrawDataForControlPolygon();
     this.forControlPoints = defaultDrawDataForControlPoints();
+    this.forControlPointsWithMaxRadius = defaultDrawDataForControlPointsWithMaxRadius();
     this.forPointOnCurve = defaultDrawDataForPointOnCurve();
     this.forIntermediateLines = defaultDrawDataForIntermediateLines();
     this.forIntermediatePoints = defaultDrawDataForIntermediatePoints();
@@ -727,6 +729,11 @@ class BCurveArtifactsDrawData
     stringRep = stringRep + "Data for this.forControlPoints";
     stringRep = stringRep + "<p>";
     stringRep = stringRep + this.forControlPoints.toString();
+
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + "Data for this.forControlPointsWithMaxRadius";
+    stringRep = stringRep + "<p>";
+    stringRep = stringRep + this.forControlPointsWithMaxRadius.toString();    
 
     stringRep = stringRep + "<p>";
     stringRep = stringRep + "Data for this.forPointOnCurve";
@@ -1791,6 +1798,23 @@ function defaultDrawDataForControlPoints() : CircleDrawData
                        controlPointStrokeColor,
                        controlPointStrokeWidth);
   return drawDataForControlPoints;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// defaultDrawDataForControlPointsWithMaxRadius - function
+// Return the default draw data for the control points with maximum radius.
+//
+////////////////////////////////////////////////////////////////////////////////
+function defaultDrawDataForControlPointsWithMaxRadius() : CircleDrawData
+{
+  const controlPointFillColor : string = "white";
+  const controlPointStrokeColor : string = "black";
+  const controlPointStrokeWidth : number = 1.0;
+  var drawDataForControlPointsWithMaxRadius : CircleDrawData =
+    new CircleDrawData(controlPointFillColor,
+                       controlPointStrokeColor,
+                       controlPointStrokeWidth);
+  return drawDataForControlPointsWithMaxRadius;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -3510,13 +3534,7 @@ class CubicSpline extends BCurve
                                            drawDataForAllBCurveArtifacts.forControlPoints,
                                            context);
 
-// The following is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData
-     var fillColor : string = "white";
-     var strokeColor : string = "black";
-     var curveWidth : number = 1;
-// The preceding is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData     
-     var theDrawDataForControlPointsWithMaxRadius : CircleDrawData = new CircleDrawData(fillColor, strokeColor, curveWidth);
-     this.drawControlPointsWithMaxRadius(theDrawDataForControlPointsWithMaxRadius, context);                                     
+     this.drawControlPointsWithMaxRadius(drawDataForAllBCurveArtifacts.forControlPointsWithMaxRadius, context);                                     
 
      this.drawPointOnCurveForParm(tGlobal,
                                   globalConstPointOnCurveRadius,
