@@ -1105,7 +1105,7 @@ abstract class BCurve
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement)
  {
-    alert("In BCurve editPointOnCurve"); // Do nothing
+    // Do nothing
  }  
 
  editControlPoint(evt : MouseEvent,
@@ -1113,10 +1113,10 @@ abstract class BCurve
                   context : CanvasRenderingContext2D,
                   canvas : HTMLCanvasElement) 
  {    
-   alert("In BCurve editControlPoint");// Do nothing
+   // Do nothing
  }
 
- drawAllBCurveArtifacts(drawDataForAllBezierArtifacts : BCurveArtifactsDrawData,
+ drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                         context : CanvasRenderingContext2D)
 {
    // Do nothing
