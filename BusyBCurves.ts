@@ -2646,7 +2646,8 @@ function alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex) : Cubi
 
     var BoundingBoxOfUnscaledBSplineGraph : Rectangle = alignedBSplineGraph.getBoundingBox();
 
-    var xScale : number = radius/BoundingBoxOfUnscaledBSplineGraph.width;
+    const scaleFac : number = 1.5;
+    var xScale : number = scaleFac*radius/BoundingBoxOfUnscaledBSplineGraph.width;
     var yScale : number = diameter/BoundingBoxOfUnscaledBSplineGraph.height;
 
     alignedBSplineGraph.scale(xScale, yScale);
