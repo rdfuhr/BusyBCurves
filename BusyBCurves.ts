@@ -3566,17 +3566,15 @@ class CubicSpline extends BCurve
      drawAllDeBoorPoints(D, drawDataForAllBCurveArtifacts.forIntermediatePoints, context);
      drawAllDeBoorLines(D, drawDataForAllBCurveArtifacts.forIntermediateLines, context);
      
-      var pointOnCurve : Point = this.positionAtParm(tGlobal);
-      globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
+     var pointOnCurve : Point = this.positionAtParm(tGlobal);
+     globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
-      var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - globalConstPointOnCurveRadius);
+     var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - globalConstPointOnCurveRadius);
 
-      drawTextForNumber(tGlobal,
-                        textLocation,
-                        drawDataForAllBCurveArtifacts.forTextNearPointOnCurve,
-                        context);
-
-     
+     drawTextForNumber(tGlobal,
+                       textLocation,
+                       drawDataForAllBCurveArtifacts.forTextNearPointOnCurve,
+                       context);
   }
 
   //////////////////////////////////////////////////////////////////////////////
