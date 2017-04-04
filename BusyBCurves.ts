@@ -3562,14 +3562,10 @@ class CubicSpline extends BCurve
      }
 // The preceding draws the graphs of the B-Spline basis functions and the corresponding point being evaluated on the graph
 
-     // The following is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData
      var D : Point[][] = this.DeBoorTriangleAtParm(tGlobal);
-     var drawDataForDeBoorPoints : CircleDrawData = defaultDrawDataForIntermediatePoints();
-     drawAllDeBoorPoints(D, drawDataForDeBoorPoints, context);
-     var drawDataForDeBoorLines : CurveDrawData = defaultDrawDataForIntermediateLines();
-     drawAllDeBoorLines(D, drawDataForDeBoorLines, context);
-     // The preceding is temporary until we can get this encoded as part of building the BCurveArtifactsDrawData
-
+     drawAllDeBoorPoints(D, drawDataForAllBCurveArtifacts.forIntermediatePoints, context);
+     drawAllDeBoorLines(D, drawDataForAllBCurveArtifacts.forIntermediateLines, context);
+     
       var pointOnCurve : Point = this.positionAtParm(tGlobal);
       globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
@@ -3580,20 +3576,7 @@ class CubicSpline extends BCurve
                         drawDataForAllBCurveArtifacts.forTextNearPointOnCurve,
                         context);
 
-      //  this.drawBasisFunctionsWithParm(tGlobal,
-      //                                  drawDataForAllBCurveArtifacts,
-      //                                  context);
-
-      // drawAllDeCasteljauLines(this.CtrlPts,
-      //                         tGlobal,
-      //                         drawDataForAllBCurveArtifacts.forIntermediateLines,
-      //                         context);
-
-
-      // drawAllDeCasteljauPoints(this.CtrlPts,
-      //                          tGlobal,
-      //                          drawDataForAllBCurveArtifacts.forIntermediatePoints,
-      //                          context);
+     
   }
 
   //////////////////////////////////////////////////////////////////////////////
