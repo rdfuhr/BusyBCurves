@@ -3548,7 +3548,7 @@ class CubicSpline extends BCurve
      const height : number = 10.0;
      this.drawKnots(width, height, drawDataForAllBCurveArtifacts.forKnots, context);
 
-// The following draws the graphs of the B-Spline basis functions and the corresponding point being evaluated on the graph
+
      var nBasisFunctions : number = globalGraphsOfCubicBSplineBasisFunctions.length;
      
      var pointOnGraphRadius : number = 3.0;
@@ -3560,7 +3560,7 @@ class CubicSpline extends BCurve
        alignedBSplineGraph.drawCurve(drawDataForAllBCurveArtifacts.forGraphOfBasisFunction, context);
        alignedBSplineGraph.drawPointOnCurveForParm(tGlobal, pointOnGraphRadius, drawDataForAllBCurveArtifacts.forPointOnGraph, context);
      }
-// The preceding draws the graphs of the B-Spline basis functions and the corresponding point being evaluated on the graph
+
 
      var D : Point[][] = this.DeBoorTriangleAtParm(tGlobal);
      drawAllDeBoorPoints(D, drawDataForAllBCurveArtifacts.forIntermediatePoints, context);
