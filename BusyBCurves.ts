@@ -2413,6 +2413,11 @@ function HandleCurveTypeRadioButtonChange()
   UpdateGlobalCurveTypeBasedOnRadioButton();
 }
 
+function HandleRevealCheckBoxChange()
+{
+  alert("Still need to implement HandleRevealCheckBoxChange");
+}
+
 function UpdateSliderBasedOnTglobal()
 {
   var ParameterRangeSlider : HTMLInputElement = <HTMLInputElement> document.getElementById("ParameterRange");
