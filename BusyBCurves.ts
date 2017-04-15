@@ -28,7 +28,8 @@
 // TODO: Mar 27, 2017: Consider making the main BCurve be a global - DONE
 // TODO: Mar 28, 2017: Upload files to https://richardfuhr.neocities.org/BusyBCurves.html and https://richardfuhr.neocities.org/BusyBCurves.js - DONE!!
 // TODO: Mar 29, 2017: Call drawAllDeBoorLines and drawAllDeBoorPoints inside drawAllBCurveArtifacts for CubicSpline. - DONE
-// TODO: Mar 29, 2017: Continue working on the slider. In particular, have changes in tGlobal be reflected by the slider if user drags point.
+// TODO: Mar 29, 2017: Continue working on the slider. In particular, have changes in tGlobal be reflected by the slider if user drags point. - DONE
+// TODO: Apr 14, 2017: Implement a checkbox labeled Reveal and when it is checked, draw only the DeCasteljau lines & points or the DeBoor lines & points
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -860,7 +861,9 @@ function drawAllDeCasteljauLines(P : Array<Point>,
                                  drawData : CurveDrawData,
                                  context : CanvasRenderingContext2D)
 {
-   var n : number = P.length
+   var n : number = P.length;
+   let ControlPolygon : PolyLine = new PolyLine(P);
+   ControlPolygon.draw(drawData, context);
    for (var i = 0; i < n-1; i++)
    {  // begin i-loop
       P = doOneDeCasteljauStep(P, t); // so we are overwriting P
@@ -883,7 +886,11 @@ function drawAllDeCasteljauPoints(P : Array<Point>,
                                   drawData : CircleDrawData,
                                   context : CanvasRenderingContext2D)
 {
-   var n : number = P.length
+   var n : number = P.length;
+   for (var k = 0; k < n; k++)
+   {
+     P[k].drawCircleHere(3.0, drawData, context)
+   }
    for (var i = 0; i < n-1; i++)
    {  // begin i-loop
       P = doOneDeCasteljauStep(P, t); // so we are overwriting P
