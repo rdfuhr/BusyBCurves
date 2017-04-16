@@ -29,7 +29,7 @@
 // TODO: Mar 28, 2017: Upload files to https://richardfuhr.neocities.org/BusyBCurves.html and https://richardfuhr.neocities.org/BusyBCurves.js - DONE!!
 // TODO: Mar 29, 2017: Call drawAllDeBoorLines and drawAllDeBoorPoints inside drawAllBCurveArtifacts for CubicSpline. - DONE
 // TODO: Mar 29, 2017: Continue working on the slider. In particular, have changes in tGlobal be reflected by the slider if user drags point. - DONE
-// TODO: Apr 14, 2017: Implement a checkbox labeled Reveal and when it is checked, draw only the DeCasteljau lines & points or the DeBoor lines & points
+// TODO: Apr 14, 2017: Implement a checkbox labeled Skeleton and when it is checked, draw only the DeCasteljau lines & points or the DeBoor lines & points
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -118,7 +118,7 @@ const globalConstPointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
 var globalSumOfControlPointAreas : number; /* = globalCircleAreaFactor*10000.0; */
 var globalMaxRadius : number; /* = Math.sqrt(globalSumOfControlPointAreas/Math.PI); */
 var globalMaxDiameter : number; /* = 2.0*globalMaxRadius; */
-var globalReveal : boolean;
+var globalSkeleton : boolean;
 
 
 // We need to put the following into an init function and make these non-constants
@@ -1448,20 +1448,27 @@ class CubicBezierCurve extends BCurve
   drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                          context : CanvasRenderingContext2D)
   {
+    if (globalSkeleton==false)
+    {
      this.drawCurve(drawDataForAllBCurveArtifacts.forBCurve, context);
      this.drawControlPolygon(drawDataForAllBCurveArtifacts.forControlPolygon, context);
 
      this.drawControlPointsWeightedForParm(tGlobal,
                                            drawDataForAllBCurveArtifacts.forControlPoints,
                                            context);
+    }
 
      this.drawPointOnCurveForParm(tGlobal,
                                   globalConstPointOnCurveRadius,
                                   drawDataForAllBCurveArtifacts.forPointOnCurve,
                                   context);
 
-      var pointOnCurve : Point = this.positionAtParm(tGlobal);
-      globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
+     var pointOnCurve : Point = this.positionAtParm(tGlobal);
+     globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
+
+     if (globalSkeleton==false)
+     { 
+      
 
       var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - globalConstPointOnCurveRadius);
 
@@ -1473,6 +1480,7 @@ class CubicBezierCurve extends BCurve
        this.drawBasisFunctionsWithParm(tGlobal,
                                        drawDataForAllBCurveArtifacts,
                                        context);
+     }
 
       drawAllDeCasteljauLines(this.CtrlPts,
                               tGlobal,
@@ -1662,7 +1670,7 @@ function initializeCubicBezierCurve() : CubicBezierCurve
   globalCurveType = CurveType.Bezier;
   initializeGlobalMetrics();
   UpdateRadioButtonBasedOnGlobalCurveType();
-  globalReveal = (<HTMLInputElement> document.getElementById("Reveal")).checked;
+  globalSkeleton = (<HTMLInputElement> document.getElementById("Skeleton")).checked;
    
   var drawingCanvas : HTMLCanvasElement =
     <HTMLCanvasElement>document.getElementById('drawingCanvas');
@@ -1695,7 +1703,7 @@ function initializeCubicSpline() : CubicSpline
   globalCurveType = CurveType.Spline;
   initializeGlobalMetrics();
   UpdateRadioButtonBasedOnGlobalCurveType();
-  globalReveal = (<HTMLInputElement> document.getElementById("Reveal")).checked;
+  globalSkeleton = (<HTMLInputElement> document.getElementById("Skeleton")).checked;
  
   var drawingCanvas : HTMLCanvasElement =
     <HTMLCanvasElement>document.getElementById('drawingCanvas');
@@ -2303,7 +2311,7 @@ function touchHandler(event) {
 //
 // TODO - There is a refactoring opportunity for constructing the curve.
 // TODO - Look for other refactoring opportunities
-// Note: This function is called when user clicks Explore With Mouse button
+// Note: This function is called when user clicks Reset Curve button
 ////////////////////////////////////////////////////////////////////////////////
 function ResetCurve()
 {  // Begin function ResetCurve
@@ -2412,16 +2420,16 @@ function UpdateGlobalCurveTypeBasedOnRadioButton()
     }
 }
 
-function UpdateGlobalRevealBasedOnCheckBox()
+function UpdateGlobalSkeletonBasedOnCheckBox()
 {
-  var reveal : HTMLInputElement = <HTMLInputElement> document.getElementById("Reveal");
-  if (reveal.checked==true)
+  var Skeleton : HTMLInputElement = <HTMLInputElement> document.getElementById("Skeleton");
+  if (Skeleton.checked==true)
   {
-    globalReveal = true;
+    globalSkeleton = true;
   }
   else
   {
-    globalReveal = false;
+    globalSkeleton = false;
   }
 }
 
@@ -2431,9 +2439,10 @@ function HandleCurveTypeRadioButtonChange()
   UpdateGlobalCurveTypeBasedOnRadioButton();
 }
 
-function HandleRevealCheckBoxChange()
+function HandleSkeletonCheckBoxChange()
 {
-  UpdateGlobalRevealBasedOnCheckBox();
+  UpdateGlobalSkeletonBasedOnCheckBox();
+  ResetCurve(); // perhaps not ideal to always reset the curve.
 }
 
 function UpdateSliderBasedOnTglobal()
@@ -3561,6 +3570,8 @@ class CubicSpline extends BCurve
   drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                          context : CanvasRenderingContext2D)
   {
+    if (globalSkeleton==false)
+    {
      this.drawCurve(drawDataForAllBCurveArtifacts.forBCurve, context);
      this.drawControlPolygon(drawDataForAllBCurveArtifacts.forControlPolygon, context);
 
@@ -3568,13 +3579,16 @@ class CubicSpline extends BCurve
                                            drawDataForAllBCurveArtifacts.forControlPoints,
                                            context);
 
-     this.drawControlPointsWithMaxRadius(drawDataForAllBCurveArtifacts.forControlPointsWithMaxRadius, context);                                     
+     this.drawControlPointsWithMaxRadius(drawDataForAllBCurveArtifacts.forControlPointsWithMaxRadius, context); 
+    }                                    
 
      this.drawPointOnCurveForParm(tGlobal,
                                   globalConstPointOnCurveRadius,
                                   drawDataForAllBCurveArtifacts.forPointOnCurve,
                                   context);
 
+    if (globalSkeleton==false)
+    {
      const width : number = 15.0;
      const height : number = 10.0;
      this.drawKnots(width, height, drawDataForAllBCurveArtifacts.forKnots, context);
@@ -3591,7 +3605,7 @@ class CubicSpline extends BCurve
        alignedBSplineGraph.drawCurve(drawDataForAllBCurveArtifacts.forGraphOfBasisFunction, context);
        alignedBSplineGraph.drawPointOnCurveForParm(tGlobal, pointOnGraphRadius, drawDataForAllBCurveArtifacts.forPointOnGraph, context);
      }
-
+   }
 
      var D : Point[][] = this.DeBoorTriangleAtParm(tGlobal);
      drawAllDeBoorPoints(D, drawDataForAllBCurveArtifacts.forIntermediatePoints, context);
@@ -3600,12 +3614,15 @@ class CubicSpline extends BCurve
      var pointOnCurve : Point = this.positionAtParm(tGlobal);
      globalPointOnCurveForParmTarget  = new Circle(pointOnCurve, globalConstPointOnCurveRadius);
 
+     if (globalSkeleton==false)
+     {
      var textLocation : Point = new Point(pointOnCurve.x, pointOnCurve.y - globalConstPointOnCurveRadius);
 
      drawTextForNumber(tGlobal,
                        textLocation,
                        drawDataForAllBCurveArtifacts.forTextNearPointOnCurve,
                        context);
+     }
   }
 
   //////////////////////////////////////////////////////////////////////////////
