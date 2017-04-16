@@ -118,6 +118,8 @@ const globalConstPointOnCurveRadius : number = globalCircleRadiusFactor*15.0;
 var globalSumOfControlPointAreas : number; /* = globalCircleAreaFactor*10000.0; */
 var globalMaxRadius : number; /* = Math.sqrt(globalSumOfControlPointAreas/Math.PI); */
 var globalMaxDiameter : number; /* = 2.0*globalMaxRadius; */
+var globalReveal : boolean;
+
 
 // We need to put the following into an init function and make these non-constants
 // var globalDrawingCanvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('drawingCanvas');
@@ -1660,7 +1662,8 @@ function initializeCubicBezierCurve() : CubicBezierCurve
   globalCurveType = CurveType.Bezier;
   initializeGlobalMetrics();
   UpdateRadioButtonBasedOnGlobalCurveType();
-  
+  globalReveal = (<HTMLInputElement> document.getElementById("Reveal")).checked;
+   
   var drawingCanvas : HTMLCanvasElement =
     <HTMLCanvasElement>document.getElementById('drawingCanvas');
 
@@ -1692,6 +1695,8 @@ function initializeCubicSpline() : CubicSpline
   globalCurveType = CurveType.Spline;
   initializeGlobalMetrics();
   UpdateRadioButtonBasedOnGlobalCurveType();
+  globalReveal = (<HTMLInputElement> document.getElementById("Reveal")).checked;
+ 
   var drawingCanvas : HTMLCanvasElement =
     <HTMLCanvasElement>document.getElementById('drawingCanvas');
 
@@ -2407,6 +2412,19 @@ function UpdateGlobalCurveTypeBasedOnRadioButton()
     }
 }
 
+function UpdateGlobalRevealBasedOnCheckBox()
+{
+  var reveal : HTMLInputElement = <HTMLInputElement> document.getElementById("Reveal");
+  if (reveal.checked==true)
+  {
+    globalReveal = true;
+  }
+  else
+  {
+    globalReveal = false;
+  }
+}
+
 
 function HandleCurveTypeRadioButtonChange()
 {
@@ -2415,7 +2433,7 @@ function HandleCurveTypeRadioButtonChange()
 
 function HandleRevealCheckBoxChange()
 {
-  alert("Still need to implement HandleRevealCheckBoxChange");
+  UpdateGlobalRevealBasedOnCheckBox();
 }
 
 function UpdateSliderBasedOnTglobal()
