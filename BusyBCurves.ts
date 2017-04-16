@@ -2336,7 +2336,7 @@ function ResetCurve()
 
    var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
-   tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
+   tGlobal = 0.25; 
    UpdateSliderBasedOnTglobal();
 
    globalBCurve.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts, drawingContext);
@@ -5223,7 +5223,7 @@ function TestCubicSpline()
    theCubicSpline.drawControlPolygon(theDrawDataForControlPolygon, context);
    var radius = 30.0;
      
-   tGlobal = 1.0 - 2.0/(1.0 + Math.sqrt(5.0)); // 1 - reciprocal of golden ratio
+   tGlobal = 0.25;
    
    theCubicSpline.drawControlPointsWeightedForParm(tGlobal, theDrawDataForControlPoints, context);
    theCubicSpline.drawControlPointsWithMaxRadius(theDrawDataForControlPointsWithMaxRadius, context);
