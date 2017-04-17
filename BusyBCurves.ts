@@ -2444,7 +2444,10 @@ function HandleCurveTypeRadioButtonChange()
 function HandleSkeletonCheckBoxChange()
 {
   UpdateGlobalSkeletonBasedOnCheckBox();
-  ResetCurve(); // perhaps not ideal to always reset the curve.
+  var context : CanvasRenderingContext2D = getDrawingContext()
+  var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
+  
+  globalBCurve.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts, context);
 }
 
 function UpdateSliderBasedOnTglobal()
