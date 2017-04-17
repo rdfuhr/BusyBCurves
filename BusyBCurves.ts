@@ -31,7 +31,7 @@
 // TODO: Mar 29, 2017: Continue working on the slider. In particular, have changes in tGlobal be reflected by the slider if user drags point. - DONE
 // TODO: Apr 14, 2017: Implement a checkbox labeled Skeleton and when it is checked, draw only the DeCasteljau lines & points or the DeBoor lines & points
 // TODO: Apr 15, 2017: Separate MakeTargets and DrawTargets so that the Skeleton option still lets users click and drag.
-// TODO: Apr 15, 2017: Figure out how to use the Skeleton option without having to reset the curve.
+// TODO: Apr 15, 2017: Figure out how to use the Skeleton option without having to reset the curve. - DONE
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -2446,7 +2446,7 @@ function HandleSkeletonCheckBoxChange()
   UpdateGlobalSkeletonBasedOnCheckBox();
   var context : CanvasRenderingContext2D = getDrawingContext();
   var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
-  
+
   clearCanvas();
   globalBCurve.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts, context);
 }
