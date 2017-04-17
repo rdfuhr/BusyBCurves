@@ -2444,9 +2444,10 @@ function HandleCurveTypeRadioButtonChange()
 function HandleSkeletonCheckBoxChange()
 {
   UpdateGlobalSkeletonBasedOnCheckBox();
-  var context : CanvasRenderingContext2D = getDrawingContext()
+  var context : CanvasRenderingContext2D = getDrawingContext();
   var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
   
+  clearCanvas();
   globalBCurve.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts, context);
 }
 
