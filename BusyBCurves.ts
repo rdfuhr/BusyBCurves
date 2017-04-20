@@ -1309,6 +1309,48 @@ class CubicBezierCurve extends BCurve
   }
 
   //////////////////////////////////////////////////////////////////////////////
+  // drawControlPointsWithMaxRadius - method of CubicBezierCurve
+  // Draws control points all with the same radius
+  //
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //
+  // note: the sum of all the control point areas is now a global const
+  //////////////////////////////////////////////////////////////////////////////
+  drawControlPointsWithMaxRadius(drawData : CircleDrawData,
+                                 context : CanvasRenderingContext2D)
+  {
+    this.makeControlPointTargetsWithMaxRadius();
+
+    var nTargets : number = globalControlPointTargets.length;
+
+    for (var i : number = 0; i < nTargets; i++)
+    {
+      var P : Point = globalControlPointTargets[i].center;
+      P.drawUnfilledCircleHere(globalMaxRadius, drawData, context);
+    }
+  } 
+
+  //////////////////////////////////////////////////////////////////////////////
+  // makeControlPointTargetsWithMaxRadius - method of CubicBezierCurve
+  // Makes control point targets all with the same radius
+  //
+  //
+  // note: the sum of all the control point areas is now a global const
+  //////////////////////////////////////////////////////////////////////////////
+  makeControlPointTargetsWithMaxRadius()
+  {
+     var controlPoints : Array<Point> = this.CtrlPts;
+     var nControlPts : number = controlPoints.length;
+     
+     for (var i = 0; i < nControlPts; i++)
+     {
+         globalControlPointTargets[i] = new Circle(controlPoints[i], globalMaxRadius);
+     }
+
+  } 
+
+  //////////////////////////////////////////////////////////////////////////////
   // drawControlPointsWeightedForParm - method of CubicBezierCurve
   // Draws control points with areas proportional to basis function values
   //
@@ -1322,27 +1364,29 @@ class CubicBezierCurve extends BCurve
                                    drawData : CircleDrawData,
                                    context : CanvasRenderingContext2D)
   {
-    this.makeControlPointTargets(t);
-    var nTargets : number = globalControlPointTargets.length;
-    for (var i = 0; i < nTargets; i++)
+    var controlPointCirclesWeightedForParm : Circle[] = this.getControlPointCirclesWeightedForParm(t);
+    var nCircles : number = controlPointCirclesWeightedForParm.length;
+    for (var i = 0; i < nCircles; i++)
     {
-      globalControlPointTargets[i].draw(drawData, context);
+      controlPointCirclesWeightedForParm[i].draw(drawData, context);
     }
   }
 
   //////////////////////////////////////////////////////////////////////////////
-  // makeControlPointTargets - method of CubicBezierCurve
-  // Makes control point targets with areas proportional to basis function values
+  // getControlPointCirclesWeightedForParm - method of CubicBezierCurve
+  // Makes control point circles with areas proportional to basis function values
   //
   // input: t - the parameter for the basis functions
   //
+  // returns: array of control point circles
   // note: the sum of all the control point areas is now a global const
   //////////////////////////////////////////////////////////////////////////////
-  makeControlPointTargets(t : number)
+  getControlPointCirclesWeightedForParm(t : number) : Circle[]
   {
      var controlPoints : Array<Point> = this.CtrlPts;
      var order : number = controlPoints.length;
      var degree : number = order - 1;
+     var controlPointCirclesWeightedForParm : Circle[] = new Array();
 
      for (var i = 0; i < order; i++)
      {
@@ -1350,8 +1394,10 @@ class CubicBezierCurve extends BCurve
         // NOTE: actualArea = Math.PI*(actualRadius)^2
         // so actualRadius = sqrt(actualArea/Math.PI)
         var actualRadius : number = Math.sqrt(actualArea/Math.PI);
-        globalControlPointTargets[i] = new Circle(controlPoints[i], actualRadius);
+        controlPointCirclesWeightedForParm[i] = new Circle(controlPoints[i], actualRadius);
      }
+
+     return controlPointCirclesWeightedForParm;
   }
 
   
@@ -1480,10 +1526,12 @@ class CubicBezierCurve extends BCurve
      this.drawControlPointsWeightedForParm(tGlobal,
                                            drawDataForAllBCurveArtifacts.forControlPoints,
                                            context);
+
+     this.drawControlPointsWithMaxRadius(drawDataForAllBCurveArtifacts.forControlPointsWithMaxRadius, context);                                            
     }
     else
     {
-      this.makeControlPointTargets(tGlobal);
+      this.makeControlPointTargetsWithMaxRadius();
     }
 
      this.drawPointOnCurveForParm(tGlobal,
