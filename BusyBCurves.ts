@@ -3711,7 +3711,15 @@ class CubicSpline extends BCurve
        alignedBSplineGraph.drawCurve(drawDataForAllBCurveArtifacts.forGraphOfBasisFunction, context);
        alignedBSplineGraph.drawPointOnCurveForParm(tGlobal, pointOnGraphRadius, drawDataForAllBCurveArtifacts.forPointOnGraph, context);
      }
-   }
+    }
+
+    if (globalSkeleton==true)
+    {
+      let strokeColor : string = "gray";
+      let curveWidth : number = 1;
+      let theDrawDataForFaintControlPolygon = new CurveDrawData(strokeColor, curveWidth);
+      this.drawControlPolygon(theDrawDataForFaintControlPolygon, context);
+    }
 
      var D : Point[][] = this.DeBoorTriangleAtParm(tGlobal);
      drawAllDeBoorPoints(D, drawDataForAllBCurveArtifacts.forIntermediatePoints, context);
