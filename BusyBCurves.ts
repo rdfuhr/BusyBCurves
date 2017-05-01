@@ -37,7 +37,7 @@
 // TODO: Apr 18, 2017: Upload the most recent source code to https://richardfuhr.neocities.org
 // TODO: Apr 19, 2017: In the Bezier case, also draw the full-sized control point circles and make them be the targets, as in the Spline case. - DONE
 // TODO: Apr 20, 2017: Update the header blocks
-// TODO: Apr 24, 2017: Draw faint polyline through all control points prior to drawing DeBoor skeleton.
+// TODO: Apr 24, 2017: Draw faint polyline through all control points prior to drawing DeBoor skeleton. - DONE
 // TODO: Apr 24, 2017: Add Updated Screen Shots To ~/iCloud Drive/BusyBCurves
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
