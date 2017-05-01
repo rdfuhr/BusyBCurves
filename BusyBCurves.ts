@@ -913,6 +913,14 @@ function drawAllDeCasteljauPoints(P : Array<Point>,
    }  //  end i-loop
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// drawAllDeBoorPoints - function
+// Draw all the points of the de Boor algorithm
+//
+// input: D - a two-dimensional array that is the result of invoking the de Boor algorithm.
+// input: drawData - an object containing information specifying appearance
+// input: context - the context associated with the canvas
+////////////////////////////////////////////////////////////////////////////////
 function drawAllDeBoorPoints(D : Point[][],
                              drawData : CircleDrawData,
                              context : CanvasRenderingContext2D)
@@ -928,6 +936,14 @@ function drawAllDeBoorPoints(D : Point[][],
   }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// drawAllDeBoorLines - function
+// Draw all the lines (related to the points) of the de Boor algorithm
+//
+// input: D - a two-dimensional array that is the result of invoking the de Boor algorithm.
+// input: drawData - an object containing information specifying appearance
+// input: context - the context associated with the canvas
+////////////////////////////////////////////////////////////////////////////////
 function drawAllDeBoorLines(D : Point[][],
                             drawData : CurveDrawData,
                             context : CanvasRenderingContext2D)
