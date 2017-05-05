@@ -1144,32 +1144,95 @@ function buildGraphOfCubicBernstein(iCubicBernstein : number,
 
 abstract class BCurve
 {  // Begin class BCurve
+  CtrlPts : Array<Point>;
   constructor()
   {
     // Do nothing
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // editPointOnCurve - method of BCurve and used by CubicBezierCurve and CubicSpline
+  // Called when user has clicked the point on this curve and is moving it.
+  //
+  // input: evt - the mouse event
+  // input: drawDataForAllBCurveArtifacts - styles for drawing everything
+  // input: context - the context associated with the canvas
+  // input: canvas - the canvas on which we are drawing
+  //
+  // NOTE: to get the updated position of the point on the curve, we are
+  // using information about the derivative of the curve, and we are using
+  // the linear approximation theorem.  In effect, we are projecting the
+  // updated mouse position onto the tangent line to the curve at the previous
+  // point, and we use this projected point to get a dt value.  We update the
+  // the current parameter, which is called tGlobal, and we use this to redraw
+  // this Bezier curve and its associated artifacts.
+  //
+  // TODO: I think we can get by without passing the canvas as a parameter
+  // because we should be able to get it from evt.
+  //
+  // TODO: We should document in detail how we get the updated position of the
+  // point on the curve by using TeX and save the TeX as well as the generated
+  // PDF file in this folder and put it under git control.
+  //
+  //////////////////////////////////////////////////////////////////////////////
   editPointOnCurve(evt : MouseEvent,
                    drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                    context : CanvasRenderingContext2D,
                    canvas : HTMLCanvasElement)
- {
-    // Do nothing
- }  
+  {
+     var P : Point = this.positionAtParm(tGlobal);
+     var V : Point = this.derivativeAtParm(tGlobal);
+     var M : Point = getMousePos(canvas, evt);
+     var vdotv : number = V.dotProd(V);
+     var dt : number = 0.0;
+     if (vdotv > 0.0)
+     {
+        dt = ((M.minus(P)).dotProd(V))/vdotv
+     }
+     tGlobal += dt;
+     if (tGlobal < globalMinParm) tGlobal = globalMinParm;
+     if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
+     UpdateSliderBasedOnTglobal();
 
- editControlPoint(evt : MouseEvent,
-                  drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
-                  context : CanvasRenderingContext2D,
-                  canvas : HTMLCanvasElement) 
- {    
-   // Do nothing
- }
+     context.clearRect(0, 0, canvas.width, canvas.height);
+     this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
+                                 context);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // editControlPoint - method of BCurve and used by CubicBezierCurve and CubicSpline
+  // Called when user has clicked a control point on this curve and is moving it
+  //
+  // input: evt - the mouse event
+  // input: drawDataForAllBCurveArtifacts - styles for drawing everything
+  // input: context - the context associated with the canvas
+  // input: canvas - the canvas on which we are drawing
+  //
+  // TODO: I think we can get by without passing the canvas as a parameter
+  // because we should be able to get it from evt.
+  //
+  //////////////////////////////////////////////////////////////////////////////
+  editControlPoint(evt : MouseEvent,
+                   drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
+                   context : CanvasRenderingContext2D,
+                   canvas : HTMLCanvasElement)
+  {
+     var mousePos : Point = getMousePos(canvas, evt);
+     this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
+     context.clearRect(0, 0, canvas.width, canvas.height);
+
+     this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
+                                 context);
+  }
 
  drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                         context : CanvasRenderingContext2D)
-{
+ {
    // Do nothing
-}
+ }
+ abstract positionAtParm(t: number) : Point;
+ abstract derivativeAtParm(t : number) : Point;
+ 
 
 }  //   End class BCurve
 
@@ -1590,80 +1653,80 @@ class CubicBezierCurve extends BCurve
                                context);
   }
 
-  //////////////////////////////////////////////////////////////////////////////
-  // editPointOnCurve - method of CubicBezierCurve
-  // Called when user has clicked the point on this curve and is moving it.
-  //
-  // input: evt - the mouse event
-  // input: drawDataForAllBezierArtifacts - styles for drawing everything
-  // input: context - the context associated with the canvas
-  // input: canvas - the canvas on which we are drawing
-  //
-  // NOTE: to get the updated position of the point on the curve, we are
-  // using information about the derivative of the curve, and we are using
-  // the linear approximation theorem.  In effect, we are projecting the
-  // updated mouse position onto the tangent line to the curve at the previous
-  // point, and we use this projected point to get a dt value.  We update the
-  // the current parameter, which is called tGlobal, and we use this to redraw
-  // this Bezier curve and its associated artifacts.
-  //
-  // TODO: I think we can get by without passing the canvas as a parameter
-  // because we should be able to get it from evt.
-  //
-  // TODO: We should document in detail how we get the updated position of the
-  // point on the curve by using TeX and save the TeX as well as the generated
-  // PDF file in this folder and put it under git control.
-  //
-  //////////////////////////////////////////////////////////////////////////////
-  editPointOnCurve(evt : MouseEvent,
-                   drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
-                   context : CanvasRenderingContext2D,
-                   canvas : HTMLCanvasElement)
-  {
-     var P : Point = this.positionAtParm(tGlobal);
-     var V : Point = this.derivativeAtParm(tGlobal);
-     var M : Point = getMousePos(canvas, evt);
-     var vdotv : number = V.dotProd(V);
-     var dt : number = 0.0;
-     if (vdotv > 0.0)
-     {
-        dt = ((M.minus(P)).dotProd(V))/vdotv
-     }
-     tGlobal += dt;
-     if (tGlobal < globalMinParm) tGlobal = globalMinParm;
-     if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
-     UpdateSliderBasedOnTglobal();
+  // //////////////////////////////////////////////////////////////////////////////
+  // // editPointOnCurve - method of CubicBezierCurve
+  // // Called when user has clicked the point on this curve and is moving it.
+  // //
+  // // input: evt - the mouse event
+  // // input: drawDataForAllBezierArtifacts - styles for drawing everything
+  // // input: context - the context associated with the canvas
+  // // input: canvas - the canvas on which we are drawing
+  // //
+  // // NOTE: to get the updated position of the point on the curve, we are
+  // // using information about the derivative of the curve, and we are using
+  // // the linear approximation theorem.  In effect, we are projecting the
+  // // updated mouse position onto the tangent line to the curve at the previous
+  // // point, and we use this projected point to get a dt value.  We update the
+  // // the current parameter, which is called tGlobal, and we use this to redraw
+  // // this Bezier curve and its associated artifacts.
+  // //
+  // // TODO: I think we can get by without passing the canvas as a parameter
+  // // because we should be able to get it from evt.
+  // //
+  // // TODO: We should document in detail how we get the updated position of the
+  // // point on the curve by using TeX and save the TeX as well as the generated
+  // // PDF file in this folder and put it under git control.
+  // //
+  // //////////////////////////////////////////////////////////////////////////////
+  // editPointOnCurve(evt : MouseEvent,
+  //                  drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
+  //                  context : CanvasRenderingContext2D,
+  //                  canvas : HTMLCanvasElement)
+  // {
+  //    var P : Point = this.positionAtParm(tGlobal);
+  //    var V : Point = this.derivativeAtParm(tGlobal);
+  //    var M : Point = getMousePos(canvas, evt);
+  //    var vdotv : number = V.dotProd(V);
+  //    var dt : number = 0.0;
+  //    if (vdotv > 0.0)
+  //    {
+  //       dt = ((M.minus(P)).dotProd(V))/vdotv
+  //    }
+  //    tGlobal += dt;
+  //    if (tGlobal < globalMinParm) tGlobal = globalMinParm;
+  //    if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
+  //    UpdateSliderBasedOnTglobal();
 
-     context.clearRect(0, 0, canvas.width, canvas.height);
-     this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
-                                 context);
-  }
+  //    context.clearRect(0, 0, canvas.width, canvas.height);
+  //    this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
+  //                                context);
+  // }
 
-  //////////////////////////////////////////////////////////////////////////////
-  // editControlPoint - method of CubicBezierCurve
-  // Called when user has clicked a control point on this curve and is moving it
-  //
-  // input: evt - the mouse event
-  // input: drawDataForAllBezierArtifacts - styles for drawing everything
-  // input: context - the context associated with the canvas
-  // input: canvas - the canvas on which we are drawing
-  //
-  // TODO: I think we can get by without passing the canvas as a parameter
-  // because we should be able to get it from evt.
-  //
-  //////////////////////////////////////////////////////////////////////////////
-  editControlPoint(evt : MouseEvent,
-                   drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
-                   context : CanvasRenderingContext2D,
-                   canvas : HTMLCanvasElement)
-  {
-     var mousePos : Point = getMousePos(canvas, evt);
-     this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
-     context.clearRect(0, 0, canvas.width, canvas.height);
+  // //////////////////////////////////////////////////////////////////////////////
+  // // editControlPoint - method of CubicBezierCurve
+  // // Called when user has clicked a control point on this curve and is moving it
+  // //
+  // // input: evt - the mouse event
+  // // input: drawDataForAllBezierArtifacts - styles for drawing everything
+  // // input: context - the context associated with the canvas
+  // // input: canvas - the canvas on which we are drawing
+  // //
+  // // TODO: I think we can get by without passing the canvas as a parameter
+  // // because we should be able to get it from evt.
+  // //
+  // //////////////////////////////////////////////////////////////////////////////
+  // editControlPoint(evt : MouseEvent,
+  //                  drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
+  //                  context : CanvasRenderingContext2D,
+  //                  canvas : HTMLCanvasElement)
+  // {
+  //    var mousePos : Point = getMousePos(canvas, evt);
+  //    this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
+  //    context.clearRect(0, 0, canvas.width, canvas.height);
 
-     this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
-                                 context);
-  }
+  //    this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
+  //                                context);
+  // }
 
 
 } // End class CubicBezierCurve
@@ -3831,81 +3894,81 @@ class CubicSpline extends BCurve
     return BoundingBox;
   }
 
-//////////////////////////////////////////////////////////////////////////////
-  // editPointOnCurve - method of CubicSpline
-  // Called when user has clicked the point on this curve and is moving it.
-  //
-  // input: evt - the mouse event
-  // input: drawDataForAllBCurveArtifacts - styles for drawing everything
-  // input: context - the context associated with the canvas
-  // input: canvas - the canvas on which we are drawing
-  //
-  // NOTE: to get the updated position of the point on the curve, we are
-  // using information about the derivative of the curve, and we are using
-  // the linear approximation theorem.  In effect, we are projecting the
-  // updated mouse position onto the tangent line to the curve at the previous
-  // point, and we use this projected point to get a dt value.  We update the
-  // the current parameter, which is called tGlobal, and we use this to redraw
-  // this Bezier curve and its associated artifacts.
-  //
-  // TODO: I think we can get by without passing the canvas as a parameter
-  // because we should be able to get it from evt.
-  //
-  // TODO: We should document in detail how we get the updated position of the
-  // point on the curve by using TeX and save the TeX as well as the generated
-  // PDF file in this folder and put it under git control.
-  //
-  //////////////////////////////////////////////////////////////////////////////
-  editPointOnCurve(evt : MouseEvent,
-                   drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
-                   context : CanvasRenderingContext2D,
-                   canvas : HTMLCanvasElement)
-  {
-     var P : Point = this.positionAtParm(tGlobal);
-     var V : Point = this.derivativeAtParm(tGlobal);
-     var M : Point = getMousePos(canvas, evt);
-     var vdotv : number = V.dotProd(V);
-     var dt : number = 0.0;
-     if (vdotv > 0.0)
-     {
-        dt = ((M.minus(P)).dotProd(V))/vdotv
-     }
-     tGlobal += dt;
-     if (tGlobal < globalMinParm) tGlobal = globalMinParm;
-     if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
+// //////////////////////////////////////////////////////////////////////////////
+//   // editPointOnCurve - method of CubicSpline
+//   // Called when user has clicked the point on this curve and is moving it.
+//   //
+//   // input: evt - the mouse event
+//   // input: drawDataForAllBCurveArtifacts - styles for drawing everything
+//   // input: context - the context associated with the canvas
+//   // input: canvas - the canvas on which we are drawing
+//   //
+//   // NOTE: to get the updated position of the point on the curve, we are
+//   // using information about the derivative of the curve, and we are using
+//   // the linear approximation theorem.  In effect, we are projecting the
+//   // updated mouse position onto the tangent line to the curve at the previous
+//   // point, and we use this projected point to get a dt value.  We update the
+//   // the current parameter, which is called tGlobal, and we use this to redraw
+//   // this Bezier curve and its associated artifacts.
+//   //
+//   // TODO: I think we can get by without passing the canvas as a parameter
+//   // because we should be able to get it from evt.
+//   //
+//   // TODO: We should document in detail how we get the updated position of the
+//   // point on the curve by using TeX and save the TeX as well as the generated
+//   // PDF file in this folder and put it under git control.
+//   //
+//   //////////////////////////////////////////////////////////////////////////////
+//   editPointOnCurve(evt : MouseEvent,
+//                    drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
+//                    context : CanvasRenderingContext2D,
+//                    canvas : HTMLCanvasElement)
+//   {
+//      var P : Point = this.positionAtParm(tGlobal);
+//      var V : Point = this.derivativeAtParm(tGlobal);
+//      var M : Point = getMousePos(canvas, evt);
+//      var vdotv : number = V.dotProd(V);
+//      var dt : number = 0.0;
+//      if (vdotv > 0.0)
+//      {
+//         dt = ((M.minus(P)).dotProd(V))/vdotv
+//      }
+//      tGlobal += dt;
+//      if (tGlobal < globalMinParm) tGlobal = globalMinParm;
+//      if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
 
-     UpdateSliderBasedOnTglobal();
+//      UpdateSliderBasedOnTglobal();
 
-     context.clearRect(0, 0, canvas.width, canvas.height);
-     this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
-                                 context);
-  }
+//      context.clearRect(0, 0, canvas.width, canvas.height);
+//      this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
+//                                  context);
+//   }
 
-  //////////////////////////////////////////////////////////////////////////////
-  // editControlPoint - method of CubicSpline
-  // Called when user has clicked a control point on this curve and is moving it
-  //
-  // input: evt - the mouse event
-  // input: drawDataForAllBCurveArtifacts - styles for drawing everything
-  // input: context - the context associated with the canvas
-  // input: canvas - the canvas on which we are drawing
-  //
-  // TODO: I think we can get by without passing the canvas as a parameter
-  // because we should be able to get it from evt.
-  //
-  //////////////////////////////////////////////////////////////////////////////
-  editControlPoint(evt : MouseEvent,
-                   drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
-                   context : CanvasRenderingContext2D,
-                   canvas : HTMLCanvasElement)
-  {
-     var mousePos : Point = getMousePos(canvas, evt);
-     this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
-     context.clearRect(0, 0, canvas.width, canvas.height);
+  // //////////////////////////////////////////////////////////////////////////////
+  // // editControlPoint - method of CubicSpline
+  // // Called when user has clicked a control point on this curve and is moving it
+  // //
+  // // input: evt - the mouse event
+  // // input: drawDataForAllBCurveArtifacts - styles for drawing everything
+  // // input: context - the context associated with the canvas
+  // // input: canvas - the canvas on which we are drawing
+  // //
+  // // TODO: I think we can get by without passing the canvas as a parameter
+  // // because we should be able to get it from evt.
+  // //
+  // //////////////////////////////////////////////////////////////////////////////
+  // editControlPoint(evt : MouseEvent,
+  //                  drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
+  //                  context : CanvasRenderingContext2D,
+  //                  canvas : HTMLCanvasElement)
+  // {
+  //    var mousePos : Point = getMousePos(canvas, evt);
+  //    this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
+  //    context.clearRect(0, 0, canvas.width, canvas.height);
 
-     this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
-                                 context);
-  }  
+  //    this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
+  //                                context);
+  // }  
 
 } // End class CubicSpline
 
