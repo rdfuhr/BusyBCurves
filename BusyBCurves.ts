@@ -1222,11 +1222,9 @@ abstract class BCurve
                                  context);
   }
 
- drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
-                        context : CanvasRenderingContext2D)
- {
-   // Do nothing
- }
+ abstract drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
+                        context : CanvasRenderingContext2D);
+ 
  abstract positionAtParm(t: number) : Point;
  abstract derivativeAtParm(t : number) : Point;
  
