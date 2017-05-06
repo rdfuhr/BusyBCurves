@@ -2062,20 +2062,20 @@ function defaultDrawDataForKnots() : RectangleDrawData
 
 ////////////////////////////////////////////////////////////////////////////////
 // animation - function
-// Manage the animation in which a point moves back and forth along a Bezier
-// curve, and in which the size of the control points and the indicators on the graphs
+// Manage the animation in which a point moves back and forth along a BCurve,
+// and in which the size of the control points and the indicators on the graphs
 // of the basis functions vary accordingly.  One call to this function generates
 // one frame of the animation.
 //
 // input: drawingCanvas - the canvas on which we are drawing
 // input: drawingContext - the context associated with the canvas
-// input: C - the main CubicBezierCurve
+// input: C - the main BCurve
 // input: drawDataForAllBezierArtifacts - styles for drawing everything
 //
 ////////////////////////////////////////////////////////////////////////////////
 function animation(drawingCanvas : HTMLCanvasElement,
                    drawingContext : CanvasRenderingContext2D,
-                   C : CubicBezierCurve,
+                   C : BCurve,
                    drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData)
 {
    drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
@@ -2083,32 +2083,6 @@ function animation(drawingCanvas : HTMLCanvasElement,
    tGlobalUpdate(); // the global value of t is adjusted
 
    C.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
-                            drawingContext);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// splineAnimation - function
-// Manage the animation in which a point moves back and forth along a spline
-// curve, and in which the size of the control points and the indicators on the graphs
-// of the basis functions vary accordingly.  One call to this function generates
-// one frame of the animation.
-//
-// input: drawingCanvas - the canvas on which we are drawing
-// input: drawingContext - the context associated with the canvas
-// input: S - the main CubicSpline
-// input: drawDataForAllBCurveArtifacts - styles for drawing everything
-//
-////////////////////////////////////////////////////////////////////////////////
-function splineAnimation(drawingCanvas : HTMLCanvasElement,
-                         drawingContext : CanvasRenderingContext2D,
-                         S : CubicSpline,
-                         drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData)
-{
-   drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
-
-   tGlobalUpdate(); // the global value of t is adjusted
-
-   S.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
                             drawingContext);
 }
 
@@ -2161,7 +2135,8 @@ function EnableRadioButtons()
 // value seen (after calling setInterval the first time) being 1.
 var globalLoop : number; //used by StartAnimation and StopAnimation
 
-////////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
 // StartAnimation - function
 // Enable and disable the appropriate buttons and set the animation interval.
 // Initialize the data to be passed to the function that generates each frame
@@ -2169,43 +2144,26 @@ var globalLoop : number; //used by StartAnimation and StopAnimation
 ////////////////////////////////////////////////////////////////////////////////
 function StartAnimation()
 {
-   var startAnimationButtonDisabled : boolean = true;
-   var stopAnimationButtonDisabled : boolean = false;
-   var ResetCurveButtonDisabled : boolean = true;
-   DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, ResetCurveButtonDisabled);
-   DisableRadioButtons();
+  var startAnimationButtonDisabled: boolean = true;
+  var stopAnimationButtonDisabled: boolean = false;
+  var ResetCurveButtonDisabled: boolean = true;
+  DisableEnableButtons(startAnimationButtonDisabled, stopAnimationButtonDisabled, ResetCurveButtonDisabled);
+  DisableRadioButtons();
 
-   var drawingCanvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('drawingCanvas');
-   var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
+  var drawingCanvas: HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('drawingCanvas');
+  var drawingContext: CanvasRenderingContext2D = <CanvasRenderingContext2D>drawingCanvas.getContext('2d');
 
-   if (globalCurveType==CurveType.Bezier)
-   {
-      // var C : CubicBezierCurve = initializeCubicBezierCurve();
+  var drawDataForAllBezierArtifacts: BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
-      var drawDataForAllBezierArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
-
-      globalLoop = setInterval(animation,
-                               10,
-                               drawingCanvas,
-                               drawingContext,
-                               globalBCurve, // instead of  var C : CubicBezierCurve = initializeCubicBezierCurve();
-                               drawDataForAllBezierArtifacts);
-   }
-   else
-   if (globalCurveType==CurveType.Spline)
-   {
-     // var S : CubicSpline = initializeCubicSpline();
-
-     var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
-
-     globalLoop = setInterval(splineAnimation,
-                              10,
-                              drawingCanvas,
-                              drawingContext,
-                              globalBCurve,  // instead of var S : CubicSpline = initializeCubicSpline();
-                              drawDataForAllBCurveArtifacts);
-   }
+  globalLoop = setInterval(animation,
+                           10,
+                           drawingCanvas,
+                           drawingContext,
+                           globalBCurve, 
+                           drawDataForAllBezierArtifacts);      
 }
+
+
 //   End code related to StartAnimation()
 
 
