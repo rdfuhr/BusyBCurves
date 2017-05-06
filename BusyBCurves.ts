@@ -39,7 +39,7 @@
 // TODO: Apr 20, 2017: Update the header blocks
 // TODO: Apr 24, 2017: Draw faint polyline through all control points prior to drawing DeBoor skeleton. - DONE
 // TODO: Apr 24, 2017: Add Updated Screen Shots To ~/iCloud Drive/BusyBCurves
-// TODO: May 02, 2017: Make editPointOnCurve and editControlPoint be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each.
+// TODO: May 02, 2017: Make editPointOnCurve and editControlPoint be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each - DONE
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
