@@ -1145,10 +1145,7 @@ function buildGraphOfCubicBernstein(iCubicBernstein : number,
 abstract class BCurve
 {  // Begin class BCurve
   CtrlPts : Array<Point>;
-  constructor()
-  {
-    // Do nothing
-  }
+  
 
   //////////////////////////////////////////////////////////////////////////////
   // editPointOnCurve - method of BCurve and used by CubicBezierCurve and CubicSpline
