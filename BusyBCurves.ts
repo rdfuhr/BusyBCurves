@@ -41,6 +41,7 @@
 // TODO: Apr 24, 2017: Add Updated Screen Shots To ~/iCloud Drive/BusyBCurves
 // TODO: May 02, 2017: Make editPointOnCurve and editControlPoint be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each - DONE
 // TODO: May 06, 2017: Use just one animation function and simplify StartAnimation by using just the BCurve class.
+// TODO: May 07, 2017: Reduce the jitter in the editControlPoint functionality.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
