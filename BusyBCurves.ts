@@ -40,8 +40,8 @@
 // TODO: Apr 24, 2017: Draw faint polyline through all control points prior to drawing DeBoor skeleton. - DONE
 // TODO: Apr 24, 2017: Add Updated Screen Shots To ~/iCloud Drive/BusyBCurves
 // TODO: May 02, 2017: Make editPointOnCurve and editControlPoint be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each - DONE
-// TODO: May 06, 2017: Use just one animation function and simplify StartAnimation by using just the BCurve class.
-// TODO: May 07, 2017: Reduce the jitter in the editControlPoint functionality.
+// TODO: May 06, 2017: Use just one animation function and simplify StartAnimation by using just the BCurve class. - DONE
+// TODO: May 07, 2017: Reduce the jitter in the editControlPoint functionality. - DONE
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -131,6 +131,7 @@ var globalSumOfControlPointAreas : number; /* = globalCircleAreaFactor*10000.0; 
 var globalMaxRadius : number; /* = Math.sqrt(globalSumOfControlPointAreas/Math.PI); */
 var globalMaxDiameter : number; /* = 2.0*globalMaxRadius; */
 var globalSkeleton : boolean;
+var globalControlPointDelta : Point;
 
 
 // We need to put the following into an init function and make these non-constants
@@ -1217,7 +1218,7 @@ abstract class BCurve
                    canvas : HTMLCanvasElement)
   {
      var mousePos : Point = getMousePos(canvas, evt);
-     this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos;
+     this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos.minus(globalControlPointDelta);
      context.clearRect(0, 0, canvas.width, canvas.height);
 
      this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
@@ -2235,6 +2236,8 @@ function onMouseDown(evt : MouseEvent,
          {
             globalIndexOfModifiedControlPoint = i;
             globalModifyingPointOnCurve = false;
+            var selectedControlPoint : Point = globalControlPointTargets[i].center;
+            globalControlPointDelta = mousePos.minus(selectedControlPoint);
             break;
          }
    }
@@ -2256,13 +2259,6 @@ function onMouseMove(evt : MouseEvent,
   					         drawingContext : CanvasRenderingContext2D,
 					           drawingCanvas : HTMLCanvasElement)
 {
-  // // The following is a temporary workaround until we get a proper implementation 
-  // // for CurveType.Spline
-  // if(globalCurveType != CurveType.Bezier)
-  // {
-  //   return;
-  // }
-
 	if (globalModifyingPointOnCurve==true)
 	{
 	   C.editPointOnCurve(evt,
