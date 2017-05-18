@@ -44,7 +44,7 @@
 // TODO: May 07, 2017: Reduce the jitter in the editControlPoint functionality. - DONE
 // TODO: May 14, 2017: Make translate and scale be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
 // TODO: May 14, 2017: Make drawControlPolygon and drawControlPoints be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
-// TODO: May 14, 2017: Make drawControlPointsWithMaxRadius and makeControlPointTargetsWithMaxRadius be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each.
+// TODO: May 14, 2017: Make drawControlPointsWithMaxRadius and makeControlPointTargetsWithMaxRadius be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
 // TODO: May 15, 2017: Make drawPointOnCurveForParm be a method of just the BCurve class, since CubicBezier and CubicSpline have the same implementation.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
@@ -1295,6 +1295,48 @@ abstract class BCurve
      }
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawControlPointsWithMaxRadius - method of BCurve and used by CubicBezierCurve and CubicSpline
+  // Draws control points all with the same radius
+  //
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //
+  // note: the sum of all the control point areas is now a global const
+  //////////////////////////////////////////////////////////////////////////////
+  drawControlPointsWithMaxRadius(drawData : CircleDrawData,
+                                 context : CanvasRenderingContext2D)
+  {
+    this.makeControlPointTargetsWithMaxRadius();
+
+    var nTargets : number = globalControlPointTargets.length;
+
+    for (var i : number = 0; i < nTargets; i++)
+    {
+      var P : Point = globalControlPointTargets[i].center;
+      P.drawUnfilledCircleHere(globalMaxRadius, drawData, context);
+    }
+  } 
+
+  //////////////////////////////////////////////////////////////////////////////
+  // makeControlPointTargetsWithMaxRadius - method of BCurve and used by CubicBezierCurve and CubicSpline
+  // Makes control point targets all with the same radius
+  //
+  //
+  // note: the sum of all the control point areas is now a global const
+  //////////////////////////////////////////////////////////////////////////////
+  makeControlPointTargetsWithMaxRadius()
+  {
+     var controlPoints : Array<Point> = this.CtrlPts;
+     var nControlPts : number = controlPoints.length;
+     
+     for (var i = 0; i < nControlPts; i++)
+     {
+         globalControlPointTargets[i] = new Circle(controlPoints[i], globalMaxRadius);
+     }
+
+  }   
+
  abstract drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                         context : CanvasRenderingContext2D);
  
@@ -1393,47 +1435,7 @@ class CubicBezierCurve extends BCurve
      context.stroke();
   }
 
-  //////////////////////////////////////////////////////////////////////////////
-  // drawControlPointsWithMaxRadius - method of CubicBezierCurve
-  // Draws control points all with the same radius
-  //
-  // input: drawData - an object containing data specifying appearance
-  // input: context - the context associated with the canvas
-  //
-  // note: the sum of all the control point areas is now a global const
-  //////////////////////////////////////////////////////////////////////////////
-  drawControlPointsWithMaxRadius(drawData : CircleDrawData,
-                                 context : CanvasRenderingContext2D)
-  {
-    this.makeControlPointTargetsWithMaxRadius();
-
-    var nTargets : number = globalControlPointTargets.length;
-
-    for (var i : number = 0; i < nTargets; i++)
-    {
-      var P : Point = globalControlPointTargets[i].center;
-      P.drawUnfilledCircleHere(globalMaxRadius, drawData, context);
-    }
-  } 
-
-  //////////////////////////////////////////////////////////////////////////////
-  // makeControlPointTargetsWithMaxRadius - method of CubicBezierCurve
-  // Makes control point targets all with the same radius
-  //
-  //
-  // note: the sum of all the control point areas is now a global const
-  //////////////////////////////////////////////////////////////////////////////
-  makeControlPointTargetsWithMaxRadius()
-  {
-     var controlPoints : Array<Point> = this.CtrlPts;
-     var nControlPts : number = controlPoints.length;
-     
-     for (var i = 0; i < nControlPts; i++)
-     {
-         globalControlPointTargets[i] = new Circle(controlPoints[i], globalMaxRadius);
-     }
-
-  } 
+ 
 
   //////////////////////////////////////////////////////////////////////////////
   // drawControlPointsWeightedForParm - method of CubicBezierCurve
@@ -3476,48 +3478,6 @@ class CubicSpline extends BCurve
         P.drawRectangleHere(width, height, drawData, context);
      }
   }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // drawControlPointsWithMaxRadius - method of CubicSpline
-  // Draws control points all with the same radius
-  //
-  // input: drawData - an object containing data specifying appearance
-  // input: context - the context associated with the canvas
-  //
-  // note: the sum of all the control point areas is now a global const
-  //////////////////////////////////////////////////////////////////////////////
-  drawControlPointsWithMaxRadius(drawData : CircleDrawData,
-                                 context : CanvasRenderingContext2D)
-  {
-    this.makeControlPointTargetsWithMaxRadius();
-
-    var nTargets : number = globalControlPointTargets.length;
-
-    for (var i : number = 0; i < nTargets; i++)
-    {
-      var P : Point = globalControlPointTargets[i].center;
-      P.drawUnfilledCircleHere(globalMaxRadius, drawData, context);
-    }
-  } 
-
-  //////////////////////////////////////////////////////////////////////////////
-  // makeControlPointTargetsWithMaxRadius - method of CubicSpline
-  // Makes control point targets all with the same radius
-  //
-  //
-  // note: the sum of all the control point areas is now a global const
-  //////////////////////////////////////////////////////////////////////////////
-  makeControlPointTargetsWithMaxRadius()
-  {
-     var controlPoints : Array<Point> = this.CtrlPts;
-     var nControlPts : number = controlPoints.length;
-     
-     for (var i = 0; i < nControlPts; i++)
-     {
-         globalControlPointTargets[i] = new Circle(controlPoints[i], globalMaxRadius);
-     }
-
-  } 
 
   //////////////////////////////////////////////////////////////////////////////
   // drawControlPointsWeightedForParm - method of CubicSpline
