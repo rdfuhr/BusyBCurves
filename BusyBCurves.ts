@@ -43,7 +43,7 @@
 // TODO: May 06, 2017: Use just one animation function and simplify StartAnimation by using just the BCurve class. - DONE
 // TODO: May 07, 2017: Reduce the jitter in the editControlPoint functionality. - DONE
 // TODO: May 14, 2017: Make translate and scale be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
-// TODO: May 14, 2017: Make drawControlPolygon and drawControlPoints be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each.
+// TODO: May 14, 2017: Make drawControlPolygon and drawControlPoints be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
 // TODO: May 14, 2017: Make drawControlPointsWithMaxRadius and makeControlPointTargetsWithMaxRadius be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each.
 // TODO: May 15, 2017: Make drawPointOnCurveForParm be a method of just the BCurve class, since CubicBezier and CubicSpline have the same implementation.
 
@@ -1261,6 +1261,40 @@ abstract class BCurve
      }
   }  
 
+  //////////////////////////////////////////////////////////////////////////////
+  // drawControlPolygon - method of BCurve and used by CubicBezierCurve and CubicSpline
+  // Draws control polygon of this BCurve with specified appearance
+  //
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  drawControlPolygon(drawData : CurveDrawData,
+                     context : CanvasRenderingContext2D)
+  {
+    let ControlPolygon : PolyLine = new PolyLine(this.CtrlPts);
+    ControlPolygon.draw(drawData, context);
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // drawControlPoints - method of BCurve and used by CubicBezierCurve and CubicSpline
+  // Draws control points of this BCurve with specified appearance
+  //
+  // input: radius - the radius of the circles representing the control points
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  drawControlPoints(radius : number,
+                    drawData : CircleDrawData,
+                    context : CanvasRenderingContext2D)
+  {
+     var controlPoints : Array<Point> = this.CtrlPts;
+     var n : number = controlPoints.length;
+     for (var i = 0; i < n; i++)
+     {
+        controlPoints[i].drawCircleHere(radius, drawData, context);
+     }
+  }
+
  abstract drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                         context : CanvasRenderingContext2D);
  
@@ -1357,40 +1391,6 @@ class CubicBezierCurve extends BCurve
      context.moveTo(P[0].x, P[0].y);
      context.bezierCurveTo(P[1].x, P[1].y, P[2].x, P[2].y, P[3].x, P[3].y);
      context.stroke();
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // drawControlPolygon - method of CubicBezierCurve
-  // Draws control polygon of this CubicBezierCurve with specified appearance
-  //
-  // input: drawData - an object containing data specifying appearance
-  // input: context - the context associated with the canvas
-  //////////////////////////////////////////////////////////////////////////////
-  drawControlPolygon(drawData : CurveDrawData,
-                     context : CanvasRenderingContext2D)
-  {
-    let ControlPolygon : PolyLine = new PolyLine(this.CtrlPts);
-    ControlPolygon.draw(drawData, context);
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // drawControlPoints - method of CubicBezierCurve
-  // Draws control points of this CubicBezierCurve with specified appearance
-  //
-  // input: radius - the radius of the circles representing the control points
-  // input: drawData - an object containing data specifying appearance
-  // input: context - the context associated with the canvas
-  //////////////////////////////////////////////////////////////////////////////
-  drawControlPoints(radius : number,
-                    drawData : CircleDrawData,
-                    context : CanvasRenderingContext2D)
-  {
-     var controlPoints : Array<Point> = this.CtrlPts;
-     var n : number = controlPoints.length;
-     for (var i = 0; i < n; i++)
-     {
-        controlPoints[i].drawCircleHere(radius, drawData, context);
-     }
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -3451,41 +3451,6 @@ class CubicSpline extends BCurve
      thePolyBezier.drawCurve(drawData, context);
   }
 
-  //////////////////////////////////////////////////////////////////////////////
-  // drawControlPolygon - method of CubicSpline
-  // Draws control polygon of this CubicSpline with specified appearance
-  //
-  // input: drawData - an object containing data specifying appearance
-  // input: context - the context associated with the canvas
-  // Note: This function was copied directly from CubicBezierCurve
-  //////////////////////////////////////////////////////////////////////////////
-  drawControlPolygon(drawData : CurveDrawData,
-                     context : CanvasRenderingContext2D)
-  {
-    let ControlPolygon : PolyLine = new PolyLine(this.CtrlPts);
-    ControlPolygon.draw(drawData, context);
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // drawControlPoints - method of CubicSpline
-  // Draws control points of this CubicSpline with specified appearance
-  //
-  // input: radius - the radius of the circles representing the control points
-  // input: drawData - an object containing data specifying appearance
-  // input: context - the context associated with the canvas
-  // Note: This function was copied directly from CubicBezierCurve
-  //////////////////////////////////////////////////////////////////////////////
-  drawControlPoints(radius : number,
-                    drawData : CircleDrawData,
-                    context : CanvasRenderingContext2D)
-  {
-     var controlPoints : Array<Point> = this.CtrlPts;
-     var n : number = controlPoints.length;
-     for (var i = 0; i < n; i++)
-     {
-        controlPoints[i].drawCircleHere(radius, drawData, context);
-     }
-  }
 
   //////////////////////////////////////////////////////////////////////////////
   // drawKnots - method of CubicSpline
