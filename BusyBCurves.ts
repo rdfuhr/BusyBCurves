@@ -45,7 +45,7 @@
 // TODO: May 14, 2017: Make translate and scale be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
 // TODO: May 14, 2017: Make drawControlPolygon and drawControlPoints be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
 // TODO: May 14, 2017: Make drawControlPointsWithMaxRadius and makeControlPointTargetsWithMaxRadius be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
-// TODO: May 15, 2017: Make drawPointOnCurveForParm be a method of just the BCurve class, since CubicBezier and CubicSpline have the same implementation.
+// TODO: May 15, 2017: Make drawPointOnCurveForParm be a method of just the BCurve class, since CubicBezier and CubicSpline have the same implementation. - DONE
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -1335,7 +1335,25 @@ abstract class BCurve
          globalControlPointTargets[i] = new Circle(controlPoints[i], globalMaxRadius);
      }
 
-  }   
+  } 
+
+  //////////////////////////////////////////////////////////////////////////////
+  // drawPointOnCurveForParm - method of BCurve and used by CubicBezierCurve and CubicSpline
+  // Draws point on curve at specified parameter with specified appearance
+  //
+  // input: t - parameter at which corresponding point is to be drawn
+  // input: radius - the radius of the circle representing the point
+  // input: drawData - an object containing data specifying appearance
+  // input: context - the context associated with the canvas
+  //////////////////////////////////////////////////////////////////////////////
+  drawPointOnCurveForParm(t : number,
+                          radius : number,
+                          drawData : CircleDrawData,
+                          context : CanvasRenderingContext2D)
+  {
+     var P : Point = this.positionAtParm(t);
+     P.drawCircleHere(radius, drawData, context);
+  }    
 
  abstract drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                         context : CanvasRenderingContext2D);
@@ -1488,25 +1506,6 @@ class CubicBezierCurve extends BCurve
   }
 
   
-
-  //////////////////////////////////////////////////////////////////////////////
-  // drawPointOnCurveForParm - method of CubicBezierCurve
-  // Draws point on curve at specified parameter with specified appearance
-  //
-  // input: t - parameter at which corresponding point is to be drawn
-  // input: radius - the radius of the circle representing the point
-  // input: drawData - an object containing data specifying appearance
-  // input: context - the context associated with the canvas
-  //////////////////////////////////////////////////////////////////////////////
-  drawPointOnCurveForParm(t : number,
-                          radius : number,
-                          drawData : CircleDrawData,
-                          context : CanvasRenderingContext2D)
-  {
-     var P : Point = this.positionAtParm(t);
-     P.drawCircleHere(radius, drawData, context);
-  }
-
   //////////////////////////////////////////////////////////////////////////////
   // drawVerticalLineFromCurveForParm - method of CubicBezierCurve
   // Draw a vertical line from a point on a curve to its local X-axis
@@ -3588,24 +3587,6 @@ class CubicSpline extends BCurve
      }
   }
 
-  //////////////////////////////////////////////////////////////////////////////
-  // drawPointOnCurveForParm - method of CubicSpline
-  // Draws point on curve at specified parameter with specified appearance
-  //
-  // input: t - parameter at which corresponding point is to be drawn
-  // input: radius - the radius of the circle representing the point
-  // input: drawData - an object containing data specifying appearance
-  // input: context - the context associated with the canvas
-  // Note: This function was copied directly from CubicBezierCurve
-  //////////////////////////////////////////////////////////////////////////////
-  drawPointOnCurveForParm(t : number,
-                          radius : number,
-                          drawData : CircleDrawData,
-                          context : CanvasRenderingContext2D)
-  {
-     var P : Point = this.positionAtParm(t);
-     P.drawCircleHere(radius, drawData, context);
-  }   
 
   //////////////////////////////////////////////////////////////////////////////
   // drawVerticalLineFromCurveForParm - method of CubicSpline
