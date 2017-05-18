@@ -42,7 +42,7 @@
 // TODO: May 02, 2017: Make editPointOnCurve and editControlPoint be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each - DONE
 // TODO: May 06, 2017: Use just one animation function and simplify StartAnimation by using just the BCurve class. - DONE
 // TODO: May 07, 2017: Reduce the jitter in the editControlPoint functionality. - DONE
-// TODO: May 14, 2017: Make translate and scale be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each.
+// TODO: May 14, 2017: Make translate and scale be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
 // TODO: May 14, 2017: Make drawControlPolygon and drawControlPoints be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each.
 // TODO: May 14, 2017: Make drawControlPointsWithMaxRadius and makeControlPointTargetsWithMaxRadius be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each.
 // TODO: May 15, 2017: Make drawPointOnCurveForParm be a method of just the BCurve class, since CubicBezier and CubicSpline have the same implementation.
@@ -1229,6 +1229,38 @@ abstract class BCurve
                                  context);
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // scale - method of BCurve and used by CubicBezierCurve and CubicSpline
+  // Scales this BCurve using specified scale factors
+  //
+  // input: xScale - the scale factor in the x direction
+  // input: yScale - the scale factor in the y direction
+  //////////////////////////////////////////////////////////////////////////////
+  scale(xScale : number,
+        yScale : number)
+  {
+     for (var i = 0; i < this.CtrlPts.length; i++)
+     {
+        this.CtrlPts[i].x *= xScale;
+        this.CtrlPts[i].y *= yScale;
+     }
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // translate - method of BCurve and used by CubicBezierCurve and CubicSpline
+  // Traslates this BCurve using specified displacement
+  //
+  // input: P - specified displacement
+  //////////////////////////////////////////////////////////////////////////////
+  translate(P : Point)
+  {
+     for (var i = 0; i < this.CtrlPts.length; i++)
+     {
+        this.CtrlPts[i].x += P.x;
+        this.CtrlPts[i].y += P.y;
+     }
+  }  
+
  abstract drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                         context : CanvasRenderingContext2D);
  
@@ -1307,38 +1339,6 @@ class CubicBezierCurve extends BCurve
      var Q : Array<Point> = bezierHodographPoints(this.CtrlPts);
      var der : Point = doAllDeCasteljauSteps(Q, t);
      return der;
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // scale - method of CubicBezierCurve
-  // Scales this CubicBezierCurve using specified scale factors
-  //
-  // input: xScale - the scale factor in the x direction
-  // input: yScale - the scale factor in the y direction
-  //////////////////////////////////////////////////////////////////////////////
-  scale(xScale : number,
-        yScale : number)
-  {
-     for (var i = 0; i < this.CtrlPts.length; i++)
-     {
-        this.CtrlPts[i].x *= xScale;
-        this.CtrlPts[i].y *= yScale;
-     }
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // translate - method of CubicBezierCurve
-  // Traslates this CubicBezierCurve using specified displacement
-  //
-  // input: P - specified displacement
-  //////////////////////////////////////////////////////////////////////////////
-  translate(P : Point)
-  {
-     for (var i = 0; i < this.CtrlPts.length; i++)
-     {
-        this.CtrlPts[i].x += P.x;
-        this.CtrlPts[i].y += P.y;
-     }
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -3436,41 +3436,6 @@ class CubicSpline extends BCurve
       } //   end case where degree is 3
       return polyBezierCurve;
     }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // scale - method of CubicSpline
-  // Scales this CubicSpline using specified scale factors
-  //
-  // input: xScale - the scale factor in the x direction
-  // input: yScale - the scale factor in the y direction
-  //
-  // Note: This function was copied directly from CubicBezierCurve
-  //////////////////////////////////////////////////////////////////////////////
-  scale(xScale : number,
-        yScale : number)
-  {
-     for (var i = 0; i < this.CtrlPts.length; i++)
-     {
-        this.CtrlPts[i].x *= xScale;
-        this.CtrlPts[i].y *= yScale;
-     }
-  }
-
-  //////////////////////////////////////////////////////////////////////////////
-  // translate - method of CubicSpline
-  // Traslates this CubicSpline using specified displacement
-  //
-  // input: P - specified displacement
-  // Note: This function was copied directly from CubicBezierCurve
-  //////////////////////////////////////////////////////////////////////////////
-  translate(P : Point)
-  {
-     for (var i = 0; i < this.CtrlPts.length; i++)
-     {
-        this.CtrlPts[i].x += P.x;
-        this.CtrlPts[i].y += P.y;
-     }
-  }
 
   //////////////////////////////////////////////////////////////////////////////
   // drawCurve - method of CubicSpline
