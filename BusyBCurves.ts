@@ -137,13 +137,6 @@ var globalMaxDiameter : number; /* = 2.0*globalMaxRadius; */
 var globalSkeleton : boolean;
 var globalControlPointDelta : Point;
 
-
-// We need to put the following into an init function and make these non-constants
-// var globalDrawingCanvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById('drawingCanvas');
-// const globalMaxRadius : number = 0.10*globalDrawingCanvas.height;
-// const globalMaxDiameter = 2.0*globalMaxRadius;
-// const globalSumOfControlPointAreas : number = Math.PI*globalMaxRadius*globalMaxRadius;
-
 var globalGraphsOfCubicBSplineBasisFunctions : CubicSpline[];
 
 //   End declaring some of the globals
