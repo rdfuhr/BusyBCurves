@@ -1865,7 +1865,7 @@ function clearCanvas()
 // Begin implementing functions that construct and return draw data.
 ////////////////////////////////////////////////////////////////////////////////
 // defaultDrawDataForBCurve - function
-// Return the default draw data for the Bezier curve.
+// Return the default draw data for the BCurve.
 //
 ////////////////////////////////////////////////////////////////////////////////
 function defaultDrawDataForBCurve() : CurveDrawData
