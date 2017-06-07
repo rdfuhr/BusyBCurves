@@ -537,9 +537,9 @@ class RectangleDrawData
   // constructor for RectangleDrawData
   // Creates an instance of RectangleDrawData
   //
-  // input: fillColor - the color with which to fill the Circle
-  // input: strokeColor - the color with which to stroke the Circle
-  // input: curveWidth - the width of the Circle to be drawn
+  // input: fillColor - the color with which to fill the Rectangle
+  // input: strokeColor - the color with which to stroke the Rectangle
+  // input: curveWidth - the width of the Rectangle to be drawn
   //////////////////////////////////////////////////////////////////////////////
   constructor(fillColor : string,
               strokeColor : string,
