@@ -2019,7 +2019,7 @@ function defaultDrawDataForVerticalLineFromCurveForParm() : CurveDrawData
 
 ////////////////////////////////////////////////////////////////////////////////
 // defaultDrawDataForTextNearPointOnCurve - function
-// Return the default draw data for the text near the point on the main Bezier curve.
+// Return the default draw data for the text near the point on the main BCurve.
 //
 ////////////////////////////////////////////////////////////////////////////////
 function defaultDrawDataForTextNearPointOnCurve() : TextDrawData
@@ -2032,7 +2032,7 @@ function defaultDrawDataForTextNearPointOnCurve() : TextDrawData
 
 ////////////////////////////////////////////////////////////////////////////////
 // defaultDrawDataForTextNearPointOnGraph - function
-// Return the default draw data for the text near the points on graphs of the Bernstein basis functions.
+// Return the default draw data for the text near the points on graphs of the basis functions.
 //
 ////////////////////////////////////////////////////////////////////////////////
 function defaultDrawDataForTextNearPointOnGraph() : TextDrawData
