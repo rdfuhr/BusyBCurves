@@ -1988,7 +1988,8 @@ function defaultDrawDataForGraphOfBasisFunction() : CurveDrawData
 
 ////////////////////////////////////////////////////////////////////////////////
 // defaultDrawDataForPointOnGraph - function
-// Return the default draw data for the point on each graph of the cubic Bernstein polynomials.
+// Return the default draw data for the point on each graph 
+// of the cubic Bernstein polynomials or of the B-spline (basis) functions.
 //
 ////////////////////////////////////////////////////////////////////////////////
 function defaultDrawDataForPointOnGraph() : CircleDrawData
