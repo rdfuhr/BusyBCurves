@@ -2260,7 +2260,7 @@ function onMouseDown(evt : MouseEvent,
 //
 // input: evt - the mouse event
 // input: C - the BCurve
-// input: drawDataForAllBezierArtifacts - styles for drawing everything
+// input: drawDataForAllBCurveArtifacts - styles for drawing everything
 // input: drawingContext - the context associated with the canvas
 // input: drawingCanvas - the canvas on which we are drawing
 ///////////////////////////////////////////////////////////////////////////////
