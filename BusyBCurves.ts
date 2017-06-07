@@ -2109,6 +2109,11 @@ function DisableEnableButtons(startAnimationButtonDisabled : boolean,
    ResetCurveButton.disabled = ResetCurveButtonDisabled;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// DisableRadioButtons - function
+// Disable the radio buttons that allow the user to specify the curve type.
+//
+////////////////////////////////////////////////////////////////////////////////
 function DisableRadioButtons()
 {
     var curvetypes = document.getElementsByName('curvetype')
@@ -2120,6 +2125,11 @@ function DisableRadioButtons()
     }   
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// EnableRadioButtons - function
+// Enable the radio buttons that allow the user to specify the curve type.
+//
+////////////////////////////////////////////////////////////////////////////////
 function EnableRadioButtons()
 {
     var curvetypes = document.getElementsByName('curvetype')
