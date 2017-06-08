@@ -2420,6 +2420,12 @@ enum CurveType {Bezier, Spline};
 
 var globalCurveType : CurveType;
 
+
+////////////////////////////////////////////////////////////////////////////////
+// UpdateRadioButtonBasedOnGlobalCurveType - function
+// Change the relevant radio buttons' checked status based on value of globalCurveType
+//
+////////////////////////////////////////////////////////////////////////////////
 function UpdateRadioButtonBasedOnGlobalCurveType()
 {
     var curvetypes = document.getElementsByName('curvetype')
@@ -2440,6 +2446,11 @@ function UpdateRadioButtonBasedOnGlobalCurveType()
     } 
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// UpdateGlobalCurveTypeBasedOnRadioButton - function
+// Change the value of globalCurveType based on the relevant radio buttons' checked status
+//
+////////////////////////////////////////////////////////////////////////////////
 function UpdateGlobalCurveTypeBasedOnRadioButton()
 {
     var curvetypes = document.getElementsByName('curvetype')
@@ -2465,6 +2476,11 @@ function UpdateGlobalCurveTypeBasedOnRadioButton()
     }
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// UpdateGlobalSkeletonBasedOnCheckBox - function
+// Change the value of globalSkeleton based on the relevant check box's checked status
+//
+////////////////////////////////////////////////////////////////////////////////
 function UpdateGlobalSkeletonBasedOnCheckBox()
 {
   var Skeleton : HTMLInputElement = <HTMLInputElement> document.getElementById("Skeleton");
