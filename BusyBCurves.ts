@@ -2494,12 +2494,22 @@ function UpdateGlobalSkeletonBasedOnCheckBox()
   }
 }
 
-
+////////////////////////////////////////////////////////////////////////////////
+// HandleCurveTypeRadioButtonChange - function
+// This is just a cover routine for UpdateGlobalCurveTypeBasedOnRadioButton
+//
+////////////////////////////////////////////////////////////////////////////////
 function HandleCurveTypeRadioButtonChange()
 {
   UpdateGlobalCurveTypeBasedOnRadioButton();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// HandleSkeletonCheckBoxChange - function
+// This updates the value of globalSkeleton and it redraws everything according
+// to the new value that appears in the check box.
+//
+////////////////////////////////////////////////////////////////////////////////
 function HandleSkeletonCheckBoxChange()
 {
   UpdateGlobalSkeletonBasedOnCheckBox();
@@ -2510,6 +2520,11 @@ function HandleSkeletonCheckBoxChange()
   globalBCurve.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts, context);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// UpdateSliderBasedOnTglobal - function
+// Change the setting on the parameter range slider based on the value of tGlobal
+//
+////////////////////////////////////////////////////////////////////////////////
 function UpdateSliderBasedOnTglobal()
 {
   var ParameterRangeSlider : HTMLInputElement = <HTMLInputElement> document.getElementById("ParameterRange");
@@ -2520,6 +2535,12 @@ function UpdateSliderBasedOnTglobal()
   ParameterRangeSlider.value = val.toString();
 }
 
+
+////////////////////////////////////////////////////////////////////////////////
+// UpdateTglobalBasedOnSlider - function
+// Change the value of tGlobal based on the setting of the parameter range slider
+//
+////////////////////////////////////////////////////////////////////////////////
 function UpdateTglobalBasedOnSlider()
 {
   var ParameterRangeSlider : HTMLInputElement = <HTMLInputElement> document.getElementById("ParameterRange");
