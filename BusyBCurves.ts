@@ -2554,7 +2554,12 @@ function UpdateTglobalBasedOnSlider()
 
 
 
-// Begin code related to HelpInTheFormOfAWebPage()
+////////////////////////////////////////////////////////////////////////////////
+// HelpInTheFormOfAWebPage - function
+// Display the appropriate web page containing help, depending upon the value
+// of globalCurveType.
+//
+////////////////////////////////////////////////////////////////////////////////
 function HelpInTheFormOfAWebPage()
 {
   if (globalCurveType==CurveType.Bezier)
@@ -2567,7 +2572,7 @@ function HelpInTheFormOfAWebPage()
     window.open("SplineHelp.html");
   }
 }
-//   End code related to HelpInTheFormOfAWebPage()
+
 
 // Begin code to support BusyBSpline
 
