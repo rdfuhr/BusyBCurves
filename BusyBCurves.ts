@@ -2711,6 +2711,17 @@ function DeBoorTriangleAt(t : number,
    return D;
  }
 
+////////////////////////////////////////////////////////////////////////////////
+// getGraphsOfCubicSplineBasisFunctions - function
+// Given a knot sequence that defines a vector space of cubic splines, return
+// an array of cubic splines that represents the graphs of the basis functions
+// for the vector space of cubic splines determined by the knots.
+//
+// input: knots : an array of numbers that specifies the explicit knots
+//
+// returns : an array of CubicSpline objects that represents the graphs of the
+// basis functions for the vector space of cubic splines determined by knots.
+////////////////////////////////////////////////////////////////////////////////
  function getGraphsOfCubicBSplineBasisFunctions(knots : number[]) : CubicSpline[]
 {
   const degree : number = 3;
