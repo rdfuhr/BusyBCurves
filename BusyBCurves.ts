@@ -3230,6 +3230,19 @@ class CubicSpline extends BCurve
      return spanIndex;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // DeBoorTriangleAtParm - method of CubicSpline
+  // Given a parameter value, generate and return the results of implementing
+  // the Cox-de Boor algorithm on this spline with the given parameter value
+  //
+  // input: t - the parameter value at which to implement the Cox-de Boor algorithm.
+  //
+  // returns: a two-dimensional array that contains the results of implementing
+  // the Cox-de Boor algorithm at parameter t on this spline. The results could
+  // be displayed as a triangle, with the left side being the first column of
+  // results and the point at the right vertex being the value of the position
+  // evaluated on this curve at parameter t.
+  //////////////////////////////////////////////////////////////////////////////
   DeBoorTriangleAtParm(t : number) : Point[][]
   {
     let ispan : number = this.findSpan(t);
