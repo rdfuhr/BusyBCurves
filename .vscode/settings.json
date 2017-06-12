@@ -1,5 +1,6 @@
 // Place your settings in this file to overwrite the default settings
 {
+    "editor.minimap.enabled": false,
    "typescript.tsdk": "/usr/local/lib/node_modules/typescript/lib/",
 
     "git.enabled": false,
