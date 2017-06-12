@@ -1362,7 +1362,7 @@ abstract class BCurve
 
 class CubicBezierCurve extends BCurve
 { // Begin class CubicBezierCurve
-  CtrlPts : Array<Point>;
+ // CtrlPts : Array<Point>; it is a data member in BCurve hence does not need to be also declared here in CubicBezierCurve
 
   //////////////////////////////////////////////////////////////////////////////
   // constructor for CubicBezierCurve
@@ -3096,7 +3096,7 @@ class DistinctKnotAndMultiplicity
 class CubicSpline extends BCurve
 {  // Begin class CubicSpline
   readonly degree: number;
-  CtrlPts : Array<Point>;
+  // CtrlPts : Array<Point>; it is a data member in BCurve hence does not need to be also declared here in CubicSpline
   ExplicitKnots : Array<number>;
 
   //////////////////////////////////////////////////////////////////////////////
