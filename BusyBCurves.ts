@@ -3063,6 +3063,11 @@ class DistinctKnotAndMultiplicity
   DistinctKnot : number;
   Multiplicity : number;
 
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for a DistinctKnotAndMultiplicity object
+  // input: DistinctKnot - the value of a distinct knot
+  // input: Multiplicity - the multiplicity of DistinctKnot
+  //////////////////////////////////////////////////////////////////////////////
   constructor(DistinctKnot : number,
               Multiplicity : number)
   {
@@ -3070,6 +3075,12 @@ class DistinctKnotAndMultiplicity
     this.Multiplicity = Multiplicity;
   }
 
+  //////////////////////////////////////////////////////////////////////////////
+  // toString - method of DistinctKnotAndMultiplicity
+  // Returns the string representation of this DistinctKnotAndMultiplicity object
+  //
+  // returns: the string representation of this DistinctKnotAndMultiplicity object
+  //////////////////////////////////////////////////////////////////////////////
   toString() : string
   {
     var stringRep : string;
