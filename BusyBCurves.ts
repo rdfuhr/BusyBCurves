@@ -3385,7 +3385,16 @@ class CubicSpline extends BCurve
     } // end case of kvalue in open interval of the domain
   } // end addknot
 
-
+//////////////////////////////////////////////////////////////////////////////
+// getKnotMultiplicityAtIndex - method of CubicSpline
+// Get the multiplicity of the knot having a certain index.
+//
+// input - IndexOfExplicitKnot - the index of a knot whose multiplicity is sought.
+//
+// returns - the multiplicity of the knot whose index is IndexOfExplicitKnot
+// So, for instance, if the knot sequence is 0,0,0,0,.1,.2,1,1,1,1
+// and if IndexOfExplicitKnot is 0, 1, 2, or 3, then the function will return 4.
+//////////////////////////////////////////////////////////////////////////////
   getKnotMultiplicityAtIndex(IndexOfExplicitKnot: number) : number
   {
     var multiplicity : number = 0; // we will return 0 if IndexOfExplicitKnot is outside of the legal range
