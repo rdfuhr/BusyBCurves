@@ -3306,7 +3306,7 @@ class CubicSpline extends BCurve
 // Based upon /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
 // The new representation of this CubicSpline will include the original knots
 // and the one specified knot, kvalue, inserted.  Also, degree-1 old control
-// points will be replace with degree new control points.  Since degree = 3
+// points will be replaced with degree new control points.  Since degree = 3
 // 2 old control points will be replaced with 3 new control points.
 //////////////////////////////////////////////////////////////////////////////
   addknot(kvalue : number)
