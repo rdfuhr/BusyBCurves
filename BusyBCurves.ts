@@ -3474,6 +3474,12 @@ class CubicSpline extends BCurve
 
 
   // The following is based on /Users/richardfuhr/Dropbox/Sandbox/typeScriptLearn/Resources/BusyBSplineResources/CubicSplineModel.m
+  //////////////////////////////////////////////////////////////////////////////
+  // convertToPolyBezier - method of CubicSpline
+  // Build and return a PolyBezier object that is parametrically equivalent to this CubicSpline
+  //
+  // returns - a PolyBezier object that is parametrically equivalent to this CubicSpline
+  //////////////////////////////////////////////////////////////////////////////
   convertToPolyBezier() : PolyBezier
   {
     // Only do this if the degree is 3
