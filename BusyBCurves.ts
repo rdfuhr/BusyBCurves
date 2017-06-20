@@ -3895,7 +3895,15 @@ class PolyLineHelper
 {  // Begin class PolyLineHelper
    currLineIndex : number;
    currLineParm : number;
-
+  //////////////////////////////////////////////////////////////////////////////
+  // constructor for PolyLineHelper
+  // Creates an instance of PolyLineHelper
+  //
+  // input: currLineIndex - the index of the current Line component of the PolyLine
+  // input: currLineParm - the value of the current local parameter of the current Line
+  //
+  // Note:  To keep things simple, the domain of each line is will be [0,1].
+  //////////////////////////////////////////////////////////////////////////////
    constructor(currLineIndex : number,
                currLineParm : number)
    {
