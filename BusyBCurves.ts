@@ -3437,6 +3437,14 @@ class CubicSpline extends BCurve
     return multiplicity;
   }
 
+//////////////////////////////////////////////////////////////////////////////
+// getDistinctKnotsAndMultiplicities - method of CubicSpline
+// Return an array of objects representing the distinct knots and their multiplicities
+// for this CubicSpline
+//
+// returns - an array of objects representing the distinct knots and their multiplicities
+// for this CubicSpline
+//////////////////////////////////////////////////////////////////////////////
   getDistinctKnotsAndMultiplicities() : Array<DistinctKnotAndMultiplicity>
   {
     var DistinctKnotsAndMultiplicities : Array<DistinctKnotAndMultiplicity> = new Array();
