@@ -2758,7 +2758,7 @@ function DeBoorTriangleAt(t : number,
 // input - the index of the B-spline, which is also the index of its corresponding
 // control point circle.
 //
-// returns - a CubicSpline object that is the graph of the B-spline that has
+// returns: a CubicSpline object that is the graph of the B-spline that has
 // been aligned with its corresponding control point circle.
 ////////////////////////////////////////////////////////////////////////////////
 function alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex) : CubicSpline
@@ -3392,7 +3392,7 @@ class CubicSpline extends BCurve
 //
 // input - IndexOfExplicitKnot - the index of a knot whose multiplicity is sought.
 //
-// returns - the multiplicity of the knot whose index is IndexOfExplicitKnot
+// returns: the multiplicity of the knot whose index is IndexOfExplicitKnot
 // So, for instance, if the knot sequence is 0,0,0,0,.1,.2,1,1,1,1
 // and if IndexOfExplicitKnot is 0, 1, 2, or 3, then the function will return 4.
 //////////////////////////////////////////////////////////////////////////////
@@ -3442,7 +3442,7 @@ class CubicSpline extends BCurve
 // Return an array of objects representing the distinct knots and their multiplicities
 // for this CubicSpline
 //
-// returns - an array of objects representing the distinct knots and their multiplicities
+// returns: an array of objects representing the distinct knots and their multiplicities
 // for this CubicSpline
 //////////////////////////////////////////////////////////////////////////////
   getDistinctKnotsAndMultiplicities() : Array<DistinctKnotAndMultiplicity>
@@ -3478,7 +3478,7 @@ class CubicSpline extends BCurve
   // convertToPolyBezier - method of CubicSpline
   // Build and return a PolyBezier object that is parametrically equivalent to this CubicSpline
   //
-  // returns - a PolyBezier object that is parametrically equivalent to this CubicSpline
+  // returns: a PolyBezier object that is parametrically equivalent to this CubicSpline
   //////////////////////////////////////////////////////////////////////////////
   convertToPolyBezier() : PolyBezier
   {
@@ -3750,6 +3750,14 @@ class CubicSpline extends BCurve
      VerticalLine.draw(drawData, context);
   }  
 
+//////////////////////////////////////////////////////////////////////////////
+// getBoundingBox - methodOfCubicSpline
+// Build and return a bounding box for this CubicSpline
+//
+// returns: a bounding box for this CubicSpline.
+// note: the bounding box that gets returned is based upon the control points,
+// and thus is not the tightest bounding box for this CubicSpline
+//////////////////////////////////////////////////////////////////////////////
   getBoundingBox() : Rectangle
   {
     var xMin : number = this.CtrlPts[0].x;
