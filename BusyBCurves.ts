@@ -36,7 +36,7 @@
 // TODO: Apr 18, 2017: Update the Medium document to explain Skeleton mode.
 // TODO: Apr 18, 2017: Upload the most recent source code to https://richardfuhr.neocities.org
 // TODO: Apr 19, 2017: In the Bezier case, also draw the full-sized control point circles and make them be the targets, as in the Spline case. - DONE
-// TODO: Apr 20, 2017: Update the header blocks
+// TODO: Apr 20, 2017: Update the header blocks. - DONE
 // TODO: Apr 24, 2017: Draw faint polyline through all control points prior to drawing DeBoor skeleton. - DONE
 // TODO: Apr 24, 2017: Add Updated Screen Shots To ~/iCloud Drive/BusyBCurves
 // TODO: May 02, 2017: Make editPointOnCurve and editControlPoint be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each - DONE
@@ -48,7 +48,7 @@
 // TODO: May 15, 2017: Make drawPointOnCurveForParm be a method of just the BCurve class, since CubicBezier and CubicSpline have the same implementation. - DONE
 // TODO: Jun 06, 2017: Put a call to clearCanvas inside the implementations of drawAllBCurveArtifacts and remove those calls or calls to clearRect before calling drawAllBCurveArtifacts.
 // TODO: Jun 06, 2017: As a benefit of the immediately previous TODO, remove canvas as a parameter in those functions where it is no longer needed.
-// TODO: Jun 15, 2017: Only update the PolyBezier curve associated with the CubicSpline curve when it is necessary to do so.  Make it a global.
+// TODO: Jun 15, 2017: Only update the PolyBezier curve associated with the CubicSpline curve when it is necessary to do so.  Make it either a global or a data member of CubicSpline.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
