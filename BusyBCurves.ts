@@ -32,7 +32,7 @@
 // TODO: Apr 14, 2017: Implement a checkbox labeled Skeleton and when it is checked, draw only the DeCasteljau lines & points or the DeBoor lines & points. - DONE
 // TODO: Apr 15, 2017: Separate MakeControlPointTargets and DrawControlPointTargets so that the Skeleton option still lets users click and drag. - DONE
 // TODO: Apr 15, 2017: Figure out how to use the Skeleton option without having to reset the curve. - DONE
-// TODO: Apr 18, 2017: Update the Help files to explain Skeleton mode.
+// TODO: Apr 18, 2017: Update the Help files to explain Skeleton mode. - DONE
 // TODO: Apr 18, 2017: Update the Medium document to explain Skeleton mode.
 // TODO: Apr 18, 2017: Upload the most recent source code to https://richardfuhr.neocities.org
 // TODO: Apr 19, 2017: In the Bezier case, also draw the full-sized control point circles and make them be the targets, as in the Spline case. - DONE
