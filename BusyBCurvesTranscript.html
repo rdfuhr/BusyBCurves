@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title Transcript and Additional Comments>
+        </title>
     </head>
     <body>
         <p>
-The following is a transcript of the spoken commentary that accompanies the video.  In addition, I have put some supplementary comments inside brackets [] that reflect some suggestions given to me by viewers, as well as some additional points of clarification.
+The following is a transcript of the spoken commentary that accompanies the video.  In addition, I have put some supplementary comments <b>in bold</b> inside brackets <b>[]</b> that reflect some suggestions given to me by viewers, as well as some additional points of clarification.
 </p>
 <p>
 
 </p>
 <p>
-[This video describes] a web app for exploring Bezier and spline curves.  Anyone who has internet access and who has a computer or mobile device with a reasonably modern browser can use this app the same way I am using it here.  So, let us get started.
+<b>[This video describes]</b> a web app for exploring Bezier and spline curves.  Anyone who has internet access and who has a computer or mobile device with a reasonably modern browser can use this app the same way I am using it here.  So, let us get started.
 </p>
 <p>
 Bezier curves and spline curves are used quite a bit: in the design of airplanes, automobiles, and also, on a much smaller scale, fonts: every shape of every letter.
@@ -22,16 +24,16 @@ So this app enables you to use both Bezier curves and spline curves.
 We will start with Bezier curves.
 </p>
 <p>
-The red curve you see is a Bezier curve, and it is really just a polynomial.  [Actually it is a parametric curve of the form C(t) = (x(t), y(t)) where x and y are each cubic polynomials].  But the main property that makes it unique here is that it is determined by the four control points that you see, which are shaded in blue.
+The red curve you see is a Bezier curve, and it is really just a polynomial.  <b>[Actually it is a parametric curve of the form C(t) = (x(t), y(t)) where x and y are each cubic polynomials]</b>.  But the main property that makes it unique here is that it is determined by the four control points that you see, which are shaded in blue.
 </p>
 <p>
-So if I start the animation, as you see the yellow point move along the curve, the blue circles get larger and smaller as the point moves.  [The yellow point is always located at the center of gravity of the four control points, where the mass of each control point is indicated by the area of the blue circle centered at that control point]..
+So if I start the animation, as you see the yellow point move along the curve, the blue circles get larger and smaller as the point moves.  <b>[The yellow point is always located at the center of gravity of the four control points, where the mass of each control point is indicated by the area of the blue circle centered at that control point]</b>>.
 </p>
 <p>
 And, as the point moves, the parameter moves.
 </p>
 <p>
-The size of each blue circle is determined by the value of the graph of the curve that is colored green [the green color does not show up very vividly in the video] right next to each control point. [These four graphs are each graphs of cubic polynomials known as Bernstein polynomials that play a prominent role in mathematics].
+The size of each blue circle is determined by the value of the graph of the curve that is colored green <b>[the green color does not show up very vividly in the video]</b> right next to each control point. <b>[These four graphs are each graphs of cubic polynomials (known as Bernstein polynomials) that play a prominent role in mathematics]</b>.
 </p>
 <p>
 So now, let us stop the animation.
@@ -40,10 +42,10 @@ So now, let us stop the animation.
 I can also move the control points, and, as you see, these move the curve.  So, you can just click and drag to move the control points.
 </p>
 <p>
-What you can also do is click and drag to move the point on the curve. [as you move the point on the curve, you will see the corresponding parameter value change, and you will also see the blue circles expand and contract].
+What you can also do is click and drag to move the point on the curve. <b>[as you move the point on the curve, you will see the corresponding parameter value change, and you will also see the blue circles expand and contract]</b>.
 </p>
 <p>
-Another thing that is a feature of this app is that you can click the “Skeleton” check box, and now we see only some straight lines [and some points], and there is a subdivision algorithm by De Casteljau [pronounced cas-tel-zho], which enables you to calculate the value [the (x,y) coordinates] of the yellow point given the current locations of the control points and given the parameter [the parameter is a number between 0 and 1].  So if I start the animation, you will see, as the yellow point moves along, the De Casteljau points and lines move.  I explain a little bit more about what these are if you click the Help button [there are links to some Wikipedia articles].
+Another thing that is a feature of this app is that you can click the Skeleton check box, and now we see only some straight lines <b>[and some points]</b>, and there is a subdivision algorithm by De Casteljau <b>[pronounced cas-tel-zho]</b>, which enables you to calculate the value <b>[the (x,y) coordinates]</b> of the yellow point given the current locations of the control points and given the parameter <b>[the parameter is a number between 0 and 1]</b>.  So if I start the animation, you will see, as the yellow point moves along, the De Casteljau points and lines move.  I explain a little bit more about what these are if you click the Help button <b>[there are links to some Wikipedia articles]</b>.
 </p>
 <p>
 So now, let us stop the animation, and let us uncheck the Skeleton box, and we get back to the Bezier cure.
@@ -52,22 +54,22 @@ So now, let us stop the animation, and let us uncheck the Skeleton box, and we g
 Now let us click the Spline radio button.
 </p>
 <p>
-So now, we have a situation that looks more complex than the one before.  In the Bezier case we had four control points.  In this case, which is a spline, we have eight control points, but the number is [can be] arbitrarily large.  It must be at least four though [for a cubic spline, which this is, the minimum number of control points is four].  And what this curve is - is a piecewise cubic polynomial [Actually it is a parametric curve of the form C(t) = (x(t), y(t)) where x and y are each piecewise cubic polynomials].  Where you see those black little rectangles on the curve, that is where we switch from one cubic polynomial to another. [Notice that the polynomial components join together quite smoothly].
+So now, we have a situation that looks more complex than the one before.  In the Bezier case we had four control points.  In this case, which is a spline, we have eight control points, but the number <b>[can be]</b> arbitrarily large.  It must be at least four though <b>[for a cubic spline, which this is, the minimum number of control points is four]</b>.  And what this curve is - is a piecewise cubic polynomial <b>[Actually it is a parametric curve of the form C(t) = (x(t), y(t)) where x and y are each piecewise cubic polynomials]</b>.  Where you see those black little rectangles on the curve, that is where we switch from one cubic polynomial to another. <b>[Notice that the polynomial components join together quite smoothly]</b>.
 </p>
 <p>
-So, if I do the “Start Animation” then we see the yellow point moves along the curve, and once again, as in the Bezier case, we see the blue circles expand and contract.  But one critical difference here is that at most four of the circles have blue in them.  So the yellow point is always at the center of mass of the four blue circles [as it was in the Bezier case].  So if we stop the animation, we can click and drag the various control points and we can see the curve move.  [Actually, you can click and drag the control points even during the animation process].  You can also see the green graphs [unfortunately the green does not show up very vividly in the video] of the B-spline basis functions adjacent to each control point. [the current value of each B-spline basis function corresponds to the current area of the corresponding blue circle, and that area can be zero].
+So, if I do the Start Animation then we see the yellow point moves along the curve, and once again, as in the Bezier case, we see the blue circles expand and contract.  But one critical difference here is that at most four of the circles have blue in them.  So the yellow point is always at the center of mass of the four blue circles <b>[as it was in the Bezier case]</b>.  So if we stop the animation, we can click and drag the various control points and we can see the curve move.  <b>[Actually, you can click and drag the control points even during the animation process]</b>.  You can also see the green graphs <b>[unfortunately the green does not show up very vividly in the video]</b> of the B-spline basis functions adjacent to each control point. <b>[the current value of each B-spline basis function corresponds to the current area of the corresponding blue circle, and that area can be zero]</b>.
 </p>
 <p>
 And we can also drag the yellow point along the curve, and, as we do that, we see the little points on the graphs move, and we also see the blue circles expand and contract.
 </p>
 <p>
-We can also click the Skeleton box, and this is analogous to the Bezier case.  We are now seeing an algorithm in action that is being used to compute the yellow point, based on the parameter and based on the control points.  [The algorithm also is based upon the parameter values at which we switch from one cubic polynomial component to the next.  These parameter values are called knots].  This algorithm was developed by Carl de Boor.  
+We can also click the Skeleton box, and this is analogous to the Bezier case.  We are now seeing an algorithm in action that is being used to compute the yellow point, based on the parameter and based on the control points.  <b>[The algorithm also is based upon the parameter values at which we switch from one cubic polynomial component to the next.  These parameter values are called knots]</b>.  This algorithm was developed by Carl de Boor.  
 </p>
 <p>
-So, anyway, we will now stop the animation and unblock the Skeleton box, and if we Reset the Curve, it just puts it back to its starting shape and starting parameter.
+So, anyway, we will now stop the animation and uncheck the Skeleton box, and if we Reset the Curve, it just puts it back to its starting shape and starting parameter.
 </p>
 <p>
-[One important point is that this app demonstrates two different ways of obtaining the location of the yellow point on the curve.  The first way is to interpret the location as being at the current center of mass of the blue control points, where the amount of blue (the weight) is governed by the values of the Bernstein polynomials in the Bezier case and by the B-Spline basis functions in the spline case.  The second way is to obtain the location by the algorithms depicted when you check the Skeleton box.  It is the De Casteljau algorithm in the Bezier case and it is the de Boor algorithm in the spline case].
+<b>[One important point is that this app demonstrates two different ways of obtaining the location of the yellow point on the curve.  The first way is to interpret the location as being at the current center of mass of the blue control points, where the amount of blue (the weight) is governed by the values of the Bernstein polynomials in the Bezier case and by the B-Spline basis functions in the spline case.  The second way is to obtain the location by the algorithms depicted when you check the Skeleton box.  It is the De Casteljau algorithm in the Bezier case and it is the de Boor algorithm in the spline case]</b>.
 </p>
 <p>
 So I hope you will give this web app a try.
