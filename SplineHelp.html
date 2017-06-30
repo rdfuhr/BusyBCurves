@@ -11,25 +11,31 @@
 <body>
 <p>
 This part of the program enables you to explore some properties of cubic
-<a href="https://en.wikipedia.org/wiki/Spline_(mathematics)"><i>Spline curves</i></a>.
+<a href="https://en.wikipedia.org/wiki/Spline_(mathematics)"><i>spline curves</i></a>.
 </p>
 <p>
 To get help with exploring Bezier
 curves click <a href="BezierHelp.html">here</a>
 </p>
 <p>
-A Spline curve is made up of pieces, each of which can be represented by a polynomial.
-In this example, each polynomial is of degree three. 
+A <i>spline curve</i> (as shown in this app) is a <i>parametric curve</i> C(t) = (x(t), y(t)), where x(t) and y(t) are each real-valued <i>spline functions</i>.  
+</p>
+<p>
+A <i>spline function</i> is made up of pieces, each of which can be represented by a <i>polynomial</i>.  The pieces typically join together smoothly.
+</p>
+<p>
+In this app, each polynomial is of degree three. 
+</p>
 <p> 
-On the graph of the red Spline
+On the graph of the red spline
 curve you will see little black rectangles.  These represent locations where we switch
-from one polynomial to the next.  
+from one (x(t), y(t) pair of polynomials to the next.  
 The parameter values associated with these locations are called <i>knots</i>.
 </p>
 </p>
 <p>
-The yellow circle on the red cubic Spline curve is <b>always</b> at the
-<i>center of mass</i> of the blue <i>control points</i>.
+The yellow circle on the red cubic spline curve is <b>always</b> at the
+<i>center of mass</i> of the blue <i>control points</i>, where the mass of each control point is equal to the area of the blue circle.
 </p>
 <p>
 The number next to this yellow circle (the <i>parameter</i>) varies between 0 and 1.
@@ -48,17 +54,17 @@ are drawn next to the blue circles.
 </p>
 <p>
 These functions are called
-<a href="https://en.wikipedia.org/wiki/B-spline"><i>B-Spline basis functions</i></a>.
+<a href="https://en.wikipedia.org/wiki/B-spline"><i>B-spline basis functions</i></a>.
 </p>
 <p>
-The black polyline connecting the blue control points is the <i>control polygon</i> for the Spline
-curve.  NOTE: The Spline curve is <i>always tangent</i> to its control polygon at the endpoints,
+The black polyline connecting the blue control points is the <i>control polygon</i> for the spline
+curve.  NOTE: The spline curve is <i>always tangent</i> to its control polygon at the endpoints,
 no matter how you move the control points.
 </p>
 <p>
 Finally, the brown lines connecting the small orange circles illustrate
 <a href="https://en.wikipedia.org/wiki/De_Boor%27s_algorithm"><i>de Boor's algorithm</i></a>
-for evaluating a point on the Spline curve at a particular parameter value. 
+for evaluating a point on the spline curve at a particular parameter value. 
 <br>If you select the box labeled
 <i>Skeleton</i>, you will see <b>only</b> the details of de Boor's algorithm.
 <br>
