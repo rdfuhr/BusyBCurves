@@ -49,7 +49,7 @@
 // TODO: Jun 06, 2017: Put a call to clearCanvas inside the implementations of drawAllBCurveArtifacts and remove those calls or calls to clearRect before calling drawAllBCurveArtifacts.
 // TODO: Jun 06, 2017: As a benefit of the immediately previous TODO, remove canvas as a parameter in those functions where it is no longer needed.
 // TODO: Jun 15, 2017: Only update the PolyBezier curve associated with the CubicSpline curve when it is necessary to do so.  Make it either a global or a data member of CubicSpline.
-// TODO: Jun 21, 2017: Implement methods to mirror BCurve and PolyBezier objects about constant-y and constant-x lines.  Call the appropriate mirror method instead of using inline code.
+// TODO: Jun 21, 2017: Implement methods to mirror BCurve objects about constant-y and constant-x lines.  Call the appropriate mirror method instead of using inline code. - DONE
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -2816,12 +2816,15 @@ function alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex) : Cubi
     alignedBSplineGraph = globalGraphsOfCubicBSplineBasisFunctions[basisIndex].clone();
     var CorrespondingControlPointCircle : Circle = globalControlPointTargets[basisIndex];
 
-    // Reflect the graph about the line y = 1 because the positive direction is downward
-    // Correction: actually we are reflecting about the line y = 0.5
-    for (var i : number = 0; i < alignedBSplineGraph.CtrlPts.length; i++)
-    {
-      alignedBSplineGraph.CtrlPts[i].y = 1.0 - alignedBSplineGraph.CtrlPts[i].y;
-    }
+    // Reflect the graph about the line y = 0.5 because the positive direction is downward
+    // Old code was as follows
+    // for (var i : number = 0; i < alignedBSplineGraph.CtrlPts.length; i++)
+    // {
+    //   alignedBSplineGraph.CtrlPts[i].y = 1.0 - alignedBSplineGraph.CtrlPts[i].y;
+    // }
+    // New code is as follows
+    const yConst : number = 0.5;
+    alignedBSplineGraph.mirrorAboutConstantY(yConst);
 
     // Scale the alignedBSplineGraph
 
