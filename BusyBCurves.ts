@@ -1259,6 +1259,36 @@ abstract class BCurve
   }  
 
   //////////////////////////////////////////////////////////////////////////////
+  // mirrorAboutConstantX - method of BCurve and used by CubicBezierCurve and CubicSpline
+  // Mirrors this BCurve about the line x = xConst
+  //
+  // input: xConst - Mirror this BCurve about the line x = xConst 
+  //////////////////////////////////////////////////////////////////////////////
+  mirrorAboutConstantX(xConst : number)
+  {
+    for (var i = 0; i < this.CtrlPts.length; i++)
+    {
+      var delta : number = xConst - this.CtrlPts[i].x;
+      this.CtrlPts[i].x = xConst + delta;
+    }
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+  // mirrorAboutConstantY - method of BCurve and used by CubicBezierCurve and CubicSpline
+  // Mirrors this BCurve about the line y = yConst
+  //
+  // input: yConst - Mirror this BCurve about the line y = yConst 
+  //////////////////////////////////////////////////////////////////////////////
+  mirrorAboutConstantY(yConst : number)
+  {
+    for (var i = 0; i < this.CtrlPts.length; i++)
+    {
+      var delta : number = yConst - this.CtrlPts[i].y;
+      this.CtrlPts[i].y = yConst + delta;
+    }
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
   // drawControlPolygon - method of BCurve and used by CubicBezierCurve and CubicSpline
   // Draws control polygon of this BCurve with specified appearance
   //
@@ -2787,6 +2817,7 @@ function alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex) : Cubi
     var CorrespondingControlPointCircle : Circle = globalControlPointTargets[basisIndex];
 
     // Reflect the graph about the line y = 1 because the positive direction is downward
+    // Correction: actually we are reflecting about the line y = 0.5
     for (var i : number = 0; i < alignedBSplineGraph.CtrlPts.length; i++)
     {
       alignedBSplineGraph.CtrlPts[i].y = 1.0 - alignedBSplineGraph.CtrlPts[i].y;
