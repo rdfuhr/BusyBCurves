@@ -30,7 +30,7 @@
             <li>
                 Q: How do I get this app to run on my computer, tablet, or smart phone?
                 <br>
-                A: Open a web browser on your device and access <a href="https://richardfuhr.neocities.org/BusyBCurves.html">https://richardfuhr.neocities.org/BusyBCurves.html</a>.
+                A: Launch a web browser on your device and access <a href="https://richardfuhr.neocities.org/BusyBCurves.html">https://richardfuhr.neocities.org/BusyBCurves.html</a>.
                 <br> 
                 <br>      
             </li>
@@ -39,14 +39,14 @@
                 <br>
                 A: The web app runs on the following devices:
                 <ul>
-                    <li>Microsoft Windows Computers</li>
-                    <li>Apple macOS Computers</li>
-                    <li>Ubuntu Linux Computers</li>
+                    <li>Microsoft Windows computers</li>
+                    <li>Apple macOS computers</li>
+                    <li>Ubuntu Linux computers</li>
                     <li>Google Chromebooks</li>
                     <li>iPhones</li>
                     <li>Android phones</li>
                     <li>iPads</li>
-                    <li>Amazon Kindle</li>
+                    <li>Kindles</li>
                 </ul>
                 <br>
                 <br>
@@ -59,30 +59,33 @@
                 <br>       
             </li>
             <li>
-                Q: How is the Bezier curve drawn?
+                Q: How is the cubic Bezier curve drawn?
                 <br>
-                A: Answer
+                A: The cubic Bezier curve is drawn using the bezierCurveTo method of the CanvasRenderingContext2D object, which is obtained from the HTML5 Canvas.
                 <br>
                 <br>
             </li>
             <li>
-                Q: How is the spline curve drawn?
+                Q: How is the cubic spline curve drawn?
                 <br>
-                A: Answer
+                A: The cubic spline curve is drawn by first internally representing it as a piecewise Bezier curve and then using the bezierCurveTo method.  The
+                   piecewise-Bezier curve representation is obtained by knot insertion so that each distinct knot has multiplicity equal to the degree.
                 <br>
                 <br>       
             </li>
             <li>
                 Q: How are the graphs of the Bernstein polynomials drawn?
                 <br>
-                A: Answer
+                A: The graph of each Bernstein polynomial b[i](t) is represented as a cubic Bezier curve (t, b[i](t)) by determining the appropriate control points, and
+                   that Bezier curve is drawn as described above.
                 <br>
                 <br>
             </li>
             <li>
                 Q: How are the graphs of the B-Spline basis functions drawn?
                 <br>
-                A: Answer
+                A: The graph of each B-spline basis function b[i](t) is represented as a cubic spline curve (t, b[i](t)) by determining the appropriate control points, and
+                   that cubic spline curve is drawn as described above.
                 <br> 
                 <br>      
             </li> 
