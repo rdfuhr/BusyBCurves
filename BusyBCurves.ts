@@ -3620,6 +3620,30 @@ class CubicSpline extends BCurve
     }
 
   //////////////////////////////////////////////////////////////////////////////
+  // getPolyBezierEquivalent - method of CubicSpline
+  // Returns the PolyBezierEquivalent of this CubicSpline
+  //
+  // returns : A PolyBezier object that is parametrically equivalent to this
+  // CubicSpline.  If the PolyBezierEquivalent data member of this CubicSpline
+  // is not null, we will return it.  Otherwise, we will call convertToPolyBezier
+  // for this CubicSpline, we will save that object in PolyBezierEquivalent, and
+  // we will return it
+  //////////////////////////////////////////////////////////////////////////////
+  getPolyBezierEquivalent() : PolyBezier
+  {
+    if (this.PolyBezierEquivalent!=null)
+    {
+      return this.PolyBezierEquivalent;
+    }
+    else
+    {
+      this.PolyBezierEquivalent = this.convertToPolyBezier();
+      return this.PolyBezierEquivalent;
+    }
+  }
+
+
+  //////////////////////////////////////////////////////////////////////////////
   // drawCurve - method of CubicSpline
   // Draws this CubicSpline with specified appearance
   //
