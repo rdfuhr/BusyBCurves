@@ -3134,6 +3134,7 @@ class CubicSpline extends BCurve
   readonly degree: number;
   // CtrlPts : Array<Point>; it is a data member in BCurve hence does not need to be also declared here in CubicSpline
   ExplicitKnots : Array<number>;
+  PolyBezierEquivalent : PolyBezier | null;
 
   //////////////////////////////////////////////////////////////////////////////
   // constructor for a cubic spline curve
@@ -3167,6 +3168,8 @@ class CubicSpline extends BCurve
         var t : number = ExplicitKnots[iKt];
         this.ExplicitKnots.push(t);
       }
+
+      this.PolyBezierEquivalent = null;
 
     }
 
@@ -3209,6 +3212,21 @@ class CubicSpline extends BCurve
        stringRep += DistinctKnotsAndMultiplicities[k].toString();
        stringRep += "</p>";
      }
+
+     stringRep += "<p>";
+     stringRep += "PolyBezierEquivalent";
+     stringRep += "<p>";
+     if (this.PolyBezierEquivalent==null)
+     {
+        stringRep += "null";
+     }
+     else
+     {
+        stringRep += this.PolyBezierEquivalent.toString();
+     } 
+     stringRep += "</p>";
+     stringRep += "</p>";
+
      return stringRep;
   }
 
