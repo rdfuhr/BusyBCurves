@@ -3345,7 +3345,7 @@ class CubicSpline extends BCurve
   //////////////////////////////////////////////////////////////////////////////
   derivativeAtParm(t : number) : Point
   {
-     var thePolyBezier = this.convertToPolyBezier();
+     var thePolyBezier : PolyBezier = this.convertToPolyBezier();
      var der : Point = thePolyBezier.derivativeAtParm(t);
      return der;
   }
