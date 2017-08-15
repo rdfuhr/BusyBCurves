@@ -209,8 +209,8 @@ class Point
   //////////////////////////////////////////////////////////////////////////////
   plus(that : Point) : Point
   {
-     var x = this.x + that.x;
-     var y = this.y + that.y;
+     var x : number = this.x + that.x;
+     var y : number = this.y + that.y;
      return new Point(x,y);
   }
 
@@ -223,8 +223,8 @@ class Point
   //////////////////////////////////////////////////////////////////////////////
   minus(that : Point) : Point
   {
-     var x = this.x - that.x;
-     var y = this.y - that.y;
+     var x : number = this.x - that.x;
+     var y : number = this.y - that.y;
      return new Point(x,y);
   }
 
@@ -237,8 +237,8 @@ class Point
   //////////////////////////////////////////////////////////////////////////////
   scalarMult(s : number) : Point
   {
-     var x = s*this.x;
-     var y = s*this.y;
+     var x : number = s*this.x;
+     var y : number = s*this.y;
      return new Point(x,y);
   }
 
