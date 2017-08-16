@@ -50,7 +50,7 @@
 // TODO: Jun 06, 2017: As a benefit of the immediately previous TODO, remove canvas as a parameter in those functions where it is no longer needed.
 // TODO: Jun 15, 2017: Only update the PolyBezier curve associated with the CubicSpline curve when it is necessary to do so.  Make it either a global or a data member of CubicSpline.
 // TODO: Jun 21, 2017: Implement methods to mirror BCurve objects about constant-y and constant-x lines.  Call the appropriate mirror method instead of using inline code. - DONE
-// TODO: Aug 16, 2017: Change var to let in all for loops, since that is a better coding style, according to Basarat, and I agree.
+// TODO: Aug 16, 2017: Change var to let in all for loops, since that is a better coding style, according to Basarat, and I agree. - DONE
 // TODO: Aug 16, 2017: Make sure we set the PolyBezier data member to null for CubicSpline when and only when we need to do that.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
@@ -827,7 +827,7 @@ function doOneDeCasteljauStep(P : Array<Point>,
 	var s : number = 1.0 - t
 	var Q : Array<Point> = new Array();
 	var n : number = P.length;
-	for (var i = 0; i < n-1; i++)
+	for (let i = 0; i < n-1; i++)
 	{
 		Q.push(linearCombination(s, P[i], t, P[i+1]));
 	}
@@ -853,7 +853,7 @@ function doAllDeCasteljauSteps(P : Array<Point>,
    }
    else
    {
-      for (var i = 0; i < n-1; i++)
+      for (let i = 0; i < n-1; i++)
       {
          P = doOneDeCasteljauStep(P, t); // so we are overwriting P
       }
@@ -882,7 +882,7 @@ function drawAllDeCasteljauLines(P : Array<Point>,
    var n : number = P.length;
    let ControlPolygon : PolyLine = new PolyLine(P);
    ControlPolygon.draw(drawData, context);
-   for (var i = 0; i < n-1; i++)
+   for (let i = 0; i < n-1; i++)
    {  // begin i-loop
       P = doOneDeCasteljauStep(P, t); // so we are overwriting P
       let DeCasteljauPolyLine : PolyLine = new PolyLine(P);
@@ -905,15 +905,15 @@ function drawAllDeCasteljauPoints(P : Array<Point>,
                                   context : CanvasRenderingContext2D)
 {
    var n : number = P.length;
-   for (var k = 0; k < n; k++)
+   for (let k = 0; k < n; k++)
    {
      P[k].drawCircleHere(3.0, drawData, context)
    }
-   for (var i = 0; i < n-1; i++)
+   for (let i = 0; i < n-1; i++)
    {  // begin i-loop
       P = doOneDeCasteljauStep(P, t); // so we are overwriting P
       var m : number = P.length;
-      for (var j = 0; j < m; j++)
+      for (let j = 0; j < m; j++)
       {   // begin j-loop
           P[j].drawCircleHere(3.0, drawData, context)
       }   //   end j-loop
@@ -934,9 +934,9 @@ function drawAllDeBoorPoints(D : Point[][],
 {
   const degree : number = 3;
   const order : number = degree + 1;
-  for (var i = 0; i < order; i++)
+  for (let i = 0; i < order; i++)
   {
-    for (var j = i; j < order; j++)
+    for (let j = i; j < order; j++)
     {
       D[i][j].drawCircleHere(3.0, drawData, context);
     }
@@ -957,9 +957,9 @@ function drawAllDeBoorLines(D : Point[][],
 {
   const degree : number = 3;
   const order : number = degree + 1
-  for (var i = 0; i < order; i++)
+  for (let i = 0; i < order; i++)
   {
-    for (var j = i; j < degree; j++)
+    for (let j = i; j < degree; j++)
     {
       var L : Line = new Line(D[i][j], D[i][j+1])
       L.draw(drawData, context);
@@ -983,7 +983,7 @@ function bezierHodographPoints(P : Array<Point>) : Array<Point>
   // control points for the Bezier curve C'
   var Q : Array<Point> = new Array();
   var d : number = P.length - 1; // so d can be interpreted as the degree of C
-  for(var i = 0; i < d; i++)
+  for (let i = 0; i < d; i++)
   {
      var LinComb = linearCombination(d, P[i+1], -1.0*d, P[i]);
      Q.push(LinComb);
@@ -1007,8 +1007,8 @@ function binom(n : number,
                k : number) : number
 {
     var  coeff : number = 1;
-    for (var i = n-k+1; i <= n; i++) coeff *= i;
-    for (var i = 1;     i <= k; i++) coeff /= i;
+    for (let i = n-k+1; i <= n; i++) coeff *= i;
+    for (let i = 1;     i <= k; i++) coeff /= i;
     return coeff;
 }
 
@@ -1238,7 +1238,7 @@ abstract class BCurve
   scale(xScale : number,
         yScale : number)
   {
-     for (var i = 0; i < this.CtrlPts.length; i++)
+     for (let i = 0; i < this.CtrlPts.length; i++)
      {
         this.CtrlPts[i].x *= xScale;
         this.CtrlPts[i].y *= yScale;
@@ -1253,7 +1253,7 @@ abstract class BCurve
   //////////////////////////////////////////////////////////////////////////////
   translate(P : Point)
   {
-     for (var i = 0; i < this.CtrlPts.length; i++)
+     for (let i = 0; i < this.CtrlPts.length; i++)
      {
         this.CtrlPts[i].x += P.x;
         this.CtrlPts[i].y += P.y;
@@ -1268,7 +1268,7 @@ abstract class BCurve
   //////////////////////////////////////////////////////////////////////////////
   mirrorAboutConstantX(xConst : number)
   {
-    for (var i = 0; i < this.CtrlPts.length; i++)
+    for (let i = 0; i < this.CtrlPts.length; i++)
     {
       var delta : number = xConst - this.CtrlPts[i].x;
       this.CtrlPts[i].x = xConst + delta;
@@ -1283,7 +1283,7 @@ abstract class BCurve
   //////////////////////////////////////////////////////////////////////////////
   mirrorAboutConstantY(yConst : number)
   {
-    for (var i = 0; i < this.CtrlPts.length; i++)
+    for (let i = 0; i < this.CtrlPts.length; i++)
     {
       var delta : number = yConst - this.CtrlPts[i].y;
       this.CtrlPts[i].y = yConst + delta;
@@ -1318,7 +1318,7 @@ abstract class BCurve
   {
      var controlPoints : Array<Point> = this.CtrlPts;
      var n : number = controlPoints.length;
-     for (var i = 0; i < n; i++)
+     for (let i = 0; i < n; i++)
      {
         controlPoints[i].drawCircleHere(radius, drawData, context);
      }
@@ -1340,7 +1340,7 @@ abstract class BCurve
 
     var nTargets : number = globalControlPointTargets.length;
 
-    for (var i : number = 0; i < nTargets; i++)
+    for (let i : number = 0; i < nTargets; i++)
     {
       var P : Point = globalControlPointTargets[i].center;
       P.drawUnfilledCircleHere(globalMaxRadius, drawData, context);
@@ -1359,7 +1359,7 @@ abstract class BCurve
      var controlPoints : Array<Point> = this.CtrlPts;
      var nControlPts : number = controlPoints.length;
      
-     for (var i = 0; i < nControlPts; i++)
+     for (let i = 0; i < nControlPts; i++)
      {
          globalControlPointTargets[i] = new Circle(controlPoints[i], globalMaxRadius);
      }
@@ -1426,7 +1426,7 @@ class CubicBezierCurve extends BCurve
   {
      var stringRep = "Data for Bezier Curve\n";
      var n = this.CtrlPts.length;
-     for (var i = 0; i < n; i++)
+     for (let i = 0; i < n; i++)
      {
         stringRep += "<p>"
         stringRep += "CtrlPts[" + i + "] = ";
@@ -1500,7 +1500,7 @@ class CubicBezierCurve extends BCurve
   {
     var controlPointCirclesWeightedForParm : Circle[] = this.getControlPointCirclesWeightedForParm(t);
     var nCircles : number = controlPointCirclesWeightedForParm.length;
-    for (var i = 0; i < nCircles; i++)
+    for (let i = 0; i < nCircles; i++)
     {
       controlPointCirclesWeightedForParm[i].draw(drawData, context);
     }
@@ -1522,7 +1522,7 @@ class CubicBezierCurve extends BCurve
      var degree : number = order - 1;
      var controlPointCirclesWeightedForParm : Circle[] = new Array();
 
-     for (var i = 0; i < order; i++)
+     for (let i = 0; i < order; i++)
      {
         var actualArea : number = globalSumOfControlPointAreas*bernsteinValue(i, degree, t);
         // NOTE: actualArea = Math.PI*(actualRadius)^2
@@ -1553,7 +1553,7 @@ class CubicBezierCurve extends BCurve
      // of this CubicBezierCurve.  That is because y increases as we go downward.
      var controlPoints : Array<Point> = this.CtrlPts;
      var yMax : number = controlPoints[0].y;
-     for (var i = 1; i < controlPoints.length; i++)
+     for (let i = 1; i < controlPoints.length; i++)
      {
         var yCurr : number = controlPoints[i].y;
         if (yMax < yCurr)
@@ -1585,7 +1585,7 @@ class CubicBezierCurve extends BCurve
      var delta2 = new Point(-3.0*globalMaxRadius, -1.0*globalMaxRadius);
      var upperLeft
 
-     for (var indx = 0; indx < 4; indx++)
+     for (let indx = 0; indx < 4; indx++)
      {
         if (indx % 2 == 0) // i.e., the even indices
         {
@@ -1863,7 +1863,7 @@ function initializeCubicSpline() : CubicSpline
   // because we can use the same tDeltaGlobal
   // that we were using for Bezier.
   const bot : number = t[t.length-1] - t[0];
-  for (var i : number = 0; i < t.length; i++)
+  for (let i : number = 0; i < t.length; i++)
   {
     let top = t[i] - t[0];
     t[i] = top/bot;
@@ -2152,7 +2152,7 @@ function DisableRadioButtons()
 {
     var curvetypes = document.getElementsByName('curvetype')
     var n = curvetypes.length;
-    for (var i : number = 0; i < n; i++)
+    for (let i : number = 0; i < n; i++)
     {
         var curItem : HTMLInputElement = <HTMLInputElement> curvetypes[i];
         curItem.disabled = true;
@@ -2168,7 +2168,7 @@ function EnableRadioButtons()
 {
     var curvetypes = document.getElementsByName('curvetype')
     var n = curvetypes.length;
-    for (var i : number = 0; i < n; i++)
+    for (let i : number = 0; i < n; i++)
     {
         var curItem : HTMLInputElement = <HTMLInputElement> curvetypes[i];
         curItem.disabled = false;
@@ -2275,7 +2275,7 @@ function onMouseDown(evt : MouseEvent,
       globalModifyingPointOnCurve = true;
       globalIndexOfModifiedControlPoint = -1;
    }
-   else for (var i = 0; i < globalControlPointTargets.length; i++)
+   else for (let i = 0; i < globalControlPointTargets.length; i++)
    {
          if(mousePos.isInsideCircle(globalControlPointTargets[i]))
          {
@@ -2464,7 +2464,7 @@ function UpdateRadioButtonBasedOnGlobalCurveType()
 {
     var curvetypes = document.getElementsByName('curvetype')
     var n = curvetypes.length;
-    for (var i : number = 0; i < n; i++)
+    for (let i : number = 0; i < n; i++)
     {
         var curItem : HTMLInputElement = <HTMLInputElement> curvetypes[i];
         if (globalCurveType==CurveType.Bezier && curItem.value=="Bezier")
@@ -2489,7 +2489,7 @@ function UpdateGlobalCurveTypeBasedOnRadioButton()
 {
     var curvetypes = document.getElementsByName('curvetype')
     var n = curvetypes.length;
-    for (var i : number = 0; i < n; i++)
+    for (let i : number = 0; i < n; i++)
     {
         var curItem : HTMLInputElement = <HTMLInputElement> curvetypes[i];
         if (curItem.checked)
@@ -2820,7 +2820,7 @@ function alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex) : Cubi
 
     // Reflect the graph about the line y = 0.5 because the positive direction is downward
     // Old code was as follows
-    // for (var i : number = 0; i < alignedBSplineGraph.CtrlPts.length; i++)
+    // for (let i : number = 0; i < alignedBSplineGraph.CtrlPts.length; i++)
     // {
     //   alignedBSplineGraph.CtrlPts[i].y = 1.0 - alignedBSplineGraph.CtrlPts[i].y;
     // }
@@ -2918,7 +2918,7 @@ class PolyBezier
     }
     else
     { // begin checking that t is monotone increasing
-      for (var i = 0; i < t.length - 1; i++)
+      for (let i = 0; i < t.length - 1; i++)
       {  // begin i-loop
          if (t[i] >= t[i+1])
          {  // begin case where t not monotone increasing
@@ -2930,7 +2930,7 @@ class PolyBezier
 
     if (validInput)
     { // Begin checking that last pt of m-th curve = 1st pt of (m+1)-st curve
-      for (var m = 0; m < C.length - 1; m++)
+      for (let m = 0; m < C.length - 1; m++)
       {   // begin m-loop
           var endPt : Point = C[m].CtrlPts[3];
           var startPt : Point = C[m+1].CtrlPts[0];
@@ -2947,11 +2947,11 @@ class PolyBezier
 
     if (validInput)
     {  // begin constructing this PolyBezier curve
-       for (var j = 0; j < C.length; j++)
+       for (let j = 0; j < C.length; j++)
        {   // begin j-loop
            this.Component.push(C[j]);
        }   //   end j-loop
-       for (var k = 0; k < t.length; k++)
+       for (let k = 0; k < t.length; k++)
        {   // begin k-loop
            this.Breakpoint.push(t[k]);
        }   //   end k-loop
@@ -2969,7 +2969,7 @@ class PolyBezier
     var stringRep : string = "Data for PolyBezier Curve\n";
 
     var nComponents : number = this.Component.length;
-    for (var i = 0; i < nComponents; i++)
+    for (let i = 0; i < nComponents; i++)
     {
        stringRep += "<p>"
        stringRep += "Component[" + i + "] = ";
@@ -2978,7 +2978,7 @@ class PolyBezier
     }
 
     var nBreakpoints : number = this.Breakpoint.length;
-    for (var j = 0; j < nBreakpoints; j++)
+    for (let j = 0; j < nBreakpoints; j++)
     {
        stringRep += "<p>"
        stringRep += "Breakpoint[" + j + "] = ";
@@ -3087,7 +3087,7 @@ class PolyBezier
             context : CanvasRenderingContext2D)
   {
      var nComponents : number = this.Component.length;
-     for (var i : number = 0; i < nComponents; i++)
+     for (let i : number = 0; i < nComponents; i++)
      {
        this.Component[i].drawCurve(drawData, context);
      }
@@ -3155,7 +3155,7 @@ class CubicSpline extends BCurve
 
       this.CtrlPts = new Array<Point>();
 
-      for (var iPt : number = 0; iPt < CtrlPts.length; iPt++)
+      for (let iPt : number = 0; iPt < CtrlPts.length; iPt++)
       {
         var x : number = CtrlPts[iPt].x;
         var y : number = CtrlPts[iPt].y;
@@ -3165,7 +3165,7 @@ class CubicSpline extends BCurve
 
       this.ExplicitKnots = new Array<number>();
 
-      for (var iKt : number = 0; iKt < ExplicitKnots.length; iKt++)
+      for (let iKt : number = 0; iKt < ExplicitKnots.length; iKt++)
       {
         var t : number = ExplicitKnots[iKt];
         this.ExplicitKnots.push(t);
@@ -3190,7 +3190,7 @@ class CubicSpline extends BCurve
      stringRep += "</p>";
 
      var nPts : number = this.CtrlPts.length;
-     for (var i = 0; i < nPts; i++)
+     for (let i = 0; i < nPts; i++)
      {
         stringRep += "<p>";
         stringRep += "CtrlPts[" + i + "] = ";
@@ -3199,7 +3199,7 @@ class CubicSpline extends BCurve
      }
 
      var nKts : number = this.ExplicitKnots.length;
-     for (var j = 0; j < nKts; j++)
+     for (let j = 0; j < nKts; j++)
      {
         stringRep += "<p>";
         stringRep += "ExplicitKnots[" + j + "] = ";
@@ -3208,7 +3208,7 @@ class CubicSpline extends BCurve
      }
 
      var DistinctKnotsAndMultiplicities : Array<DistinctKnotAndMultiplicity> = this.getDistinctKnotsAndMultiplicities();
-     for (var k = 0; k < DistinctKnotsAndMultiplicities.length; k++)
+     for (let k = 0; k < DistinctKnotsAndMultiplicities.length; k++)
      {
        stringRep += "<p>";
        stringRep += DistinctKnotsAndMultiplicities[k].toString();
@@ -3505,7 +3505,7 @@ class CubicSpline extends BCurve
     var DistinctKnotsAndMultiplicities : Array<DistinctKnotAndMultiplicity> = new Array();
     var numExplicitKnots = this.ExplicitKnots.length;
     var TempArray : Array<DistinctKnotAndMultiplicity> = new Array(numExplicitKnots);
-    for (var i : number = 0; i < numExplicitKnots; i++)
+    for (let i : number = 0; i < numExplicitKnots; i++)
     {
       var knot : number = this.ExplicitKnots[i];
       var multiplicity : number = this.getKnotMultiplicityAtIndex(i);
@@ -3513,7 +3513,7 @@ class CubicSpline extends BCurve
       TempArray[i] = new DistinctKnotAndMultiplicity(knot, multiplicity);
     }
 
-    i = 0;
+    let i = 0;
     while (i < numExplicitKnots)
     {
        var currKnot : number = TempArray[i].DistinctKnot;
@@ -3593,7 +3593,7 @@ class CubicSpline extends BCurve
         {  // begin iComponent loop
           var firstIndex : number = 3*iComponent;
           var currControlPoints : Point[] = new Array<Point>(4);
-          for (var iCurrControlPoint : number = 0; iCurrControlPoint < 4; iCurrControlPoint++)
+          for (let iCurrControlPoint : number = 0; iCurrControlPoint < 4; iCurrControlPoint++)
           {
             currControlPoints[iCurrControlPoint] = clone.CtrlPts[firstIndex + iCurrControlPoint];
           }
@@ -3677,7 +3677,7 @@ class CubicSpline extends BCurve
      var DistinctKnotsAndMultiplicities : DistinctKnotAndMultiplicity[] = this.getDistinctKnotsAndMultiplicities()
      var numInternalKnots : number = DistinctKnotsAndMultiplicities.length - 2;
      
-     for (var i = 1; i <= numInternalKnots; i++)
+     for (let i = 1; i <= numInternalKnots; i++)
      {
         var t : number = DistinctKnotsAndMultiplicities[i].DistinctKnot;
         var P : Point = this.positionAtParm(t);
@@ -3705,7 +3705,7 @@ class CubicSpline extends BCurve
      var controlPoints : Array<Point> = this.CtrlPts;
      var nControlPts : number = controlPoints.length;
      
-     for (var i = 0; i < nControlPts; i++)
+     for (let i = 0; i < nControlPts; i++)
      {
         var bsplineValue : number = globalGraphsOfCubicBSplineBasisFunctions[i].positionAtParm(t).y;
         var actualArea : number = globalSumOfControlPointAreas*bsplineValue;
@@ -3759,7 +3759,7 @@ class CubicSpline extends BCurve
      
      var pointOnGraphRadius : number = 3.0;
 
-     for (var basisIndex : number = 0; basisIndex < nBasisFunctions; basisIndex++)
+     for (let basisIndex : number = 0; basisIndex < nBasisFunctions; basisIndex++)
      {
        var alignedBSplineGraph : CubicSpline = alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex);
       
@@ -3815,7 +3815,7 @@ class CubicSpline extends BCurve
      // of this CubicBezierCurve.  That is because y increases as we go downward.
      var controlPoints : Array<Point> = this.CtrlPts;
      var yMax : number = controlPoints[0].y;
-     for (var i = 1; i < controlPoints.length; i++)
+     for (let i = 1; i < controlPoints.length; i++)
      {
         var yCurr : number = controlPoints[i].y;
         if (yMax < yCurr)
@@ -3844,7 +3844,7 @@ class CubicSpline extends BCurve
     var xMax : number = this.CtrlPts[0].x;
     var yMax : number = this.CtrlPts[0].y;
     var nPts : number = this.CtrlPts.length;
-    for (var i = 1; i < nPts; i++)
+    for (let i = 1; i < nPts; i++)
     {
       var xCur = this.CtrlPts[i].x;
       var yCur = this.CtrlPts[i].y;
@@ -4009,7 +4009,7 @@ class PolyLine
   {
     this.Pt = new Array();
     const n : number = Pt.length;
-    for (var i = 0; i < n ; i++)
+    for (let i = 0; i < n ; i++)
     {
       this.Pt.push(Pt[i]);
     }
@@ -4027,7 +4027,7 @@ class PolyLine
 
      const n : number = this.Pt.length;
 
-     for (var i : number = 0; i < n; i++)
+     for (let i : number = 0; i < n; i++)
      {
         stringRep += "<p>";
         stringRep += "Pt[" + i.toString() + "] = ";
@@ -4139,7 +4139,7 @@ class PolyLine
      context.beginPath();
      context.moveTo(this.Pt[0].x, this.Pt[0].y);
      var n : number = this.Pt.length;
-     for (var i : number = 1; i < n; i++)
+     for (let i : number = 1; i < n; i++)
      {
         context.lineTo(this.Pt[i].x, this.Pt[i].y);
      }
@@ -4323,7 +4323,7 @@ function ArrayLogger<T>(ArrayDescription : string,
   document.writeln("Begin " + ArrayDescription);
   EndParagraph();
   let n : number = A.length;
-  for (var i : number = 0; i < n; i++)
+  for (let i : number = 0; i < n; i++)
   {
     StartParagraph();
     document.writeln(ItemDescription + "[" + i + "] = ");
@@ -4369,7 +4369,7 @@ function TestJustTesting()
   document.writeln("In TestJustTesting()")
   document.writeln("<p>");
   document.writeln("Just testing")
-  for (var i : number = 0; i < 10; i++)
+  for (let i : number = 0; i < 10; i++)
   {
     // document.write(i.toString());
     document.write((i*i).toString());
@@ -4600,7 +4600,7 @@ function TestCubicSpline()
    document.writeln("<p>Entering TestArrayLogger()</p>");
    let P : Array<Point> = new Array();
    let n = 10;
-   for (var i = 0; i < n; i++)
+   for (let i = 0; i < n; i++)
    {
      P[i] = new Point(i, i+1);
    }
@@ -4621,7 +4621,7 @@ function TestCubicSpline()
 
     const iTop : number = 10;
 
-    for (var i =0; i <= 10; i++)
+    for (let i =0; i <= 10; i++)
     {
       let u : number = i/iTop;
       let pos : Point = L.positionAtParm(u);
@@ -4639,7 +4639,7 @@ function TestCubicSpline()
    document.writeln("<p>Entering TestPolyLine()</p>");
    let P : Array<Point> = new Array();
    let n = 10;
-   for (var i = 0; i < n; i++)
+   for (let i = 0; i < n; i++)
    {
      P[i] = new Point(i, 10*i);
    }
@@ -4651,7 +4651,7 @@ function TestCubicSpline()
    document.writeln("<p>")
    document.writeln(PL.toString());
 
-   for (var j = 0; j <= 10*n; j++)
+   for (let j = 0; j <= 10*n; j++)
    {
      let t : number = j/n;
      let P : Point = PL.positionAtParm(t);
@@ -4791,7 +4791,7 @@ function TestCubicSpline()
    document.writeln("<p>Entering TestCubicSplineEvaluatorsCase003</p>");
    var P : Array<Point> = new Array();
    const basisIndex : number = 2;
-   for (var i : number = 0; i < 4; i++)
+   for (let i : number = 0; i < 4; i++)
    {
      P.push(new Point(i/3.0, KroneckerDelta(i,basisIndex))); // This controls the basis index
    }
@@ -4819,7 +4819,7 @@ function TestCubicSpline()
   const kDelta = (t[iLast] - t[0])/kIntervals
   var maxXerror : number = 0.0;
   var maxYerror : number = 0.0;
-  for (i = 0; i <= kIntervals; i++)
+  for (let i = 0; i <= kIntervals; i++)
   {
     let kArg : number = t[0] + i*kDelta;
     let kPos : Point = GraphOfCubic.positionAtParm(kArg);
@@ -4931,14 +4931,14 @@ function TestCubicSpline()
  {
 
    var D : Point[][] = new Array(n);
-   for (var i = 0; i < n; i++)
+   for (let i = 0; i < n; i++)
    {
      D[i] = new Array(n);
    }
 
-   for (var i = 0; i < n; i++)
+   for (let i = 0; i < n; i++)
    {
-     for (var j = 0; j < n; j++)
+     for (let j = 0; j < n; j++)
      {
        D[i][j] = new Point(i,j);
      }
@@ -4952,9 +4952,9 @@ function TestCubicSpline()
    const n : number = 4;
    document.writeln("<p>Entering Test2DArray</p>");
    let D : Point[][] = get2DArray(n);
-   for (var i = 0; i < n; i++)
+   for (let i = 0; i < n; i++)
    {
-     for (var j = 0; j < n; j++)
+     for (let j = 0; j < n; j++)
      {
        document.writeln("<p>");
        document.writeln("D["+ i + "][" + j + "] = ")
@@ -5018,7 +5018,7 @@ function TestCubicSpline()
 
 
    document.writeln("<p>Testing getKnotMultiplicityAtIndex</p>");
-   for (var i = -1; i <= After.ExplicitKnots.length; i++)
+   for (let i = -1; i <= After.ExplicitKnots.length; i++)
    {
      var multiplicity : number = After.getKnotMultiplicityAtIndex(i);
      document.writeln("<p>");
@@ -5031,7 +5031,7 @@ function TestCubicSpline()
    const nIntervals : number = 7033;
    const Delta : number = 1/nIntervals;
 
-   for (var i = 0; i <= nIntervals; i++)
+   for (let i = 0; i <= nIntervals; i++)
    {
      var s : number = t[0] + i*Delta;
      var PtOnBefore : Point = Before.positionAtParm(s);
@@ -5101,7 +5101,7 @@ function TestCubicSpline()
    const delta : number = (b -a )/nIntervals;
    var maxError = 0.0;
 
-   for (var i = 0; i <= nIntervals; i++)
+   for (let i = 0; i <= nIntervals; i++)
    {
      var u : number = 1 + i*delta;
      var splPos : Point = theSpline.positionAtParm(u);
@@ -5221,7 +5221,7 @@ function TestCubicSpline()
 
    var nGraphs = GraphsOfCubicBSplineBasisFunctions.length;
 
-   for (var iGraph = 0; iGraph < nGraphs; iGraph++)
+   for (let iGraph = 0; iGraph < nGraphs; iGraph++)
    {
      document.writeln("<p>Graph of basis function with index = " + iGraph.toString() + "</p>");
      document.writeln(GraphsOfCubicBSplineBasisFunctions[iGraph].toString());
@@ -5353,7 +5353,7 @@ function TestCubicSpline()
    var xDelta : Point = new Point(sx, 0);
    var pointOnGraphRadius : number = 3.0;
 
-   for (var i : number = 0; i < globalGraphsOfCubicBSplineBasisFunctions.length; i++)
+   for (let i : number = 0; i < globalGraphsOfCubicBSplineBasisFunctions.length; i++)
    {
       var drawDataForPointOnGraph : CircleDrawData;
       var basisVal : number = globalGraphsOfCubicBSplineBasisFunctions[i].positionAtParm(tGlobal).y
@@ -5367,7 +5367,7 @@ function TestCubicSpline()
       }
       var ClonedSpline = globalGraphsOfCubicBSplineBasisFunctions[i].clone();
       var nCtrlPts = ClonedSpline.CtrlPts.length;
-      for (var iPt : number = 0; iPt < nCtrlPts; iPt++)
+      for (let iPt : number = 0; iPt < nCtrlPts; iPt++)
       {
         ClonedSpline.CtrlPts[iPt].y = 1.0 - ClonedSpline.CtrlPts[iPt].y; // could implement a yMirror method.
       }
