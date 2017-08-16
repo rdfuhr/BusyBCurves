@@ -50,6 +50,7 @@
 // TODO: Jun 06, 2017: As a benefit of the immediately previous TODO, remove canvas as a parameter in those functions where it is no longer needed.
 // TODO: Jun 15, 2017: Only update the PolyBezier curve associated with the CubicSpline curve when it is necessary to do so.  Make it either a global or a data member of CubicSpline.
 // TODO: Jun 21, 2017: Implement methods to mirror BCurve objects about constant-y and constant-x lines.  Call the appropriate mirror method instead of using inline code. - DONE
+// TODO: Aug 16, 2017: Change var to let in all for loops, since that is a better coding style, according to Basarat, and I agree.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
