@@ -1203,6 +1203,18 @@ abstract class BCurve
   }
 
   //////////////////////////////////////////////////////////////////////////////
+  // nullifyPolyBezierEquivalent = method of BCurve
+  // If the BCurve is a CubicSpline set the PolyBezierEquivalent data member to null.
+  //////////////////////////////////////////////////////////////////////////////
+  nullifyPolyBezierEquivalent()
+  {
+      if (this instanceof CubicSpline)
+      {
+         this.PolyBezierEquivalent = null;
+      }
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
   // editControlPoint - method of BCurve and used by CubicBezierCurve and CubicSpline
   // Called when user has clicked a control point on this curve and is moving it
   //
@@ -1222,6 +1234,8 @@ abstract class BCurve
   {
      var mousePos : Point = getMousePos(canvas, evt);
      this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos.minus(globalControlPointDelta);
+     this.nullifyPolyBezierEquivalent();
+
      context.clearRect(0, 0, canvas.width, canvas.height);
 
      this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
@@ -1243,6 +1257,7 @@ abstract class BCurve
         this.CtrlPts[i].x *= xScale;
         this.CtrlPts[i].y *= yScale;
      }
+     this.nullifyPolyBezierEquivalent();
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -1258,6 +1273,7 @@ abstract class BCurve
         this.CtrlPts[i].x += P.x;
         this.CtrlPts[i].y += P.y;
      }
+     this.nullifyPolyBezierEquivalent();
   }  
 
   //////////////////////////////////////////////////////////////////////////////
@@ -1273,6 +1289,7 @@ abstract class BCurve
       var delta : number = xConst - this.CtrlPts[i].x;
       this.CtrlPts[i].x = xConst + delta;
     }
+    this.nullifyPolyBezierEquivalent()
   }
 
   //////////////////////////////////////////////////////////////////////////////
@@ -1288,6 +1305,7 @@ abstract class BCurve
       var delta : number = yConst - this.CtrlPts[i].y;
       this.CtrlPts[i].y = yConst + delta;
     }
+    this.nullifyPolyBezierEquivalent();
   }
 
   //////////////////////////////////////////////////////////////////////////////
