@@ -51,7 +51,8 @@
 // TODO: Jun 15, 2017: Only update the PolyBezier curve associated with the CubicSpline curve when it is necessary to do so.  Make it either a global or a data member of CubicSpline.
 // TODO: Jun 21, 2017: Implement methods to mirror BCurve objects about constant-y and constant-x lines.  Call the appropriate mirror method instead of using inline code. - DONE
 // TODO: Aug 16, 2017: Change var to let in all for loops, since that is a better coding style, according to Basarat, and I agree. - DONE
-// TODO: Aug 16, 2017: Make sure we set the PolyBezier data member to null for CubicSpline when and only when we need to do that.
+// TODO: Aug 16, 2017: Make sure we set the PolyBezier data member to null for CubicSpline when and only when we need to do that. - DONE
+// TODO: Aug 18, 2017: Rethink whether we really want to implement the PolyBezier equivalent code at all, because the equivalents are always being recomputed for the basis functions.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -3366,6 +3367,7 @@ class CubicSpline extends BCurve
   derivativeAtParm(t : number) : Point
   {
      var thePolyBezier : PolyBezier = this.convertToPolyBezier();
+     // let thePolyBezier : PolyBezier = this.getPolyBezierEquivalent();
      var der : Point = thePolyBezier.derivativeAtParm(t);
      return der;
   }
@@ -3651,12 +3653,15 @@ class CubicSpline extends BCurve
   //////////////////////////////////////////////////////////////////////////////
   getPolyBezierEquivalent() : PolyBezier
   {
+    // console.log("Entering getPolyBezierEquivalent()")
     if (this.PolyBezierEquivalent!=null)
     {
+      // console.log("Just return existing this.PolyBezierEquivalent")
       return this.PolyBezierEquivalent;
     }
     else
     {
+      // console.log("Need to invoke this.convertToPolyBezier()")
       this.PolyBezierEquivalent = this.convertToPolyBezier();
       return this.PolyBezierEquivalent;
     }
@@ -3674,6 +3679,7 @@ class CubicSpline extends BCurve
             context : CanvasRenderingContext2D)
   {
      var thePolyBezier : PolyBezier = this.convertToPolyBezier();
+     // let thePolyBezier : PolyBezier = this.getPolyBezierEquivalent();
      thePolyBezier.drawCurve(drawData, context);
   }
 
