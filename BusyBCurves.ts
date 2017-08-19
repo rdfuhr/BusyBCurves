@@ -46,7 +46,7 @@
 // TODO: May 14, 2017: Make drawControlPolygon and drawControlPoints be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
 // TODO: May 14, 2017: Make drawControlPointsWithMaxRadius and makeControlPointTargetsWithMaxRadius be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
 // TODO: May 15, 2017: Make drawPointOnCurveForParm be a method of just the BCurve class, since CubicBezier and CubicSpline have the same implementation. - DONE
-// TODO: Jun 06, 2017: Put a call to clearCanvas inside the implementations of drawAllBCurveArtifacts and remove those calls or calls to clearRect before calling drawAllBCurveArtifacts.
+// TODO: Jun 06, 2017: Put a call to clearCanvas inside the implementations of drawAllBCurveArtifacts and remove those calls or calls to clearRect before calling drawAllBCurveArtifacts. - DONE
 // TODO: Jun 06, 2017: As a benefit of the immediately previous TODO, remove canvas as a parameter in those functions where it is no longer needed.
 // TODO: Jun 15, 2017: Only update the PolyBezier curve associated with the CubicSpline curve when it is necessary to do so.  Make it either a global or a data member of CubicSpline. - DONE - then UNDONE
 // TODO: Jun 21, 2017: Implement methods to mirror BCurve objects about constant-y and constant-x lines.  Call the appropriate mirror method instead of using inline code. - DONE
@@ -1199,7 +1199,6 @@ abstract class BCurve
      if (tGlobal > globalMaxParm) tGlobal = globalMaxParm;
      UpdateSliderBasedOnTglobal();
 
-     context.clearRect(0, 0, canvas.width, canvas.height);
      this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
                                  context);
   }
@@ -1225,8 +1224,6 @@ abstract class BCurve
      var mousePos : Point = getMousePos(canvas, evt);
      this.CtrlPts[globalIndexOfModifiedControlPoint] = mousePos.minus(globalControlPointDelta);
  
-     context.clearRect(0, 0, canvas.width, canvas.height);
-
      this.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
                                  context);
   }
@@ -1636,6 +1633,7 @@ class CubicBezierCurve extends BCurve
   drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                          context : CanvasRenderingContext2D)
   {
+    clearCanvas();
     if (globalSkeleton==false)
     {
      this.drawCurve(drawDataForAllBCurveArtifacts.forBCurve, context);
@@ -2118,8 +2116,6 @@ function animation(drawingCanvas : HTMLCanvasElement,
                    C : BCurve,
                    drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData)
 {
-   drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
-
    tGlobalUpdate(); // the global value of t is adjusted
 
    C.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts,
@@ -2401,9 +2397,6 @@ function ResetCurve()
      <HTMLCanvasElement>document.getElementById('drawingCanvas');
    var drawingContext : CanvasRenderingContext2D = <CanvasRenderingContext2D> drawingCanvas.getContext('2d');
 
-   // Inline code corresponding to clearCanvas
-   drawingContext.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
-
    if (globalCurveType==CurveType.Bezier)
    {
      globalBCurve = initializeCubicBezierCurve();
@@ -2553,7 +2546,6 @@ function HandleSkeletonCheckBoxChange()
   var context : CanvasRenderingContext2D = getDrawingContext();
   var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
 
-  clearCanvas();
   globalBCurve.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts, context);
 }
 
@@ -3690,6 +3682,7 @@ class CubicSpline extends BCurve
   drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
                          context : CanvasRenderingContext2D)
   {
+    clearCanvas();
     if (globalSkeleton==false)
     {
      this.drawCurve(drawDataForAllBCurveArtifacts.forBCurve, context);
@@ -5376,7 +5369,6 @@ function TestSlider()
   UpdateTglobalBasedOnSlider();
   var context : CanvasRenderingContext2D = getDrawingContext()
   var drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData = new BCurveArtifactsDrawData();
-  clearCanvas();
   globalBCurve.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts, context);
 }
 
