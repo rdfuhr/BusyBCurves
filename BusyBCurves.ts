@@ -47,7 +47,7 @@
 // TODO: May 14, 2017: Make drawControlPointsWithMaxRadius and makeControlPointTargetsWithMaxRadius be methods of just the BCurve class, since CubicBezier and CubicSpline are same for each. - DONE
 // TODO: May 15, 2017: Make drawPointOnCurveForParm be a method of just the BCurve class, since CubicBezier and CubicSpline have the same implementation. - DONE
 // TODO: Jun 06, 2017: Put a call to clearCanvas inside the implementations of drawAllBCurveArtifacts and remove those calls or calls to clearRect before calling drawAllBCurveArtifacts. - DONE
-// TODO: Jun 06, 2017: As a benefit of the immediately previous TODO, remove canvas as a parameter in those functions where it is no longer needed (seems to be just the animation function).
+// TODO: Jun 06, 2017: As a benefit of the immediately previous TODO, remove canvas as a parameter in those functions where it is no longer needed (seems to be just the animation function). - DONE
 // TODO: Jun 15, 2017: Only update the PolyBezier curve associated with the CubicSpline curve when it is necessary to do so.  Make it either a global or a data member of CubicSpline. - DONE - then UNDONE
 // TODO: Jun 21, 2017: Implement methods to mirror BCurve objects about constant-y and constant-x lines.  Call the appropriate mirror method instead of using inline code. - DONE
 // TODO: Aug 16, 2017: Change var to let in all for loops, since that is a better coding style, according to Basarat, and I agree. - DONE
