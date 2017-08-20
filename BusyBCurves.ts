@@ -54,6 +54,7 @@
 // TODO: Aug 16, 2017: Make sure we set the PolyBezier data member to null for CubicSpline when and only when we need to do that. - DONE - then UNDONE
 // TODO: Aug 18, 2017: Rethink whether we really want to implement the PolyBezier equivalent code at all, because the equivalents are always being recomputed for the basis functions. - DONE
 // TODO: Aug 18, 2017: Back out the changes involving the PolyBezier equivalent; it was premature optimization. - DONE
+// TODO: Aug 19, 2017: Clean up the code in the implementations of drawAllBCurveArtifacts.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
