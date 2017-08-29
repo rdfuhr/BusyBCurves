@@ -57,7 +57,14 @@ Now let us click the Spline radio button.
 So now, we have a situation that looks more complex than the one before.  In the Bezier case we had four control points.  In this case, which is a spline, we have eight control points, but the number <b>[can be]</b> arbitrarily large.  It must be at least four though <b>[for a cubic spline, which this is, the minimum number of control points is four]</b>.  And what this curve is - is a piecewise cubic polynomial <b>[Actually it is a parametric curve of the form C(t) = (x(t), y(t)) where x and y are each piecewise cubic polynomials]</b>.  Where you see those black little rectangles on the curve, that is where we switch from one cubic polynomial to another. <b>[Notice that the polynomial components join together quite smoothly]</b>.
 </p>
 <p>
-So, if I do the Start Animation then we see the yellow point moves along the curve, and once again, as in the Bezier case, we see the blue circles expand and contract.  But one critical difference here is that at most four of the circles have blue in them.  So the yellow point is always at the center of mass of the four blue circles <b>[as it was in the Bezier case]</b>.  So if we stop the animation, we can click and drag the various control points and we can see the curve move.  <b>[Actually, you can click and drag the control points even during the animation process]</b>.  You can also see the green graphs <b>[unfortunately the green does not show up very vividly in the video]</b> of the B-spline basis functions adjacent to each control point. <b>[the current value of each B-spline basis function corresponds to the current area of the corresponding blue circle, and that area can be zero]</b>.
+So, if I do the Start Animation then we see the yellow point moves along the curve, and once again, as in the Bezier case, we see the blue circles expand and contract.  
+But one critical difference here is that at most four of the circles have blue in them.  
+So the yellow point is always at the center of mass of the four blue circles <b>[as it was in the Bezier case]</b>.  
+So if we stop the animation, we can click and drag the various control points and we can see the curve move. 
+ <b>[Actually, you can click and drag the control points even during the animation process]</b>.  
+ You can also see the green graphs <b>[unfortunately the green does not show up very vividly in the video]</b> of the B-spline basis functions adjacent to each control point.
+ <b>[While the term "B-spline basis function" is in widespread use, the B in B-spline already stands for "Basic" so it is much better style to simply call each such object a B-spline.]</b> 
+ <b>[The current value of each B-spline corresponds to the current area of the corresponding blue circle, and that area can be zero]</b>.
 </p>
 <p>
 And we can also drag the yellow point along the curve, and, as we do that, we see the little points on the graphs move, and we also see the blue circles expand and contract.
@@ -69,7 +76,25 @@ We can also click the Skeleton box, and this is analogous to the Bezier case.  W
 So, anyway, we will now stop the animation and uncheck the Skeleton box, and if we Reset the Curve, it just puts it back to its starting shape and starting parameter.
 </p>
 <p>
-<b>[One important point is that this app demonstrates two different ways of obtaining the location of the yellow point on the curve.  The first way is to interpret the location as being at the current center of mass of the blue control points, where the amount of blue (the weight) is governed by the values of the Bernstein polynomials in the Bezier case and by the B-Spline basis functions in the spline case.  The second way is to obtain the location by the algorithms depicted when you check the Skeleton box.  It is the De Casteljau algorithm in the Bezier case and it is the de Boor algorithm in the spline case]</b>.
+<b>[One important point is that this app demonstrates two different ways of obtaining the location of the yellow point on the curve.  
+The first way is to interpret the location as being at the current center of mass of the blue control points, where the amount of blue (the weight) is governed by the values of the Bernstein polynomials 
+in the Bezier case and by the B-splines in the spline case.  
+The second way is to obtain the location by the algorithms depicted when you check the Skeleton box.  It is the De Casteljau algorithm in the Bezier case and it is the de Boor algorithm in the spline case]</b>.
+</p>
+<p>
+ <b>
+[Finally, note the following nice relationships between the mathematics of splines and Bezier curves in the special case where the spline consists of only one polynomial component
+(and therefore there are no interior knots, only multiple start and multiple end knots):
+<ul>
+    <li>
+        The de Boor algorithm becomes the DeCasteljau algorithm!
+    </li>
+    <li>
+        The B-splines become the Bernstein polynomials!
+    </li>
+</ul>
+]
+</b>
 </p>
 <p>
 So I hope you will give this web app a try.
