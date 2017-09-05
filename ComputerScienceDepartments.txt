@@ -35,6 +35,12 @@ Laura Waller waller@berkeley.edu (graphics)
 
 
 4. Princeton University
+Jennifer Rexford jrex@cs.princeton.edu (chair)
+Szymon Rusinkiewicz smr@cs.princeton.edu (associate chair)
+Bernard Chazelle chazelle@cs.princeton.edu (computational geometry)
+Robert Tarjan ret@cs.princeton.edu (on leave computational geometry)
+Adam Finkelstein af@cs.princeton.edu (graphics)
+Thomas Funkhouser funk@cs.princeton.edu (graphics)
 
 
 5. Carnegie Mellon University
