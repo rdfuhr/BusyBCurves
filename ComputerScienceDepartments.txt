@@ -1,0 +1,85 @@
+1. Stanford University 
+Alex Aiken aiken@cs.stanford.edu (Chair)
+Mehran Sahani sahani@cs.stanford.edu (Associate Chair, Educational Affairs)
+Maneesh Agrawala maneesh@cs.stanford.edu (Computer Graphics)
+Ron Fedkiw fedkiw@cs.stanford.edu (Computer Graphics)
+Leonidas Guibas guibas@cs.stanford.edu (Computer Graphics)
+Patrick Hanrahan hanrahan@cs.stanford.edu (Computer Graphics)
+Doug James djames@cs.stanford.edu (Computer Graphics)
+Marc Levoy levoy@cs.stanford.edu (Emeritus Computer Graphics and Google)
+
+
+
+
+2. Massachusetts Institute of Technology
+Rob Miller rcm@mit.edu (Chair)
+Wojciech Matusik wojciech@csail.mit.edu (CAD?)
+
+
+3. University of California Berkeley
+James Demmeldemmel@cs.berkeley.edu (Chair)
+Ruzena Bajcsy bajcsy@eecs.berkeley.edu (graphics)
+Brian Barsky barsky@berkeley.edu (graphics)
+John Canny jfc@cs.berkeley.edu (graphics)
+Alexei Efros efros@eecs.berkeley.edu (graphics)
+Dan Garcia ddgarcia@cs.berkeley.edu (graphics)
+Susan Graham graham@cs.berkeley.edu (graphics)
+Bjorn Hartmann bjoern@eecs.berkeley.edu (graphics)
+Michael Lustig mlustig@eecs.berkeley.edu (graphics)
+Jitendra Malik malik@berkeley.edu (graphics)
+Ren Ng ren@eecs.berkeley.edu (graphics)
+James O’Brien job@eecs.berkeley.edu (graphics)
+Carlo Sequin sequin@cs.berkeley.edu (emeritus graphics)
+Jonathan Shewchuk jrs@cs.berkeley.edu (graphics)
+Laura Waller waller@berkeley.edu (graphics)
+
+
+4. Princeton University
+
+
+5. Carnegie Mellon University
+
+
+6. Cornell University
+
+
+7. University of Southern California 
+
+
+8. The University of Texas at Austin
+
+
+9. Harvard University
+
+
+10. California Institute of Technology
+
+
+11. University of Illinois at Urbana-Champaign
+
+
+12. University of Maryland College Park
+
+
+13. University of California San Diego
+
+
+14. University of Michigan Ann Arbor
+
+
+15. Purdue University
+
+
+16. Columbia University
+
+
+17. University of Washington
+
+
+18. Georgia Institute of Technology
+
+
+19. University of California Los Angeles
+
+
+20. Yale University
