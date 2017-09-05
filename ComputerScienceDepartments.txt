@@ -83,6 +83,13 @@ Andre Platzet aplatzer@cs.cmu.edu (mathematics)
 
 
 17. University of Washington
+Brian Curless curless@cs.washington.edu (graphics)
+Ali Farhadi ali@cs.washington.edu (graphics)
+Jeffrey Heer jheer@cs.washington.edu (graphics)
+Ira Kemelmacher-Shlitzerman kemelmi@cs.washington.edu (graphics)
+Zoran Popovic zoran@cs.washington.edu (graphics)
+Steven Seitz seitz@cs.washington.edu (graphics)
+Linda Shapiro shapiro@cs.washington.edu (graphics)
 
 
 18. Georgia Institute of Technology
