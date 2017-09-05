@@ -44,7 +44,10 @@ Thomas Funkhouser funk@cs.princeton.edu (graphics)
 
 
 5. Carnegie Mellon University
-
+Frank Pfenning fp@cs.cmu.edu (chair)
+Abhinav Gupta abhinavg@cs.cmu.edu (graphics)
+Kayvon Fatahalian kayvonf@cs.cmu.edu (graphics)
+Andre Platzet aplatzer@cs.cmu.edu (mathematics)
 
 6. Cornell University
 
