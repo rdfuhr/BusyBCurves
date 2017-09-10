@@ -1706,7 +1706,7 @@ class CubicBezierCurve extends BCurve
    // There must be a better way to do this.
    // I have posted a question on Twitter.
    let P : Point = new Point(0,0);
-   var D = [
+   var D : Point[][] = [
    [P,P,P,P],
    [P,P,P,P],
    [P,P,P,P],
@@ -2755,7 +2755,7 @@ function DeBoorTriangleAt(t : number,
    // There must be a better way to do this.
    // I have posted a question on Twitter.
    let P : Point = new Point(0,0);
-   var D = [
+   var D : Point[][] = [
    [P,P,P,P],
    [P,P,P,P],
    [P,P,P,P],
