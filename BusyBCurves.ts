@@ -55,7 +55,8 @@
 // TODO: Aug 18, 2017: Rethink whether we really want to implement the PolyBezier equivalent code at all, because the equivalents are always being recomputed for the basis functions. - DONE
 // TODO: Aug 18, 2017: Back out the changes involving the PolyBezier equivalent; it was premature optimization. - DONE
 // TODO: Aug 19, 2017: Clean up the code in the implementations of drawAllBCurveArtifacts.
-// TODO: Sep 08, 2017: Implement a DeCasteljauTriangleAtParm method to complement the DeBoorTriangleAtParm method.
+// TODO: Sep 08, 2017: Implement a DeCasteljauTriangleAtParm method to complement the DeBoorTriangleAtParm method. - DONE
+// TODO: Sep 09, 2017: Test the DeCasteljauTriangleAtParm method.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
@@ -1687,7 +1688,50 @@ class CubicBezierCurve extends BCurve
                                drawDataForAllBCurveArtifacts.forIntermediatePoints,
                                context);
   }
-   
+  //////////////////////////////////////////////////////////////////////////////
+  // DeCasteljauTriangleAtParm - method of CubicBezierCurve
+  // Given a parameter value, generate and return the results of implementing
+  // the DeCasteljau algorithm on this cubic Bezier curve with the given parameter value
+  //
+  // input: t - the parameter value at which to implement the DeCasteljau algorithm.
+  //
+  // returns: a two-dimensional array that contains the results of implementing
+  // the DeCastlejau algorithm at parameter t on this spline. The results could
+  // be displayed as a triangle, with the left side being the first column of
+  // results and the point at the right vertex being the value of the position
+  // evaluated on this curve at parameter t.
+  //////////////////////////////////////////////////////////////////////////////
+  DeCasteljauTriangleAtParm(t : number) : Point[][]
+  {
+   // There must be a better way to do this.
+   // I have posted a question on Twitter.
+   let P : Point = new Point(0,0);
+   var D = [
+   [P,P,P,P],
+   [P,P,P,P],
+   [P,P,P,P],
+   [P,P,P,P]];
+
+   var i : number;
+   var j : number;
+   const degree : number = 3;
+
+   for (j = 0; j <= degree; j++)
+   {  // Begin j-loop
+      D[0][j] = this.CtrlPts[j];
+   }  //   End j-loop 
+
+   const s : number = 1.0 - t;
+   for (i = 1; i <= degree; i++)
+   {   // Begin i-loop
+      for (j = i; j <= degree; j++)
+      {  // Begin j-loop
+         D[i][j] = linearCombination(s, D[i-1][j], t, D[i-1][j+1]);
+      }  //   End j-loop
+   }   //   End i-loop
+   return D; 
+  } 
+    
 } // End class CubicBezierCurve
 
 
