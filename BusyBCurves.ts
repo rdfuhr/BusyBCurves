@@ -5435,6 +5435,30 @@ function TestSlider()
   globalBCurve.drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts, context);
 }
 
+function TestDeCasteljauTriangleAtParm()
+{
+  document.writeln("<p>Entering TestDeCastlejauTriangleAtParm</p>");
+  var P0 : Point = new Point(0, 0);
+  var P1 : Point = new Point(2, 7);
+  var P2 : Point = new Point(3, 11);
+  var P3 : Point = new Point(5, 13)
+  let C : CubicBezierCurve = new CubicBezierCurve(P0, P1, P2, P3);;
+  let t : number = 0.3;
+  let D : Point[][] = C.DeCasteljauTriangleAtParm(t);
+  // var i : number;
+  // var j : number;
+  // for (i = 0; i < 4; i++)
+  // {
+  //   for (j = 0; j < 4; j++)
+  //   {
+  //      document.writeln("<p>");
+  //      document.writeln(i.toString() + " " + j.toString + " " + D[i][j].toString())
+  //      document.writeln("</p>");
+  //   }
+  }
+  document.writeln("<p> Leaving TestDeCastlejauTriangleAtParm</p>");
+}
+
 function doTests()
 {
    var date : Date = new Date();
@@ -5454,4 +5478,5 @@ function doTests()
    // TestGetGraphsOfCubicBSplineBasisFunctions();
    // TestInitializeCubicSpline()
    // TestSomeGlobals();
+   TestDeCasteljauTriangleAtParm(); // there is currently trouble invoking DeCasteljauTriangleAtParm
    }
