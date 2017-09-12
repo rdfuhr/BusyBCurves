@@ -1727,7 +1727,7 @@ class CubicBezierCurve extends BCurve
    {   // Begin i-loop
       for (j = i; j <= degree; j++)
       {  // Begin j-loop
-         D[i][j] = linearCombination(s, D[i-1][j], t, D[i-1][j+1]);
+         D[i][j] = linearCombination(s, D[i-1][j-1], t, D[i-1][j]);
       }  //   End j-loop
    }   //   End i-loop
    return D; 
@@ -5445,16 +5445,16 @@ function TestDeCasteljauTriangleAtParm()
   let C : CubicBezierCurve = new CubicBezierCurve(P0, P1, P2, P3);;
   let t : number = 0.3;
   let D : Point[][] = C.DeCasteljauTriangleAtParm(t);
-  // var i : number;
-  // var j : number;
-  // for (i = 0; i < 4; i++)
-  // {
-  //   for (j = 0; j < 4; j++)
-  //   {
-  //      document.writeln("<p>");
-  //      document.writeln(i.toString() + " " + j.toString + " " + D[i][j].toString())
-  //      document.writeln("</p>");
-  //   }
+  var i : number;
+  var j : number;
+  for (i = 0; i < 4; i++)
+  {
+    for (j = 0; j < 4; j++)
+    {
+       document.writeln("<p>");
+       document.writeln(i.toString() + " " + j.toString() + " " + D[i][j].toString())
+       document.writeln("</p>");
+    }
   }
   document.writeln("<p> Leaving TestDeCastlejauTriangleAtParm</p>");
 }
