@@ -2387,6 +2387,20 @@ function onMouseUp()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// onKeyDown - callback function
+// This is called in reponse to a keydown event detected by the canvas
+// input: evt - the keyboard event
+///////////////////////////////////////////////////////////////////////////////
+function onKeyDown(evt : KeyboardEvent)
+{
+  const keyName : string = evt.key;
+  if (keyName==='t')
+  {
+       doTests();
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // touchHandler - callback function
 // This is called response to touchstart, touchmove, and touchend.
 //
@@ -2478,6 +2492,11 @@ function ResetCurve()
          {
             onMouseUp();
          }, false);
+
+      document.addEventListener('keydown', function(evt)  
+         {
+           onKeyDown(evt);
+         }, true);
 
 // Begin adding code based on
 // http://stackoverflow.com/questions/5186441/javascript-drag-and-drop-for-touch-devices/6362527#6362527
@@ -5419,7 +5438,7 @@ function TestSlider()
 function doTests()
 {
    var date : Date = new Date();
-   // document.writeln(date.toString());
+   document.writeln(date.toString());
    // TestPolyBezier();
    // TestDrawData();
    // TestBinarySearchSortedArray();
@@ -5434,5 +5453,5 @@ function doTests()
    // TestCubicSplineEvaluatorsAtParm();
    // TestGetGraphsOfCubicBSplineBasisFunctions();
    // TestInitializeCubicSpline()
-   TestSomeGlobals();
+   // TestSomeGlobals();
    }
