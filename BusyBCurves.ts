@@ -5437,26 +5437,53 @@ function TestSlider()
 
 function TestDeCasteljauTriangleAtParm()
 {
-  document.writeln("<p>Entering TestDeCastlejauTriangleAtParm</p>");
-  var P0 : Point = new Point(0, 0);
-  var P1 : Point = new Point(2, 7);
-  var P2 : Point = new Point(3, 11);
-  var P3 : Point = new Point(5, 13)
+  document.writeln("<p>Entering TestDeCasteljauTriangleAtParm</p>");
+  let P0 : Point = new Point(0, 0);
+  let P1 : Point = new Point(2, 7);
+  let P2 : Point = new Point(3, 11);
+  let P3 : Point = new Point(5, 13)
   let C : CubicBezierCurve = new CubicBezierCurve(P0, P1, P2, P3);;
   let t : number = 0.3;
   let D : Point[][] = C.DeCasteljauTriangleAtParm(t);
-  var i : number;
-  var j : number;
-  for (i = 0; i < 4; i++)
+  document.writeln("<p>Begin Evaluation Tests</p>");
+  const nIntervals : number = 1024;
+  const delta : number = 1.0/nIntervals;
+  const degree : number = 3;
+  let i : number;
+  let j : number;
+  let k : number;
+  let maxError = 0.0;
+  for (i = 0; i <= nIntervals; i++)
   {
-    for (j = 0; j < 4; j++)
-    {
-       document.writeln("<p>");
-       document.writeln(i.toString() + " " + j.toString() + " " + D[i][j].toString())
-       document.writeln("</p>");
-    }
+    let t : number = i*delta;
+    let D : Point[][] = C.DeCasteljauTriangleAtParm(t);
+    let P : Point = D[degree][degree];
+    let Q : Point = C.positionAtParm(t);
+    let curError : number = P.distanceTo(Q);
+    maxError = Math.max(curError, maxError);
   }
-  document.writeln("<p> Leaving TestDeCastlejauTriangleAtParm</p>");
+  document.writeln("<p>maxError = " + maxError.toString() + "</p>");
+  document.writeln("<p>  End Evaluation Tests</p>");
+  document.writeln("<p>Begin In-Depth Tests</p>");
+  maxError = 0.0;
+  for (i = 0; i <= nIntervals; i++)
+  {
+    let t : number = i*delta;
+    let D : Point[][] = C.DeCasteljauTriangleAtParm(t);
+    let P: Array<Point> = C.CtrlPts;
+    for (j = 1; j <= degree; j++)
+    {
+      P = doOneDeCasteljauStep(P, t)
+      for (k = j; k <= degree; k++)
+      {
+        let curError : number = P[k-j].distanceTo(D[j][k]);
+        maxError = Math.max(curError, maxError);
+      }
+    }
+   }
+  document.writeln("<p>maxError = " + maxError.toString() + "</p>");
+  document.writeln("<p>  End In-Depth Tests</p>");
+  document.writeln("<p> Leaving TestDeCasteljauTriangleAtParm</p>");
 }
 
 function doTests()
