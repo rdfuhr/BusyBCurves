@@ -56,7 +56,7 @@
 // TODO: Aug 18, 2017: Back out the changes involving the PolyBezier equivalent; it was premature optimization. - DONE
 // TODO: Aug 19, 2017: Clean up the code in the implementations of drawAllBCurveArtifacts.
 // TODO: Sep 08, 2017: Implement a DeCasteljauTriangleAtParm method to complement the DeBoorTriangleAtParm method. - DONE
-// TODO: Sep 09, 2017: Test the DeCasteljauTriangleAtParm method.
+// TODO: Sep 09, 2017: Test the DeCasteljauTriangleAtParm method. - DONE
 // TODO: Sep 11, 2017: Consider adding a keyboard shortcut to launch tests. See /Users/richardfuhr/Documents/Sandbox/javaScriptLearn/MyJavaScriptTests/keyevents.html - DONE
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
