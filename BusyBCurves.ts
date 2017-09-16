@@ -2154,7 +2154,7 @@ function defaultDrawDataForKnots() : RectangleDrawData
 //
 // input: drawingContext - the context associated with the canvas
 // input: C - the main BCurve
-// input: drawDataForAllBezierArtifacts - styles for drawing everything
+// input: drawDataForAllBCurveArtifacts - styles for drawing everything
 //
 ////////////////////////////////////////////////////////////////////////////////
 function animation(drawingContext : CanvasRenderingContext2D,
