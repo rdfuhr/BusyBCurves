@@ -1631,7 +1631,7 @@ class CubicBezierCurve extends BCurve
   // drawAllBCurveArtifacts - method of CubicBezierCurve
   // Draw all information associated with this CubicBezierCurve
   //
-  // input: drawDataForAllBezierArtifacts - styles for drawing everything
+  // input: drawDataForAllBCurveArtifacts - styles for drawing everything
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
