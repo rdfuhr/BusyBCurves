@@ -50,6 +50,9 @@ Kayvon Fatahalian kayvonf@cs.cmu.edu (graphics)
 Andre Platzet aplatzer@cs.cmu.edu (mathematics)
 
 6. Cornell University
+Serge Belongie sjb344@cornell.edu (graphics)
+Shimon Edelman se37@cornell.edu
+Donald Greenberg dpg5@cornell.edu (director of computer graphics group)
 
 
 7. University of Southern California 
@@ -90,6 +93,7 @@ Ira Kemelmacher-Shlitzerman kemelmi@cs.washington.edu (graphics)
 Zoran Popovic zoran@cs.washington.edu (graphics)
 Steven Seitz seitz@cs.washington.edu (graphics)
 Linda Shapiro shapiro@cs.washington.edu (graphics)
+Ed Lazowska lazowska@cs.washington.edu (former chair)
 
 
 18. Georgia Institute of Technology
