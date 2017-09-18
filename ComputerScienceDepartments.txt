@@ -56,6 +56,10 @@ Donald Greenberg dpg5@cornell.edu (director of computer graphics group)
 
 
 7. University of Southern California 
+Jernej Barbic jnb@usc.edu
+Paul Debevec paul@debevec.org
+Ulirich Neumann uneumann@usc.edu
+Suya You suyay@graphics.usc.edu
 
 
 8. The University of Texas at Austin
@@ -68,6 +72,15 @@ Donald Greenberg dpg5@cornell.edu (director of computer graphics group)
 
 
 11. University of Illinois at Urbana-Champaign
+Brian P. Bailey bpbailey@illinois.edu
+David Alexander Forsyth daf@illinois.edu
+Wai-Tat Fu wfu@illinois.edu
+John C. Hart jch@illinois.edu
+Karrie Karahalios kkarahal@illinois.edu
+Alex Kirlik kirlik@illinois.edu
+Ranjitha Kumar ranjitha@illinois.edu
+Steven M. LaValle lavalle@illinois.edu
+Hari Sundaram hs1@illinois.edu
 
 
 12. University of Maryland College Park
@@ -103,3 +116,5 @@ Ed Lazowska lazowska@cs.washington.edu (former chair)
 
 
 20. Yale University
+Julie Dorsey julie.dorsey@yale.edu
+Holly Rushmeier@yale.edu
