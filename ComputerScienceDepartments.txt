@@ -66,6 +66,11 @@ Suya You suyay@graphics.usc.edu
 
 
 9. Harvard University
+David Cox davidcox@seas.harvard.edu
+Krzysztof Gajos kgajos@seas.harvard.edu
+Steven Gortler sjg@cs.harvard.edu
+Hanspeter Pfister pfister@seas.harvard.edu
+Todd Zickler zickler@seas.harvard.edu
 
 
 10. California Institute of Technology
