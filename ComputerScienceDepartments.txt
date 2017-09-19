@@ -118,6 +118,9 @@ Ed Lazowska lazowska@cs.washington.edu (former chair)
 
 
 19. University of California Los Angeles
+David Heckerman heckerma@hotmail.com
+Alan Kay alan.kay@squeakland.org
+Demetri Terzopoulos dt@cs.ucla.edu
 
 
 20. Yale University
