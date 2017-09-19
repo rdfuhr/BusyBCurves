@@ -145,3 +145,17 @@ Ross Whitaker whitaker@cs.utah.edu
 Joe Zachary zachary@cs.utah.edu
 Richard Riesenfeld rfr@cs.utah.edu
 
+22. Brigham Young University
+Tom Sederberg tom@cs.byu.edu
+
+23.  Temple University
+Slobodan Vucetic slobodan.vucetic@temple.edu
+
+24. University of Wisconsin Madison
+Eftychios Sifakis sifakis@cs.wisc.edu
+Michael Gleicher gleicher@cs.wisc.edu
+
+25. University of Wisconsin Milwaukee
+Adrian Dumitrescu dumitres@uwm.edu
+
+
