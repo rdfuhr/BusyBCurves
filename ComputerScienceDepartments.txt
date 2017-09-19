@@ -105,6 +105,11 @@ Brian Noble bnoble@umich.edu
 
 
 15. Purdue University
+Daniel Aliaga aliaga@cs.purdue.edu
+Christoph M. Hoffmann cmh@cs.purdue.edu
+Voicu S. Popescu popescu@cs.purdue.edu
+Elisha Sacks elisha.sacks@gmail.com
+Xavier Tricoche xmt@purdue.edu
 
 
 16. Columbia University
