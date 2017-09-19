@@ -117,6 +117,9 @@ Ed Lazowska lazowska@cs.washington.edu (former chair)
 
 
 18. Georgia Institute of Technology
+Karen Liu karenliu@cc.gatech.edu
+Jarek Rossignac jarek.rossignac@gvu.gatech.edu
+Greg Turk gregory.turk@cc.gatech.edu
 
 
 19. University of California Los Angeles
