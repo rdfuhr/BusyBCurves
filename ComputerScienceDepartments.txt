@@ -131,3 +131,17 @@ Demetri Terzopoulos dt@cs.ucla.edu
 20. Yale University
 Julie Dorsey julie.dorsey@yale.edu
 Holly Rushmeier@yale.edu
+
+21. University of Utah
+Elaine Cohen cohen@cs.utah.edu
+Chuck Hansen hansen@cs.utah.edu
+David Johnson dejohnso@cs.utah.edu
+Ben Jones benjones@cs.utah.edu
+Ladislav Kavan ladislav@cs.utah.edu
+Daniel Kopta dkopta@cs.utah.edu
+Valerio Pascucci pascucci@sci.utah.edu
+Jeff Phillips jeffp@cs.utah.edu
+Ross Whitaker whitaker@cs.utah.edu
+Joe Zachary zachary@cs.utah.edu
+Richard Riesenfeld rfr@cs.utah.edu
+
