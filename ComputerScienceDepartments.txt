@@ -63,6 +63,11 @@ Suya You suyay@graphics.usc.edu
 
 
 8. The University of Texas at Austin
+Chandrajit Bajaj bajaj@cs.utexas.edu
+Don Fussell fussell@cs.utexas.edu
+Qixing Huang huangqx@cs.utexas.edu
+Philipp Kraehenbuehl  philkr@cs.utexas.edu
+Etienne Vouga evouga@cs.utexas.edu
 
 
 9. Harvard University
