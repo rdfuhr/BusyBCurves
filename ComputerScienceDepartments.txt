@@ -156,7 +156,7 @@ Joe Zachary zachary@cs.utah.edu
 Richard Riesenfeld rfr@cs.utah.edu
 
 22. Brigham Young University
-Tom Sederberg tom@cs.byu.edu
+Tom Sederberg tom@cs.byu.edu (emailed Thu Sep 21 2017)
 
 23.  Temple University
 Slobodan Vucetic slobodan.vucetic@temple.edu
