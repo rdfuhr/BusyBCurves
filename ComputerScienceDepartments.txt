@@ -17,7 +17,7 @@ Wojciech Matusik wojciech@csail.mit.edu (CAD?)
 
 
 3. University of California Berkeley
-James Demmeldemmel@cs.berkeley.edu (Chair)
+James Demmel demmel@cs.berkeley.edu (Chair)
 Ruzena Bajcsy bajcsy@eecs.berkeley.edu (graphics)
 Brian Barsky barsky@berkeley.edu (graphics)
 John Canny jfc@cs.berkeley.edu (graphics)
@@ -116,14 +116,14 @@ Xavier Tricoche xmt@purdue.edu
 
 
 17. University of Washington
-Brian Curless curless@cs.washington.edu (graphics)
-Ali Farhadi ali@cs.washington.edu (graphics)
-Jeffrey Heer jheer@cs.washington.edu (graphics)
-Ira Kemelmacher-Shlitzerman kemelmi@cs.washington.edu (graphics)
-Zoran Popovic zoran@cs.washington.edu (graphics)
-Steven Seitz seitz@cs.washington.edu (graphics)
-Linda Shapiro shapiro@cs.washington.edu (graphics)
-Ed Lazowska lazowska@cs.washington.edu (former chair)
+Brian Curless curless@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)
+Ali Farhadi ali@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)
+Jeffrey Heer jheer@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)
+Ira Kemelmacher-Shlitzerman kemelmi@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)
+Zoran Popovic zoran@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)
+Steven Seitz seitz@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)
+Linda Shapiro shapiro@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)
+Ed Lazowska lazowska@cs.washington.edu (former chair) (emailed Sun Oct 01 2017)
 
 
 18. Georgia Institute of Technology
@@ -156,7 +156,7 @@ Joe Zachary zachary@cs.utah.edu
 Richard Riesenfeld rfr@cs.utah.edu
 
 22. Brigham Young University
-Tom Sederberg tom@cs.byu.edu (emailed Thu Sep 21 2017)
+Tom Sederberg tom@cs.byu.edu (emailed Thu Sep 21 2017) (got nice reply)
 
 23.  Temple University
 Slobodan Vucetic slobodan.vucetic@temple.edu
