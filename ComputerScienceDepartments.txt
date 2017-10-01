@@ -116,7 +116,7 @@ Xavier Tricoche xmt@purdue.edu
 
 
 17. University of Washington
-Brian Curless curless@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)
+Brian Curless curless@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)(wrote back and said he'd share it with his class)
 Ali Farhadi ali@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)
 Jeffrey Heer jheer@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)
 Ira Kemelmacher-Shlitzerman kemelmi@cs.washington.edu (graphics) (emailed Sun Oct 01 2017)
