@@ -13,14 +13,15 @@
         Some Spline Terminology
     </h1>
     <p>
-        The purpose of these notes is to briefly discuss some of the terminology 
+        We are going to briefly discuss some of the terminology 
         related to the spline portion of the interactive web app 
         <a href="BusyBCurves.html">Exploring Bezier and Spline Curves</a>, together with
         the associated <a href="SplineHelp.html"> help page</a> and its links.
     </p>
     <p>  
         We recognize that, as the technology has evolved, the usage of these terms 
-        does vary among authors when used in software and in technical publications.
+        has  sometimes drifted from the definitions put forth in the fundamental
+        work of I. J. Schoenberg, C. R. de Boor, and others.
     </p>
     <p>
         We will describe our use of the terms and also will point out some alternative
@@ -28,30 +29,55 @@
     </p>
     <ul>
         <li>
-            Spline function: We consider a spline function to be a real-valued piecewise
-            polynomial having specified degree, specified set of breakpoints, and 
-            specified level of derivative continuity at each breakpoint. 
+            <i>Spline function</i>: We consider a <i>spline function</i> to be a real-valued piecewise
+            polynomial having specified degree, specified set of <i>breakpoints</i>, and 
+            specified levels of derivative continuity at each <i>breakpoint</i>. A <i>breakpoint</i> is a 
+            value in the domain of the spline function where two adjacent polynomials that are pieces
+            of the spline join up.
         </li>
         <br>
         <li>
-            B-spline: We consider a B-spline to be a normalized spline function that has
-            minimal support with regard to specified degree, specified set of breakpoints, and 
-            specified level of derivative continuity at each breakpoint.
-            The graphs of some B-spline functions are displayed next to the corresponding
+            <i>B-spline</i>: We consider a <i>B-spline</i> to be a <i>normalized</i> spline function that has
+            minimal support.  A set of B-splines is determined by specifying the degree, the set of breakpoints, and 
+            the level of derivative continuity at each breakpoint.  By <i>normalized</i> we mean that the set of
+            B-splines is scaled in such a way that, for each parameter value in the domain, the sum of the values
+            of all the B-splines is 1.0; in other words, the B-splines form a partition of unity.
+            To help you visualize B-splines, the graphs of some B-spline functions are displayed next to the corresponding
             control points in the  
             spline portion of the <a href="BusyBCurves.html">interactive web app</a>.  
             Every spline function can be written uniquely as a linear combination of appropriately-chosen
-            B-spline functions.  The "B" in "B-spline" stands for "basis," so it is often considered
-            better style to refer simply to "B-splines" rather than "B-spline basis functions."
+            B-spline functions.  So, the "B" in "B-spline" stands for "basis," in the linear algebra sense.  
+            We consider it to be better style to usually refer simply to "B-splines" rather than "B-spline basis functions."
         </li>
         <br>
         <li>
-            Spline curve:  In our web app a spline curve is a two-dimensional parametric curve of the
+            <i>Spline curve</i>:  In our web app a <i>spline curve</i> is a two-dimensional parametric curve of the
             form C(t) = (x(t), y(t)), where x(t) and y(t) are each real-valued spline functions.
-            Some people call a spline curve a B-spline curve, whenever the x and y components of the spline
-            curve are explicitly represented as linear combinations of B-splines.  However, in our work
-            we reserve the use of the term B-spline for the basis functions themselves and not for functions
-            or curves that are expressed as linear combinations of these basis functions.
+            Some people call a spline curve a B-spline curve, <b>whenever</b> the x and y components of the spline
+            curve are explicitly represented as linear combinations of B-splines.  However, in the <a href="BusyBCurves.html">interactive web app</a>
+            we <b>reserve</b> the use of the term B-spline for <b>the basis functions themselves</b> and <b>not</b> for spline functions
+            or spline curves that are expressed as linear combinations of these basis functions.  However, this strict use of terminology
+            breaks down when we consider <i>NURBS curves</i>, which are beyond the scope of this web app, but are widely used in applications.
+        </li>
+        <br>
+        <li>
+            <i>NURBS curve</i>: <i>NURBS</i> stands for <b>N</b>on-<b>U</b>niform <b>R</b>ational <b>B</b>-<b>S</b>pline.
+            The mathematical expression for a NURBS curve is a fraction, where the numerator is a sum of products of weights, control points
+            and B-splines and the denominator is a sum of products of weights and B-splines.  The use of the term NURBS has become standard,
+            so, in this case, even though the curve is not a B-spline in the purist sense of the term, the "BS" has become part of the 
+            acronym.
+            <ul>
+                <li>
+                    <b>NU</b> stands for "non-uniform," which really means that the spacing of the breakpoints is not necessarily uniform.
+                </li>
+                <li>    
+                    <b>R</b> stands for "rational," which means that the mathematical expression is a fraction.
+                </li>
+                <li> 
+                    <b>BS</b> stands for "B-spline," which means, in this case, not that the whole curve is a B-spline, but rather that there
+                    are B-splines involved in the mathematical expression.
+                </li>
+            </ul>
         </li>
         
     </ul>
