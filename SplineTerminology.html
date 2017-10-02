@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!-- Copyright (C) 2017 Richard David Fuhr - All rights reserved. -->
+<!-- richard.fuhr@gmail.com -->
+
+<meta charset="UTF-8">
+
+<html>
+<head>
+    <title>Spline Terminology</title>
+</head>
+<body>
+    <h1>
+        Some Spline Terminology
+    </h1>
+    <p>
+        The purpose of these notes is to briefly discuss some of the terminology 
+        related to the spline portion of the interactive web app 
+        <a href="BusyBCurves.html">Exploring Bezier and Spline Curves</a>, together with
+        the associated <a href="SplineHelp.html"> help page</a> and its links.
+    </p>
+    <p>  
+        We recognize that, as the technology has evolved, the usage of these terms 
+        does vary among authors when used in software and in technical publications.
+    </p>
+    <p>
+        We will describe our use of the terms and also will point out some alternative
+        usages below. We will not try to be totally mathematically rigorous or complete.  
+    </p>
+    <ul>
+        <li>
+            Spline function: We consider a spline function to be a real-valued piecewise
+            polynomial having specified degree, specified set of breakpoints, and 
+            specified level of derivative continuity at each breakpoint. 
+        </li>
+        <br>
+        <li>
+            B-spline: We consider a B-spline to be a normalized spline function that has
+            minimal support with regard to specified degree, specified set of breakpoints, and 
+            specified level of derivative continuity at each breakpoint.
+            The graphs of some B-spline functions are displayed next to the corresponding
+            control points in the  
+            spline portion of the <a href="BusyBCurves.html">interactive web app</a>.  
+            Every spline function can be written uniquely as a linear combination of appropriately-chosen
+            B-spline functions.  The "B" in "B-spline" stands for "basis," so it is often considered
+            better style to refer simply to "B-splines" rather than "B-spline basis functions."
+        </li>
+        <br>
+        <li>
+            Spline curve:  In our web app a spline curve is a two-dimensional parametric curve of the
+            form C(t) = (x(t), y(t)), where x(t) and y(t) are each real-valued spline functions.
+            Some people call a spline curve a B-spline curve, whenever the x and y components of the spline
+            curve are explicitly represented as linear combinations of B-splines.  However, in our work
+            we reserve the use of the term B-spline for the basis functions themselves and not for functions
+            or curves that are expressed as linear combinations of these basis functions.
+        </li>
+        
+    </ul>
+    
+</body>
+</html>
