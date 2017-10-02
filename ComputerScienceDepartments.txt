@@ -1,12 +1,12 @@
 1. Stanford University 
-Alex Aiken aiken@cs.stanford.edu (Chair)
-Mehran Sahani sahani@cs.stanford.edu (Associate Chair, Educational Affairs)
-Maneesh Agrawala maneesh@cs.stanford.edu (Computer Graphics)
-Ron Fedkiw fedkiw@cs.stanford.edu (Computer Graphics)
-Leonidas Guibas guibas@cs.stanford.edu (Computer Graphics)
-Patrick Hanrahan hanrahan@cs.stanford.edu (Computer Graphics)
-Doug James djames@cs.stanford.edu (Computer Graphics)
-Marc Levoy levoy@cs.stanford.edu (Emeritus Computer Graphics and Google)
+Alex Aiken aiken@cs.stanford.edu (Chair) (emailed Mon Oct 02 2017)
+Mehran Sahani sahani@cs.stanford.edu (Associate Chair, Educational Affairs) (emailed Mon Oct 02 2017)
+Maneesh Agrawala maneesh@cs.stanford.edu (Computer Graphics) (emailed Mon Oct 02 2017)
+Ron Fedkiw fedkiw@cs.stanford.edu (Computer Graphics) (emailed Mon Oct 02 2017)
+Leonidas Guibas guibas@cs.stanford.edu (Computer Graphics) (emailed Mon Oct 02 2017)
+Patrick Hanrahan hanrahan@cs.stanford.edu (Computer Graphics) (emailed Mon Oct 02 2017)
+Doug James djames@cs.stanford.edu (Computer Graphics) (emailed Mon Oct 02 2017)
+Marc Levoy levoy@cs.stanford.edu (Emeritus Computer Graphics and Google) (emailed Mon Oct 02 2017)
 
 
 
