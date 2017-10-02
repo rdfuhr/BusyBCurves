@@ -1,6 +1,6 @@
 1. Stanford University 
 Alex Aiken aiken@cs.stanford.edu (Chair) (emailed Mon Oct 02 2017)
-Mehran Sahani sahani@cs.stanford.edu (Associate Chair, Educational Affairs) (emailed Mon Oct 02 2017)
+Mehran Sahami sahami@cs.stanford.edu (Associate Chair, Educational Affairs) (emailed Mon Oct 02 2017)
 Maneesh Agrawala maneesh@cs.stanford.edu (Computer Graphics) (emailed Mon Oct 02 2017)
 Ron Fedkiw fedkiw@cs.stanford.edu (Computer Graphics) (emailed Mon Oct 02 2017)
 Leonidas Guibas guibas@cs.stanford.edu (Computer Graphics) (emailed Mon Oct 02 2017)
