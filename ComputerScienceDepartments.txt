@@ -170,25 +170,25 @@ Michael Gleicher gleicher@cs.wisc.edu
 Adrian Dumitrescu dumitres@uwm.edu
 
 26.  Seattle University
-Adair Dingle dingle@seattleu.edu
-Jeff Gilles gillesj@seattleu.edu
-Israel Hilerio hilerioi@seattleu.edu
-Pejman Khadavi khadivip@seattleu.edu
-Michael Koenig koenigm@seattleu.edu
-Eric Larson elarson@seattleu.edu
-Rich LeBlanc leblanc@seattleu.edu
-Lin Li lil@seattleu.edu
-David Lillethun lillethd@seattleu.edu
-Kevin Lundeen lundeenk@seattleu.edu
-Aditya Mishra mishraa@seattleu.edu
-Sheila Oh ohsh@seattleu.edu
-Renny Philipose philipr@seattleu.edu
-Michael Quinn quinnm@seattleu.edu
-Susan Reeder sreeder@seattleu.edu
-Roshanak Roshandel roshanak@seattleu.edu
-Michael Smith mikesme@seattleu.edu
-Jason Wong wongja@seattleu.edu
-Yingwu Zhu zhuy@seattleu.edu
+Adair Dingle dingle@seattleu.edu (emailed Tue Oct 03 2017)
+Jeff Gilles gillesj@seattleu.edu (emailed Tue Oct 03 2017)
+Israel Hilerio hilerioi@seattleu.edu (emailed Tue Oct 03 2017)
+Pejman Khadavi khadivip@seattleu.edu (emailed Tue Oct 03 2017)
+Michael Koenig koenigm@seattleu.edu (emailed Tue Oct 03 2017)
+Eric Larson elarson@seattleu.edu (emailed Tue Oct 03 2017)
+Rich LeBlanc leblanc@seattleu.edu (emailed Tue Oct 03 2017)
+Lin Li lil@seattleu.edu (emailed Tue Oct 03 2017)
+David Lillethun lillethd@seattleu.edu (emailed Tue Oct 03 2017)
+Kevin Lundeen lundeenk@seattleu.edu (emailed Tue Oct 03 2017)
+Aditya Mishra mishraa@seattleu.edu (emailed Tue Oct 03 2017)
+Sheila Oh ohsh@seattleu.edu (emailed Tue Oct 03 2017)
+Renny Philipose philipr@seattleu.edu (emailed Tue Oct 03 2017)
+Michael Quinn quinnm@seattleu.edu (emailed Tue Oct 03 2017)
+Susan Reeder sreeder@seattleu.edu (emailed Tue Oct 03 2017)
+Roshanak Roshandel roshanak@seattleu.edu (emailed Tue Oct 03 2017)
+Michael Smith mikesme@seattleu.edu (emailed Tue Oct 03 2017)
+Jason Wong wongja@seattleu.edu (emailed Tue Oct 03 2017)
+Yingwu Zhu zhuy@seattleu.edu (emailed Tue Oct 03 2017)
 
 27. University of Wisconsin Stevens Point
 Andy Felt afelt@uwsp.edu (In math department but teaches mathematics for computer science course) (emailed Sat Sep 23 2017)
