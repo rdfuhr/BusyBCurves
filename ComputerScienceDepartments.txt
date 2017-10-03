@@ -170,7 +170,25 @@ Michael Gleicher gleicher@cs.wisc.edu
 Adrian Dumitrescu dumitres@uwm.edu
 
 26.  Seattle University
+Adair Dingle dingle@seattleu.edu
+Jeff Gilles gillesj@seattleu.edu
+Israel Hilerio hilerioi@seattleu.edu
+Pejman Khadavi khadivip@seattleu.edu
+Michael Koenig koenigm@seattleu.edu
+Eric Larson elarson@seattleu.edu
+Rich LeBlanc leblanc@seattleu.edu
+Lin Li lil@seattleu.edu
+David Lillethun lillethd@seattleu.edu
+Kevin Lundeen lundeenk@seattleu.edu
+Aditya Mishra mishraa@seattleu.edu
+Sheila Oh ohsh@seattleu.edu
+Renny Philipose philipr@seattleu.edu
+Michael Quinn quinnm@seattleu.edu
+Susan Reeder sreeder@seattleu.edu
 Roshanak Roshandel roshanak@seattleu.edu
+Michael Smith mikesme@seattleu.edu
+Jason Wong wongja@seattleu.edu
+Yingwu Zhu zhuy@seattleu.edu
 
 27. University of Wisconsin Stevens Point
 Andy Felt afelt@uwsp.edu (In math department but teaches mathematics for computer science course) (emailed Sat Sep 23 2017)
