@@ -5507,5 +5507,5 @@ function doTests()
    // TestInitializeCubicSpline()
    // TestSomeGlobals();
    TestDeCasteljauTriangleAtParm(); // there is currently trouble invoking DeCasteljauTriangleAtParm
-   document.writeln("<p>Refresh browser to continue exploring Bezier and spline curve</p>");
+   document.writeln("<p>Reload browser (or click back button) to continue exploring Bezier and spline curve</p>");
    }
