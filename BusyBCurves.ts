@@ -59,6 +59,7 @@
 // TODO: Sep 09, 2017: Test the DeCasteljauTriangleAtParm method. - DONE
 // TODO: Sep 11, 2017: Consider adding a keyboard shortcut to launch tests. See /Users/richardfuhr/Documents/Sandbox/javaScriptLearn/MyJavaScriptTests/keyevents.html - DONE
 // TODO: Oct 13, 2017: See if there is a way, when using the keyboard shortcut to launch tests, to open up a new tab first. - DONE - window.open() opens new tab but results of doTests() don't go there.
+// TODO: Oct 14, 2017: This is really just a test of SourceTree to make sure I see the commit button.
 
 // Git and GitHub notes.  I opened this file using Visual Studio Community Edition 2017
 // and noticed that the following four files were created in this directory, which I
