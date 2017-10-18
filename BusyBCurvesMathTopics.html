@@ -6,53 +6,82 @@
 
 <html>
 <head>
-    <title>Development Tools and Resources</title>
+    <title>Math Topics Related to Bezier and Spline Curves</title>
 </head>
 <body>
     <h1>
-        Development Tools and Resources Used for <a href="https://richardfuhr.neocities.org/BusyBCurves.html">Exploring Bezier and Spline Curves</a>
+        A few Math Topics Related to Bezier and Spline Curves.
     </h1>
-    <h2>
+    <h3>
             <ul>
                 <li>
-                    <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">HTML5 Canvas</a> &nbsp &nbsp &nbsp<i>Drawing surface for web page</i>
+                    Linear Algebra
+                    <ol>
+                        <li>
+                            Bernstein polynomials form a basis for linear spaces of polynomials.
+                        </li>
+                        <li>
+                            B-splines form a basis for linear spaces of splines.
+                        </li>
+                        <li>
+                            A cubic spline curve can be constructed that passes through specified
+                            points and has specified start and end conditions.  
+                            To do this, you set up and solve a system of linear equations.  The 
+                            resulting matrix is tridiagonal.
+                        </li>
+                    </ol>
                 </li>
                 <br>
                 <li>
-                    <a href="https://www.typescriptlang.org">TypeScript</a>&nbsp &nbsp &nbsp<i>Typed superset of JavaScript</i>
+                    Calculus
+                    <ol>
+                        <li>
+                            A space of splines is determined by specifying:
+                            <ul>
+                                <li>
+                                    the degree of all the polynomial components of each spline in the space
+                                </li>
+                                <li>
+                                    a set of breakpoints at which the polynomial components join up
+                                </li>
+                                <li>
+                                    the levels of derivative continuity required at each breakpoint
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            The tangent line at the start of a Bezier or spline curve is the
+                            line between its first and second control point. A similar property
+                            holds for the tangent line at the end of the curve.
+                        </li>
+                        <li>
+                            A powerful dual-basis formula for splines, developed by C. de Boor and G. Fix, makes
+                            use of derivative values for the splines.
+                        </li>
+                    </ol>
                 </li>
                 <br>
                 <li>
-                    <a href="https://code.visualstudio.com">Visual Studio Code</a>&nbsp &nbsp &nbsp<i>Code editor and integrated development environment</i>
+                    Geometry
+                    <ol>
+                        <li>
+                            The shape of a Bezier or spline curve is governed by the location of
+                            the control points.  This is demonstrated in the interactive web
+                            app <a href="https://richardfuhr.neocities.org/BusyBCurves.html">Exploring Bezier and Spline Curves</a>.
+                        </li>
+                        <li>
+                            Evaluation algorithms for Bezier and spline curves have geometric
+                            interpretations, which are also demonstrated in the
+                            <a href="https://richardfuhr.neocities.org/BusyBCurves.html">interactive web app</a>.
+                        </li>
+                        <li>
+                            Bezier and spline curves are contained within the convex hull of their control points.
+                            For a spline curve a stricter result is true; each span of a spline curve is contained
+                            within the convex hull of a particular set of degree + 1 control points.
+                        </li>
+                    </ol>
                 </li>
                 <br>
-                <li>
-                    <a href="https://www.sourcetreeapp.com">SourceTree</a>&nbsp &nbsp &nbsp<i>Git client with GUI</i>
-                </li>
-                <br>
-                <li>
-                    <a href="https://git-scm.com">Git</a>&nbsp &nbsp &nbsp<i>Version control system</i>
-                </li>
-                <br>
-                <li>
-                    <a href="https://github.com">GitHub</a>&nbsp &nbsp &nbsp<i>Web-based Git repository</i>
-                </li>
-                <br>
-                <li>
-                    <a href="https://www.dropbox.com">Dropbox</a>&nbsp &nbsp &nbsp<i>Web-based file hosting service</i>
-                </li>
-                <br>
-                <li>
-                    <a href="https://support.apple.com/quicktime">QuickTime</a>&nbsp &nbsp &nbsp<i>Multimedia framework that enables screen recording</i>
-                </li>
-                <br>
-                <li>
-                    <a href="https://www.youtube.com/watch?v=-aiErrvLRfE">YouTube</a>&nbsp &nbsp &nbsp<i>Video-sharing website</i>
-                </li>
-                <br>
-                <li>
-                    <a href="https://www.neocities.org">Neocities</a>&nbsp &nbsp &nbsp<i>Web hosting service</i>
-                </li>
             </ul>
-    </h2>
+    </h3>
 </body>
