@@ -4372,7 +4372,7 @@ function TestPointClass()
 // Canvas-related explorations
 function TestCanvas()
 {
-  var document : Document;
+  // var document : Document;
   var canvas : HTMLCanvasElement = <HTMLCanvasElement>document.getElementById("mycanvas");
   var ctx : CanvasRenderingContext2D = <CanvasRenderingContext2D> canvas.getContext("2d");
 }
