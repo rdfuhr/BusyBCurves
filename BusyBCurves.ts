@@ -1392,7 +1392,7 @@ abstract class BCurve
   }    
 
  abstract drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
-                        context : CanvasRenderingContext2D);
+                        context : CanvasRenderingContext2D) : void;
  
  abstract positionAtParm(t: number) : Point;
  abstract derivativeAtParm(t : number) : Point;
@@ -1638,7 +1638,7 @@ class CubicBezierCurve extends BCurve
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
-                         context : CanvasRenderingContext2D)
+                         context : CanvasRenderingContext2D) : void
   {
     clearCanvas();
     if (globalSkeleton==false)
@@ -3746,7 +3746,7 @@ class CubicSpline extends BCurve
   // input: context - the context associated with the canvas
   //////////////////////////////////////////////////////////////////////////////
   drawAllBCurveArtifacts(drawDataForAllBCurveArtifacts : BCurveArtifactsDrawData,
-                         context : CanvasRenderingContext2D)
+                         context : CanvasRenderingContext2D) : void
   {
     clearCanvas();
     if (globalSkeleton==false)
