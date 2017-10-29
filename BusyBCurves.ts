@@ -2426,7 +2426,7 @@ function onKeyDown(evt : KeyboardEvent)
 // Do a Google search for "touch events" "mouse events"
 // Study: http://www.html5rocks.com/en/mobile/touchandmouse/
 ////////////////////////////////////////////////////////////////////////////////
-function touchHandler(event) {
+function touchHandler(event : TouchEvent) {
     var touch = event.changedTouches[0];
 
     var simulatedEvent = document.createEvent("MouseEvent");
