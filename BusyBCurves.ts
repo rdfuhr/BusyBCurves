@@ -2855,7 +2855,7 @@ function DeBoorTriangleAt(t : number,
 // returns: a CubicSpline object that is the graph of the B-spline that has
 // been aligned with its corresponding control point circle.
 ////////////////////////////////////////////////////////////////////////////////
-function alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex) : CubicSpline
+function alignBSplineGraphWithCorrespondingControlPointCircle(basisIndex : number) : CubicSpline
 {
   var alignedBSplineGraph : CubicSpline = null;
   // Do validity checks
